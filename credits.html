@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDL Viollet-le-Duc</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="description" content="Crédits du site de la MDL du lycée Viollet-le-Duc.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MDL Viollet-le-Duc">
+  <meta property="og:title" content="MDL Viollet-le-Duc — Crédits">
+  <meta property="og:description" content="Crédits photos, conception et développement du site de la MDL.">
+  <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .credits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .credit-block {
+      background: white;
+      border: 1px solid var(--lilas-pale);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+    .credit-block-icon { font-size: 32px; margin-bottom: 14px; }
+    .credit-block-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--prune); margin-bottom: 8px;
+    }
+    .credit-block-text { font-size: 13px; color: var(--gris-texte); line-height: 1.75; }
+    .credit-block-text strong { color: var(--prune); }
+    .credit-block-text a { color: var(--magenta); text-decoration: none; }
+    .credit-block-text a:hover { text-decoration: underline; }
+
+    .photos-list { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+    .photo-credit-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 14px;
+      background: var(--rose-pale);
+      border-radius: var(--radius-md);
+      font-size: 12px; color: var(--gris-texte);
+    }
+    .photo-credit-thumb {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      object-fit: cover; flex-shrink: 0;
+    }
+    .photo-credit-name { font-weight: 500; color: var(--prune); }
+
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tech-tag {
+      font-size: 12px; font-weight: 500;
+      background: var(--lilas-pale); color: var(--magenta);
+      padding: 5px 12px; border-radius: var(--radius-sm);
+    }
+
+    .colophon {
+      background: var(--prune);
+      color: rgba(255,255,255,0.65);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-top: 32px;
+      font-size: 13px;
+      line-height: 1.75;
+      text-align: center;
+    }
+    .colophon strong { color: white; }
+    .colophon a { color: var(--gold-light, #f0d080); text-decoration: none; }
+
+    @media (max-width: 768px) { .credits-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL Viollet-le-Duc"></div>
+    <div>
+      <div class="nav-logo-text">MDL Viollet-le-Duc</div>
+      <span class="nav-logo-sub">Maison des Lycéens</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="evenements.html">Événements</a></li>
+    <li><a href="projets.html">Projets</a></li>
+    <li><a href="planning.html">Planning</a></li>
+    <li><a href="mdl.html">La MDL</a></li>
+    <li><a href="equipe.html">Équipe</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="adhesion.html" class="nav-cta">Adhérer</a></li>
+  </ul>
+  <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <a href="evenements.html">Événements</a>
+  <a href="projets.html">Projets</a>
+  <a href="planning.html">Planning</a>
+  <a href="mdl.html">La MDL</a>
+  <a href="equipe.html">Équipe</a>
+  <a href="contact.html">Contact</a>
+  <a href="adhesion.html" class="nav-cta">Adhérer</a>
+</div>
+<script>
+function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
+document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
+</script>
+
+<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-5.jpg'); --hero-pos: center center;">
+  <span class="section-eyebrow">Transparence</span>
+  <h1 class="section-title section-title-lg">Crédits</h1>
+  <p class="section-sub">Conception, développement et droits des contenus du site de la MDL du lycée Viollet-le-Duc.</p>
+</div>
+
+<section class="section">
+  <div class="credits-grid">
+
+    <div class="credit-block">
+      <div class="credit-block-icon">🎨</div>
+      <div class="credit-block-title">Conception et gestion</div>
+      <p class="credit-block-text">
+        Ce site a été conçu, développé et est géré par <strong>Ewan Foucaud</strong>, Co-Président de la MDL du lycée Viollet-le-Duc.<br><br>
+        Direction artistique, choix des contenus, photographie et administration du site : <strong>Ewan Foucaud</strong>.<br><br>
+        Pour toute question concernant le site : <a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a>
+      </p>
+    </div>
+
+    <div class="credit-block">
+      <div class="credit-block-icon">💻</div>
+      <div class="credit-block-title">Développement</div>
+      <p class="credit-block-text">
+        Le site a été développé en collaboration avec <strong>Claude</strong> (Anthropic), un assistant IA utilisé pour la génération du code HTML, CSS et JavaScript.<br><br>
+        <strong>Technologies utilisées :</strong>
+      </p>
+      <div class="tech-stack">
+        <span class="tech-tag">HTML5</span>
+        <span class="tech-tag">CSS3</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">Cloudflare Pages</span>
+        <span class="tech-tag">Formspree</span>
+        <span class="tech-tag">Google Calendar</span>
+        <span class="tech-tag">Billetweb</span>
+        <span class="tech-tag">HelloAsso</span>
+      </div>
+    </div>
+
+    <div class="credit-block">
+      <div class="credit-block-icon">📸</div>
+      <div class="credit-block-title">Photographies</div>
+      <p class="credit-block-text">
+        Toutes les photographies présentes sur ce site sont la propriété exclusive de <strong>© Ewan Foucaud</strong>, sauf mention contraire.<br><br>
+        Toute reproduction, même partielle, est interdite sans autorisation écrite préalable.
+      </p>
+      <div class="photos-list">
+        <div class="photo-credit-item">
+          <img src="assets/lycee-entree.jpg" alt="Entrée lycée" class="photo-credit-thumb">
+          <div><div class="photo-credit-name">Entrée du lycée</div>Photos du lycée Viollet-le-Duc · © Ewan Foucaud</div>
+        </div>
+        <div class="photo-credit-item">
+          <img src="assets/photo-course-tshirts.jpg" alt="Course CCF" class="photo-credit-thumb">
+          <div><div class="photo-credit-name">Course contre la Faim 2026</div>Photos de l'événement · © Ewan Foucaud</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="credit-block">
+      <div class="credit-block-icon">📄</div>
+      <div class="credit-block-title">Typographies et ressources</div>
+      <p class="credit-block-text">
+        <strong>Polices :</strong> Playfair Display et DM Sans, via Google Fonts (licence SIL Open Font License).<br><br>
+        <strong>Logo MDL :</strong> Création originale de la MDL du lycée Viollet-le-Duc. Tous droits réservés.<br><br>
+        <strong>Affiches événements :</strong> Bal des Terminales et Course contre la Faim — créations originales de la MDL.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="colophon">
+    Site web de la <strong>MDL du lycée Viollet-le-Duc</strong><br>
+    Conçu et développé par <strong>Ewan Foucaud</strong> en collaboration avec <strong>Claude (Anthropic)</strong><br>
+    Hébergé sur <a href="https://pages.cloudflare.com" target="_blank" rel="noopener">Cloudflare Pages</a> · Domaine <a href="https://mdl-vld.fr">mdl-vld.fr</a><br>
+    <span style="font-size: 11px; opacity: 0.6;">© <span class="year-auto"></span> MDL Viollet-le-Duc — Association loi 1901 — RNA W782004627</span>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-row">
+        <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
+        <div class="footer-logo-name">MDL Viollet-le-Duc</div>
+      </div>
+      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigation</div>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="mdl.html">La MDL</a></li>
+        <li><a href="equipe.html">Équipe</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">L'association</div>
+      <ul>
+        <li><a href="adhesion.html">Adhérer</a></li>
+        <li><a href="partenaires.html">Partenaires</a></li>
+        <li><a href="documents.html">Documents</a></li>
+        <li><a href="credits.html">Crédits</a></li>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+        <li><a href="confidentialite.html">Confidentialité</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <ul>
+        <li><a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a></li>
+        <li><a href="https://mdl-vld.fr">mdl-vld.fr</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627 · Photos © Ewan Foucaud</span>
+    <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
+  </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+document.querySelectorAll('.year-auto').forEach(function(e){e.textContent=new Date().getFullYear();});
+var btn=document.getElementById('backToTop');
+window.addEventListener('scroll',function(){if(btn)btn.classList.toggle('visible',window.scrollY>400);});
+</script>
+</body>
+</html>

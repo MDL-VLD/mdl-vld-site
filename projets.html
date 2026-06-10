@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDL Viollet-le-Duc</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="description" content="Les projets soutenus par la MDL du lycée Viollet-le-Duc.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MDL Viollet-le-Duc">
+  <meta property="og:title" content="MDL Viollet-le-Duc — Projets">
+  <meta property="og:description" content="Les projets soutenus et organisés par la MDL du lycée Viollet-le-Duc.">
+  <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .projets-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .projet-card {
+      background: white;
+      border: 1px solid var(--lilas-pale);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .projet-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+    .projet-header {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      min-height: 120px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .projet-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--bg-color, var(--magenta));
+      opacity: 0.9;
+    }
+    .projet-header-emoji {
+      font-size: 36px;
+      position: absolute;
+      top: 16px; right: 16px;
+      opacity: 0.3;
+    }
+    .projet-eyebrow {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      position: relative; z-index: 1;
+      margin-bottom: 4px;
+    }
+    .projet-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700;
+      color: white; line-height: 1.2;
+      position: relative; z-index: 1;
+    }
+    .projet-body { padding: 20px 24px; }
+    .projet-desc { font-size: 13px; color: var(--gris-texte); line-height: 1.7; margin-bottom: 16px; }
+    .projet-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .projet-chip {
+      font-size: 11px; font-weight: 500;
+      background: var(--rose-pale); color: var(--magenta);
+      padding: 4px 10px; border-radius: 20px;
+    }
+    .projet-status {
+      font-size: 11px; font-weight: 500;
+      padding: 4px 10px; border-radius: 20px;
+    }
+    .projet-status.en-cours { background: #eaf5ec; color: #276237; }
+    .projet-status.a-venir { background: var(--or-pale); color: #7a5a00; }
+    .projet-status.passe { background: var(--gris-pale); color: var(--gris-texte); }
+
+    .proposer-card {
+      background: linear-gradient(135deg, var(--lilas-pale), var(--rose-pale));
+      border: 2px dashed var(--lilas);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      text-align: center;
+      margin-top: 32px;
+    }
+    .proposer-card h3 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--prune); margin-bottom: 10px; }
+    .proposer-card p { font-size: 14px; color: var(--gris-texte); line-height: 1.7; max-width: 500px; margin: 0 auto 20px; }
+
+    @media (max-width: 768px) { .projets-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL Viollet-le-Duc"></div>
+    <div>
+      <div class="nav-logo-text">MDL Viollet-le-Duc</div>
+      <span class="nav-logo-sub">Maison des Lycéens</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="evenements.html">Événements</a></li>
+    <li><a href="projets.html" class="active">Projets</a></li>
+    <li><a href="planning.html">Planning</a></li>
+    <li><a href="mdl.html">La MDL</a></li>
+    <li><a href="equipe.html">Équipe</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="adhesion.html" class="nav-cta">Adhérer</a></li>
+  </ul>
+  <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <a href="evenements.html">Événements</a>
+  <a href="projets.html">Projets</a>
+  <a href="planning.html">Planning</a>
+  <a href="mdl.html">La MDL</a>
+  <a href="equipe.html">Équipe</a>
+  <a href="contact.html">Contact</a>
+  <a href="adhesion.html" class="nav-cta">Adhérer</a>
+</div>
+<script>
+function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
+document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
+</script>
+
+<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/photo-course-groupe.jpg'); --hero-pos: center center;">
+  <span class="section-eyebrow">MDL en action</span>
+  <h1 class="section-title section-title-lg">Nos projets</h1>
+  <p class="section-sub">Au-delà des événements, la MDL soutient et accompagne des projets tout au long de l'année : sorties, actions solidaires, initiatives citoyennes...</p>
+</div>
+
+<section class="section">
+  <div class="projets-grid">
+
+    <div class="projet-card">
+      <div class="projet-header" style="--bg-color: #2d6e2d;">
+        <div class="projet-header-emoji">🌍</div>
+        <div class="projet-eyebrow">Projet solidaire · 2025-2026</div>
+        <div class="projet-title">Course contre la Faim</div>
+      </div>
+      <div class="projet-body">
+        <div class="projet-meta">
+          <span class="projet-status passe">● Édition 2026 terminée</span>
+          <span class="projet-chip">Action solidaire</span>
+        </div>
+        <p class="projet-desc">En partenariat avec Action Contre la Faim, la MDL mobilise chaque année les lycéens pour courir et collecter des fonds pour lutter contre la faim dans le monde.</p>
+        <a href="evenement-ccf.html" class="btn btn-outline btn-sm">Voir la page →</a>
+      </div>
+    </div>
+
+    <div class="projet-card">
+      <div class="projet-header" style="--bg-color: #1a3a6e;">
+        <div class="projet-header-emoji">✈️</div>
+        <div class="projet-eyebrow">Sortie · À planifier</div>
+        <div class="projet-title">Sorties culturelles</div>
+      </div>
+      <div class="projet-body">
+        <div class="projet-meta">
+          <span class="projet-status a-venir">○ En préparation</span>
+          <span class="projet-chip">Culture</span>
+          <span class="projet-chip">Sorties</span>
+        </div>
+        <p class="projet-desc">La MDL organise et soutient des sorties culturelles pour les lycéens : musées, spectacles, expositions... Une façon de sortir du lycée et de découvrir.</p>
+        <a href="contact.html" class="btn btn-outline btn-sm">Proposer une idée →</a>
+      </div>
+    </div>
+
+    <div class="projet-card">
+      <div class="projet-header" style="--bg-color: #7a2d70;">
+        <div class="projet-header-emoji">🎗</div>
+        <div class="projet-eyebrow">Engagement citoyen</div>
+        <div class="projet-title">Actions solidaires</div>
+      </div>
+      <div class="projet-body">
+        <div class="projet-meta">
+          <span class="projet-status a-venir">○ À venir</span>
+          <span class="projet-chip">Solidarité</span>
+          <span class="projet-chip">Citoyen</span>
+        </div>
+        <p class="projet-desc">Récoltes de dons, campagnes de sensibilisation, octobre rose... La MDL s'engage dans des actions citoyennes et solidaires tout au long de l'année.</p>
+        <a href="contact.html" class="btn btn-outline btn-sm">Proposer un projet →</a>
+      </div>
+    </div>
+
+    <div class="projet-card">
+      <div class="projet-header" style="--bg-color: #4a2d6e;">
+        <div class="projet-header-emoji">📸</div>
+        <div class="projet-eyebrow">Communication</div>
+        <div class="projet-title">Site web MDL</div>
+      </div>
+      <div class="projet-body">
+        <div class="projet-meta">
+          <span class="projet-status en-cours">● En cours</span>
+          <span class="projet-chip">Numérique</span>
+          <span class="projet-chip">Communication</span>
+        </div>
+        <p class="projet-desc">Conception et développement du site internet de la MDL. Un projet numérique porté par des lycéens pour améliorer la communication de l'association.</p>
+        <a href="credits.html" class="btn btn-outline btn-sm">Voir les crédits →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="proposer-card">
+    <div style="font-size: 36px; margin-bottom: 12px;">💡</div>
+    <h3>Tu as un projet ?</h3>
+    <p>La MDL peut t'aider à concrétiser ton idée - sortie, atelier, action solidaire, événement... Si tu es membre, tu peux proposer et porter un projet avec notre soutien.</p>
+    <a href="contact.html" class="btn btn-magenta">Proposer mon projet</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-row">
+        <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
+        <div class="footer-logo-name">MDL Viollet-le-Duc</div>
+      </div>
+      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigation</div>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="clubs.html">Clubs</a></li>
+        <li><a href="mdl.html">La MDL</a></li>
+        <li><a href="equipe.html">Équipe</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">L'association</div>
+      <ul>
+        <li><a href="adhesion.html">Adhérer</a></li>
+        <li><a href="partenaires.html">Partenaires</a></li>
+        <li><a href="documents.html">Documents</a></li>
+        <li><a href="credits.html">Crédits</a></li>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+        <li><a href="confidentialite.html">Confidentialité</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <ul>
+        <li><a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a></li>
+        <li><a href="https://mdl-vld.fr">mdl-vld.fr</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627 · Photos © Ewan Foucaud</span>
+    <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
+  </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+document.querySelectorAll('.year-auto').forEach(function(e){e.textContent=new Date().getFullYear();});
+var btn=document.getElementById('backToTop');
+window.addEventListener('scroll',function(){if(btn)btn.classList.toggle('visible',window.scrollY>400);});
+</script>
+</body>
+</html>
