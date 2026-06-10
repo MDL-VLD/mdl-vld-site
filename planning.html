@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDL Viollet-le-Duc</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="description" content="Le calendrier des événements de la MDL du Lycée Viollet-le-Duc.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .planning-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .calendar-wrapper {
+      background: white;
+      border: 1px solid var(--lilas-pale);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .calendar-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--lilas-pale);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .calendar-header-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--prune);
+    }
+    .calendar-header-sub {
+      font-size: 12px;
+      color: var(--gris-texte);
+      margin-top: 2px;
+    }
+    .calendar-embed-container {
+      position: relative;
+      padding-bottom: 75%;
+      height: 0;
+      overflow: hidden;
+    }
+    .calendar-embed-container iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+    .calendar-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--rose-pale);
+      padding: 40px;
+      text-align: center;
+    }
+    .calendar-placeholder-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    .calendar-placeholder-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--prune);
+      margin-bottom: 10px;
+    }
+    .calendar-placeholder-text {
+      font-size: 13px;
+      color: var(--gris-texte);
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 20px;
+    }
+    .calendar-placeholder-code {
+      background: white;
+      border: 1px solid var(--lilas-pale);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--magenta);
+      text-align: left;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .upcoming-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .upcoming-item {
+      background: white;
+      border: 1px solid var(--lilas-pale);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .upcoming-item:hover { transform: translateX(3px); box-shadow: var(--shadow-card); }
+    .upcoming-item-date {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 4px;
+    }
+    .upcoming-item-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--prune);
+      margin-bottom: 3px;
+    }
+    .upcoming-item-lieu {
+      font-size: 12px;
+      color: var(--gris-texte);
+    }
+    .upcoming-item-badge {
+      margin-top: 8px;
+    }
+
+    .sidebar-section {
+      background: white;
+      border: 1px solid var(--lilas-pale);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .sidebar-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 14px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: var(--gris-texte);
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .how-to-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .how-to-step {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .how-to-num {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--lilas-pale);
+      color: var(--magenta);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .how-to-text {
+      font-size: 12px;
+      color: var(--gris-texte);
+      line-height: 1.6;
+    }
+    .how-to-text strong { color: var(--prune); }
+
+    @media (max-width: 900px) {
+      .planning-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-img">
+      <img src="assets/logo.png" alt="Logo MDL" onerror="this.parentElement.innerHTML='<span class=\'nav-logo-fallback\'>M</span>'">
+    </div>
+    <div>
+      <div class="nav-logo-text">MDL Viollet-le-Duc</div>
+      <span class="nav-logo-sub">Maison des Lycéens</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="evenements.html">Événements</a></li>
+    <li><a href="planning.html">Planning</a></li>
+    <li><a href="planning.html" class="active">Planning</a></li>
+    <li><a href="mdl.html">La MDL</a></li>
+    <li><a href="merch.html">Merch</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="adhesion.html" class="nav-cta">Adhérer</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero" style="position:relative;">
+  <div style="position:absolute;inset:0;background:url('assets/lycee-etang.jpg') center center/cover no-repeat;opacity:0.08;z-index:0;pointer-events:none;"></div>
+  <span class="section-eyebrow">Calendrier</span>
+  <h1 class="section-title section-title-lg">Planning MDL</h1>
+  <p class="section-sub">Tous les événements, réunions et projets de la MDL en un seul coup d'oeil. Mis à jour en temps réel depuis Google Agenda.</p>
+</div>
+
+<section class="section">
+  <div class="planning-layout">
+
+    <!-- CALENDRIER PRINCIPAL -->
+    <div>
+      <div class="calendar-wrapper">
+        <div class="calendar-header">
+          <div>
+            <div class="calendar-header-title">Agenda MDL Viollet-le-Duc</div>
+            <div class="calendar-header-sub">Synchronisé avec Google Agenda - mis à jour en temps réel</div>
+          </div>
+          <a href="https://calendar.google.com" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
+            Ouvrir dans Google Agenda
+          </a>
+        </div>
+        <div class="calendar-embed-container">
+
+          <!--
+            POUR INTÉGRER VOTRE GOOGLE AGENDA :
+            1. Aller sur calendar.google.com avec le compte admin@mdl-vld.fr
+            2. Dans la colonne gauche, cliquer sur les 3 points à côté du calendrier MDL
+            3. Cliquer sur "Paramètres et partage"
+            4. Dans "Autorisations d'accès", cocher "Rendre disponible au public"
+            5. Descendre jusqu'à "Intégrer l'agenda" et copier le code iframe
+            6. Remplacer le bloc ci-dessous par votre iframe
+
+            EXEMPLE de ce que ça donne une fois configuré :
+            <iframe src="https://calendar.google.com/calendar/embed?src=VOTRE_ID@group.calendar.google.com&ctz=Europe%2FParis&hl=fr" frameborder="0" scrolling="no"></iframe>
+          -->
+
+          <div class="calendar-placeholder">
+            <div class="calendar-placeholder-icon">📅</div>
+            <div class="calendar-placeholder-title">Calendrier à configurer</div>
+            <p class="calendar-placeholder-text">
+              Le calendrier Google Agenda n'est pas encore connecté. Suivez les instructions dans le guide de mise en place pour afficher vos événements ici en temps réel.
+            </p>
+            <div class="calendar-placeholder-code">
+              &lt;!-- Remplacer ce bloc par votre iframe Google Agenda --&gt;<br>
+              &lt;iframe src="https://calendar.google.com/..."&gt;&lt;/iframe&gt;
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div>
+
+      <!-- PROCHAINS ÉVÉNEMENTS -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Prochains événements</div>
+        <div class="upcoming-list" id="upcoming-list">
+          <div class="upcoming-item">
+            <div class="upcoming-item-date">3 juillet 2025</div>
+            <div class="upcoming-item-title">Bal des Terminales 2025</div>
+            <div class="upcoming-item-lieu">Salle polyvalente de Thoiry</div>
+            <div class="upcoming-item-badge">
+              <span class="badge badge-or">Cannes Film Festival</span>
+            </div>
+          </div>
+          <div style="font-size: 12px; color: var(--gris-texte); text-align: center; padding: 8px 0;">
+            D'autres événements à venir...
+          </div>
+        </div>
+        <div style="margin-top: 14px;">
+          <a href="evenements.html" class="btn btn-outline btn-sm" style="width: 100%; justify-content: center;">
+            Voir tous les événements
+          </a>
+        </div>
+      </div>
+
+      <!-- LÉGENDE -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Légende</div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--or);"></div>
+          Événements festifs
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--magenta);"></div>
+          Réunions bureau
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: var(--lilas);"></div>
+          Projets et ateliers
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #5a9e6f;"></div>
+          Assemblées générales
+        </div>
+      </div>
+
+      <!-- COMMENT ÇA MARCHE -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Comment ça marche ?</div>
+        <div class="how-to-steps">
+          <div class="how-to-step">
+            <div class="how-to-num">1</div>
+            <div class="how-to-text">Le bureau ajoute un événement sur <strong>Google Agenda MDL</strong></div>
+          </div>
+          <div class="how-to-step">
+            <div class="how-to-num">2</div>
+            <div class="how-to-text">Il apparaît <strong>automatiquement</strong> sur cette page</div>
+          </div>
+          <div class="how-to-step">
+            <div class="how-to-num">3</div>
+            <div class="how-to-text">Les lycéens peuvent <strong>s'abonner</strong> au calendrier depuis leur propre Google Agenda</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-row">
+        <div class="footer-logo-mark"><img src="assets/logo.png" alt="" onerror="this.parentElement.innerHTML='M'"></div>
+        <div class="footer-logo-name">MDL Viollet-le-Duc</div>
+      </div>
+      <p class="footer-desc">Association loi 1901 - gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigation</div>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="evenements.html">Événements</a></li>
+    <li><a href="planning.html">Planning</a></li>
+        <li><a href="planning.html">Planning</a></li>
+        <li><a href="mdl.html">La MDL</a></li>
+        <li><a href="merch.html">Merch</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">L'association</div>
+      <ul>
+        <li><a href="adhesion.html">Adhérer</a></li>
+        <li><a href="mdl.html#gouvernance">Gouvernance</a></li>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+        <li><a href="confidentialite.html">Confidentialité</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <ul>
+        <li><a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a></li>
+        <li><a href="https://mdl-vld.fr">mdl-vld.fr</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="year"></span> MDL Viollet-le-Duc - RNA W782004627</span>
+    <a href="mentions-legales.html">Mentions légales</a>
+  </div>
+</footer>
+
+</body>
+</html>
