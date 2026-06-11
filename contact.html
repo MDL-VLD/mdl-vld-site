@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDL Viollet-le-Duc</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: start; }
+
+    .contact-aside {
+      background: var(--magenta);
+      border-radius: var(--radius-lg);
+      padding: 36px 30px;
+      color: white;
+      position: sticky;
+      top: 80px;
+    }
+    .contact-aside-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: white; margin-bottom: 8px; }
+    .contact-aside-sub { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 28px; }
+    .contact-info-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 20px; }
+    .contact-info-icon {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.12);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; flex-shrink: 0;
+    }
+    .contact-info-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 2px; }
+    .contact-info-val { font-size: 13px; color: white; }
+    .contact-info-val a { color: var(--or-pale); text-decoration: none; }
+    .contact-info-val a:hover { color: white; }
+    .contact-divider { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 20px 0; }
+    .bureau-list { display: flex; flex-direction: column; gap: 12px; }
+    .bureau-item { display: flex; align-items: center; gap: 10px; }
+    .bureau-ava {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 12px; font-weight: 700; color: white;
+      flex-shrink: 0;
+    }
+    .bureau-item-role { font-size: 10px; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.05em; }
+    .bureau-item-name { font-size: 13px; color: white; font-weight: 500; }
+
+    .form-card { background: white; border: 1px solid var(--lilas-pale); border-radius: var(--radius-lg); padding: 36px 32px; }
+    .form-card-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--prune); margin-bottom: 6px; }
+    .form-card-sub { font-size: 13px; color: var(--gris-texte); margin-bottom: 28px; line-height: 1.6; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-label { display: block; font-size: 12px; font-weight: 500; color: var(--prune); margin-bottom: 6px; }
+    .form-input {
+      width: 100%; padding: 10px 14px;
+      border: 1.5px solid var(--lilas-pale);
+      border-radius: var(--radius-md);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; color: var(--prune);
+      background: var(--blanc);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-input:focus { border-color: var(--magenta); box-shadow: 0 0 0 3px var(--lilas-pale); }
+    .form-input::placeholder { color: var(--gris-moyen); }
+    textarea.form-input { resize: vertical; min-height: 130px; line-height: 1.65; }
+    select.form-input { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%237a5a74' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+    .form-file-label {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px;
+      border: 1.5px dashed var(--lilas);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 13px; color: var(--gris-texte);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .form-file-label:hover { border-color: var(--magenta); background: var(--rose-pale); }
+    .form-file-icon { font-size: 18px; }
+    input[type="file"] { display: none; }
+    #file-name { font-size: 12px; color: var(--magenta); margin-top: 5px; min-height: 16px; }
+
+    .form-submit { width: 100%; margin-top: 6px; padding: 13px; font-size: 14px; justify-content: center; }
+    .form-note { font-size: 11px; color: var(--gris-texte); text-align: center; margin-top: 10px; line-height: 1.5; }
+
+    .success-msg {
+      display: none;
+      background: var(--success-bg);
+      color: var(--success-text);
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      margin-bottom: 16px;
+      border: 1px solid #b7dfbb;
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-aside { position: static; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MDL Viollet-le-Duc">
+  <meta property="og:title" content="MDL Viollet-le-Duc">
+  <meta property="og:description" content="Contactez la MDL du lycée Viollet-le-Duc.">
+  <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
+  <meta property="og:url" content="https://mdl-vld.fr/contact.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#930f7c">
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL"></div>
+    <div>
+      <div class="nav-logo-text">MDL Viollet-le-Duc</div>
+      <span class="nav-logo-sub">Maison des Lycéens</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li class="nav-dropdown">
+      <a href="evenements.html">Activités</a>
+      <div class="nav-dropdown-menu">
+        <a href="evenements.html">🎉 Événements</a>
+        <a href="projets.html">💡 Projets</a>
+        <a href="clubs.html">🎭 Clubs</a>
+        <a href="merch.html">🛍 Merch</a>
+      </div>
+    </li>
+    <li><a href="planning.html">Planning</a></li>
+    <li class="nav-dropdown">
+      <a href="mdl.html">La MDL</a>
+      <div class="nav-dropdown-menu">
+        <a href="mdl.html">🏠 La MDL</a>
+        <a href="equipe.html">👥 Équipe</a>
+        <a href="partenaires.html">🤝 Partenaires</a>
+        <div class="nav-dropdown-menu-sep"></div>
+        <a href="documents.html">📄 Documents</a>
+      </div>
+    </li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="adhesion.html" class="nav-cta">Adhérer</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-search-btn" id="searchOpenBtn" title="Ctrl+K" aria-label="Rechercher">🔍 Rechercher</button>
+    <button class="dark-toggle" id="darkToggle" aria-label="Mode sombre" title="Mode sombre">🌙</button>
+    <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
+  <a href="projets.html" style="padding-left:32px!important;">Projets</a>
+  <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
+  <a href="merch.html" style="padding-left:32px!important;">Merch</a>
+  <a href="planning.html">Planning</a>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
+  <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
+  <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
+  <a href="documents.html" style="padding-left:32px!important;">Documents</a>
+  <a href="credits.html" style="padding-left:32px!important;">Crédits</a>
+  <a href="contact.html">Contact</a>
+  <a href="adhesion.html" class="nav-cta">Adhérer</a>
+</div>
+<script>
+function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
+document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
+</script>
+
+<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-escaliers.jpg'); --hero-pos: center center;">
+  <span class="section-eyebrow">Contact</span>
+  <h1 class="section-title section-title-lg">On vous répond.</h1>
+  <p class="section-sub">Une question sur un événement, une commande de merch, une idée de projet ? Écrivez-nous directement.</p>
+</div>
+
+<section class="section">
+  <div class="contact-grid">
+
+    <div class="contact-aside">
+      <div class="contact-aside-title">Nous joindre</div>
+      <p class="contact-aside-sub">On répond en général dans la journée pendant les périodes scolaires.</p>
+      <div class="contact-info-row">
+        <div class="contact-info-icon">✉️</div>
+        <div>
+          <div class="contact-info-label">Email</div>
+          <div class="contact-info-val"><a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a></div>
+        </div>
+      </div>
+      <div class="contact-info-row">
+        <div class="contact-info-icon">🏫</div>
+        <div>
+          <div class="contact-info-label">Établissement</div>
+          <div class="contact-info-val">Lycée Viollet-le-Duc<br>Villiers-Saint-Frédéric, 78640</div>
+        </div>
+      </div>
+      <div class="contact-info-row">
+        <div class="contact-info-icon">🌐</div>
+        <div>
+          <div class="contact-info-label">Site</div>
+          <div class="contact-info-val"><a href="https://mdl-vld.fr">mdl-vld.fr</a></div>
+        </div>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-info-label" style="margin-bottom: 14px; color: rgba(255,255,255,0.5); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;">Secrétariat</div>
+      <div class="bureau-list">
+        <div class="bureau-item">
+          <div class="bureau-ava">QT</div>
+          <div><div class="bureau-item-role">Président</div><div class="bureau-item-name">Quentin Thiery</div></div>
+        </div>
+        <div class="bureau-item">
+          <div class="bureau-ava">EB</div>
+          <div><div class="bureau-item-role">Co-Président</div><div class="bureau-item-name">Ewan Foucaud</div></div>
+        </div>
+        <div class="bureau-item">
+          <div class="bureau-ava">SB</div>
+          <div><div class="bureau-item-role">Secrétaire Générale</div><div class="bureau-item-name">Sélène Beaufour</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-card-title">Envoyer un message</div>
+      <p class="form-card-sub">Le formulaire envoie votre message directement à <strong>contact@mdl-vld.fr</strong>. Vous recevrez une confirmation par email.</p>
+
+      <div class="success-msg" id="success-msg">
+        Message envoyé ! On vous répond très vite à contact@mdl-vld.fr.
+      </div>
+
+      <form id="contact-form" action="https://formspree.io/f/mpqelkdb" method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="prenom">Prénom *</label>
+            <input type="text" id="prenom" name="prenom" class="form-input" placeholder="Votre prénom" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="nom">Nom *</label>
+            <input type="text" id="nom" name="nom" class="form-input" placeholder="Votre nom" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email *</label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="votre@email.fr" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="sujet">Sujet</label>
+          <select id="sujet" name="sujet" class="form-input">
+            <option value="">Choisir un sujet...</option>
+            <option value="bal">Bal des Terminales</option>
+            <option value="merch">Commande merch</option>
+            <option value="adhesion">Adhésion MDL</option>
+            <option value="projet">Proposer un projet</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Message *</label>
+          <textarea id="message" name="message" class="form-input" placeholder="Votre message..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Pièce jointe (optionnel)</label>
+          <label class="form-file-label" for="fichier">
+            <span class="form-file-icon">📎</span>
+            <span>Cliquer pour joindre un fichier (image, PDF...)</span>
+          </label>
+          <input type="file" id="fichier" name="fichier" accept="image/*,.pdf,.doc,.docx">
+          <div id="file-name"></div>
+        </div>
+        <button type="submit" class="btn btn-magenta form-submit">Envoyer le message</button>
+        <p class="form-note">Votre message sera transmis à contact@mdl-vld.fr. Aucune donnée n'est revendue.</p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-row">
+        <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
+        <div class="footer-logo-name">MDL Viollet-le-Duc</div>
+      </div>
+      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Activités</div>
+      <ul>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="clubs.html">Clubs</a></li>
+        <li><a href="merch.html">Merch</a></li>
+        <li><a href="planning.html">Planning</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">La MDL</div>
+      <ul>
+        <li><a href="mdl.html">La MDL</a></li>
+        <li><a href="equipe.html">Équipe</a></li>
+        <li><a href="adhesion.html">Adhérer</a></li>
+        <li><a href="partenaires.html">Partenaires</a></li>
+        <li><a href="documents.html">Documents</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Infos</div>
+      <ul>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a></li>
+        <li><a href="credits.html">Crédits</a></li>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+        <li><a href="confidentialite.html">Confidentialité</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627</span>
+    <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
+  </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Retour en haut" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">↑</button>
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
+  <div class="search-modal">
+    <div class="search-input-row">
+      <span class="search-icon">🔍</span>
+      <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
+      <button class="search-close-btn" id="searchCloseBtn">Échap</button>
+    </div>
+    <div class="search-results" id="searchResults"><div class="search-empty">Tapez pour rechercher...</div></div>
+  </div>
+</div>
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" aria-label="Fermer">✕</button>
+  <img class="lightbox-img" src="" alt="">
+  <div class="lightbox-caption"></div>
+</div>
+<div class="cookie-banner" id="cookieBanner" role="alertdialog">
+  <p class="cookie-banner-text">Ce site utilise uniquement des cookies techniques nécessaires. <a href="confidentialite.html">En savoir plus</a></p>
+  <div class="cookie-banner-actions">
+    <button class="cookie-btn cookie-btn-refuse" id="cookieRefuse">Refuser</button>
+    <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Accepter</button>
+  </div>
+</div>
+<script>document.querySelectorAll('.year-auto').forEach(function(e){{e.textContent=new Date().getFullYear();}});</script>
+<script src="mdl-core.js" defer></script>
+</body>
+</html>

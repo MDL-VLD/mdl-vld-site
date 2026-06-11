@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDL Viollet-le-Duc</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Documents officiels de la MDL du lycée Viollet-le-Duc.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MDL Viollet-le-Duc">
+  <meta property="og:title" content="MDL Viollet-le-Duc — Documents">
+  <meta property="og:description" content="Documents officiels, statuts et comptes-rendus de la MDL du lycée Viollet-le-Duc.">
+  <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .docs-notice {
+      background: var(--lilas-pale);
+      border: 1px solid var(--lilas);
+      border-left: 4px solid var(--magenta);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--gris-texte);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .docs-notice strong { color: var(--magenta); }
+
+    .docs-category { margin-bottom: 48px; }
+    .docs-category-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--prune);
+      margin-bottom: 6px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--lilas-pale);
+    }
+    .docs-category-desc {
+      font-size: 13px; color: var(--gris-texte);
+      line-height: 1.65; margin-bottom: 20px;
+    }
+    .docs-list { display: flex; flex-direction: column; gap: 10px; }
+    .doc-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 18px;
+      background: white;
+      border: 1px solid var(--lilas-pale);
+      border-radius: var(--radius-md);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .doc-item:hover { background: var(--rose-pale); box-shadow: var(--shadow-soft); }
+    .doc-icon {
+      width: 40px; height: 40px;
+      background: var(--lilas-pale);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .doc-name { font-size: 14px; font-weight: 500; color: var(--prune); margin-bottom: 2px; }
+    .doc-meta { font-size: 12px; color: var(--gris-texte); }
+    .doc-action { margin-left: auto; flex-shrink: 0; }
+    .doc-status {
+      font-size: 11px; padding: 3px 10px;
+      border-radius: 20px; font-weight: 500;
+    }
+    .doc-status.public { background: #eaf5ec; color: #276237; }
+    .doc-status.membres { background: var(--lilas-pale); color: var(--magenta); }
+    .doc-status.bientot { background: var(--gris-pale); color: var(--gris-texte); }
+
+    .access-info {
+      background: var(--rose-pale);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-top: 40px;
+    }
+    .access-info-title { font-size: 15px; font-weight: 600; color: var(--prune); margin-bottom: 8px; }
+    .access-info-text { font-size: 13px; color: var(--gris-texte); line-height: 1.7; }
+    .access-levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+    .access-level {
+      background: white; border: 1px solid var(--lilas-pale);
+      border-radius: var(--radius-md); padding: 14px;
+      text-align: center;
+    }
+    .access-level-icon { font-size: 20px; margin-bottom: 6px; }
+    .access-level-name { font-size: 12px; font-weight: 600; color: var(--prune); margin-bottom: 4px; }
+    .access-level-desc { font-size: 11px; color: var(--gris-texte); line-height: 1.5; }
+
+    @media (max-width: 768px) { .access-levels { grid-template-columns: 1fr; } }
+  </style>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#930f7c">
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL"></div>
+    <div>
+      <div class="nav-logo-text">MDL Viollet-le-Duc</div>
+      <span class="nav-logo-sub">Maison des Lycéens</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li class="nav-dropdown">
+      <a href="evenements.html">Activités</a>
+      <div class="nav-dropdown-menu">
+        <a href="evenements.html">🎉 Événements</a>
+        <a href="projets.html">💡 Projets</a>
+        <a href="clubs.html">🎭 Clubs</a>
+        <a href="merch.html">🛍 Merch</a>
+      </div>
+    </li>
+    <li><a href="planning.html">Planning</a></li>
+    <li class="nav-dropdown">
+      <a href="mdl.html" class="active">La MDL</a>
+      <div class="nav-dropdown-menu">
+        <a href="mdl.html">🏠 La MDL</a>
+        <a href="equipe.html">👥 Équipe</a>
+        <a href="partenaires.html">🤝 Partenaires</a>
+        <div class="nav-dropdown-menu-sep"></div>
+        <a href="documents.html" class="active">📄 Documents</a>
+      </div>
+    </li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="adhesion.html" class="nav-cta">Adhérer</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-search-btn" id="searchOpenBtn" title="Ctrl+K" aria-label="Rechercher">🔍 Rechercher</button>
+    <button class="dark-toggle" id="darkToggle" aria-label="Mode sombre" title="Mode sombre">🌙</button>
+    <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
+  <a href="projets.html" style="padding-left:32px!important;">Projets</a>
+  <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
+  <a href="merch.html" style="padding-left:32px!important;">Merch</a>
+  <a href="planning.html">Planning</a>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
+  <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
+  <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
+  <a href="documents.html" style="padding-left:32px!important;">Documents</a>
+  <a href="credits.html" style="padding-left:32px!important;">Crédits</a>
+  <a href="contact.html">Contact</a>
+  <a href="adhesion.html" class="nav-cta">Adhérer</a>
+</div>
+<script>
+function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
+document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
+</script>
+
+<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-facade.jpg'); --hero-pos: center 40%;">
+  <span class="section-eyebrow">Transparence</span>
+  <h1 class="section-title section-title-lg">Documents officiels</h1>
+  <p class="section-sub">Les documents statutaires, comptes-rendus et pièces officielles de la MDL du lycée Viollet-le-Duc.</p>
+</div>
+
+<section class="section">
+  <div class="docs-notice">
+    <strong>Accès aux documents :</strong> Certains documents sont publics, d'autres sont réservés aux membres de la MDL. Les documents confidentiels (finances, données personnelles) sont accessibles sur demande auprès du bureau à <a href="mailto:contact@mdl-vld.fr" style="color:var(--magenta)">contact@mdl-vld.fr</a>.
+  </div>
+
+  <!-- DOCUMENTS FONDATEURS -->
+  <div class="docs-category">
+    <div class="docs-category-title">📋 Documents fondateurs</div>
+    <p class="docs-category-desc">Les documents constitutifs de l'association, accessibles à tous.</p>
+    <div class="docs-list">
+      <div class="doc-item">
+        <div class="doc-icon">📄</div>
+        <div>
+          <div class="doc-name">Statuts de l'association</div>
+          <div class="doc-meta">Révisés en assemblée générale extraordinaire · mai 2025</div>
+        </div>
+        <div class="doc-action"><span class="doc-status public">Public</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">📋</div>
+        <div>
+          <div class="doc-name">Règlement intérieur</div>
+          <div class="doc-meta">Version en vigueur · adopté en AGE · mai 2025</div>
+        </div>
+        <div class="doc-action"><span class="doc-status public">Public</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">🏛</div>
+        <div>
+          <div class="doc-name">Récépissé de déclaration en préfecture</div>
+          <div class="doc-meta">RNA W782004627 · SIRET 907 864 995 00010</div>
+        </div>
+        <div class="doc-action"><span class="doc-status public">Public</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCÈS-VERBAUX ET CR -->
+  <div class="docs-category">
+    <div class="docs-category-title">📝 Procès-verbaux et comptes-rendus</div>
+    <p class="docs-category-desc">Les comptes-rendus des assemblées générales et réunions de bureau.</p>
+    <div class="docs-list">
+      <div class="doc-item">
+        <div class="doc-icon">📝</div>
+        <div>
+          <div class="doc-name">PV de l'Assemblée Générale Extraordinaire</div>
+          <div class="doc-meta">12 mai 2025 · Adoption des nouveaux statuts et RI</div>
+        </div>
+        <div class="doc-action"><span class="doc-status membres">Membres</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">📝</div>
+        <div>
+          <div class="doc-name">Comptes-rendus de réunions bureau</div>
+          <div class="doc-meta">2025-2026 · En cours de publication</div>
+        </div>
+        <div class="doc-action"><span class="doc-status bientot">À venir</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">📊</div>
+        <div>
+          <div class="doc-name">Bilan annuel 2024-2025</div>
+          <div class="doc-meta">En cours de rédaction</div>
+        </div>
+        <div class="doc-action"><span class="doc-status bientot">À venir</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCUMENTS FINANCIERS -->
+  <div class="docs-category">
+    <div class="docs-category-title">💰 Documents financiers</div>
+    <p class="docs-category-desc">Budget, bilans financiers. Réservés aux membres du CA.</p>
+    <div class="docs-list">
+      <div class="doc-item">
+        <div class="doc-icon">💶</div>
+        <div>
+          <div class="doc-name">Budget prévisionnel 2025-2026</div>
+          <div class="doc-meta">Validé en AG · Réservé aux membres du CA</div>
+        </div>
+        <div class="doc-action"><span class="doc-status membres">CA uniquement</span></div>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon">📈</div>
+        <div>
+          <div class="doc-name">Bilan financier 2024-2025</div>
+          <div class="doc-meta">En cours de finalisation</div>
+        </div>
+        <div class="doc-action"><span class="doc-status bientot">À venir</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NIVEAUX D'ACCÈS -->
+  <div class="access-info">
+    <div class="access-info-title">Niveaux d'accès aux documents</div>
+    <p class="access-info-text">Les documents de la MDL sont classés selon trois niveaux d'accès.</p>
+    <div class="access-levels">
+      <div class="access-level">
+        <div class="access-level-icon">🌐</div>
+        <div class="access-level-name">Public</div>
+        <div class="access-level-desc">Accessible à tous, sans restriction.</div>
+      </div>
+      <div class="access-level">
+        <div class="access-level-icon">🏠</div>
+        <div class="access-level-name">Membres</div>
+        <div class="access-level-desc">Réservé aux adhérents de la MDL.</div>
+      </div>
+      <div class="access-level">
+        <div class="access-level-icon">🔒</div>
+        <div class="access-level-name">Bureau / CA</div>
+        <div class="access-level-desc">Réservé aux membres du bureau et du CA.</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--gris-texte);margin-top:14px;">Pour accéder aux documents réservés, deux options : contacter le bureau à <a href="mailto:contact@mdl-vld.fr" style="color:var(--magenta)">contact@mdl-vld.fr</a> en précisant votre statut de membre, ou accéder directement via <a href="https://drive.google.com" target="_blank" style="color:var(--magenta)">Google Drive MDL</a> si vous avez reçu une invitation d'accès.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-row">
+        <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
+        <div class="footer-logo-name">MDL Viollet-le-Duc</div>
+      </div>
+      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Activités</div>
+      <ul>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="clubs.html">Clubs</a></li>
+        <li><a href="merch.html">Merch</a></li>
+        <li><a href="planning.html">Planning</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">La MDL</div>
+      <ul>
+        <li><a href="mdl.html">La MDL</a></li>
+        <li><a href="equipe.html">Équipe</a></li>
+        <li><a href="adhesion.html">Adhérer</a></li>
+        <li><a href="partenaires.html">Partenaires</a></li>
+        <li><a href="documents.html">Documents</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Infos</div>
+      <ul>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a></li>
+        <li><a href="credits.html">Crédits</a></li>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+        <li><a href="confidentialite.html">Confidentialité</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627</span>
+    <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
+  </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Retour en haut" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">↑</button>
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
+  <div class="search-modal">
+    <div class="search-input-row">
+      <span class="search-icon">🔍</span>
+      <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
+      <button class="search-close-btn" id="searchCloseBtn">Échap</button>
+    </div>
+    <div class="search-results" id="searchResults"><div class="search-empty">Tapez pour rechercher...</div></div>
+  </div>
+</div>
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" aria-label="Fermer">✕</button>
+  <img class="lightbox-img" src="" alt="">
+  <div class="lightbox-caption"></div>
+</div>
+<div class="cookie-banner" id="cookieBanner" role="alertdialog">
+  <p class="cookie-banner-text">Ce site utilise uniquement des cookies techniques nécessaires. <a href="confidentialite.html">En savoir plus</a></p>
+  <div class="cookie-banner-actions">
+    <button class="cookie-btn cookie-btn-refuse" id="cookieRefuse">Refuser</button>
+    <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Accepter</button>
+  </div>
+</div>
+<script>document.querySelectorAll('.year-auto').forEach(function(e){{e.textContent=new Date().getFullYear();}});</script>
+<script src="mdl-core.js" defer></script>
+</body>
+</html>

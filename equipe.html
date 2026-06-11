@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDL Viollet-le-Duc</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="L'équipe et le bureau de la MDL du lycée Viollet-le-Duc 2025-2026.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MDL Viollet-le-Duc">
+  <meta property="og:title" content="MDL Viollet-le-Duc">
+  <meta property="og:description" content="Le bureau et l'équipe de la MDL du lycée Viollet-le-Duc.">
+  <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .equipe-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .equipe-intro-left {
+      padding: 52px 48px;
+      background: var(--magenta);
+      color: white;
+    }
+    .equipe-intro-left .section-eyebrow { color: var(--gold-light, #f0d080); }
+    .equipe-intro-left .section-title { color: white; }
+    .equipe-intro-left .section-sub { color: rgba(255,255,255,0.7); max-width: none; margin-bottom: 0; }
+    .equipe-intro-right {
+      padding: 52px 48px;
+      background: var(--rose-pale);
+    }
+
+    .bureau-type-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--magenta);
+      padding: 6px 14px;
+      background: var(--lilas-pale);
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .membres-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .membre-card {
+      background: white;
+      border: 1px solid var(--lilas-pale);
+      border-radius: var(--radius-lg);
+      padding: 22px 18px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .membre-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+    .membre-avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--lilas-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 700;
+      color: var(--magenta);
+      margin: 0 auto 12px;
+      border: 2px solid var(--lilas);
+    }
+    .membre-role {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--or); margin-bottom: 4px;
+    }
+    .membre-name {
+      font-size: 14px; font-weight: 500;
+      color: var(--prune); margin-bottom: 4px;
+    }
+    .membre-classe {
+      font-size: 11px; color: var(--gris-texte);
+    }
+
+    .membres-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      max-width: 600px;
+    }
+
+    .rejoindre-band {
+      background: var(--prune-soft, #3f2638);
+      padding: 48px;
+      text-align: center;
+      color: white;
+    }
+    .rejoindre-band .section-eyebrow { color: var(--gold-light, #f0d080); display: block; margin-bottom: 10px; }
+    .rejoindre-band h2 { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: white; margin-bottom: 12px; }
+    .rejoindre-band p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.75; max-width: 480px; margin: 0 auto 28px; }
+
+    @media (max-width: 768px) {
+      .equipe-intro { grid-template-columns: 1fr; }
+      .equipe-intro-left, .equipe-intro-right { padding: 36px 20px; }
+      .membres-grid { grid-template-columns: 1fr 1fr; }
+      .membres-grid-2 { grid-template-columns: 1fr 1fr; max-width: none; }
+      .rejoindre-band { padding: 36px 20px; }
+    }
+    @media (max-width: 480px) {
+      .membres-grid { grid-template-columns: 1fr; }
+      .membres-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#930f7c">
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL"></div>
+    <div>
+      <div class="nav-logo-text">MDL Viollet-le-Duc</div>
+      <span class="nav-logo-sub">Maison des Lycéens</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li class="nav-dropdown">
+      <a href="evenements.html">Activités</a>
+      <div class="nav-dropdown-menu">
+        <a href="evenements.html">🎉 Événements</a>
+        <a href="projets.html">💡 Projets</a>
+        <a href="clubs.html">🎭 Clubs</a>
+        <a href="merch.html">🛍 Merch</a>
+      </div>
+    </li>
+    <li><a href="planning.html">Planning</a></li>
+    <li class="nav-dropdown">
+      <a href="mdl.html" class="active">La MDL</a>
+      <div class="nav-dropdown-menu">
+        <a href="mdl.html">🏠 La MDL</a>
+        <a href="equipe.html" class="active">👥 Équipe</a>
+        <a href="partenaires.html">🤝 Partenaires</a>
+        <div class="nav-dropdown-menu-sep"></div>
+        <a href="documents.html">📄 Documents</a>
+      </div>
+    </li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="adhesion.html" class="nav-cta">Adhérer</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-search-btn" id="searchOpenBtn" title="Ctrl+K" aria-label="Rechercher">🔍 Rechercher</button>
+    <button class="dark-toggle" id="darkToggle" aria-label="Mode sombre" title="Mode sombre">🌙</button>
+    <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
+  <a href="projets.html" style="padding-left:32px!important;">Projets</a>
+  <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
+  <a href="merch.html" style="padding-left:32px!important;">Merch</a>
+  <a href="planning.html">Planning</a>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
+  <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
+  <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
+  <a href="documents.html" style="padding-left:32px!important;">Documents</a>
+  <a href="credits.html" style="padding-left:32px!important;">Crédits</a>
+  <a href="contact.html">Contact</a>
+  <a href="adhesion.html" class="nav-cta">Adhérer</a>
+</div>
+<script>
+function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
+document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
+</script>
+
+<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-2.jpg'); --hero-pos: center center;">
+  <span class="section-eyebrow">L'équipe</span>
+  <h1 class="section-title section-title-lg">Notre bureau</h1>
+  <p class="section-sub">Les élèves et adultes référents qui font vivre la MDL du lycée Viollet-le-Duc pour l'année 2025-2026.</p>
+</div>
+
+<!-- INSTANCES -->
+<section class="section">
+  <span class="section-eyebrow">Organisation</span>
+  <h2 class="section-title">Les trois instances de la MDL</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:0;">
+    <div class="card" style="padding:24px;text-align:center;">
+      <div style="font-size:32px;margin-bottom:12px;">🏛</div>
+      <div style="font-family:Playfair Display,serif;font-size:16px;font-weight:700;color:var(--prune);margin-bottom:8px;">Bureau</div>
+      <p style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Président·e, trésorier·e, secrétaire — les responsables exécutifs élus par le CA.</p>
+    </div>
+    <div class="card" style="padding:24px;text-align:center;">
+      <div style="font-size:32px;margin-bottom:12px;">⚙️</div>
+      <div style="font-family:Playfair Display,serif;font-size:16px;font-weight:700;color:var(--prune);margin-bottom:8px;">Conseil d'Administration</div>
+      <p style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Bureau + responsables de pôles élus en AG. Prend les décisions courantes de l'association.</p>
+    </div>
+    <div class="card" style="padding:24px;text-align:center;">
+      <div style="font-size:32px;margin-bottom:12px;">🗳</div>
+      <div style="font-family:Playfair Display,serif;font-size:16px;font-weight:700;color:var(--prune);margin-bottom:8px;">Assemblée Générale</div>
+      <p style="font-size:12px;color:var(--gris-texte);line-height:1.6;">CA + tous les membres adhérents. Vote les décisions importantes et élit le bureau chaque année.</p>
+    </div>
+  </div>
+  <div style="margin-top:16px;" class="card" style="padding:20px;">
+    <div style="padding:20px;display:flex;align-items:center;gap:16px;">
+      <div style="font-size:28px;">👥</div>
+      <div>
+        <div style="font-family:Playfair Display,serif;font-size:15px;font-weight:700;color:var(--prune);margin-bottom:4px;">Membres actifs</div>
+        <p style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Adhérents ne faisant pas partie du bureau ou du CA, mais qui participent activement aux événements et projets de la MDL.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO SPLIT -->
+<div class="equipe-intro">
+  <div class="equipe-intro-left">
+    <span class="section-eyebrow">L'organisation</span>
+    <h2 class="section-title">Comment ça fonctionne ?</h2>
+    <p class="section-sub">La MDL est dirigée par deux instances complémentaires : un bureau permanent composé d'adultes référents, et un bureau annuel d'élèves élus chaque année lors de l'assemblée générale.</p>
+  </div>
+  <div class="equipe-intro-right">
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:40px;height:40px;background:var(--lilas-pale);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🏛</div>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--prune);margin-bottom:3px;">Bureau permanent</div>
+          <div style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Adultes référents qui assurent la continuité et le suivi administratif de l'association.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:40px;height:40px;background:var(--lilas-pale);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🗳</div>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--prune);margin-bottom:3px;">Bureau annuel</div>
+          <div style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Élèves élus lors de l'AG de début d'année, renouvelé chaque année scolaire.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:40px;height:40px;background:var(--lilas-pale);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🤝</div>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--prune);margin-bottom:3px;">Assemblée générale</div>
+          <div style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Tous les membres peuvent voter et proposer des projets lors des AG.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BUREAU PERMANENT -->
+<section class="section">
+  <div class="bureau-type-label">Bureau permanent</div>
+  <div class="membres-grid-2">
+    <div class="membre-card">
+      <div class="membre-avatar">QT</div>
+      <div class="membre-role">Président</div>
+      <div class="membre-name">Quentin Thiery</div>
+      <div class="membre-classe">AED</div>
+    </div>
+    <div class="membre-card">
+      <div class="membre-avatar">CH</div>
+      <div class="membre-role">Trésorière</div>
+      <div class="membre-name">Cécile Hecht</div>
+      <div class="membre-classe">Professeure</div>
+    </div>
+  </div>
+</section>
+
+<!-- BUREAU ANNUEL -->
+<section class="section section-alt">
+  <div class="bureau-type-label">Bureau annuel 2025-2026</div>
+  <div class="reveal"><div class="membres-grid">
+    <div class="membre-card">
+      <div class="membre-avatar">EF</div>
+      <div class="membre-role">Co-Président</div>
+      <div class="membre-name">Ewan Foucaud</div>
+      <div class="membre-classe">Terminale 3</div>
+    </div>
+    <div class="membre-card">
+      <div class="membre-avatar">AG</div>
+      <div class="membre-role">Vice-Présidente</div>
+      <div class="membre-name">Amy Gueye</div>
+      <div class="membre-classe">Terminale 4</div>
+    </div>
+    <div class="membre-card">
+      <div class="membre-avatar">SB</div>
+      <div class="membre-role">Secrétaire Générale</div>
+      <div class="membre-name">Sélène Beaufour</div>
+      <div class="membre-classe">Terminale 3</div>
+    </div>
+    <div class="membre-card">
+      <div class="membre-avatar">TC</div>
+      <div class="membre-role">Secrétaire Adjoint</div>
+      <div class="membre-name">Tristan Chevassus-Au-Louis-Durant</div>
+      <div class="membre-classe">Première 4</div>
+    </div>
+    <div class="membre-card">
+      <div class="membre-avatar">JG</div>
+      <div class="membre-role">Trésorier Adjoint</div>
+      <div class="membre-name">Jarod Guiral</div>
+      <div class="membre-classe">TSTI2DI</div>
+    </div>
+    <div class="membre-card">
+      <div class="membre-avatar">ND</div>
+      <div class="membre-role">Trésorière Adjointe</div>
+      <div class="membre-name">Noémie Debroye</div>
+      <div class="membre-classe">Terminale 5</div>
+    </div>
+    <div class="membre-card">
+      <div class="membre-avatar">CB</div>
+      <div class="membre-role">Resp. Communication</div>
+      <div class="membre-name">Callie Brule</div>
+      <div class="membre-classe">Terminale 4</div>
+    </div>
+    <div class="membre-card">
+      <div class="membre-avatar">AM</div>
+      <div class="membre-role">Resp. Communication</div>
+      <div class="membre-name">Amandine Maeize</div>
+      <div class="membre-classe">Terminale 4</div>
+    </div>
+    <div class="membre-card">
+      <div class="membre-avatar">KF</div>
+      <div class="membre-role">Resp. Matériels & Décos</div>
+      <div class="membre-name">Killian Faye</div>
+      <div class="membre-classe">Terminale 3</div>
+    </div>
+    <div class="membre-card">
+      <div class="membre-avatar">EB</div>
+      <div class="membre-role">Resp. Matériels & Décos</div>
+      <div class="membre-name">Enora Barbot</div>
+      <div class="membre-classe">Première STL</div>
+    </div>
+  </div>
+</section>
+
+<!-- REJOINDRE -->
+<div class="rejoindre-band">
+  <span class="section-eyebrow">Tu veux nous rejoindre ?</span>
+  <h2>Rejoindre le bureau</h2>
+  <p>Les membres du bureau sont élus lors de l'assemblée générale de début d'année. Pour candidater, il faut être membre de la MDL. Tu peux aussi proposer des projets sans être au bureau.</p>
+  <a href="adhesion.html" class="btn btn-or btn-lg">Adhérer à la MDL</a>
+</div>
+
+<button class="back-to-top" id="backToTop" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>var btn=document.getElementById('backToTop');window.addEventListener('scroll',function(){if(btn)btn.classList.toggle('visible',window.scrollY>400);});</script>
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-row">
+        <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
+        <div class="footer-logo-name">MDL Viollet-le-Duc</div>
+      </div>
+      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Activités</div>
+      <ul>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="clubs.html">Clubs</a></li>
+        <li><a href="merch.html">Merch</a></li>
+        <li><a href="planning.html">Planning</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">La MDL</div>
+      <ul>
+        <li><a href="mdl.html">La MDL</a></li>
+        <li><a href="equipe.html">Équipe</a></li>
+        <li><a href="adhesion.html">Adhérer</a></li>
+        <li><a href="partenaires.html">Partenaires</a></li>
+        <li><a href="documents.html">Documents</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Infos</div>
+      <ul>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a></li>
+        <li><a href="credits.html">Crédits</a></li>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+        <li><a href="confidentialite.html">Confidentialité</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627</span>
+    <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
+  </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Retour en haut" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">↑</button>
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
+  <div class="search-modal">
+    <div class="search-input-row">
+      <span class="search-icon">🔍</span>
+      <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
+      <button class="search-close-btn" id="searchCloseBtn">Échap</button>
+    </div>
+    <div class="search-results" id="searchResults"><div class="search-empty">Tapez pour rechercher...</div></div>
+  </div>
+</div>
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" aria-label="Fermer">✕</button>
+  <img class="lightbox-img" src="" alt="">
+  <div class="lightbox-caption"></div>
+</div>
+<div class="cookie-banner" id="cookieBanner" role="alertdialog">
+  <p class="cookie-banner-text">Ce site utilise uniquement des cookies techniques nécessaires. <a href="confidentialite.html">En savoir plus</a></p>
+  <div class="cookie-banner-actions">
+    <button class="cookie-btn cookie-btn-refuse" id="cookieRefuse">Refuser</button>
+    <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Accepter</button>
+  </div>
+</div>
+<script>document.querySelectorAll('.year-auto').forEach(function(e){{e.textContent=new Date().getFullYear();}});</script>
+<script src="mdl-core.js" defer></script>
+</body>
+</html>
