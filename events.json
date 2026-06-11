@@ -1,0 +1,58 @@
+{
+  "evenements_a_venir": [
+    {
+      "id": "bal-terminales-2025",
+      "titre": "Bal des Terminales — Promo 2026",
+      "sous_titre": "Cannes Film Festival",
+      "date": "2026-07-03",
+      "date_affichee": "Jeudi 3 juillet 2026",
+      "lieu": "Salle polyvalente de Thoiry",
+      "description": "La grande soirée de fin d'année pour toutes les classes de Terminale. Thème Cannes Film Festival : dress code élégant, ambiance cinéma, dorures et tapis rouge. Musique, animations et buffet pour marquer la fin du lycée.",
+      "prix_standard": "5€",
+      "prix_membres": "Gratuit",
+      "capacite": 500,
+      "lien_billetterie": "https://www.helloasso.com",
+      "epingle": true,
+      "couleur": "gold",
+      "tags": [
+        "Événement phare",
+        "Places disponibles"
+      ]
+    }
+  ],
+  "evenements_passes": [
+    {
+      "id": "bal-terminales-2024",
+      "titre": "Bal des Terminales 2024",
+      "date_affichee": "2024",
+      "lieu": "À compléter",
+      "description": "À compléter avec photos et description.",
+      "emoji": "🎭"
+    }
+  ],
+  "infos_contact": {
+    "email": "contact@mdl-vld.fr",
+    "site": "mdl-vld.fr",
+    "helloasso_adhesion": "https://www.helloasso.com/associations/maison-des-lyceens-mld-du-lycee-viollet-le-duc/adhesions/adhesion-mdl-2025-2026"
+  },
+  "bureau": [
+    {
+      "initiales": "QT",
+      "prenom": "Quentin",
+      "nom": "Thiery",
+      "role": "Président"
+    },
+    {
+      "initiales": "EB",
+      "prenom": "Ewan",
+      "nom": "B.",
+      "role": "Co-Président"
+    },
+    {
+      "initiales": "SB",
+      "prenom": "Sélène",
+      "nom": "Beaufour",
+      "role": "Secrétaire Générale"
+    }
+  ]
+}

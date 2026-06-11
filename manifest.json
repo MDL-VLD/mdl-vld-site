@@ -1,0 +1,25 @@
+{
+  "name": "MDL Viollet-le-Duc",
+  "short_name": "MDL VLD",
+  "description": "La Maison des Lycéens du lycée Viollet-le-Duc — Événements, projets et vie lycéenne",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#141014",
+  "theme_color": "#930f7c",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["education", "social"],
+  "lang": "fr"
+}

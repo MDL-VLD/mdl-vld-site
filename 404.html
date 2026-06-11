@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page introuvable — MDL Viollet-le-Duc</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="favicon-32.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { min-height: 100vh; display: flex; flex-direction: column; }
+    .error-page {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 48px 24px;
+      background: linear-gradient(160deg, var(--lilas-pale) 0%, var(--blanc) 60%);
+      position: relative; overflow: hidden;
+    }
+    .error-page::before {
+      content: '404';
+      position: absolute;
+      font-family: 'Playfair Display', serif;
+      font-size: 300px; font-weight: 700;
+      color: var(--magenta); opacity: 0.04;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      pointer-events: none; user-select: none;
+    }
+    .error-content {
+      text-align: center; position: relative; z-index: 1;
+      max-width: 520px;
+    }
+    .error-logo { width: 80px; margin: 0 auto 24px; }
+    .error-code {
+      font-family: 'Playfair Display', serif;
+      font-size: 80px; font-weight: 700;
+      color: var(--magenta); line-height: 1;
+      margin-bottom: 8px;
+    }
+    .error-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; font-weight: 700;
+      color: var(--prune); margin-bottom: 12px;
+    }
+    .error-desc {
+      font-size: 15px; color: var(--gris-texte);
+      line-height: 1.7; margin-bottom: 32px;
+    }
+    .error-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .error-suggestions {
+      margin-top: 40px;
+      background: white;
+      border: 1px solid var(--lilas-pale);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      text-align: left;
+    }
+    .error-suggestions-title {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--or); margin-bottom: 12px;
+    }
+    .error-links { display: flex; flex-direction: column; gap: 8px; }
+    .error-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: var(--radius-sm);
+      text-decoration: none; color: var(--prune);
+      font-size: 13px; font-weight: 500;
+      transition: background 0.15s;
+    }
+    .error-link:hover { background: var(--rose-pale); color: var(--magenta); }
+    .error-link-icon { font-size: 16px; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL"></div>
+    <div>
+      <div class="nav-logo-text">MDL Viollet-le-Duc</div>
+      <span class="nav-logo-sub">Maison des Lycéens</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li class="nav-dropdown">
+      <a href="evenements.html">Activités</a>
+      <div class="nav-dropdown-menu">
+        <a href="evenements.html">🎉 Événements</a>
+        <a href="projets.html">💡 Projets</a>
+        <a href="clubs.html">🎭 Clubs</a>
+        <a href="merch.html">🛍 Merch</a>
+      </div>
+    </li>
+    <li><a href="planning.html">Planning</a></li>
+    <li class="nav-dropdown">
+      <a href="mdl.html">La MDL</a>
+      <div class="nav-dropdown-menu">
+        <a href="mdl.html">🏠 La MDL</a>
+        <a href="equipe.html">👥 Équipe</a>
+        <a href="partenaires.html">🤝 Partenaires</a>
+        <div class="nav-dropdown-menu-sep"></div>
+        <a href="documents.html">📄 Documents</a>
+      </div>
+    </li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="adhesion.html" class="nav-cta">Adhérer</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-search-btn" id="searchOpenBtn" title="Ctrl+K" aria-label="Rechercher">🔍 Rechercher</button>
+    <button class="dark-toggle" id="darkToggle" aria-label="Mode sombre" title="Mode sombre">🌙</button>
+    <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
+  <a href="projets.html" style="padding-left:32px!important;">Projets</a>
+  <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
+  <a href="merch.html" style="padding-left:32px!important;">Merch</a>
+  <a href="planning.html">Planning</a>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
+  <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
+  <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
+  <a href="documents.html" style="padding-left:32px!important;">Documents</a>
+  <a href="credits.html" style="padding-left:32px!important;">Crédits</a>
+  <a href="contact.html">Contact</a>
+  <a href="adhesion.html" class="nav-cta">Adhérer</a>
+</div>
+<script>
+function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
+document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
+</script>
+
+<div class="error-page">
+  <div class="error-content">
+    <img src="assets/logo.png" alt="Logo MDL" class="error-logo">
+    <div class="error-code">404</div>
+    <div class="error-title">Page introuvable</div>
+    <p class="error-desc">La page que vous cherchez n'existe pas ou a été déplacée. Pas de panique, le reste du site est bien là !</p>
+    <div class="error-actions">
+      <a href="index.html" class="btn btn-magenta btn-lg">Retour à l'accueil</a>
+      <a href="contact.html" class="btn btn-outline">Signaler un problème</a>
+    </div>
+    <div class="error-suggestions">
+      <div class="error-suggestions-title">Pages populaires</div>
+      <div class="error-links">
+        <a href="evenements.html" class="error-link"><span class="error-link-icon">🎉</span> Événements et billetterie</a>
+        <a href="adhesion.html" class="error-link"><span class="error-link-icon">✋</span> Adhérer à la MDL</a>
+        <a href="equipe.html" class="error-link"><span class="error-link-icon">👥</span> Notre équipe</a>
+        <a href="planning.html" class="error-link"><span class="error-link-icon">📅</span> Planning et calendrier</a>
+        <a href="contact.html" class="error-link"><span class="error-link-icon">✉️</span> Nous contacter</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-row">
+        <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
+        <div class="footer-logo-name">MDL Viollet-le-Duc</div>
+      </div>
+      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Activités</div>
+      <ul>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="clubs.html">Clubs</a></li>
+        <li><a href="merch.html">Merch</a></li>
+        <li><a href="planning.html">Planning</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">La MDL</div>
+      <ul>
+        <li><a href="mdl.html">La MDL</a></li>
+        <li><a href="equipe.html">Équipe</a></li>
+        <li><a href="adhesion.html">Adhérer</a></li>
+        <li><a href="partenaires.html">Partenaires</a></li>
+        <li><a href="documents.html">Documents</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Infos</div>
+      <ul>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a></li>
+        <li><a href="credits.html">Crédits</a></li>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+        <li><a href="confidentialite.html">Confidentialité</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627</span>
+    <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
+  </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="Retour en haut" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">↑</button>
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
+  <div class="search-modal">
+    <div class="search-input-row">
+      <span class="search-icon">🔍</span>
+      <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
+      <button class="search-close-btn" id="searchCloseBtn">Échap</button>
+    </div>
+    <div class="search-results" id="searchResults"><div class="search-empty">Tapez pour rechercher...</div></div>
+  </div>
+</div>
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" aria-label="Fermer">✕</button>
+  <img class="lightbox-img" src="" alt="">
+  <div class="lightbox-caption"></div>
+</div>
+<div class="cookie-banner" id="cookieBanner" role="alertdialog">
+  <p class="cookie-banner-text">Ce site utilise uniquement des cookies techniques nécessaires. <a href="confidentialite.html">En savoir plus</a></p>
+  <div class="cookie-banner-actions">
+    <button class="cookie-btn cookie-btn-refuse" id="cookieRefuse">Refuser</button>
+    <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Accepter</button>
+  </div>
+</div>
+<script>document.querySelectorAll('.year-auto').forEach(function(e){{e.textContent=new Date().getFullYear();}});</script>
+<script src="mdl-core.js" defer></script>
+</body>
+</html>
