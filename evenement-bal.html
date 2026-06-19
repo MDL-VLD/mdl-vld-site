@@ -3,10 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDL Viollet-le-Duc</title>
+  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Le Bal des Terminales 2026 de la MDL Viollet-le-Duc : thème Festival de Cannes, 3 juillet 2026 à Thoiry. Infos et billetterie.">
+  <title>Bal des Terminales · MDL Viollet-le-Duc</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Bal des Terminales 2026 — Festival de Cannes",
+    "startDate": "2026-07-03T19:00:00+02:00",
+    "endDate": "2026-07-04T00:00:00+02:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "image": "https://mdl-vld.fr/assets/affiche-bal.jpg",
+    "description": "Le Bal des Terminales 2026 de la MDL Viollet-le-Duc, sur le thème du Festival de Cannes.",
+    "location": {
+      "@type": "Place",
+      "name": "Salle polyvalente de Thoiry",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "13 Rue des Vignettes",
+        "postalCode": "78770",
+        "addressLocality": "Thoiry",
+        "addressCountry": "FR"
+      }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "MDL Viollet-le-Duc",
+      "url": "https://mdl-vld.fr/"
+    }
+  }
+  </script>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     .event-hero {
@@ -37,7 +73,7 @@
     .event-hero-back:hover { color: white; }
     .event-hero-eyebrow {
       font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--or); margin-bottom: 12px;
+      text-transform: uppercase; color: var(--or-texte); margin-bottom: 12px;
     }
     .event-hero h1 {
       font-family: 'Playfair Display', serif;
@@ -72,7 +108,7 @@
     .event-section-title {
       font-family: 'Playfair Display', serif;
       font-size: 22px; font-weight: 700;
-      color: var(--prune); margin-bottom: 16px;
+      color: var(--prune); margin-top: 0; margin-bottom: 16px;
       padding-bottom: 12px;
       border-bottom: 1px solid var(--lilas-pale);
     }
@@ -146,7 +182,7 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 14px; flex-shrink: 0;
     }
-    .event-info-label { font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--or); margin-bottom: 2px; }
+    .event-info-label { font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--or-texte); margin-bottom: 2px; }
     .event-info-val { font-size: 13px; color: var(--prune); font-weight: 400; line-height: 1.5; }
 
     .ticket-options-mini { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
@@ -169,15 +205,16 @@
   </style>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MDL Viollet-le-Duc">
-  <meta property="og:title" content="MDL Viollet-le-Duc">
-  <meta property="og:description" content="MDL Viollet-le-Duc — Maison des Lycéens">
-  <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
+  <meta property="og:title" content="Bal des Terminales · MDL Viollet-le-Duc">
+  <meta property="og:description" content="Le Bal des Terminales 2026 · thème Festival de Cannes · 3 juillet 2026 à Thoiry.">
+  <meta property="og:image" content="https://mdl-vld.fr/assets/affiche-bal.jpg">
   <meta property="og:url" content="https://mdl-vld.fr/evenement-bal.html">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#930f7c">
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
 <body>
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
 <nav>
   <a href="index.html" class="nav-logo">
@@ -220,13 +257,13 @@
 </nav>
 <div class="nav-mobile-menu" id="mobile-menu">
   <a href="index.html">Accueil</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">Activités</div>
   <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
   <a href="projets.html" style="padding-left:32px!important;">Projets</a>
   <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
   <a href="merch.html" style="padding-left:32px!important;">Merch</a>
   <a href="planning.html">Planning</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">La MDL</div>
   <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
   <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
   <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
@@ -239,6 +276,7 @@
 function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
 document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
 </script>
+<span id="main-content" tabindex="-1"></span>
 
 <div class="event-hero">
   <div class="event-hero-content">
@@ -246,9 +284,9 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <div class="event-hero-eyebrow">Événement phare · 2025-2026</div>
     <h1>Bal des<br><em>Terminales</em></h1>
     <div class="event-hero-meta">
-      <div class="event-meta-chip"><span class="event-meta-chip-icon">📅</span> 3 juillet 2026 · 19h-00h</div>
-      <div class="event-meta-chip"><span class="event-meta-chip-icon">📍</span> Salle polyvalente de Thoiry</div>
-      <div class="event-meta-chip"><span class="event-meta-chip-icon">🎬</span> Festival de Cannes</div>
+      <div class="event-meta-chip"><span class="event-meta-chip-icon" aria-hidden="true">📅</span> 3 juillet 2026 · 19h-00h</div>
+      <div class="event-meta-chip"><span class="event-meta-chip-icon" aria-hidden="true">📍</span> Salle polyvalente de Thoiry</div>
+      <div class="event-meta-chip"><span class="event-meta-chip-icon" aria-hidden="true">🎬</span> Festival de Cannes</div>
     </div>
     <div class="event-hero-actions">
       <a href="https://www.billetweb.fr/bal-des-terminales-vld-2026" target="_blank" rel="noopener" class="btn btn-or btn-lg">Réserver sa place</a>
@@ -260,7 +298,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     </div>
   </div>
   <div class="event-hero-poster">
-    <img src="assets/affiche-bal.jpg" alt="Affiche Bal des Terminales 2026">
+    <img src="assets/affiche-bal.jpg" alt="Affiche Bal des Terminales 2026" loading="lazy">
   </div>
 </div>
 
@@ -269,7 +307,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
     <div>
       <div class="event-section">
-        <div class="event-section-title">À propos de l'événement</div>
+        <h2 class="event-section-title">À propos de l'événement</h2>
         <div class="event-section-text">
           <p>Le Bal des Terminales est la grande soirée de fin d'année organisée par la MDL pour toutes les classes de Terminale du lycée Viollet-le-Duc. C'est le moment de célébrer ensemble la fin du lycée avant de se lancer dans la suite.</p>
           <p>Cette année, le thème est <strong>Festival de Cannes</strong> - Promo 2026. Dress code élégant, ambiance cinéma, dorures et tapis rouge pour une soirée inoubliable.</p>
@@ -278,7 +316,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
       </div>
 
       <div class="event-section">
-        <div class="event-section-title">Informations pratiques</div>
+        <h2 class="event-section-title">Informations pratiques</h2>
         <div class="event-section-text">
           <p><strong>Dress code :</strong> Tenue élégante exigée, dans le thème Festival de Cannes. Robes de soirée, smokings, costumes - l'occasion de se mettre sur son 31.</p>
           <p><strong>Billetterie :</strong> Réservation obligatoire via Billetweb (lien ci-contre). Les places sont limitées à 500. Présentez votre billet (QR code) à l'entrée, sur téléphone ou imprimé.</p>
@@ -287,18 +325,18 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
       </div>
 
       <div class="event-section">
-        <div class="event-section-title">Photos</div>
+        <h2 class="event-section-title">Photos</h2>
         <div class="photo-gallery">
           <div class="photo-placeholder" style="grid-column: span 2; aspect-ratio: 16/7;">
-            <div class="photo-placeholder-icon">📸</div>
+            <div class="photo-placeholder-icon" aria-hidden="true">📸</div>
             <div>Les photos de la soirée seront ajoutées ici après l'événement</div>
           </div>
           <div class="photo-placeholder">
-            <div class="photo-placeholder-icon">📸</div>
+            <div class="photo-placeholder-icon" aria-hidden="true">📸</div>
             <div>À venir</div>
           </div>
           <div class="photo-placeholder">
-            <div class="photo-placeholder-icon">📸</div>
+            <div class="photo-placeholder-icon" aria-hidden="true">📸</div>
             <div>À venir</div>
           </div>
         </div>
@@ -333,35 +371,35 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
       <div class="event-sidebar-card">
         <div class="event-sidebar-body">
           <div class="event-info-row">
-            <div class="event-info-icon">📅</div>
+            <div class="event-info-icon" aria-hidden="true">📅</div>
             <div>
               <div class="event-info-label">Date</div>
               <div class="event-info-val">Jeudi 3 juillet 2026<br>19h00 - 00h00</div>
             </div>
           </div>
           <div class="event-info-row">
-            <div class="event-info-icon">📍</div>
+            <div class="event-info-icon" aria-hidden="true">📍</div>
             <div>
               <div class="event-info-label">Lieu</div>
               <div class="event-info-val">Salle polyvalente de Thoiry<br>13 Rue des Vignettes, 78770</div>
             </div>
           </div>
           <div class="event-info-row">
-            <div class="event-info-icon">🎬</div>
+            <div class="event-info-icon" aria-hidden="true">🎬</div>
             <div>
               <div class="event-info-label">Thème</div>
               <div class="event-info-val">Festival de Cannes · Promo 2026</div>
             </div>
           </div>
           <div class="event-info-row">
-            <div class="event-info-icon">👗</div>
+            <div class="event-info-icon" aria-hidden="true">👗</div>
             <div>
               <div class="event-info-label">Dress code</div>
               <div class="event-info-val">Tenue élégante exigée</div>
             </div>
           </div>
           <div class="event-info-row">
-            <div class="event-info-icon">👥</div>
+            <div class="event-info-icon" aria-hidden="true">👥</div>
             <div>
               <div class="event-info-label">Capacité</div>
               <div class="event-info-val">500 places maximum</div>
@@ -372,7 +410,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
       <div class="event-sidebar-card">
         <div class="event-sidebar-body">
-          <div style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--or);margin-bottom:12px;">Organisé par</div>
+          <div style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--or-texte);margin-bottom:12px;">Organisé par</div>
           <div style="display:flex;align-items:center;gap:10px;">
             <img src="assets/logo.png" alt="Logo MDL" style="width:36px;height:36px;object-fit:contain;">
             <div>
@@ -399,7 +437,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
         <div class="footer-logo-name">MDL Viollet-le-Duc</div>
       </div>
-      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+      <p class="footer-desc">Association loi 1901 · gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Activités</div>
@@ -441,7 +479,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon" aria-hidden="true">🔍</span>
       <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>

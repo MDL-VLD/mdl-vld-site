@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDL Viollet-le-Duc</title>
+  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <title>Les clubs · MDL Viollet-le-Duc</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -12,9 +13,12 @@
   <meta name="description" content="Les clubs du lycée Viollet-le-Duc, soutenus par la MDL.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MDL Viollet-le-Duc">
-  <meta property="og:title" content="MDL Viollet-le-Duc — Les clubs">
+  <meta property="og:title" content="MDL Viollet-le-Duc · Les clubs">
   <meta property="og:description" content="Les clubs du lycée Viollet-le-Duc, soutenus par la MDL.">
   <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     .clubs-grid {
@@ -103,6 +107,7 @@
   <meta name="theme-color" content="#930f7c">
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
 <body>
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
 <nav>
   <a href="index.html" class="nav-logo">
@@ -145,13 +150,13 @@
 </nav>
 <div class="nav-mobile-menu" id="mobile-menu">
   <a href="index.html">Accueil</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">Activités</div>
   <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
   <a href="projets.html" style="padding-left:32px!important;">Projets</a>
   <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
   <a href="merch.html" style="padding-left:32px!important;">Merch</a>
   <a href="planning.html">Planning</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">La MDL</div>
   <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
   <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
   <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
@@ -164,6 +169,7 @@
 function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
 document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
 </script>
+<span id="main-content" tabindex="-1"></span>
 
 <div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-3.jpg'); --hero-pos: center center;">
   <span class="section-eyebrow">Vie lycéenne</span>
@@ -180,7 +186,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
     <div class="club-card">
       <div class="club-card-header">
-        <div class="club-emoji">📻</div>
+        <div class="club-emoji" aria-hidden="true">📻</div>
         <div>
           <div class="club-name">Club Web Radio</div>
           <div class="club-category">Médias · Communication</div>
@@ -199,7 +205,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
     <div class="club-card">
       <div class="club-card-header">
-        <div class="club-emoji">🎭</div>
+        <div class="club-emoji" aria-hidden="true">🎭</div>
         <div>
           <div class="club-name">Club Théâtre / Comédie musicale</div>
           <div class="club-category">Arts vivants</div>
@@ -218,7 +224,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
     <div class="club-card">
       <div class="club-card-header">
-        <div class="club-emoji">🎵</div>
+        <div class="club-emoji" aria-hidden="true">🎵</div>
         <div>
           <div class="club-name">La Chorale</div>
           <div class="club-category">Musique</div>
@@ -237,7 +243,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
     <div class="club-card">
       <div class="club-card-header">
-        <div class="club-emoji">🌸</div>
+        <div class="club-emoji" aria-hidden="true">🌸</div>
         <div>
           <div class="club-name">Club Manga</div>
           <div class="club-category">Culture · Dessin</div>
@@ -256,7 +262,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
     <div class="club-card">
       <div class="club-card-header">
-        <div class="club-emoji">📚</div>
+        <div class="club-emoji" aria-hidden="true">📚</div>
         <div>
           <div class="club-name">Club Lecture</div>
           <div class="club-category">Littérature</div>
@@ -275,7 +281,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
     <div class="club-card">
       <div class="club-card-header">
-        <div class="club-emoji">🎬</div>
+        <div class="club-emoji" aria-hidden="true">🎬</div>
         <div>
           <div class="club-name">Club Vidéo</div>
           <div class="club-category">Audiovisuel</div>
@@ -294,7 +300,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
     <div class="club-card">
       <div class="club-card-header">
-        <div class="club-emoji">🇬🇧</div>
+        <div class="club-emoji" aria-hidden="true">🇬🇧</div>
         <div>
           <div class="club-name">English Drama Club</div>
           <div class="club-category">Langues · Théâtre</div>
@@ -313,7 +319,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
     <div class="club-card">
       <div class="club-card-header">
-        <div class="club-emoji">🎲</div>
+        <div class="club-emoji" aria-hidden="true">🎲</div>
         <div>
           <div class="club-name">Improvisation théâtrale</div>
           <div class="club-category">Arts vivants</div>
@@ -332,7 +338,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
     <div class="club-card" style="border: 1.5px dashed var(--lilas);">
       <div class="club-card-header" style="background: var(--gris-pale);">
-        <div class="club-emoji">➕</div>
+        <div class="club-emoji" aria-hidden="true">➕</div>
         <div>
           <div class="club-name">Ton club ici ?</div>
           <div class="club-category">À ajouter</div>
@@ -361,7 +367,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
         <div class="footer-logo-name">MDL Viollet-le-Duc</div>
       </div>
-      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+      <p class="footer-desc">Association loi 1901 · gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Activités</div>
@@ -403,7 +409,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon" aria-hidden="true">🔍</span>
       <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>

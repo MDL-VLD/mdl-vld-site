@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDL Viollet-le-Duc</title>
+  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <title>La MDL · MDL Viollet-le-Duc</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
   <meta name="robots" content="index, follow">
   <meta name="description" content="Qu'est-ce que la Maison des Lycéens ? Missions, gouvernance, et comment adhérer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     .mdl-intro-grid {
@@ -62,7 +66,7 @@
       font-size: 20px;
       margin: 0 auto 14px;
     }
-    .gouv-role { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--or); margin-bottom: 6px; }
+    .gouv-role { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--or-texte); margin-bottom: 6px; }
     .gouv-title { font-size: 15px; font-weight: 500; color: var(--prune); margin-bottom: 6px; }
     .gouv-desc { font-size: 12px; color: var(--gris-texte); line-height: 1.6; }
 
@@ -124,6 +128,7 @@
   <meta name="theme-color" content="#930f7c">
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
 <body>
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
 <nav>
   <a href="index.html" class="nav-logo">
@@ -166,13 +171,13 @@
 </nav>
 <div class="nav-mobile-menu" id="mobile-menu">
   <a href="index.html">Accueil</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">Activités</div>
   <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
   <a href="projets.html" style="padding-left:32px!important;">Projets</a>
   <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
   <a href="merch.html" style="padding-left:32px!important;">Merch</a>
   <a href="planning.html">Planning</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">La MDL</div>
   <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
   <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
   <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
@@ -185,6 +190,7 @@
 function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
 document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
 </script>
+<span id="main-content" tabindex="-1"></span>
 
 <div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-1.jpg'); --hero-pos: center 40%;">
   <span class="section-eyebrow">À propos</span>
@@ -201,14 +207,14 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   </p>
   <div class="mdl-intro-grid">
     <div class="card info-card">
-      <div class="info-card-icon">🏫</div>
+      <div class="info-card-icon" aria-hidden="true">🏫</div>
       <div class="info-card-title">Une asso du lycée...</div>
       <p class="info-card-text">
         La MDL fonctionne comme une vraie association - avec un bureau élu, un budget, des statuts et des assemblées générales où tous les membres votent. Elle est ouverte à tous les élèves volontaires, sous réserve d'adhésion.
       </p>
     </div>
     <div class="card info-card">
-      <div class="info-card-icon">🎯</div>
+      <div class="info-card-icon" aria-hidden="true">🎯</div>
       <div class="info-card-title">...par et pour les lycéens</div>
       <p class="info-card-text">
         Créée pour remplacer les anciens foyers socio-éducatifs (FSE) gérés par les adultes, la MDL donne aux lycéens un véritable rôle actif. Tu peux y participer, proposer des idées, voter, et même rejoindre le bureau.
@@ -293,29 +299,26 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <section class="section section-alt" id="gouvernance">
   <span class="section-eyebrow">Organisation</span>
   <h2 class="section-title">Qui gère la MDL ?</h2>
-  <p class="section-sub">La MDL est dirigée par des élèves élus, au sein d'un conseil d'administration. Les décisions importantes sont prises en assemblée générale, où tous les membres peuvent voter.</p>
-  <div class="gouvernance-grid">
-    <div class="card gouv-card">
-      <div class="gouv-icon">👑</div>
-      <div class="gouv-role">Bureau</div>
-      <div class="gouv-title">Président·e</div>
-      <p class="gouv-desc">Représente l'association, coordonne les actions et porte la voix de la MDL auprès de l'établissement.</p>
+  <p class="section-sub">La MDL est dirigée par des lycéens élus — Présidence, Secrétariat, Trésorerie — réunis dans un bureau, un conseil d'administration, et une assemblée générale ouverte à tous les membres.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px;">
+    <div class="card" style="padding:20px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:8px;" aria-hidden="true">👑</div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--or-texte);margin-bottom:4px;">Bureau</div>
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--prune);">Présidence</div>
     </div>
-    <div class="card gouv-card">
-      <div class="gouv-icon">📋</div>
-      <div class="gouv-role">Bureau</div>
-      <div class="gouv-title">Secrétaire</div>
-      <p class="gouv-desc">Gère les documents officiels, rédige les comptes-rendus et organise les réunions.</p>
+    <div class="card" style="padding:20px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:8px;" aria-hidden="true">📋</div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--or-texte);margin-bottom:4px;">Bureau</div>
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--prune);">Secrétariat</div>
     </div>
-    <div class="card gouv-card">
-      <div class="gouv-icon">💰</div>
-      <div class="gouv-role">Bureau</div>
-      <div class="gouv-title">Trésorier·e</div>
-      <p class="gouv-desc">Gère le budget de l'association, suit les dépenses et les recettes, rend compte à l'AG.</p>
+    <div class="card" style="padding:20px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:8px;" aria-hidden="true">💰</div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--or-texte);margin-bottom:4px;">Bureau</div>
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--prune);">Trésorerie</div>
     </div>
   </div>
-  <div style="margin-top: 20px; padding: 20px 24px; background: var(--lilas-pale); border-radius: var(--radius-md); font-size: 13px; color: var(--gris-texte); line-height: 1.7;">
-    <strong style="color: var(--magenta);">Bureau actuel (2025-2026) :</strong> Quentin Thiery (Président), Ewan Foucaud (Co-Président), Sélène Beaufour (Secrétaire Générale).
+  <div style="text-align:center;">
+    <a href="equipe.html" class="btn btn-magenta">Voir toute l'équipe →</a>
   </div>
 </section>
 
@@ -377,7 +380,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
         <div class="footer-logo-name">MDL Viollet-le-Duc</div>
       </div>
-      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+      <p class="footer-desc">Association loi 1901 · gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Activités</div>
@@ -419,7 +422,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon" aria-hidden="true">🔍</span>
       <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>

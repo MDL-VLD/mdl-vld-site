@@ -3,13 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDL Viollet-le-Duc</title>
+  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <title>Accueil · MDL Viollet-le-Duc</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MDL Viollet-le-Duc",
+    "alternateName": "Maison des Lycéens du lycée Viollet-le-Duc",
+    "url": "https://mdl-vld.fr/",
+    "logo": "https://mdl-vld.fr/assets/logo.png",
+    "description": "La Maison des Lycéens du lycée Viollet-le-Duc — événements, projets et vie lycéenne à Villiers-Saint-Frédéric.",
+    "location": {
+      "@type": "Place",
+      "name": "Lycée Viollet-le-Duc",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Villiers-Saint-Frédéric",
+        "postalCode": "78640",
+        "addressCountry": "FR"
+      }
+    }
+  }
+  </script>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
   <meta name="robots" content="index, follow">
   <meta name="description" content="La Maison des Lycéens du Lycée Viollet-le-Duc à Villiers-Saint-Frédéric. Événements, projets et vie lycéenne.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     /* HERO */
@@ -62,7 +87,7 @@
       gap: 8px;
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.2);
-      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
       color: white;
       padding: 6px 14px;
       border-radius: 20px;
@@ -99,7 +124,7 @@
       z-index: 2;
       margin: 0 64px 64px;
       background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
       border: 1px solid rgba(255,255,255,0.2);
       border-radius: var(--radius-lg);
       padding: 20px 28px;
@@ -174,7 +199,7 @@
       margin: 0 auto 14px;
       border: 2px solid var(--lilas);
     }
-    .bureau-role { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--or); margin-bottom: 5px; }
+    .bureau-role { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--or-texte); margin-bottom: 5px; }
     .bureau-name { font-size: 15px; font-weight: 500; color: var(--prune); }
 
     /* ADHÉSION CTA */
@@ -210,6 +235,7 @@
   <meta name="theme-color" content="#930f7c">
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
 <body>
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
 <nav>
   <a href="index.html" class="nav-logo">
@@ -252,13 +278,13 @@
 </nav>
 <div class="nav-mobile-menu" id="mobile-menu">
   <a href="index.html">Accueil</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">Activités</div>
   <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
   <a href="projets.html" style="padding-left:32px!important;">Projets</a>
   <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
   <a href="merch.html" style="padding-left:32px!important;">Merch</a>
   <a href="planning.html">Planning</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">La MDL</div>
   <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
   <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
   <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
@@ -271,6 +297,7 @@
 function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
 document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
 </script>
+<span id="main-content" tabindex="-1"></span>
 
 <!-- TICKER -->
 <div class="ticker-wrap" aria-hidden="true">
@@ -319,7 +346,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     </p>
     <div class="hero-actions">
       <a href="evenements.html" class="btn btn-or btn-lg">Nos événements</a>
-      <a href="mdl.html" class="btn btn-lg" style="background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(8px);">Découvrir la MDL</a>
+      <a href="mdl.html" class="btn btn-lg" style="background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);">Découvrir la MDL</a>
     </div>
     <div class="hero-dots">
       <button class="hero-dot active" onclick="goSlide(0)"></button>
@@ -334,7 +361,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   <div class="hero-pinned">
     <div>
       <div class="hero-pinned-label">Événement en cours</div>
-      <div class="hero-pinned-title">Bal des Terminales 2025 - Cannes Film Festival</div>
+      <div class="hero-pinned-title">Bal des Terminales 2026 - Cannes Film Festival</div>
       <div class="hero-pinned-meta">Jeudi 3 juillet 2026 - Salle polyvalente de Thoiry - 500 places</div>
     </div>
     <div class="hero-pinned-right">
@@ -354,14 +381,14 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   <div class="card reveal" style="max-width:720px;overflow:hidden;display:grid;grid-template-columns:240px 1fr;">
     <div style="overflow:hidden;">
       <img src="assets/affiche-bal.jpg" alt="Bal des Terminales 2026"
-           style="width:100%;height:100%;object-fit:cover;object-position:top;">
+           style="width:100%;height:100%;object-fit:cover;object-position:top;" loading="lazy">
     </div>
     <div style="padding:28px;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
         <span style="background:#eaf5ec;color:#276237;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">● Places disponibles</span>
         <span style="background:var(--or-pale);color:#7a5a00;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">3 juillet 2026</span>
       </div>
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--prune);margin-bottom:6px;">Bal des Terminales — Promo 2026</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--prune);margin-bottom:6px;">Bal des Terminales · Promo 2026</div>
       <div style="font-size:13px;color:var(--gris-texte);margin-bottom:14px;">📍 Salle polyvalente de Thoiry · 19h-00h · Thème Festival de Cannes</div>
       <p style="font-size:13px;color:var(--gris-texte);line-height:1.65;margin-bottom:20px;">La grande soirée de fin d'année pour toutes les Terminales. Dress code élégant exigé. Places limitées à 500.</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -376,26 +403,26 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   <div style="text-align:center;margin-bottom:36px;">
     <span class="section-eyebrow">Ce qu'on fait</span>
     <h2 class="section-title">Nos activités</h2>
-    <p class="section-sub">Événements, projets solidaires, clubs, merch — la MDL anime toute la vie du lycée.</p>
+    <p class="section-sub">Événements, projets solidaires, clubs, merch · la MDL anime toute la vie du lycée.</p>
   </div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
     <a href="evenements.html" class="card reveal" style="padding:28px;text-align:center;text-decoration:none;transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
-      <div style="font-size:36px;margin-bottom:12px;">🎉</div>
+      <div style="font-size:36px;margin-bottom:12px;" aria-hidden="true">🎉</div>
       <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--prune);margin-bottom:8px;">Événements</div>
       <p style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Bal des Terminales, Carnaval, Halloween, Noël et bien d'autres.</p>
     </a>
     <a href="projets.html" class="card reveal reveal-delay-1" style="padding:28px;text-align:center;text-decoration:none;transition:transform .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
-      <div style="font-size:36px;margin-bottom:12px;">💡</div>
+      <div style="font-size:36px;margin-bottom:12px;" aria-hidden="true">💡</div>
       <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--prune);margin-bottom:8px;">Projets</div>
       <p style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Course contre la Faim, sorties culturelles, actions solidaires.</p>
     </a>
     <a href="clubs.html" class="card reveal reveal-delay-2" style="padding:28px;text-align:center;text-decoration:none;transition:transform .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
-      <div style="font-size:36px;margin-bottom:12px;">🎭</div>
+      <div style="font-size:36px;margin-bottom:12px;" aria-hidden="true">🎭</div>
       <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--prune);margin-bottom:8px;">Clubs</div>
       <p style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Théâtre, chorale, manga, lecture, vidéo, radio et plus encore.</p>
     </a>
     <a href="merch.html" class="card reveal reveal-delay-3" style="padding:28px;text-align:center;text-decoration:none;transition:transform .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
-      <div style="font-size:36px;margin-bottom:12px;">🛍</div>
+      <div style="font-size:36px;margin-bottom:12px;" aria-hidden="true">🛍</div>
       <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--prune);margin-bottom:8px;">Merch</div>
       <p style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Hoodies officiels VLD. Ventes reprennent en 2026-2027.</p>
     </a>
@@ -417,21 +444,21 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <span class="section-eyebrow">Nos missions</span>
     <ul class="about-missions">
       <li class="about-mission-item">
-        <div class="about-mission-icon">🎉</div>
+        <div class="about-mission-icon" aria-hidden="true">🎉</div>
         <div>
           <div class="about-mission-title">Animer et divertir</div>
           <div class="about-mission-desc">Tournois sportifs, événements culturels, soirées, carnaval, clubs...</div>
         </div>
       </li>
       <li class="about-mission-item">
-        <div class="about-mission-icon">💡</div>
+        <div class="about-mission-icon" aria-hidden="true">💡</div>
         <div>
           <div class="about-mission-title">Accompagner les projets</div>
           <div class="about-mission-desc">Chaque élève peut proposer un projet - sortie, atelier, action solidaire - et la MDL l'aide à le réaliser.</div>
         </div>
       </li>
       <li class="about-mission-item">
-        <div class="about-mission-icon">🤝</div>
+        <div class="about-mission-icon" aria-hidden="true">🤝</div>
         <div>
           <div class="about-mission-title">Créer du lien</div>
           <div class="about-mission-desc">Favoriser les rencontres et la convivialité entre lycéens à travers des activités variées.</div>
@@ -445,7 +472,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <div style="position: relative; height: 420px; overflow: hidden;">
   <img src="assets/photo-course-lycees.jpg"
        alt="Lycéens participant à la Course contre la Faim organisée par la MDL"
-       style="width: 100%; height: 100%; object-fit: cover; object-position: center 40%;">
+       style="width: 100%; height: 100%; object-fit: cover; object-position: center 40%;" loading="lazy">
   <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(45,26,40,0.7) 0%, rgba(45,26,40,0.2) 60%, transparent 100%);"></div>
   <div style="position: absolute; top: 50%; left: 48px; transform: translateY(-50%); color: white; max-width: 480px;">
     <span style="font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--or-pale, #f5ecd0); display: block; margin-bottom: 10px;">Projet solidaire</span>
@@ -497,7 +524,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
         <div class="footer-logo-name">MDL Viollet-le-Duc</div>
       </div>
-      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+      <p class="footer-desc">Association loi 1901 · gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Activités</div>
@@ -539,7 +566,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon" aria-hidden="true">🔍</span>
       <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>

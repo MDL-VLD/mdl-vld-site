@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDL Viollet-le-Duc</title>
+  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <title>Documents · MDL Viollet-le-Duc</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -12,9 +13,12 @@
   <meta name="description" content="Documents officiels de la MDL du lycée Viollet-le-Duc.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MDL Viollet-le-Duc">
-  <meta property="og:title" content="MDL Viollet-le-Duc — Documents">
+  <meta property="og:title" content="MDL Viollet-le-Duc · Documents">
   <meta property="og:description" content="Documents officiels, statuts et comptes-rendus de la MDL du lycée Viollet-le-Duc.">
   <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     .docs-notice {
@@ -95,6 +99,7 @@
   <meta name="theme-color" content="#930f7c">
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
 <body>
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
 <nav>
   <a href="index.html" class="nav-logo">
@@ -137,13 +142,13 @@
 </nav>
 <div class="nav-mobile-menu" id="mobile-menu">
   <a href="index.html">Accueil</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">Activités</div>
   <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
   <a href="projets.html" style="padding-left:32px!important;">Projets</a>
   <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
   <a href="merch.html" style="padding-left:32px!important;">Merch</a>
   <a href="planning.html">Planning</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">La MDL</div>
   <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
   <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
   <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
@@ -156,8 +161,9 @@
 function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
 document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
 </script>
+<span id="main-content" tabindex="-1"></span>
 
-<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-facade.jpg'); --hero-pos: center 40%;">
+<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-4.jpg'); --hero-pos: center 40%;">
   <span class="section-eyebrow">Transparence</span>
   <h1 class="section-title section-title-lg">Documents officiels</h1>
   <p class="section-sub">Les documents statutaires, comptes-rendus et pièces officielles de la MDL du lycée Viollet-le-Duc.</p>
@@ -174,7 +180,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <p class="docs-category-desc">Les documents constitutifs de l'association, accessibles à tous.</p>
     <div class="docs-list">
       <div class="doc-item">
-        <div class="doc-icon">📄</div>
+        <div class="doc-icon" aria-hidden="true">📄</div>
         <div>
           <div class="doc-name">Statuts de l'association</div>
           <div class="doc-meta">Révisés en assemblée générale extraordinaire · mai 2025</div>
@@ -182,7 +188,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="doc-action"><span class="doc-status public">Public</span></div>
       </div>
       <div class="doc-item">
-        <div class="doc-icon">📋</div>
+        <div class="doc-icon" aria-hidden="true">📋</div>
         <div>
           <div class="doc-name">Règlement intérieur</div>
           <div class="doc-meta">Version en vigueur · adopté en AGE · mai 2025</div>
@@ -190,7 +196,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="doc-action"><span class="doc-status public">Public</span></div>
       </div>
       <div class="doc-item">
-        <div class="doc-icon">🏛</div>
+        <div class="doc-icon" aria-hidden="true">🏛</div>
         <div>
           <div class="doc-name">Récépissé de déclaration en préfecture</div>
           <div class="doc-meta">RNA W782004627 · SIRET 907 864 995 00010</div>
@@ -206,7 +212,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <p class="docs-category-desc">Les comptes-rendus des assemblées générales et réunions de bureau.</p>
     <div class="docs-list">
       <div class="doc-item">
-        <div class="doc-icon">📝</div>
+        <div class="doc-icon" aria-hidden="true">📝</div>
         <div>
           <div class="doc-name">PV de l'Assemblée Générale Extraordinaire</div>
           <div class="doc-meta">12 mai 2025 · Adoption des nouveaux statuts et RI</div>
@@ -214,7 +220,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="doc-action"><span class="doc-status membres">Membres</span></div>
       </div>
       <div class="doc-item">
-        <div class="doc-icon">📝</div>
+        <div class="doc-icon" aria-hidden="true">📝</div>
         <div>
           <div class="doc-name">Comptes-rendus de réunions bureau</div>
           <div class="doc-meta">2025-2026 · En cours de publication</div>
@@ -222,7 +228,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="doc-action"><span class="doc-status bientot">À venir</span></div>
       </div>
       <div class="doc-item">
-        <div class="doc-icon">📊</div>
+        <div class="doc-icon" aria-hidden="true">📊</div>
         <div>
           <div class="doc-name">Bilan annuel 2024-2025</div>
           <div class="doc-meta">En cours de rédaction</div>
@@ -238,7 +244,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <p class="docs-category-desc">Budget, bilans financiers. Réservés aux membres du CA.</p>
     <div class="docs-list">
       <div class="doc-item">
-        <div class="doc-icon">💶</div>
+        <div class="doc-icon" aria-hidden="true">💶</div>
         <div>
           <div class="doc-name">Budget prévisionnel 2025-2026</div>
           <div class="doc-meta">Validé en AG · Réservé aux membres du CA</div>
@@ -246,7 +252,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="doc-action"><span class="doc-status membres">CA uniquement</span></div>
       </div>
       <div class="doc-item">
-        <div class="doc-icon">📈</div>
+        <div class="doc-icon" aria-hidden="true">📈</div>
         <div>
           <div class="doc-name">Bilan financier 2024-2025</div>
           <div class="doc-meta">En cours de finalisation</div>
@@ -262,17 +268,17 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <p class="access-info-text">Les documents de la MDL sont classés selon trois niveaux d'accès.</p>
     <div class="access-levels">
       <div class="access-level">
-        <div class="access-level-icon">🌐</div>
+        <div class="access-level-icon" aria-hidden="true">🌐</div>
         <div class="access-level-name">Public</div>
         <div class="access-level-desc">Accessible à tous, sans restriction.</div>
       </div>
       <div class="access-level">
-        <div class="access-level-icon">🏠</div>
+        <div class="access-level-icon" aria-hidden="true">🏠</div>
         <div class="access-level-name">Membres</div>
         <div class="access-level-desc">Réservé aux adhérents de la MDL.</div>
       </div>
       <div class="access-level">
-        <div class="access-level-icon">🔒</div>
+        <div class="access-level-icon" aria-hidden="true">🔒</div>
         <div class="access-level-name">Bureau / CA</div>
         <div class="access-level-desc">Réservé aux membres du bureau et du CA.</div>
       </div>
@@ -288,7 +294,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
         <div class="footer-logo-name">MDL Viollet-le-Duc</div>
       </div>
-      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+      <p class="footer-desc">Association loi 1901 · gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Activités</div>
@@ -330,7 +336,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon" aria-hidden="true">🔍</span>
       <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>

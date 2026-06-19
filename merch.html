@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDL Viollet-le-Duc</title>
+  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Merch — MDL du lycée Viollet-le-Duc, Villiers-Saint-Frédéric.">
+  <title>Merch · MDL Viollet-le-Duc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     .merch-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
@@ -40,7 +47,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MDL Viollet-le-Duc">
   <meta property="og:title" content="MDL Viollet-le-Duc">
-  <meta property="og:description" content="MDL Viollet-le-Duc — Maison des Lycéens">
+  <meta property="og:description" content="MDL Viollet-le-Duc · Maison des Lycéens">
   <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
   <meta property="og:url" content="https://mdl-vld.fr/merch.html">
   <meta name="twitter:card" content="summary_large_image">
@@ -51,6 +58,7 @@
   <meta name="theme-color" content="#930f7c">
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
 <body>
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
 <nav>
   <a href="index.html" class="nav-logo">
@@ -93,13 +101,13 @@
 </nav>
 <div class="nav-mobile-menu" id="mobile-menu">
   <a href="index.html">Accueil</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">Activités</div>
   <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
   <a href="projets.html" style="padding-left:32px!important;">Projets</a>
   <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
   <a href="merch.html" style="padding-left:32px!important;">Merch</a>
   <a href="planning.html">Planning</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">La MDL</div>
   <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
   <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
   <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
@@ -112,6 +120,7 @@
 function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
 document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
 </script>
+<span id="main-content" tabindex="-1"></span>
 
 <div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-facade.jpg'); --hero-pos: center 40%;">
   <span class="section-eyebrow">Boutique</span>
@@ -124,7 +133,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
     <!-- STATUT VENTES -->
     <div style="grid-column:1/-1;background:var(--or-pale);border:1.5px solid var(--or);border-radius:var(--radius-lg);padding:20px 24px;display:flex;align-items:center;gap:16px;">
-      <div style="font-size:28px;">🔒</div>
+      <div style="font-size:28px;" aria-hidden="true">🔒</div>
       <div>
         <div style="font-size:14px;font-weight:600;color:#7a5a00;margin-bottom:4px;">Ventes clôturées pour l'année scolaire 2025-2026</div>
         <div style="font-size:13px;color:var(--gris-texte);">Les commandes reprennent en 2026-2027. Consultez cette page à la rentrée pour les nouveaux articles.</div>
@@ -134,11 +143,11 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <!-- HOODIE BLANC -->
     <div class="card merch-card">
       <div class="merch-visual" style="background:#f5f5f5;padding:12px;">
-        <img src="assets/merch-1.jpg" alt="Hoodie VLD blanc face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;">
+        <img src="assets/merch-1.jpg" alt="Hoodie VLD blanc face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;" loading="lazy">
         <div class="merch-badge-pos"><span class="badge" style="background:#888;color:white;">Clôturé</span></div>
       </div>
       <div class="merch-body">
-        <div class="merch-name">Hoodie VLD — Blanc</div>
+        <div class="merch-name">Hoodie VLD · Blanc</div>
         <p class="merch-desc">Hoodie officiel du lycée Viollet-le-Duc. Logo VLD brodé sur la poitrine. Coupe oversize, qualité premium.</p>
         <div class="merch-sizes"><span class="merch-size">XS</span><span class="merch-size">S</span><span class="merch-size">M</span><span class="merch-size">L</span><span class="merch-size">XL</span><span class="merch-size">XXL</span></div>
         <div class="merch-footer">
@@ -150,13 +159,61 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <!-- HOODIE NOIR -->
     <div class="card merch-card">
       <div class="merch-visual" style="background:#2a2a2a;padding:12px;">
-        <img src="assets/merch-3.jpg" alt="Hoodie VLD noir face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;">
+        <img src="assets/merch-3.jpg" alt="Hoodie VLD noir face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;" loading="lazy">
         <div class="merch-badge-pos"><span class="badge" style="background:#888;color:white;">Clôturé</span></div>
       </div>
       <div class="merch-body">
-        <div class="merch-name">Hoodie VLD — Noir</div>
+        <div class="merch-name">Hoodie VLD · Noir</div>
         <p class="merch-desc">Hoodie officiel du lycée Viollet-le-Duc coloris noir. Logo VLD brodé sur la poitrine. Coupe oversize, qualité premium.</p>
         <div class="merch-sizes"><span class="merch-size">XS</span><span class="merch-size">S</span><span class="merch-size">M</span><span class="merch-size">L</span><span class="merch-size">XL</span><span class="merch-size">XXL</span></div>
+        <div class="merch-footer">
+          <div class="merch-price" style="font-size:14px;color:var(--gris-texte);">Ventes 2025-2026 terminées</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOODIE BLEU MARINE -->
+    <div class="card merch-card">
+      <div class="merch-visual" style="background:#1a2540;padding:12px;">
+        <img src="assets/merch-5.jpg" alt="Hoodie VLD bleu marine face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;" loading="lazy">
+        <div class="merch-badge-pos"><span class="badge" style="background:#888;color:white;">Clôturé</span></div>
+      </div>
+      <div class="merch-body">
+        <div class="merch-name">Hoodie VLD · Bleu Marine</div>
+        <p class="merch-desc">Hoodie officiel du lycée Viollet-le-Duc coloris bleu marine. Logo VLD brodé sur la poitrine. Coupe oversize, qualité premium.</p>
+        <div class="merch-sizes"><span class="merch-size">XS</span><span class="merch-size">S</span><span class="merch-size">M</span><span class="merch-size">L</span><span class="merch-size">XL</span><span class="merch-size">XXL</span></div>
+        <div class="merch-footer">
+          <div class="merch-price" style="font-size:14px;color:var(--gris-texte);">Ventes 2025-2026 terminées</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOODIE BORDEAUX -->
+    <div class="card merch-card">
+      <div class="merch-visual" style="background:#3d1020;padding:12px;">
+        <img src="assets/merch-7.jpg" alt="Hoodie VLD bordeaux face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;" loading="lazy">
+        <div class="merch-badge-pos"><span class="badge" style="background:#888;color:white;">Clôturé</span></div>
+      </div>
+      <div class="merch-body">
+        <div class="merch-name">Hoodie VLD · Bordeaux</div>
+        <p class="merch-desc">Hoodie officiel du lycée Viollet-le-Duc coloris bordeaux. Logo VLD brodé sur la poitrine. Coupe oversize, qualité premium.</p>
+        <div class="merch-sizes"><span class="merch-size">XS</span><span class="merch-size">S</span><span class="merch-size">M</span><span class="merch-size">L</span><span class="merch-size">XL</span><span class="merch-size">XXL</span></div>
+        <div class="merch-footer">
+          <div class="merch-price" style="font-size:14px;color:var(--gris-texte);">Ventes 2025-2026 terminées</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOTE-BAG -->
+    <div class="card merch-card">
+      <div class="merch-visual" style="background:#f0ece4;padding:12px;">
+        <img src="assets/merch-9.jpg" alt="Tote-bag VLD" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;" loading="lazy">
+        <div class="merch-badge-pos"><span class="badge" style="background:#888;color:white;">Clôturé</span></div>
+      </div>
+      <div class="merch-body">
+        <div class="merch-name">Tote-bag VLD</div>
+        <p class="merch-desc">Tote-bag en toile naturelle avec le logo VLD sérigraphié. Pratique et résistant, parfait pour le quotidien au lycée.</p>
+        <div class="merch-sizes"><span class="merch-size">Taille unique</span></div>
         <div class="merch-footer">
           <div class="merch-price" style="font-size:14px;color:var(--gris-texte);">Ventes 2025-2026 terminées</div>
         </div>
@@ -167,20 +224,20 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
   <!-- Galerie pulls supplémentaires -->
   <div style="margin-top:24px;">
-    <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--or);margin-bottom:14px;">Aperçu des coloris disponibles</div>
+    <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--or-texte);margin-bottom:14px;">Aperçu des coloris disponibles</div>
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">
-      <img src="assets/merch-1.jpg" alt="Blanc face" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
-      <img src="assets/merch-2.jpg" alt="Blanc dos" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
-      <img src="assets/merch-3.jpg" alt="Noir face" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
-      <img src="assets/merch-4.jpg" alt="Noir dos" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
-      <img src="assets/merch-5.jpg" alt="Coloris 5" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
+      <img src="assets/merch-1.jpg" alt="Blanc face" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
+      <img src="assets/merch-2.jpg" alt="Blanc dos" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
+      <img src="assets/merch-3.jpg" alt="Noir face" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
+      <img src="assets/merch-4.jpg" alt="Noir dos" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
+      <img src="assets/merch-5.jpg" alt="Coloris 5" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
     </div>
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:10px;">
-      <img src="assets/merch-6.jpg" alt="Coloris 6" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
-      <img src="assets/merch-7.jpg" alt="Coloris 7" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
-      <img src="assets/merch-8.jpg" alt="Bordeaux dos" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
-      <img src="assets/merch-9.jpg" alt="Coloris 9" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
-      <img src="assets/merch-10.jpg" alt="Coloris 10" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
+      <img src="assets/merch-6.jpg" alt="Coloris 6" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
+      <img src="assets/merch-7.jpg" alt="Coloris 7" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
+      <img src="assets/merch-8.jpg" alt="Bordeaux dos" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
+      <img src="assets/merch-9.jpg" alt="Coloris 9" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
+      <img src="assets/merch-10.jpg" alt="Coloris 10" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
     </div>
   </div>
 
@@ -196,7 +253,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
         <div class="footer-logo-name">MDL Viollet-le-Duc</div>
       </div>
-      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+      <p class="footer-desc">Association loi 1901 · gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Activités</div>
@@ -238,7 +295,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon" aria-hidden="true">🔍</span>
       <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>

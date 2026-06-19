@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDL Viollet-le-Duc</title>
+  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <title>Adhérer · MDL Viollet-le-Duc</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
   <meta name="robots" content="index, follow">
   <meta name="description" content="Rejoindre la Maison des Lycéens du Lycée Viollet-le-Duc. Comment adhérer, tarifs, avantages.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     .adhesion-hero-grid {
@@ -54,7 +58,7 @@
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--or);
+      color: var(--or-texte);
       margin-bottom: 8px;
     }
     .adhesion-card-title {
@@ -163,6 +167,11 @@
       overflow: hidden;
     }
     .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      font-family: inherit;
+      text-align: left;
       padding: 16px 20px;
       font-size: 14px;
       font-weight: 500;
@@ -194,7 +203,7 @@
   </style>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MDL Viollet-le-Duc">
-  <meta property="og:title" content="MDL Viollet-le-Duc">
+  <meta property="og:title" content="Adhérer · MDL Viollet-le-Duc">
   <meta property="og:description" content="Rejoignez la MDL du lycée Viollet-le-Duc.">
   <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
   <meta property="og:url" content="https://mdl-vld.fr/adhesion.html">
@@ -203,6 +212,7 @@
   <meta name="theme-color" content="#930f7c">
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
 <body>
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
 <nav>
   <a href="index.html" class="nav-logo">
@@ -245,13 +255,13 @@
 </nav>
 <div class="nav-mobile-menu" id="mobile-menu">
   <a href="index.html">Accueil</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">Activités</div>
   <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
   <a href="projets.html" style="padding-left:32px!important;">Projets</a>
   <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
   <a href="merch.html" style="padding-left:32px!important;">Merch</a>
   <a href="planning.html">Planning</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">La MDL</div>
   <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
   <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
   <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
@@ -264,6 +274,7 @@
 function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
 document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
 </script>
+<span id="main-content" tabindex="-1"></span>
 
 <div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-entree.jpg'); --hero-pos: center 35%;">
   <span class="section-eyebrow">Rejoindre la MDL</span>
@@ -279,22 +290,22 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
       <h2 class="section-title">Ce que ça t'apporte</h2>
       <div class="avantages-grid">
         <div class="card avantage-card">
-          <div class="avantage-icon">🎉</div>
+          <div class="avantage-icon" aria-hidden="true">🎉</div>
           <div class="avantage-title">Accès gratuit aux événements</div>
           <p class="avantage-desc">Entrée gratuite au bal des terminales et aux événements MDL réservés aux membres.</p>
         </div>
         <div class="card avantage-card">
-          <div class="avantage-icon">💡</div>
+          <div class="avantage-icon" aria-hidden="true">💡</div>
           <div class="avantage-title">Propose tes idées</div>
           <p class="avantage-desc">Tu peux soumettre des projets, voter lors des assemblées générales et peser sur les décisions.</p>
         </div>
         <div class="card avantage-card">
-          <div class="avantage-icon">🤝</div>
+          <div class="avantage-icon" aria-hidden="true">🤝</div>
           <div class="avantage-title">Rejoins l'équipe</div>
           <p class="avantage-desc">Investis-toi dans l'organisation des événements, la communication ou la gestion de l'asso.</p>
         </div>
         <div class="card avantage-card">
-          <div class="avantage-icon">📋</div>
+          <div class="avantage-icon" aria-hidden="true">📋</div>
           <div class="avantage-title">Expérience associative</div>
           <p class="avantage-desc">Une vraie expérience à mettre sur ton CV - engagement, prise d'initiative, responsabilité.</p>
         </div>
@@ -306,26 +317,26 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
       <div class="adhesion-card-title">Adhésion MDL</div>
       <div class="adhesion-card-year">Année scolaire 2025-2026</div>
       <div class="adhesion-price">5€</div>
-      <div class="adhesion-price-note">par élève · 2025-2026 · variable selon décision du CA</div>
+      <div class="adhesion-price-note">par élève · année scolaire 2025-2026</div>
       <ul class="adhesion-features">
         <li class="adhesion-feature">
-          <div class="adhesion-feature-check">✓</div>
+          <div class="adhesion-feature-check" aria-hidden="true">✓</div>
           Entrée gratuite au bal des terminales
         </li>
         <li class="adhesion-feature">
-          <div class="adhesion-feature-check">✓</div>
+          <div class="adhesion-feature-check" aria-hidden="true">✓</div>
           Accès aux événements membres
         </li>
         <li class="adhesion-feature">
-          <div class="adhesion-feature-check">✓</div>
+          <div class="adhesion-feature-check" aria-hidden="true">✓</div>
           Droit de vote en assemblée générale
         </li>
         <li class="adhesion-feature">
-          <div class="adhesion-feature-check">✓</div>
+          <div class="adhesion-feature-check" aria-hidden="true">✓</div>
           Possibilité de rejoindre le bureau
         </li>
         <li class="adhesion-feature">
-          <div class="adhesion-feature-check">✓</div>
+          <div class="adhesion-feature-check" aria-hidden="true">✓</div>
           Carte de membre officielle
         </li>
       </ul>
@@ -376,32 +387,26 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   </div>
 </section>
 
-<!-- TÉMOIGNAGES -->
+<!-- AVIS -->
 <section class="section section-alt">
-  <span class="section-eyebrow">Ils témoignent</span>
-  <h2 class="section-title">Pourquoi rejoindre la MDL ?</h2>
-  <p class="section-sub">Ce que disent les membres de la MDL sur leur expérience.</p>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
-    <div class="card reveal" style="padding:24px;">
-      <div style="font-size:24px;margin-bottom:12px;">⭐⭐⭐⭐⭐</div>
-      <p style="font-size:14px;color:var(--gris-texte);line-height:1.75;font-style:italic;margin-bottom:16px;">"La MDL m'a permis de m'investir vraiment dans mon lycée, de proposer des idées et de les voir se réaliser. C'est une expérience unique."</p>
-      <div style="font-size:13px;font-weight:600;color:var(--prune);">Membre du bureau</div>
-      <div style="font-size:11px;color:var(--gris-texte);">Terminale · 2025-2026</div>
+  <span class="section-eyebrow">Ce qu'ils en pensent</span>
+  <h2 class="section-title">Partagez votre expérience</h2>
+  <p class="section-sub">Tu as participé à un événement MDL ou tu es membre ? Ton avis compte et aide les futurs lycéens à nous rejoindre.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:680px;">
+    <div class="card" style="padding:28px;text-align:center;">
+      <div style="font-size:32px;margin-bottom:12px;" aria-hidden="true">⭐</div>
+      <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--prune);margin-bottom:8px;">Laisser un avis</div>
+      <p style="font-size:13px;color:var(--gris-texte);line-height:1.65;margin-bottom:16px;">Tu es membre ou tu as vécu un événement MDL ? Partage ton retour sur Google pour aider les futurs lycéens.</p>
+      <a href="https://g.page/r/CdqRMgtEwrdoEAE/review" target="_blank" rel="noopener" class="btn btn-magenta btn-sm">Donner mon avis →</a>
+      <p style="font-size:11px;color:var(--gris-texte);margin-top:10px;">Via Google Avis</p>
     </div>
-    <div class="card reveal reveal-delay-1" style="padding:24px;">
-      <div style="font-size:24px;margin-bottom:12px;">⭐⭐⭐⭐⭐</div>
-      <p style="font-size:14px;color:var(--gris-texte);line-height:1.75;font-style:italic;margin-bottom:16px;">"J'ai rencontré plein de gens et participé à des événements géniaux. La Course contre la Faim était une expérience incroyable à organiser."</p>
-      <div style="font-size:13px;font-weight:600;color:var(--prune);">Membre actif</div>
-      <div style="font-size:11px;color:var(--gris-texte);">Première · 2025-2026</div>
-    </div>
-    <div class="card reveal reveal-delay-2" style="padding:24px;">
-      <div style="font-size:24px;margin-bottom:12px;">⭐⭐⭐⭐⭐</div>
-      <p style="font-size:14px;color:var(--gris-texte);line-height:1.75;font-style:italic;margin-bottom:16px;">"Être à la MDL c'est avoir un vrai rôle dans son lycée. On prend des décisions, on gère un budget, on organise des soirées. Ça prépare vraiment à la vie."</p>
-      <div style="font-size:13px;font-weight:600;color:var(--prune);">Membre du CA</div>
-      <div style="font-size:11px;color:var(--gris-texte);">Terminale · 2025-2026</div>
+    <div class="card" style="padding:28px;text-align:center;">
+      <div style="font-size:32px;margin-bottom:12px;" aria-hidden="true">💬</div>
+      <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--prune);margin-bottom:8px;">Témoignage écrit</div>
+      <p style="font-size:13px;color:var(--gris-texte);line-height:1.65;margin-bottom:16px;">Tu veux qu'on publie ton témoignage sur ce site ? Envoie-nous un message, on le mettra en avant.</p>
+      <a href="contact.html" class="btn btn-outline btn-sm">Nous écrire →</a>
     </div>
   </div>
-  <p style="font-size:12px;color:var(--gris-texte);text-align:center;margin-top:16px;">Les témoignages sont anonymisés. <a href="contact.html" style="color:var(--magenta);">Partager ton expérience →</a></p>
 </section>
 
 <!-- FAQ -->
@@ -411,46 +416,46 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   <p class="section-sub">Quelques réponses aux questions les plus courantes.</p>
   <div class="faq-list">
     <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
+      <button class="faq-question" type="button" aria-expanded="false" onclick="toggleFaq(this)">
         Qui peut adhérer à la MDL ?
         <span class="faq-arrow">▼</span>
-      </div>
+      </button>
       <div class="faq-answer">
         Tous les élèves du lycée Viollet-le-Duc, quelle que soit leur classe, peuvent adhérer à la MDL. Il suffit d'être scolarisé dans l'établissement et de régler la cotisation annuelle.
       </div>
     </div>
     <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
+      <button class="faq-question" type="button" aria-expanded="false" onclick="toggleFaq(this)">
         L'adhésion est-elle valable toute l'année ?
         <span class="faq-arrow">▼</span>
-      </div>
+      </button>
       <div class="faq-answer">
         Oui, l'adhésion est valable pour toute l'année scolaire en cours (2025-2026). Elle expire en fin d'année scolaire et doit être renouvelée chaque année.
       </div>
     </div>
     <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
+      <button class="faq-question" type="button" aria-expanded="false" onclick="toggleFaq(this)">
         Est-ce que l'adhésion donne accès au bal gratuitement ?
         <span class="faq-arrow">▼</span>
-      </div>
+      </button>
       <div class="faq-answer">
         Oui, les membres de la MDL bénéficient de l'entrée gratuite au bal des terminales (sous présentation de la carte de membre). L'entrée est à 5€ pour les non-membres.
       </div>
     </div>
     <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
+      <button class="faq-question" type="button" aria-expanded="false" onclick="toggleFaq(this)">
         Comment rejoindre le bureau de la MDL ?
         <span class="faq-arrow">▼</span>
-      </div>
+      </button>
       <div class="faq-answer">
         Les membres du bureau sont élus lors de l'assemblée générale de début d'année. Pour candidater, il faut être membre de la MDL et se présenter lors de l'AG. Contacte-nous pour plus d'infos.
       </div>
     </div>
     <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
+      <button class="faq-question" type="button" aria-expanded="false" onclick="toggleFaq(this)">
         J'ai une question, qui contacter ?
         <span class="faq-arrow">▼</span>
-      </div>
+      </button>
       <div class="faq-answer">
         Tu peux écrire directement au bureau à l'adresse <a href="mailto:contact@mdl-vld.fr" style="color: var(--magenta);">contact@mdl-vld.fr</a> ou utiliser le <a href="contact.html" style="color: var(--magenta);">formulaire de contact</a>. Tu peux aussi interpeller un membre de la MDL directement au lycée ou passer par la vie scolaire.
       </div>
@@ -465,7 +470,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
         <div class="footer-logo-name">MDL Viollet-le-Duc</div>
       </div>
-      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+      <p class="footer-desc">Association loi 1901 · gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Activités</div>
@@ -507,7 +512,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon" aria-hidden="true">🔍</span>
       <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>
@@ -528,7 +533,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 </div>
 <script>document.querySelectorAll('.year-auto').forEach(function(e){{e.textContent=new Date().getFullYear();}});</script>
 <script>
-function toggleFaq(el){el.parentElement.classList.toggle('open');}
+function toggleFaq(el){var i=el.parentElement;var o=i.classList.toggle('open');el.setAttribute('aria-expanded',o);}
 </script>
 <script src="mdl-core.js" defer></script>
 </body>

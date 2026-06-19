@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDL Viollet-le-Duc</title>
+  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <title>Confidentialité · MDL Viollet-le-Duc</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
   <meta name="robots" content="index, follow">
   <meta name="description" content="Politique de confidentialité de la MDL du Lycée Viollet-le-Duc.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     .legal-content { max-width: 760px; margin: 0 auto; }
@@ -48,11 +52,18 @@
     .droit-icon { font-size: 20px; flex-shrink: 0; }
     .droit-title { font-size: 13px; font-weight: 500; color: var(--prune); margin-bottom: 3px; }
     .droit-desc { font-size: 12px; color: var(--gris-texte); line-height: 1.55; }
+    .legal-date {
+      font-size: 12px;
+      color: var(--gris-texte);
+      text-align: right;
+      margin-top: 32px;
+      font-style: italic;
+    }
   </style>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MDL Viollet-le-Duc">
   <meta property="og:title" content="MDL Viollet-le-Duc">
-  <meta property="og:description" content="MDL Viollet-le-Duc — Maison des Lycéens">
+  <meta property="og:description" content="MDL Viollet-le-Duc · Maison des Lycéens">
   <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
   <meta property="og:url" content="https://mdl-vld.fr/confidentialite.html">
   <meta name="twitter:card" content="summary_large_image">
@@ -60,6 +71,7 @@
   <meta name="theme-color" content="#930f7c">
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
 <body>
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
 <nav>
   <a href="index.html" class="nav-logo">
@@ -102,13 +114,13 @@
 </nav>
 <div class="nav-mobile-menu" id="mobile-menu">
   <a href="index.html">Accueil</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">Activités</div>
   <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
   <a href="projets.html" style="padding-left:32px!important;">Projets</a>
   <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
   <a href="merch.html" style="padding-left:32px!important;">Merch</a>
   <a href="planning.html">Planning</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">La MDL</div>
   <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
   <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
   <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
@@ -121,6 +133,7 @@
 function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
 document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
 </script>
+<span id="main-content" tabindex="-1"></span>
 
 <div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-facade.jpg'); --hero-pos: center center;">
   <span class="section-eyebrow">Vie privée</span>
@@ -181,27 +194,27 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <p>Conformément au RGPD, vous disposez des droits suivants sur vos données personnelles. Pour les exercer, écrivez à <a href="mailto:contact@mdl-vld.fr" style="color: var(--magenta);">contact@mdl-vld.fr</a>. Réponse sous 30 jours.</p>
         <div class="droits-grid">
           <div class="droit-item">
-            <div class="droit-icon">👁</div>
+            <div class="droit-icon" aria-hidden="true">👁</div>
             <div><div class="droit-title">Droit d'accès</div><div class="droit-desc">Obtenir une copie des données vous concernant.</div></div>
           </div>
           <div class="droit-item">
-            <div class="droit-icon">✏️</div>
+            <div class="droit-icon" aria-hidden="true">✏️</div>
             <div><div class="droit-title">Droit de rectification</div><div class="droit-desc">Faire corriger des données inexactes ou incomplètes.</div></div>
           </div>
           <div class="droit-item">
-            <div class="droit-icon">🗑</div>
+            <div class="droit-icon" aria-hidden="true">🗑</div>
             <div><div class="droit-title">Droit à l'effacement</div><div class="droit-desc">Demander la suppression de vos données ("droit à l'oubli").</div></div>
           </div>
           <div class="droit-item">
-            <div class="droit-icon">⏸</div>
+            <div class="droit-icon" aria-hidden="true">⏸</div>
             <div><div class="droit-title">Droit à la limitation</div><div class="droit-desc">Restreindre temporairement l'utilisation de vos données.</div></div>
           </div>
           <div class="droit-item">
-            <div class="droit-icon">🚫</div>
+            <div class="droit-icon" aria-hidden="true">🚫</div>
             <div><div class="droit-title">Droit d'opposition</div><div class="droit-desc">S'opposer au traitement de vos données pour des raisons légitimes.</div></div>
           </div>
           <div class="droit-item">
-            <div class="droit-icon">📦</div>
+            <div class="droit-icon" aria-hidden="true">📦</div>
             <div><div class="droit-title">Portabilité</div><div class="droit-desc">Recevoir vos données dans un format structuré et lisible.</div></div>
           </div>
         </div>
@@ -214,6 +227,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
       <div class="legal-text">
         <p>Ce site n'utilise <strong>aucun cookie publicitaire ou de traçage</strong>. Aucun outil d'analyse de trafic (Google Analytics, etc.) n'est installé.</p>
         <p>Les seuls cookies susceptibles d'être déposés sont des cookies techniques strictement nécessaires au bon fonctionnement du site (session, sécurité du formulaire). Ces cookies ne nécessitent pas votre consentement au titre de l'article 82 de la loi Informatique et Libertés.</p>
+        <p>Le site utilise également le <strong>stockage local de votre navigateur (localStorage)</strong> pour mémoriser deux préférences strictement techniques : votre choix de réponse au bandeau cookie, et votre préférence d'affichage (mode clair ou sombre). Ces informations restent sur votre appareil, ne sont jamais transmises à la MDL ni à un tiers, et peuvent être effacées à tout moment depuis les paramètres de votre navigateur.</p>
         <p>Les services tiers intégrés (HelloAsso, Billetweb via liens externes) peuvent déposer leurs propres cookies lorsque vous accédez à leurs plateformes. Consultez leurs politiques de confidentialité respectives.</p>
       </div>
     </div>
@@ -239,8 +253,11 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
       <div class="legal-section-title"><span class="legal-section-num">8</span>Mise à jour de cette politique</div>
       <div class="legal-text">
         <p>Cette politique de confidentialité peut être mise à jour pour refléter des changements dans nos pratiques ou dans la réglementation applicable. La date de dernière mise à jour est indiquée ci-dessous. En cas de modification substantielle, un avis sera affiché sur le site.</p>
-        <p>Dernière mise à jour : <strong>juin 2026</strong></p>
       </div>
+    </div>
+
+    <div class="legal-date">
+      Dernière mise à jour : <strong>juin 2026</strong>
     </div>
 
   </div>
@@ -253,7 +270,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
         <div class="footer-logo-name">MDL Viollet-le-Duc</div>
       </div>
-      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+      <p class="footer-desc">Association loi 1901 · gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Activités</div>
@@ -295,7 +312,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon" aria-hidden="true">🔍</span>
       <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>

@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDL Viollet-le-Duc</title>
+  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <title>Partenaires · MDL Viollet-le-Duc</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -15,6 +16,9 @@
   <meta property="og:title" content="MDL Viollet-le-Duc">
   <meta property="og:description" content="Les partenaires et structures associées à la MDL du lycée Viollet-le-Duc.">
   <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     .partners-grid {
@@ -44,7 +48,7 @@
     .partner-type {
       font-size: 10px; font-weight: 600;
       letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--or);
+      color: var(--or-texte);
     }
     .partner-name {
       font-family: 'Playfair Display', serif;
@@ -89,6 +93,7 @@
   <meta name="theme-color" content="#930f7c">
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
 <body>
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
 <nav>
   <a href="index.html" class="nav-logo">
@@ -131,13 +136,13 @@
 </nav>
 <div class="nav-mobile-menu" id="mobile-menu">
   <a href="index.html">Accueil</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">Activités</div>
   <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
   <a href="projets.html" style="padding-left:32px!important;">Projets</a>
   <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
   <a href="merch.html" style="padding-left:32px!important;">Merch</a>
   <a href="planning.html">Planning</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">La MDL</div>
   <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
   <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
   <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
@@ -150,8 +155,9 @@
 function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
 document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
 </script>
+<span id="main-content" tabindex="-1"></span>
 
-<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-entree.jpg'); --hero-pos: center 35%;">
+<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-facade2.jpg'); --hero-pos: center 35%;">
   <span class="section-eyebrow">Écosystème lycéen</span>
   <h1 class="section-title section-title-lg">Nos partenaires</h1>
   <p class="section-sub">Le lycée Viollet-le-Duc, c'est bien plus que la MDL. Voici les structures, associations et comptes qui animent la vie du lycée à nos côtés.</p>
@@ -165,12 +171,16 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   <p class="section-sub">Notre établissement de référence.</p>
   <div class="partners-grid">
     <a href="https://lyc-violletleduc.ac-versailles.fr/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">🏫</div>
+      <div class="partner-icon" aria-hidden="true">🏫</div>
       <div class="partner-type">Établissement</div>
       <div class="partner-name">Lycée Viollet-le-Duc</div>
       <p class="partner-desc">Le lycée général et technologique de Villiers-Saint-Frédéric, qui accueille la MDL en son sein.</p>
       <span class="partner-link">Voir le site →</span>
     </a>
+    <div class="partner-card" style="padding:0;overflow:hidden;cursor:default;">
+      <img src="assets/lycee-facade.jpg" alt="Façade du lycée Viollet-le-Duc"
+           style="width:100%;height:100%;object-fit:cover;min-height:220px;display:block;" loading="lazy">
+    </div>
   </div>
 </section>
 
@@ -182,17 +192,21 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   <p class="section-sub">Les structures officielles de représentation et d'engagement lycéen.</p>
   <div class="partners-grid">
     <a href="https://www.instagram.com/cvl.vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">🗳</div>
+      <div class="partner-icon" style="background:none;padding:0;overflow:hidden;border-radius:var(--radius-sm);">
+        <img src="assets/partner-cvl.jpg" alt="Logo CVL" style="width:52px;height:52px;object-fit:cover;border-radius:var(--radius-sm);" loading="lazy">
+      </div>
       <div class="partner-type">Instance officielle</div>
       <div class="partner-name">Conseil de Vie Lycéenne</div>
       <p class="partner-desc">Le CVL représente les lycéens auprès de la direction et des instances académiques. Instance élective officielle.</p>
       <span class="insta-badge">📸 @cvl.vld</span>
     </a>
     <a href="https://www.instagram.com/ambassadeurs_vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">🤝</div>
-      <div class="partner-type">Représentation</div>
+      <div class="partner-icon" style="background:none;padding:0;overflow:hidden;border-radius:var(--radius-sm);">
+        <img src="assets/partner-ambassadeurs.jpg" alt="Logo Ambassadeurs lycéens VLD" style="width:52px;height:52px;object-fit:cover;border-radius:var(--radius-sm);" loading="lazy">
+      </div>
+      <div class="partner-type">Ambassadeurs anti-harcèlement</div>
       <div class="partner-name">Ambassadeurs VLD</div>
-      <p class="partner-desc">Les ambassadeurs du lycée, représentants de l'établissement dans diverses missions et événements.</p>
+      <p class="partner-desc">Ambassadeurs anti-harcèlement et représentants du lycée. Ils agissent pour un climat scolaire bienveillant et sécurisé.</p>
       <span class="insta-badge">📸 @ambassadeurs_vld</span>
     </a>
   </div>
@@ -206,21 +220,21 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   <p class="section-sub">Les initiatives culturelles et citoyennes du lycée.</p>
   <div class="partners-grid">
     <a href="https://www.instagram.com/ambassadeurs.culturevld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">🎨</div>
+      <div class="partner-icon" aria-hidden="true">🎨</div>
       <div class="partner-type">Culture</div>
       <div class="partner-name">Ambassadeurs Culture VLD</div>
       <p class="partner-desc">Promotion de la culture au sein du lycée, organisation de sorties et d'événements culturels.</p>
       <span class="insta-badge">📸 @ambassadeurs.culturevld</span>
     </a>
     <a href="https://www.instagram.com/culture.vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">🎭</div>
+      <div class="partner-icon" aria-hidden="true">🎭</div>
       <div class="partner-type">Pass Culture</div>
       <div class="partner-name">Pass Culture VLD</div>
       <p class="partner-desc">Référents Pass Culture du lycée, pour aider les lycéens à profiter de leurs crédits culturels.</p>
       <span class="insta-badge">📸 @culture.vld</span>
     </a>
     <a href="https://www.instagram.com/as.vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">⚽</div>
+      <div class="partner-icon" aria-hidden="true">⚽</div>
       <div class="partner-type">Sport</div>
       <div class="partner-name">Association Sportive VLD</div>
       <p class="partner-desc">L'association sportive du lycée, qui organise les activités et compétitions sportives inter-lycées.</p>
@@ -228,6 +242,19 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     </a>
   </div>
 </section>
+
+<!-- PHOTO PLEINE LARGEUR - Vie lycéenne -->
+<div style="position: relative; height: 360px; overflow: hidden;">
+  <img src="assets/photo-course-banniere.jpg"
+       alt="Lycéens du lycée Viollet-le-Duc lors d'un événement collectif"
+       style="width: 100%; height: 100%; object-fit: cover; object-position: center 40%;" loading="lazy">
+  <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(45,26,40,0.72) 0%, rgba(45,26,40,0.25) 60%, transparent 100%);"></div>
+  <div style="position: absolute; top: 50%; left: 48px; transform: translateY(-50%); color: white; max-width: 460px;">
+    <span style="font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--or-pale, #f5ecd0); display: block; margin-bottom: 10px;">Un écosystème commun</span>
+    <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; line-height: 1.25; margin-bottom: 12px;">Toutes ces structures<br>font vivre le même lycée</div>
+    <p style="font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.7;">Instances officielles, clubs, médias lycéens : autant de façons différentes de s'impliquer à Viollet-le-Duc.</p>
+  </div>
+</div>
 
 <!-- MÉDIAS ET COMMUNICATION -->
 <section class="section section-alt">
@@ -237,14 +264,14 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   <p class="section-sub">Les comptes et médias qui font l'info au lycée.</p>
   <div class="partners-grid">
     <a href="https://www.instagram.com/vlmag_lemagdevld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">📻</div>
+      <div class="partner-icon" aria-hidden="true">📻</div>
       <div class="partner-type">Média</div>
-      <div class="partner-name">VLMag — Web Radio</div>
+      <div class="partner-name">VLMag · Web Radio</div>
       <p class="partner-desc">Le magazine et la web radio du lycée Viollet-le-Duc. Actualités, émissions et contenus produits par les élèves.</p>
       <span class="insta-badge">📸 @vlmag_lemagdevld</span>
     </a>
     <a href="https://www.instagram.com/crush_.vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">💬</div>
+      <div class="partner-icon" aria-hidden="true">💬</div>
       <div class="partner-type">Compte lycéen</div>
       <div class="partner-name">Crush VLD</div>
       <p class="partner-desc">Compte communautaire des lycéens de Viollet-le-Duc. Page d'expression libre et de partage entre élèves.</p>
@@ -261,14 +288,14 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   <p class="section-sub">Les comptes des filières et sections du lycée.</p>
   <div class="partners-grid">
     <a href="https://www.instagram.com/formation.deco.vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">🎀</div>
+      <div class="partner-icon" aria-hidden="true">🎀</div>
       <div class="partner-type">Formation</div>
       <div class="partner-name">Formation Déco VLD</div>
       <p class="partner-desc">Compte de la filière décoration du lycée Viollet-le-Duc. Projets, créations et actualités de la section.</p>
       <span class="insta-badge">📸 @formation.deco.vld</span>
     </a>
     <a href="https://www.instagram.com/arts_appliques_vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">✏️</div>
+      <div class="partner-icon" aria-hidden="true">✏️</div>
       <div class="partner-type">Formation</div>
       <div class="partner-name">Arts Appliqués VLD</div>
       <p class="partner-desc">La section arts appliqués du lycée. Créations artistiques, projets et actualités de la filière.</p>
@@ -284,7 +311,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
         <div class="footer-logo-name">MDL Viollet-le-Duc</div>
       </div>
-      <p class="footer-desc">Association loi 1901 — gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+      <p class="footer-desc">Association loi 1901 · gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
     </div>
     <div class="footer-col">
       <div class="footer-col-title">Activités</div>
@@ -326,7 +353,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon" aria-hidden="true">🔍</span>
       <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>

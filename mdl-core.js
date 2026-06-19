@@ -227,33 +227,41 @@ function initCountdown() {
 }
 
 // ============================================================
-// NEWSLETTER (via Brevo/Sendinblue)
+// NEWSLETTER (via Brevo) — À CONFIGURER
 // ============================================================
+// Cette fonction affiche un message clair tant que la newsletter
+// n'est pas branchée à un vrai compte Brevo. L'API Brevo ne peut pas
+// être appelée directement depuis le navigateur (la clé API serait
+// visible publiquement) : il faut utiliser le formulaire d'inscription
+// embed fourni par Brevo (Campagnes > Formulaires > Créer un formulaire),
+// puis remplacer le contenu de ce formulaire par le code qu'il donne.
+var NEWSLETTER_CONFIGURED = false; // passer à true une fois le formulaire Brevo branché
+
 function initNewsletter() {
   var form = document.getElementById('newsletterForm');
   if (!form) return;
-  
+
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-    var email = form.querySelector('input[type="email"]').value;
     var btn = form.querySelector('.newsletter-btn');
     var success = document.getElementById('newsletterSuccess');
-    
+
+    if (!NEWSLETTER_CONFIGURED) {
+      success.textContent = '⚠️ Inscription temporairement indisponible — contactez-nous directement à contact@mdl-vld.fr en attendant.';
+      success.style.background = 'rgba(255,255,255,0.18)';
+      form.style.display = 'none';
+      success.style.display = 'block';
+      return;
+    }
+
     btn.textContent = 'Inscription...';
     btn.disabled = true;
-    // TODO: Remplacer par votre endpoint Brevo
-    // Créez un compte sur brevo.com, créez une liste, 
-    // puis remplacez l'URL ci-dessous par votre formulaire Brevo embed
-    fetch('https://api.brevo.com/v3/contacts', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json', 'api-key': 'VOTRE_CLE_BREVO'},
-      body: JSON.stringify({email: email, listIds: [VOTRE_LIST_ID]})
-    }).then(function() {
-      if (success) { form.style.display = 'none'; success.style.display = 'block'; }
-    }).catch(function() {
-      // Fallback: rediriger vers page de contact
-      if (success) { form.style.display = 'none'; success.style.display = 'block'; }
-    });
+    // TODO une fois NEWSLETTER_CONFIGURED = true :
+    // soumettre le formulaire vers l'URL d'action fournie par Brevo
+    // (form.action déjà configuré dans le HTML) plutôt que de faire
+    // un fetch manuel vers l'API.
+    form.style.display = 'none';
+    success.style.display = 'block';
   });
 }
 
