@@ -1,6 +1,7 @@
 /* Polices chargées via <link> dans le <head> de chaque page (plus rapide que @import) */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+img, svg, video, iframe { max-width: 100%; }
 
 :root {
   /* Palette principale */
@@ -947,4 +948,45 @@ img.lightbox-trigger:hover { opacity: 0.9; }
   .countdown-wrap { gap: 8px; }
   .countdown-unit { min-width: 56px; padding: 12px; }
   .countdown-num { font-size: 28px; }
+}
+
+/* =====================
+   FILET DE SÉCURITÉ MOBILE
+   Réempile les grilles inline non couvertes par les règles par classe,
+   neutralise les spans de galerie qui créent une colonne implicite,
+   et coupe tout débordement horizontal résiduel.
+   ===================== */
+@media (max-width: 768px) {
+  /* Aucune barre de défilement horizontale parasite */
+  html, body { overflow-x: hidden; }
+
+  /* Grilles posées en style inline (non collapsées par les règles par classe) */
+  [style*="repeat(3,1fr)"], [style*="repeat(3, 1fr)"],
+  [style*="repeat(4,1fr)"], [style*="repeat(4, 1fr)"],
+  [style*="repeat(5,1fr)"], [style*="repeat(5, 1fr)"],
+  [style*="1fr 1fr 1fr"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  [style*="240px 1fr"], [style*="280px 1fr"],
+  [style*="grid-template-columns:240px"], [style*="grid-template-columns: 240px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Galeries photos : forcer 1 colonne et annuler les span (sinon colonne implicite = débordement) */
+  .photo-gallery { grid-template-columns: 1fr !important; }
+  .photo-gallery > *, .photo-gallery img { grid-column: span 1 !important; }
+  .photo-gallery > *[style*="16/7"], .photo-gallery img:first-child { aspect-ratio: 4/3 !important; }
+}
+
+@media (max-width: 380px) {
+  /* Sur les très petits écrans, les grilles de cartes/stats passent en 1 colonne */
+  [style*="repeat(3,1fr)"], [style*="repeat(3, 1fr)"],
+  [style*="repeat(4,1fr)"], [style*="repeat(4, 1fr)"],
+  [style*="1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Les vignettes coloris merch restent en grille serrée (petites images) */
+  [style*="repeat(5,1fr)"], [style*="repeat(5, 1fr)"] {
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
 }
