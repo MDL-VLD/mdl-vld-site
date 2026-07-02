@@ -3,103 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-  <title>Projets · MDL Viollet-le-Duc</title>
+  <title>MDL Viollet-le-Duc · Projets</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
   <meta name="robots" content="index, follow">
-  <meta name="description" content="Les projets soutenus par la MDL du lycée Viollet-le-Duc.">
+  <meta name="description" content="Les projets solidaires et culturels soutenus par la MDL du lycée Viollet-le-Duc.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MDL Viollet-le-Duc">
   <meta property="og:title" content="MDL Viollet-le-Duc · Projets">
-  <meta property="og:description" content="Les projets soutenus et organisés par la MDL du lycée Viollet-le-Duc.">
+  <meta property="og:description" content="Course contre la Faim, sorties culturelles, voyages et actions solidaires.">
   <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap">
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#930f7c">
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script>
   <style>
-    .projets-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .projets-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
     .projet-card {
       background: white;
       border: 1px solid var(--lilas-pale);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
     }
-    .projet-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
-    .projet-header {
-      padding: 24px;
+    .projet-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lift);
+    }
+    .projet-card-top {
+      padding: 32px 32px 24px;
       position: relative;
-      overflow: hidden;
-      min-height: 120px;
-      display: flex; flex-direction: column; justify-content: flex-end;
     }
-    .projet-header::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: var(--bg-color, var(--magenta));
-      opacity: 0.9;
+    .projet-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+      flex-shrink: 0;
     }
-    .projet-header-emoji {
-      font-size: 36px;
-      position: absolute;
-      top: 16px; right: 16px;
-      opacity: 0.3;
-    }
-    .projet-eyebrow {
-      font-size: 10px; font-weight: 600;
-      letter-spacing: 0.09em; text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
-      position: relative; z-index: 1;
-      margin-bottom: 4px;
-    }
-    .projet-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px; font-weight: 700;
-      color: white; line-height: 1.2;
-      position: relative; z-index: 1;
-    }
-    .projet-body { padding: 20px 24px; }
-    .projet-desc { font-size: 13px; color: var(--gris-texte); line-height: 1.7; margin-bottom: 16px; }
-    .projet-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-    .projet-chip {
-      font-size: 11px; font-weight: 500;
-      background: var(--rose-pale); color: var(--magenta);
-      padding: 4px 10px; border-radius: 20px;
-    }
-    .projet-status {
-      font-size: 11px; font-weight: 500;
-      padding: 4px 10px; border-radius: 20px;
-    }
-    .projet-status.en-cours { background: #eaf5ec; color: #276237; }
-    .projet-status.a-venir { background: var(--or-pale); color: #7a5a00; }
-    .projet-status.passe { background: var(--gris-pale); color: var(--gris-texte); }
+    .projet-icon-magenta { background: rgba(147,15,124,0.10); }
+    .projet-icon-or      { background: rgba(201,168,76,0.12); }
+    .projet-icon-lilas   { background: var(--lilas-pale); }
+    .projet-icon-prune   { background: rgba(45,26,40,0.08); }
 
-    .proposer-card {
-      background: linear-gradient(135deg, var(--lilas-pale), var(--rose-pale));
-      border: 2px dashed var(--lilas);
-      border-radius: var(--radius-lg);
+    .projet-name {
+      font-family: var(--syne);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--prune);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .projet-desc {
+      font-size: 14px;
+      color: var(--gris-texte);
+      line-height: 1.75;
+    }
+    .projet-card-footer {
+      padding: 16px 32px 24px;
+      border-top: 1px solid var(--lilas-pale);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .projet-tag {
+      font-family: var(--syne);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--magenta);
+    }
+    .projet-link {
+      font-family: var(--syne);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--magenta);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.2s;
+    }
+    .projet-link:hover { gap: 8px; }
+
+    /* Carte CCF — mise en avant -->  */
+    .projet-card-featured {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+    }
+    .projet-card-featured .projet-card-img {
+      overflow: hidden;
+    }
+    .projet-card-featured .projet-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .projet-card-featured .projet-card-top {
       padding: 40px;
+    }
+    .projet-card-featured .projet-card-footer {
+      padding: 16px 40px 32px;
+    }
+    .projet-card-featured .projet-name { font-size: 26px; }
+
+    /* CTA */
+    .projets-cta {
+      background: var(--prune);
+      border-radius: var(--radius-lg);
+      padding: 48px;
       text-align: center;
       margin-top: 32px;
+      position: relative;
+      overflow: hidden;
     }
-    .proposer-card h3 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--prune); margin-bottom: 10px; }
-    .proposer-card p { font-size: 14px; color: var(--gris-texte); line-height: 1.7; max-width: 500px; margin: 0 auto 20px; }
+    .projets-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 50%, rgba(147,15,124,0.25) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .projets-cta-title {
+      font-family: var(--syne);
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .projets-cta-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.60);
+      margin-bottom: 24px;
+      position: relative;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-    @media (max-width: 768px) { .projets-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) {
+      .projets-grid { grid-template-columns: 1fr; }
+      .projet-card-featured { grid-column: span 1; grid-template-columns: 1fr; }
+      .projet-card-featured .projet-card-img { height: 200px; }
+    }
+
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .10s; }
+    .reveal-delay-2 { transition-delay: .20s; }
+    .reveal-delay-3 { transition-delay: .30s; }
   </style>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#930f7c">
-  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
+</head>
 <body>
 <a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
 <nav>
   <a href="index.html" class="nav-logo">
-    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL"></div>
+    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL Viollet-le-Duc"></div>
     <div>
       <div class="nav-logo-text">MDL Viollet-le-Duc</div>
       <span class="nav-logo-sub">Maison des Lycéens</span>
@@ -110,21 +183,22 @@
     <li class="nav-dropdown">
       <a href="evenements.html" class="active">Activités</a>
       <div class="nav-dropdown-menu">
-        <a href="evenements.html">🎉 Événements</a>
-        <a href="projets.html" class="active">💡 Projets</a>
-        <a href="clubs.html">🎭 Clubs</a>
-        <a href="merch.html">🛍 Merch</a>
+        <a href="evenements.html">Événements</a>
+        <a href="projets.html">Projets</a>
+        <a href="clubs.html">Clubs</a>
+        <a href="merch.html">Merch</a>
       </div>
     </li>
     <li><a href="planning.html">Planning</a></li>
     <li class="nav-dropdown">
       <a href="mdl.html">La MDL</a>
       <div class="nav-dropdown-menu">
-        <a href="mdl.html">🏠 La MDL</a>
-        <a href="equipe.html">👥 Équipe</a>
-        <a href="partenaires.html">🤝 Partenaires</a>
+        <a href="mdl.html">La MDL</a>
+        <a href="equipe.html">Équipe</a>
+        <a href="partenaires.html">Partenaires</a>
         <div class="nav-dropdown-menu-sep"></div>
-        <a href="documents.html">📄 Documents</a>
+        <a href="documents.html">Documents</a>
+        <a href="credits.html">Crédits</a>
       </div>
     </li>
     <li><a href="contact.html">Contact</a></li>
@@ -133,6 +207,7 @@
   <div class="nav-right">
     <button class="nav-search-btn" id="searchOpenBtn" title="Ctrl+K" aria-label="Rechercher">🔍 Rechercher</button>
     <button class="dark-toggle" id="darkToggle" aria-label="Mode sombre" title="Mode sombre">🌙</button>
+    <a href="admin.html" style="font-family:var(--syne,sans-serif);font-size:10px;font-weight:700;letter-spacing:.06em;color:rgba(var(--prune-rgb,45,26,40),.45);padding:5px 10px;border:1px solid rgba(0,0,0,.12);border-radius:4px;text-decoration:none;white-space:nowrap;margin-left:4px;" title="Connexion membres">🔐</a>
     <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -159,92 +234,88 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 </script>
 <span id="main-content" tabindex="-1"></span>
 
-<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/photo-course-groupe.jpg'); --hero-pos: center center;">
-  <span class="section-eyebrow">MDL en action</span>
-  <h1 class="section-title section-title-lg">Nos projets</h1>
-  <p class="section-sub">Au-delà des événements, la MDL soutient et accompagne des projets tout au long de l'année : sorties, actions solidaires, initiatives citoyennes...</p>
+<!-- HERO -->
+<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/photo-course-lycees.jpg'); --hero-pos: center 30%;">
+  <div class="page-hero-inner">
+    <div class="da-hero-eyebrow">Ce qu'on fait</div>
+    <h1 class="da-hero-title">Nos projets</h1>
+    <p class="da-hero-sub">Au-delà des événements, la MDL s'engage dans des projets solidaires et culturels qui donnent du sens à la vie lycéenne.</p>
+  </div>
 </div>
 
+<!-- GRILLE PROJETS -->
 <section class="section">
   <div class="projets-grid">
 
-    <div class="projet-card">
-      <div class="projet-header" style="--bg-color: #2d6e2d;">
-        <div class="projet-header-emoji" aria-hidden="true">🌍</div>
-        <div class="projet-eyebrow">Projet solidaire · 2025-2026</div>
-        <div class="projet-title">Course contre la Faim</div>
+    <!-- COURSE CONTRE LA FAIM — mise en avant -->
+    <div class="card projet-card projet-card-featured reveal">
+      <div class="projet-card-img">
+        <img src="assets/photo-course-tshirts.jpg" alt="Course contre la Faim">
       </div>
-      <div class="projet-body">
-        <div class="projet-meta">
-          <span class="projet-status passe">● Édition 2026 terminée</span>
-          <span class="projet-chip">Action solidaire</span>
+      <div>
+        <div class="projet-card-top">
+          <div class="projet-icon projet-icon-magenta">🏃</div>
+          <div class="projet-name">Course contre la Faim</div>
+          <p class="projet-desc">Le projet solidaire phare de la MDL. Chaque année, les lycéens courent pour collecter des fonds au profit d'Action Contre la Faim. Un moment fédérateur qui rassemble tout le lycée autour d'une cause qui compte.</p>
         </div>
-        <p class="projet-desc">En partenariat avec Action Contre la Faim, la MDL mobilise chaque année les lycéens pour courir et collecter des fonds pour lutter contre la faim dans le monde.</p>
-        <a href="evenement-ccf.html" class="btn btn-outline btn-sm">Voir la page →</a>
+        <div class="projet-card-footer">
+          <span class="projet-tag">Solidarité · Action Contre la Faim</span>
+          <a href="evenement-ccf.html" class="projet-link">En savoir plus →</a>
+        </div>
       </div>
     </div>
 
-    <div class="projet-card">
-      <div class="projet-header" style="--bg-color: #1a3a6e;">
-        <div class="projet-header-emoji" aria-hidden="true">✈️</div>
-        <div class="projet-eyebrow">Sortie · À planifier</div>
-        <div class="projet-title">Sorties culturelles</div>
+    <!-- SORTIES CULTURELLES -->
+    <div class="card projet-card reveal reveal-delay-1">
+      <div class="projet-card-top">
+        <div class="projet-icon projet-icon-or">🎭</div>
+        <div class="projet-name">Sorties culturelles</div>
+        <p class="projet-desc">La MDL finance et organise des sorties culturelles pour les lycéens — spectacles, expositions, cinéma, musées. L'objectif : rendre la culture accessible à tous, quels que soient les moyens.</p>
       </div>
-      <div class="projet-body">
-        <div class="projet-meta">
-          <span class="projet-status a-venir">○ En préparation</span>
-          <span class="projet-chip">Culture</span>
-          <span class="projet-chip">Sorties</span>
-        </div>
-        <p class="projet-desc">La MDL organise et soutient des sorties culturelles pour les lycéens : musées, spectacles, expositions... Une façon de sortir du lycée et de découvrir.</p>
-        <a href="contact.html" class="btn btn-outline btn-sm">Proposer une idée →</a>
+      <div class="projet-card-footer">
+        <span class="projet-tag">Culture · Financement MDL</span>
       </div>
     </div>
 
-    <div class="projet-card">
-      <div class="projet-header" style="--bg-color: #7a2d70;">
-        <div class="projet-header-emoji" aria-hidden="true">🎗</div>
-        <div class="projet-eyebrow">Engagement citoyen</div>
-        <div class="projet-title">Actions solidaires</div>
+    <!-- VOYAGES SCOLAIRES -->
+    <div class="card projet-card reveal reveal-delay-1">
+      <div class="projet-card-top">
+        <div class="projet-icon projet-icon-lilas">✈️</div>
+        <div class="projet-name">Voyages scolaires</div>
+        <p class="projet-desc">La MDL contribue au financement des voyages scolaires pour que chaque lycéen puisse y participer. Une façon concrète de soutenir les projets pédagogiques et les échanges internationaux.</p>
       </div>
-      <div class="projet-body">
-        <div class="projet-meta">
-          <span class="projet-status a-venir">○ À venir</span>
-          <span class="projet-chip">Solidarité</span>
-          <span class="projet-chip">Citoyen</span>
-        </div>
-        <p class="projet-desc">Récoltes de dons, campagnes de sensibilisation, octobre rose... La MDL s'engage dans des actions citoyennes et solidaires tout au long de l'année.</p>
-        <a href="contact.html" class="btn btn-outline btn-sm">Proposer un projet →</a>
+      <div class="projet-card-footer">
+        <span class="projet-tag">Voyages · Soutien financier</span>
       </div>
     </div>
 
-    <div class="projet-card">
-      <div class="projet-header" style="--bg-color: #4a2d6e;">
-        <div class="projet-header-emoji" aria-hidden="true">📸</div>
-        <div class="projet-eyebrow">Communication</div>
-        <div class="projet-title">Site web MDL</div>
+    <!-- OCTOBRE ROSE -->
+    <div class="card projet-card reveal reveal-delay-2">
+      <div class="projet-card-top">
+        <div class="projet-icon projet-icon-prune">🎀</div>
+        <div class="projet-name">Actions solidaires</div>
+        <p class="projet-desc">Octobre Rose avec la Fondation Marie Curie, collectes, sensibilisations — la MDL s'engage régulièrement sur des causes sociales et de santé publique, en mobilisant la communauté lycéenne.</p>
       </div>
-      <div class="projet-body">
-        <div class="projet-meta">
-          <span class="projet-status en-cours">● En cours</span>
-          <span class="projet-chip">Numérique</span>
-          <span class="projet-chip">Communication</span>
-        </div>
-        <p class="projet-desc">Conception et développement du site internet de la MDL. Un projet numérique porté par des lycéens pour améliorer la communication de l'association.</p>
-        <a href="credits.html" class="btn btn-outline btn-sm">Voir les crédits →</a>
+      <div class="projet-card-footer">
+        <span class="projet-tag">Solidarité · Fondation Marie Curie</span>
+        <a href="evenement-octobrose.html" class="projet-link">Octobre Rose →</a>
       </div>
     </div>
 
   </div>
 
-  <div class="proposer-card">
-    <div style="font-size: 36px; margin-bottom: 12px;" aria-hidden="true">💡</div>
-    <h3>Tu as un projet ?</h3>
-    <p>La MDL peut t'aider à concrétiser ton idée - sortie, atelier, action solidaire, événement... Si tu es membre, tu peux proposer et porter un projet avec notre soutien.</p>
-    <a href="contact.html" class="btn btn-magenta">Proposer mon projet</a>
+  <!-- CTA -->
+  <div class="projets-cta reveal reveal-delay-3">
+    <div class="projets-cta-title">Tu as un projet en tête ?</div>
+    <p class="projets-cta-sub">La MDL peut soutenir, financer ou co-organiser ton projet. Sortie, action solidaire, initiative culturelle — parles-en au bureau.</p>
+    <a href="contact.html" class="btn btn-or">Proposer un projet</a>
   </div>
 </section>
 
+<div class="footer-tagline-block">
+  <p class="footer-tagline-text">Fait par des <strong>lycéens</strong>, pour des lycéens.</p>
+  <p class="footer-tagline-sub">MDL Viollet-le-Duc · Villiers-Saint-Frédéric · depuis 2014</p>
+</div>
 <footer>
   <div class="footer-grid">
     <div>
@@ -285,26 +356,27 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">
+  <div style="padding:12px 64px;border-top:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.15);">
+  <a href="admin.html" style="font-size:11px;color:rgba(255,255,255,0.25);text-decoration:none;font-family:var(--syne,sans-serif);letter-spacing:.06em;">
+    🔐 Espace membres
+  </a>
+</div>
+<div class="footer-bottom">
     <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627</span>
     <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
   </div>
 </footer>
+
 <button class="back-to-top" id="backToTop" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon" aria-hidden="true">🔍</span>
-      <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
+      <span class="search-icon">🔍</span>
+      <input type="search" class="search-input" id="searchInput" placeholder="Rechercher..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>
     <div class="search-results" id="searchResults"><div class="search-empty">Tapez pour rechercher...</div></div>
   </div>
-</div>
-<div class="lightbox-overlay" id="lightboxOverlay">
-  <button class="lightbox-close" aria-label="Fermer">✕</button>
-  <img class="lightbox-img" src="" alt="">
-  <div class="lightbox-caption"></div>
 </div>
 <div class="cookie-banner" id="cookieBanner" role="alertdialog">
   <p class="cookie-banner-text">Ce site utilise uniquement des cookies techniques nécessaires. <a href="confidentialite.html">En savoir plus</a></p>
@@ -313,7 +385,14 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Accepter</button>
   </div>
 </div>
-<script>document.querySelectorAll('.year-auto').forEach(function(e){{e.textContent=new Date().getFullYear();}});</script>
+
+<script>
+document.querySelectorAll('.year-auto').forEach(function(e){e.textContent=new Date().getFullYear();});
+var btn=document.getElementById('backToTop');
+window.addEventListener('scroll',function(){if(btn)btn.classList.toggle('visible',window.scrollY>400);});
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+</script>
 <script src="mdl-core.js" defer></script>
 </body>
 </html>

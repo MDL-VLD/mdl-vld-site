@@ -3,14 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-  <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
-  <meta name="robots" content="index, follow">
-  <meta name="description" content="Merch — MDL du lycée Viollet-le-Duc, Villiers-Saint-Frédéric.">
-  <title>Merch · MDL Viollet-le-Duc</title>
+  <title>MDL Viollet-le-Duc</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     .merch-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
@@ -73,21 +69,21 @@
     <li class="nav-dropdown">
       <a href="evenements.html" class="active">Activités</a>
       <div class="nav-dropdown-menu">
-        <a href="evenements.html">🎉 Événements</a>
-        <a href="projets.html">💡 Projets</a>
-        <a href="clubs.html">🎭 Clubs</a>
-        <a href="merch.html" class="active">🛍 Merch</a>
+        <a href="evenements.html">Événements</a>
+        <a href="projets.html">Projets</a>
+        <a href="clubs.html">Clubs</a>
+        <a href="merch.html" class="active">Merch</a>
       </div>
     </li>
     <li><a href="planning.html">Planning</a></li>
     <li class="nav-dropdown">
       <a href="mdl.html">La MDL</a>
       <div class="nav-dropdown-menu">
-        <a href="mdl.html">🏠 La MDL</a>
-        <a href="equipe.html">👥 Équipe</a>
-        <a href="partenaires.html">🤝 Partenaires</a>
+        <a href="mdl.html">La MDL</a>
+        <a href="equipe.html">Équipe</a>
+        <a href="partenaires.html">Partenaires</a>
         <div class="nav-dropdown-menu-sep"></div>
-        <a href="documents.html">📄 Documents</a>
+        <a href="documents.html">Documents</a>
       </div>
     </li>
     <li><a href="contact.html">Contact</a></li>
@@ -96,6 +92,7 @@
   <div class="nav-right">
     <button class="nav-search-btn" id="searchOpenBtn" title="Ctrl+K" aria-label="Rechercher">🔍 Rechercher</button>
     <button class="dark-toggle" id="darkToggle" aria-label="Mode sombre" title="Mode sombre">🌙</button>
+    <a href="admin.html" style="font-family:var(--syne,sans-serif);font-size:10px;font-weight:700;letter-spacing:.06em;color:rgba(var(--prune-rgb,45,26,40),.45);padding:5px 10px;border:1px solid rgba(0,0,0,.12);border-radius:4px;text-decoration:none;white-space:nowrap;margin-left:4px;" title="Connexion membres">🔐</a>
     <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -123,9 +120,11 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <span id="main-content" tabindex="-1"></span>
 
 <div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-facade.jpg'); --hero-pos: center 40%;">
-  <span class="section-eyebrow">Boutique</span>
-  <h1 class="section-title section-title-lg">Merch MDL</h1>
-  <p class="section-sub">Les articles officiels de la Maison des Lycéens. Chaque vente soutient directement les projets et événements de l'association.</p>
+  <div class="page-hero-inner">
+    <div class="da-hero-eyebrow">Boutique</div>
+    <h1 class="da-hero-title">Merch MDL</h1>
+    <p class="da-hero-sub">Les articles officiels de la Maison des Lycéens. Chaque vente soutient directement les projets et événements de l'association.</p>
+  </div>
 </div>
 
 <section class="section">
@@ -133,7 +132,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 
     <!-- STATUT VENTES -->
     <div style="grid-column:1/-1;background:var(--or-pale);border:1.5px solid var(--or);border-radius:var(--radius-lg);padding:20px 24px;display:flex;align-items:center;gap:16px;">
-      <div style="font-size:28px;" aria-hidden="true">🔒</div>
+      <div style="font-size:28px;">🔒</div>
       <div>
         <div style="font-size:14px;font-weight:600;color:#7a5a00;margin-bottom:4px;">Ventes clôturées pour l'année scolaire 2025-2026</div>
         <div style="font-size:13px;color:var(--gris-texte);">Les commandes reprennent en 2026-2027. Consultez cette page à la rentrée pour les nouveaux articles.</div>
@@ -143,7 +142,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <!-- HOODIE BLANC -->
     <div class="card merch-card">
       <div class="merch-visual" style="background:#f5f5f5;padding:12px;">
-        <img src="assets/merch-1.jpg" alt="Hoodie VLD blanc face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;" loading="lazy">
+        <img src="assets/merch-1.jpg" alt="Hoodie VLD blanc face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;">
         <div class="merch-badge-pos"><span class="badge" style="background:#888;color:white;">Clôturé</span></div>
       </div>
       <div class="merch-body">
@@ -159,7 +158,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <!-- HOODIE NOIR -->
     <div class="card merch-card">
       <div class="merch-visual" style="background:#2a2a2a;padding:12px;">
-        <img src="assets/merch-3.jpg" alt="Hoodie VLD noir face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;" loading="lazy">
+        <img src="assets/merch-3.jpg" alt="Hoodie VLD noir face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;">
         <div class="merch-badge-pos"><span class="badge" style="background:#888;color:white;">Clôturé</span></div>
       </div>
       <div class="merch-body">
@@ -175,7 +174,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <!-- HOODIE BLEU MARINE -->
     <div class="card merch-card">
       <div class="merch-visual" style="background:#1a2540;padding:12px;">
-        <img src="assets/merch-5.jpg" alt="Hoodie VLD bleu marine face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;" loading="lazy">
+        <img src="assets/merch-5.jpg" alt="Hoodie VLD bleu marine face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;">
         <div class="merch-badge-pos"><span class="badge" style="background:#888;color:white;">Clôturé</span></div>
       </div>
       <div class="merch-body">
@@ -191,7 +190,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <!-- HOODIE BORDEAUX -->
     <div class="card merch-card">
       <div class="merch-visual" style="background:#3d1020;padding:12px;">
-        <img src="assets/merch-7.jpg" alt="Hoodie VLD bordeaux face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;" loading="lazy">
+        <img src="assets/merch-7.jpg" alt="Hoodie VLD bordeaux face" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;">
         <div class="merch-badge-pos"><span class="badge" style="background:#888;color:white;">Clôturé</span></div>
       </div>
       <div class="merch-body">
@@ -207,7 +206,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <!-- TOTE-BAG -->
     <div class="card merch-card">
       <div class="merch-visual" style="background:#f0ece4;padding:12px;">
-        <img src="assets/merch-9.jpg" alt="Tote-bag VLD" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;" loading="lazy">
+        <img src="assets/merch-9.jpg" alt="Tote-bag VLD" class="lightbox-trigger" style="width:100%;height:100%;object-fit:contain;">
         <div class="merch-badge-pos"><span class="badge" style="background:#888;color:white;">Clôturé</span></div>
       </div>
       <div class="merch-body">
@@ -226,18 +225,18 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   <div style="margin-top:24px;">
     <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--or-texte);margin-bottom:14px;">Aperçu des coloris disponibles</div>
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">
-      <img src="assets/merch-1.jpg" alt="Blanc face" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
-      <img src="assets/merch-2.jpg" alt="Blanc dos" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
-      <img src="assets/merch-3.jpg" alt="Noir face" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
-      <img src="assets/merch-4.jpg" alt="Noir dos" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
-      <img src="assets/merch-5.jpg" alt="Coloris 5" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
+      <img src="assets/merch-1.jpg" alt="Blanc face" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
+      <img src="assets/merch-2.jpg" alt="Blanc dos" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
+      <img src="assets/merch-3.jpg" alt="Noir face" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
+      <img src="assets/merch-4.jpg" alt="Noir dos" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
+      <img src="assets/merch-5.jpg" alt="Coloris 5" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
     </div>
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:10px;">
-      <img src="assets/merch-6.jpg" alt="Coloris 6" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
-      <img src="assets/merch-7.jpg" alt="Coloris 7" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
-      <img src="assets/merch-8.jpg" alt="Bordeaux dos" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
-      <img src="assets/merch-9.jpg" alt="Coloris 9" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
-      <img src="assets/merch-10.jpg" alt="Coloris 10" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;" loading="lazy">
+      <img src="assets/merch-6.jpg" alt="Coloris 6" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
+      <img src="assets/merch-7.jpg" alt="Coloris 7" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
+      <img src="assets/merch-8.jpg" alt="Bordeaux dos" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
+      <img src="assets/merch-9.jpg" alt="Coloris 9" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
+      <img src="assets/merch-10.jpg" alt="Coloris 10" class="lightbox-trigger" style="border-radius:var(--radius-md);width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in;">
     </div>
   </div>
 
@@ -246,6 +245,10 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   </div>
 </section>
 
+<div class="footer-tagline-block">
+  <p class="footer-tagline-text">Fait par des <strong>lycéens</strong>, pour des lycéens.</p>
+  <p class="footer-tagline-sub">MDL Viollet-le-Duc · Villiers-Saint-Frédéric · depuis 2014</p>
+</div>
 <footer>
   <div class="footer-grid">
     <div>
@@ -286,7 +289,12 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">
+  <div style="padding:12px 64px;border-top:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.15);">
+  <a href="admin.html" style="font-size:11px;color:rgba(255,255,255,0.25);text-decoration:none;font-family:var(--syne,sans-serif);letter-spacing:.06em;">
+    🔐 Espace membres
+  </a>
+</div>
+<div class="footer-bottom">
     <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627</span>
     <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
   </div>
@@ -295,7 +303,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon" aria-hidden="true">🔍</span>
+      <span class="search-icon">🔍</span>
       <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>

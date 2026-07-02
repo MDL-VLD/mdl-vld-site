@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDL · Administration</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --mg: #930f7c; --mg2: #7a0d67;
+      --prune: #2d1a28; --lilas: #eddde9;
+      --gris: #6b7280; --gris-pale: #f9f8fa;
+      --rouge: #dc2626; --vert: #16a34a;
+      --or: #c9a84c; --syne: 'Syne', sans-serif;
+      --radius: 8px; --border: #e9e3ec;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: #f5f3f7; color: var(--prune); min-height: 100vh; font-size: 14px; }
+
+    /* LOGIN */
+    #pg-login { min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--prune); }
+    .login-box { background:white; border-radius:12px; padding:48px; width:100%; max-width:400px; box-shadow:0 20px 60px rgba(0,0,0,.3); }
+    .login-logo { font-family:var(--syne); font-size:20px; font-weight:800; color:var(--prune); margin-bottom:4px; }
+    .login-sub  { font-size:12px; color:var(--gris); margin-bottom:32px; }
+    .lbl { display:block; font-size:12px; font-weight:600; margin-bottom:5px; }
+    .inp { width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:6px; font-size:14px; font-family:inherit; outline:none; margin-bottom:14px; transition:border-color .2s; }
+    .inp:focus { border-color:var(--mg); }
+    .login-btn { width:100%; background:var(--mg); color:white; border:none; padding:12px; border-radius:6px; font-family:var(--syne); font-size:13px; font-weight:700; cursor:pointer; }
+    .login-btn:hover { background:var(--mg2); }
+    .login-err { font-size:12px; color:var(--rouge); margin-top:8px; min-height:16px; }
+
+    /* LAYOUT */
+    #pg-admin { display:none; min-height:100vh; }
+    .adm-header { background:var(--prune); height:58px; display:flex; align-items:center; justify-content:space-between; padding:0 28px; position:sticky; top:0; z-index:200; }
+    .adm-logo { font-family:var(--syne); font-size:15px; font-weight:800; color:white; display:flex; align-items:center; gap:10px; }
+    .adm-logo a { color:rgba(255,255,255,.4); font-weight:400; font-size:12px; text-decoration:none; }
+    .adm-logo a:hover { color:rgba(255,255,255,.7); }
+    .adm-right { display:flex; align-items:center; gap:10px; }
+    .adm-user { font-size:12px; color:rgba(255,255,255,.45); }
+    .adm-logout { font-family:var(--syne); font-size:11px; font-weight:700; background:rgba(255,255,255,.1); color:white; border:1px solid rgba(255,255,255,.2); padding:5px 12px; border-radius:4px; cursor:pointer; }
+    .adm-logout:hover { background:rgba(255,255,255,.18); }
+    .adm-body { display:flex; min-height:calc(100vh - 58px); }
+
+    /* SIDEBAR */
+    .adm-sidebar { width:210px; flex-shrink:0; background:white; border-right:1px solid var(--border); padding:16px 0; }
+    .sb-section { font-family:var(--syne); font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#bbb; padding:0 18px; margin:16px 0 5px; }
+    .sb-btn { display:flex; align-items:center; gap:9px; width:100%; padding:8px 18px; font-size:13px; font-weight:500; color:var(--gris); background:none; border:none; cursor:pointer; text-align:left; transition:background .15s,color .15s; }
+    .sb-btn:hover { background:var(--lilas); color:var(--prune); }
+    .sb-btn.on { background:var(--lilas); color:var(--mg); font-weight:600; }
+    .sb-icon { font-size:15px; width:20px; text-align:center; }
+    .sb-badge { margin-left:auto; background:var(--mg); color:white; border-radius:20px; padding:1px 7px; font-size:10px; font-weight:700; display:none; }
+
+    /* MAIN */
+    .adm-main { flex:1; padding:28px; overflow-y:auto; }
+    .view { display:none; } .view.on { display:block; }
+    .view-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
+    .view-title { font-family:var(--syne); font-size:22px; font-weight:800; color:var(--prune); }
+
+    /* BOUTONS */
+    .btn { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:6px; font-family:var(--syne); font-size:12px; font-weight:700; cursor:pointer; border:none; transition:all .15s; text-decoration:none; }
+    .btn-mg  { background:var(--mg); color:white; } .btn-mg:hover  { background:var(--mg2); transform:translateY(-1px); }
+    .btn-out { background:white; color:var(--prune); border:1px solid var(--border); } .btn-out:hover { border-color:var(--mg); color:var(--mg); }
+    .btn-vt  { background:var(--vert); color:white; } .btn-vt:hover  { background:#15803d; }
+    .btn-rd  { background:var(--rouge); color:white; } .btn-rd:hover  { background:#b91c1c; }
+    .btn-sm  { padding:5px 11px; font-size:11px; }
+
+    /* STATS */
+    .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px; }
+    .stat { background:white; border-radius:var(--radius); padding:18px; border:1px solid var(--border); }
+    .stat-n { font-family:var(--syne); font-size:28px; font-weight:800; color:var(--prune); }
+    .stat-l { font-size:11px; color:var(--gris); margin-top:2px; }
+
+    /* TABLE */
+    .tbl { background:white; border-radius:var(--radius); border:1px solid var(--border); overflow:hidden; }
+    .tbl-head { display:grid; padding:10px 18px; background:var(--gris-pale); font-size:10px; font-weight:700; color:var(--gris); letter-spacing:.06em; text-transform:uppercase; border-bottom:1px solid var(--border); }
+    .tbl-row  { display:grid; padding:12px 18px; border-bottom:1px solid #f3f0f5; align-items:center; transition:background .12s; }
+    .tbl-row:last-child { border-bottom:none; }
+    .tbl-row:hover { background:#faf8fc; }
+    .tbl-title { font-size:13px; font-weight:500; color:var(--prune); }
+    .tbl-meta  { font-size:12px; color:var(--gris); }
+    .tbl-acts  { display:flex; gap:6px; }
+    .tbl-empty { text-align:center; padding:40px; color:var(--gris); }
+    .cols-art  { grid-template-columns:1fr 130px 100px 90px 170px; }
+    .cols-evt  { grid-template-columns:1fr 160px 80px 120px; }
+    .cols-ann  { grid-template-columns:1fr 70px 100px; }
+    .cols-mbr  { grid-template-columns:1fr 180px 110px 90px; }
+
+    /* BADGES */
+    .badge { display:inline-flex; padding:3px 9px; border-radius:20px; font-size:10px; font-weight:700; }
+    .b-publie   { background:#dcfce7; color:#15803d; }
+    .b-soumis   { background:#fef9c3; color:#a16207; }
+    .b-brouillon{ background:#f3f4f6; color:#6b7280; }
+    .b-refuse   { background:#fee2e2; color:#dc2626; }
+    .b-admin    { background:rgba(147,15,124,.12); color:var(--mg); }
+    .b-moderateur { background:rgba(201,168,76,.15); color:#9a6f00; }
+    .b-editeur  { background:#f3f4f6; color:var(--gris); }
+
+    /* FORM */
+    .fg { margin-bottom:16px; }
+    .flbl { display:block; font-size:12px; font-weight:600; margin-bottom:5px; }
+    .finp,.fsel,.fta { width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:13px; font-family:inherit; outline:none; color:var(--prune); transition:border-color .2s; }
+    .finp:focus,.fsel:focus,.fta:focus { border-color:var(--mg); }
+    .fta { resize:vertical; }
+    .fhint { font-size:11px; color:var(--gris); margin-top:4px; }
+    .frow { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .fcb { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--gris); cursor:pointer; }
+    .fcb input { cursor:pointer; accent-color:var(--mg); }
+
+    /* ÉDITEUR */
+    .ed-layout { display:grid; grid-template-columns:1fr 270px; gap:20px; align-items:start; }
+    .ed-main { background:white; border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+    .ed-panel { background:white; border:1px solid var(--border); border-radius:var(--radius); padding:18px; }
+    .ed-panel + .ed-panel { margin-top:14px; }
+    .ed-panel-title { font-family:var(--syne); font-size:13px; font-weight:700; color:var(--prune); margin-bottom:12px; }
+    .ed-title { width:100%; padding:14px 18px; border:none; border-bottom:1px solid var(--border); font-family:var(--syne); font-size:20px; font-weight:800; color:var(--prune); outline:none; resize:none; }
+    .ed-title::placeholder { color:#d1c8ce; }
+
+    /* TOOLBAR */
+    .toolbar { display:flex; align-items:center; gap:2px; flex-wrap:wrap; padding:7px 10px; border-bottom:1px solid var(--border); background:var(--gris-pale); }
+    .tb { background:none; border:none; cursor:pointer; padding:5px 7px; border-radius:4px; font-size:13px; font-weight:600; color:var(--gris); transition:background .12s,color .12s; font-family:inherit; min-width:28px; text-align:center; line-height:1; }
+    .tb:hover { background:var(--lilas); color:var(--prune); }
+    .tb.on { background:var(--lilas); color:var(--mg); }
+    .tb-sep { width:1px; height:16px; background:var(--border); margin:0 3px; flex-shrink:0; }
+
+    /* ZONE ÉDITION */
+    .ed-zone { padding:18px; min-height:300px; }
+    #editor-content {
+      outline:none; min-height:260px;
+      font-size:15px; line-height:1.8; color:#374151;
+    }
+    #editor-content:empty::before { content:attr(data-placeholder); color:#c8bcc6; }
+    #editor-content h2 { font-family:var(--syne); font-size:20px; font-weight:700; color:var(--prune); margin:22px 0 8px; }
+    #editor-content h3 { font-family:var(--syne); font-size:16px; font-weight:700; color:var(--prune); margin:18px 0 6px; }
+    #editor-content p  { margin-bottom:10px; }
+    #editor-content ul,#editor-content ol { padding-left:22px; margin-bottom:10px; }
+    #editor-content li { margin-bottom:4px; }
+    #editor-content blockquote { border-left:3px solid var(--mg); padding:8px 14px; margin:14px 0; background:#faf8fc; color:var(--gris); font-style:italic; border-radius:0 4px 4px 0; }
+    #editor-content a { color:var(--mg); }
+    #editor-content img { max-width:100%; border-radius:6px; margin:10px 0; }
+    #editor-content strong { font-weight:700; }
+    #editor-content em { font-style:italic; }
+    #editor-content u  { text-decoration:underline; }
+    #editor-content s  { text-decoration:line-through; }
+
+    /* TAGS */
+    .tags-wrap { display:flex; flex-wrap:wrap; gap:5px; padding:6px 10px; border:1px solid var(--border); border-radius:6px; cursor:text; min-height:36px; align-items:center; }
+    .tags-wrap:focus-within { border-color:var(--mg); }
+    .tag-chip { background:var(--lilas); color:var(--mg); padding:2px 8px; border-radius:20px; font-size:11px; font-weight:600; display:flex; align-items:center; gap:3px; }
+    .tag-x { cursor:pointer; opacity:.6; font-size:13px; line-height:1; }
+    .tag-x:hover { opacity:1; }
+    .tag-inp { border:none; outline:none; font-size:13px; font-family:inherit; min-width:80px; flex:1; background:transparent; }
+
+    /* TOAST */
+    .toast { position:fixed; bottom:20px; right:20px; background:var(--prune); color:white; padding:11px 18px; border-radius:var(--radius); font-size:13px; font-weight:500; box-shadow:0 8px 24px rgba(0,0,0,.2); transform:translateY(60px); opacity:0; transition:all .25s; z-index:9999; }
+    .toast.show { transform:translateY(0); opacity:1; }
+    .toast.ok  { border-left:3px solid var(--vert); }
+    .toast.err { border-left:3px solid var(--rouge); }
+
+    /* MODAL */
+    .overlay { position:fixed; inset:0; background:rgba(0,0,0,.45); display:none; align-items:center; justify-content:center; z-index:500; }
+    .overlay.open { display:flex; }
+    .modal { background:white; border-radius:12px; padding:28px; max-width:420px; width:90%; }
+    .modal-title { font-family:var(--syne); font-size:17px; font-weight:700; color:var(--prune); margin-bottom:8px; }
+    .modal-sub { font-size:13px; color:var(--gris); margin-bottom:18px; }
+    .modal-acts { display:flex; gap:10px; justify-content:flex-end; margin-top:18px; }
+
+    /* SWITCH */
+    .sw { position:relative; display:inline-block; width:40px; height:22px; }
+    .sw input { opacity:0; width:0; height:0; }
+    .sw-slider { position:absolute; inset:0; background:#ddd; border-radius:22px; cursor:pointer; transition:.2s; }
+    .sw-slider::before { content:''; position:absolute; width:16px; height:16px; left:3px; bottom:3px; background:white; border-radius:50%; transition:.2s; }
+    .sw input:checked + .sw-slider { background:var(--mg); }
+    .sw input:checked + .sw-slider::before { transform:translateX(18px); }
+
+    @media (max-width:900px) {
+      .ed-layout { grid-template-columns:1fr; }
+      .stats { grid-template-columns:1fr 1fr; }
+      .adm-sidebar { display:none; }
+      .cols-art { grid-template-columns:1fr 90px 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="pg-login">
+  <div class="login-box">
+    <div class="login-logo">MDL Viollet-le-Duc</div>
+    <div class="login-sub">Interface d'administration · Connexion</div>
+    <label class="lbl" for="li-email">Adresse email</label>
+    <input class="inp" type="email" id="li-email" placeholder="prenom@mdl-vld.fr" autocomplete="email">
+    <label class="lbl" for="li-pwd">Mot de passe</label>
+    <input class="inp" type="password" id="li-pwd" placeholder="••••••••" autocomplete="current-password"
+      onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Se connecter</button>
+    <div class="login-err" id="li-err"></div>
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);text-align:center;">
+      <a href="index.html" style="font-size:12px;color:var(--gris);text-decoration:none;">← Retour au site</a>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="pg-admin">
+  <header class="adm-header">
+    <div class="adm-logo">
+      MDL Viollet-le-Duc
+      <a href="index.html">← Retour au site</a>
+    </div>
+    <div class="adm-right">
+      <span class="adm-user" id="adm-username"></span>
+      <button class="adm-logout" onclick="doLogout()">Déconnexion</button>
+    </div>
+  </header>
+
+  <div class="adm-body">
+    <aside class="adm-sidebar">
+      <div class="sb-section">Tableau de bord</div>
+      <button class="sb-btn on" id="sb-dash"    onclick="go('dash')"><span class="sb-icon">📊</span>Accueil</button>
+
+      <div class="sb-section">Articles</div>
+      <button class="sb-btn" id="sb-new-art"  onclick="go('new-art')"><span class="sb-icon">✏️</span>Nouvel article</button>
+      <button class="sb-btn" id="sb-mes-art"  onclick="go('mes-art')"><span class="sb-icon">📝</span>Mes articles</button>
+
+      <div id="sb-admin" style="display:none;">
+        <div class="sb-section">Modération</div>
+        <button class="sb-btn" id="sb-valid"   onclick="go('valid')">
+          <span class="sb-icon">✅</span>À valider
+          <span class="sb-badge" id="badge-n"></span>
+        </button>
+        <button class="sb-btn" id="sb-all-art" onclick="go('all-art')"><span class="sb-icon">📋</span>Tous les articles</button>
+
+        <div class="sb-section">Site</div>
+        <button class="sb-btn" id="sb-events"  onclick="go('events')"><span class="sb-icon">🎉</span>Événements à la une</button>
+        <button class="sb-btn" id="sb-annonces" onclick="go('annonces')"><span class="sb-icon">📢</span>Annonces ticker</button>
+
+        <div class="sb-section">Équipe</div>
+        <button class="sb-btn" id="sb-membres" onclick="go('membres')"><span class="sb-icon">👥</span>Membres</button>
+      </div>
+    </aside>
+
+    <main class="adm-main">
+
+      <!-- DASHBOARD -->
+      <div class="view on" id="v-dash">
+        <div class="view-header">
+          <div class="view-title">Tableau de bord</div>
+          <button class="btn btn-mg" onclick="go('new-art')">✏️ Nouvel article</button>
+        </div>
+        <div class="stats" id="stats-row"></div>
+        <div id="dash-soumis"></div>
+      </div>
+
+      <!-- MES ARTICLES -->
+      <div class="view" id="v-mes-art">
+        <div class="view-header">
+          <div class="view-title">Mes articles</div>
+          <button class="btn btn-mg" onclick="go('new-art')">✏️ Nouvel article</button>
+        </div>
+        <div class="tbl" id="tbl-mes-art"><div class="tbl-empty">Chargement…</div></div>
+      </div>
+
+      <!-- ÉDITEUR -->
+      <div class="view" id="v-new-art">
+        <div class="view-header">
+          <div class="view-title" id="ed-view-title">Nouvel article</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-out" onclick="saveArt('brouillon')">💾 Enregistrer brouillon</button>
+            <button class="btn btn-mg"  onclick="saveArt('soumis')">📨 Soumettre pour validation</button>
+          </div>
+        </div>
+        <input type="hidden" id="ed-id">
+        <div class="ed-layout">
+          <div class="ed-main">
+            <textarea class="ed-title" id="ed-title" placeholder="Titre de l'article…" rows="1"
+              oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+            <div class="toolbar">
+              <button class="tb" id="tb-b"  onclick="fmt('bold')"       title="Gras"><b>G</b></button>
+              <button class="tb" id="tb-i"  onclick="fmt('italic')"     title="Italique"><i>I</i></button>
+              <button class="tb" id="tb-u"  onclick="fmt('underline')"  title="Souligné"><u>S</u></button>
+              <button class="tb" id="tb-s"  onclick="fmt('strikeThrough')" title="Barré"><s>A</s></button>
+              <div class="tb-sep"></div>
+              <button class="tb" onclick="fmtBlock('h2')"  title="Titre 2">H2</button>
+              <button class="tb" onclick="fmtBlock('h3')"  title="Titre 3">H3</button>
+              <button class="tb" onclick="fmtBlock('p')"   title="Paragraphe">¶</button>
+              <div class="tb-sep"></div>
+              <button class="tb" onclick="fmt('insertUnorderedList')"  title="Liste à puces">• Liste</button>
+              <button class="tb" onclick="fmt('insertOrderedList')"    title="Liste numérotée">1. Liste</button>
+              <button class="tb" onclick="fmtBlock('blockquote')"      title="Citation">❝</button>
+              <div class="tb-sep"></div>
+              <button class="tb" onclick="insLink()"  title="Lien">🔗 Lien</button>
+              <button class="tb" onclick="insImg()"   title="Image">🖼️ Image</button>
+              <div class="tb-sep"></div>
+              <button class="tb" onclick="document.execCommand('undo')" title="Annuler">↩</button>
+              <button class="tb" onclick="document.execCommand('redo')" title="Refaire">↪</button>
+            </div>
+            <div class="ed-zone">
+              <div id="editor-content" contenteditable="true" data-placeholder="Écris ton article ici…"></div>
+            </div>
+          </div>
+          <div>
+            <div class="ed-panel">
+              <div class="ed-panel-title">Image de couverture</div>
+              <div class="fg">
+                <input class="finp" type="url" id="ed-cover" placeholder="https://…">
+                <div class="fhint">Héberge l'image sur <a href="https://imgbb.com" target="_blank" style="color:var(--mg);">ImgBB</a> (gratuit)</div>
+              </div>
+            </div>
+            <div class="ed-panel">
+              <div class="ed-panel-title">Résumé</div>
+              <textarea class="fta" id="ed-excerpt" rows="3" placeholder="Affiché dans la liste des articles…"></textarea>
+            </div>
+            <div class="ed-panel">
+              <div class="ed-panel-title">Tags</div>
+              <div class="tags-wrap" id="tags-wrap" onclick="document.getElementById('tag-inp').focus()"></div>
+              <input id="tag-inp" class="tag-inp" style="width:100%;margin-top:8px;border:none;border-bottom:1px solid var(--border);padding:4px 0;outline:none;font-size:13px;" placeholder="Ajouter un tag + Entrée" onkeydown="addTag(event)">
+              <div class="fhint">Appuie sur Entrée pour valider</div>
+            </div>
+            <div class="ed-panel">
+              <div class="ed-panel-title">Auteur</div>
+              <div class="fg">
+                <label class="flbl">Nom affiché sur l'article</label>
+                <input class="finp" type="text" id="ed-author" placeholder="Prénom Nom">
+              </div>
+              <label class="fcb">
+                <input type="checkbox" id="ed-show-author" checked>
+                Afficher mon nom publiquement
+              </label>
+            </div>
+            <div class="ed-panel" id="ed-refuse-block" style="display:none;">
+              <div class="ed-panel-title" style="color:var(--rouge);">⚠ Article refusé</div>
+              <div class="fhint" id="ed-refuse-reason" style="color:var(--rouge);font-size:12px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VALIDATION -->
+      <div class="view" id="v-valid">
+        <div class="view-header"><div class="view-title">Articles à valider</div></div>
+        <div class="tbl" id="tbl-valid"><div class="tbl-empty">Chargement…</div></div>
+      </div>
+
+      <!-- TOUS ARTICLES -->
+      <div class="view" id="v-all-art">
+        <div class="view-header"><div class="view-title">Tous les articles</div></div>
+        <div class="tbl" id="tbl-all-art"><div class="tbl-empty">Chargement…</div></div>
+      </div>
+
+      <!-- ÉVÉNEMENTS À LA UNE -->
+      <div class="view" id="v-events">
+        <div class="view-header">
+          <div class="view-title">Événements à la une</div>
+          <button class="btn btn-mg" onclick="openEvtModal()">+ Ajouter un événement</button>
+        </div>
+        <div class="fhint" style="margin-bottom:16px;">Ces événements s'affichent dans la section "Prochain événement" de la page d'accueil.</div>
+        <div class="tbl" id="tbl-events"><div class="tbl-empty">Chargement…</div></div>
+      </div>
+
+      <!-- ANNONCES TICKER -->
+      <div class="view" id="v-annonces">
+        <div class="view-header">
+          <div class="view-title">Annonces du bandeau défilant</div>
+          <button class="btn btn-mg" onclick="openAnnModal()">+ Ajouter une annonce</button>
+        </div>
+        <div class="fhint" style="margin-bottom:16px;">Ces textes défilent en haut de toutes les pages du site.</div>
+        <div class="tbl" id="tbl-ann"><div class="tbl-empty">Chargement…</div></div>
+      </div>
+
+      <!-- MEMBRES -->
+      <div class="view" id="v-membres">
+        <div class="view-header"><div class="view-title">Membres</div></div>
+        <div class="tbl" id="tbl-mbr"><div class="tbl-empty">Chargement…</div></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- MODAL REFUS -->
+<div class="overlay" id="ov-refus">
+  <div class="modal">
+    <div class="modal-title">Refuser l'article</div>
+    <div class="modal-sub">Le rédacteur sera informé de la raison pour améliorer son article.</div>
+    <label class="flbl">Raison du refus</label>
+    <textarea class="fta" id="refus-reason" rows="4" placeholder="Ex : Contenu insuffisant, ton inapproprié…"></textarea>
+    <input type="hidden" id="refus-id">
+    <div class="modal-acts">
+      <button class="btn btn-out" onclick="closeOv('ov-refus')">Annuler</button>
+      <button class="btn btn-rd" onclick="doRefus()">Refuser</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ÉVÉNEMENT -->
+<div class="overlay" id="ov-evt">
+  <div class="modal" style="max-width:560px;">
+    <div class="modal-title" id="evt-modal-title">Ajouter un événement</div>
+    <input type="hidden" id="evt-id">
+    <div class="frow">
+      <div class="fg"><label class="flbl">Titre *</label><input class="finp" id="evt-titre" placeholder="Bal des Terminales…"></div>
+      <div class="fg"><label class="flbl">Date</label><input class="finp" id="evt-date" placeholder="3 juillet 2026 · 19h"></div>
+    </div>
+    <div class="fg"><label class="flbl">Description</label><textarea class="fta" id="evt-desc" rows="3" placeholder="Description courte…"></textarea></div>
+    <div class="frow">
+      <div class="fg"><label class="flbl">Lieu</label><input class="finp" id="evt-lieu" placeholder="Salle polyvalente…"></div>
+      <div class="fg"><label class="flbl">URL affiche</label><input class="finp" id="evt-affiche" placeholder="https://…"></div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label class="flbl">Lien "Voir la page"</label><input class="finp" id="evt-lien" placeholder="evenement-bal.html"></div>
+      <div class="fg"><label class="flbl">Lien billetterie</label><input class="finp" id="evt-billet" placeholder="https://billetweb…"></div>
+    </div>
+    <div class="fg"><label class="flbl">Label bouton billetterie</label><input class="finp" id="evt-billet-label" placeholder="Réserver · 5€"></div>
+    <div class="fg" style="display:flex;align-items:center;gap:12px;">
+      <label class="sw"><input type="checkbox" id="evt-actif" checked><span class="sw-slider"></span></label>
+      <span style="font-size:13px;color:var(--gris);">Afficher sur l'accueil</span>
+    </div>
+    <div class="modal-acts">
+      <button class="btn btn-out" onclick="closeOv('ov-evt')">Annuler</button>
+      <button class="btn btn-mg" onclick="saveEvt()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ANNONCE -->
+<div class="overlay" id="ov-ann">
+  <div class="modal">
+    <div class="modal-title" id="ann-modal-title">Ajouter une annonce</div>
+    <input type="hidden" id="ann-id">
+    <div class="fg"><label class="flbl">Texte de l'annonce *</label><input class="finp" id="ann-texte" placeholder="🎉 Bal des Terminales · 3 juillet 2026"></div>
+    <div class="fg"><label class="flbl">Ordre d'affichage</label><input class="finp" type="number" id="ann-ordre" placeholder="0" value="0"></div>
+    <div class="fg" style="display:flex;align-items:center;gap:12px;">
+      <label class="sw"><input type="checkbox" id="ann-actif" checked><span class="sw-slider"></span></label>
+      <span style="font-size:13px;color:var(--gris);">Activer cette annonce</span>
+    </div>
+    <div class="modal-acts">
+      <button class="btn btn-out" onclick="closeOv('ov-ann')">Annuler</button>
+      <button class="btn btn-mg" onclick="saveAnn()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SB_URL = 'https://ksvqjbcnqphnyxfpjhvz.supabase.co';
+const SB_KEY = 'sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0';
+const sb = supabase.createClient(SB_URL, SB_KEY);
+
+let ME = null, PROFILE = null, TAGS = [];
+
+// ─── TOAST ───────────────────────────────────────────
+function toast(msg, type='ok') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = `toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ─── OVERLAY ─────────────────────────────────────────
+function openOv(id)  { document.getElementById(id).classList.add('open'); }
+function closeOv(id) { document.getElementById(id).classList.remove('open'); }
+
+// ─── AUTH ─────────────────────────────────────────────
+async function doLogin() {
+  const email = document.getElementById('li-email').value.trim();
+  const pwd   = document.getElementById('li-pwd').value;
+  const err   = document.getElementById('li-err');
+  err.textContent = '';
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pwd });
+  if (error) { err.textContent = 'Email ou mot de passe incorrect.'; return; }
+  await initAdmin(data.user);
+}
+async function doLogout() { await sb.auth.signOut(); location.reload(); }
+
+async function initAdmin(user) {
+  ME = user;
+  const { data: p } = await sb.from('profiles').select('*').eq('id', user.id).single();
+  PROFILE = p;
+  document.getElementById('pg-login').style.display = 'none';
+  document.getElementById('pg-admin').style.display  = 'block';
+  document.getElementById('adm-username').textContent = p?.full_name || user.email;
+  document.getElementById('ed-author').value = p?.full_name || '';
+  if (p?.role === 'admin' || p?.role === 'moderateur') {
+    document.getElementById('sb-admin').style.display = 'block';
+  }
+  loadDash();
+}
+
+// ─── NAVIGATION ───────────────────────────────────────
+function go(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('on'));
+  document.querySelectorAll('.sb-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById(`v-${name}`).classList.add('on');
+  const sb = document.getElementById(`sb-${name}`);
+  if (sb) sb.classList.add('on');
+  const loaders = {
+    'mes-art': loadMesArt,
+    'valid':   loadValid,
+    'all-art': loadAllArt,
+    'events':  loadEvents,
+    'annonces': loadAnn,
+    'membres': loadMembres,
+    'new-art': resetEditor,
+    'dash':    loadDash,
+  };
+  if (loaders[name]) loaders[name]();
+}
+
+// ─── DASHBOARD ────────────────────────────────────────
+async function loadDash() {
+  const [pub, sub, bro, mbr] = await Promise.all([
+    sb.from('articles').select('id',{count:'exact',head:true}).eq('status','publie'),
+    sb.from('articles').select('id',{count:'exact',head:true}).eq('status','soumis'),
+    sb.from('articles').select('id',{count:'exact',head:true}).eq('status','brouillon').eq('author_id',ME.id),
+    sb.from('profiles').select('id',{count:'exact',head:true}),
+  ]);
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat"><div class="stat-n">${pub.count??0}</div><div class="stat-l">Articles publiés</div></div>
+    <div class="stat"><div class="stat-n">${sub.count??0}</div><div class="stat-l">En attente de validation</div></div>
+    <div class="stat"><div class="stat-n">${bro.count??0}</div><div class="stat-l">Mes brouillons</div></div>
+    <div class="stat"><div class="stat-n">${mbr.count??0}</div><div class="stat-l">Membres</div></div>
+  `;
+  if ((sub.count||0) > 0) {
+    const badge = document.getElementById('badge-n');
+    badge.textContent = sub.count; badge.style.display = 'inline-block';
+  }
+  if (PROFILE?.role === 'admin' || PROFILE?.role === 'moderateur') {
+    const { data } = await sb.from('articles').select('*').eq('status','soumis').order('created_at',{ascending:false}).limit(5);
+    if (data?.length) {
+      document.getElementById('dash-soumis').innerHTML = `
+        <h3 style="font-family:var(--syne);font-size:15px;font-weight:700;color:var(--prune);margin-bottom:12px;">⏳ À valider en priorité</h3>
+        <div class="tbl">${renderArtTable(data,true)}</div>`;
+    }
+  }
+}
+
+// ─── TABLES ARTICLES ──────────────────────────────────
+function statusBadge(s) {
+  const lbl = {brouillon:'Brouillon',soumis:'Soumis',publie:'Publié',refuse:'Refusé'}[s]||s;
+  return `<span class="badge b-${s}">${lbl}</span>`;
+}
+function dateStr(iso) { return new Date(iso).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'2-digit'}); }
+
+function renderArtTable(rows, validation=false) {
+  if (!rows.length) return '<div class="tbl-empty">Aucun article.</div>';
+  const head = `<div class="tbl-head cols-art"><span>Titre</span><span>Auteur</span><span>Statut</span><span>Date</span><span>Actions</span></div>`;
+  const body = rows.map(a => {
+    let acts = `<button class="btn btn-out btn-sm" onclick="editArt('${a.id}')">Modifier</button>`;
+    if (validation) {
+      acts = `<button class="btn btn-vt btn-sm" onclick="publishArt('${a.id}')">✓ Publier</button>
+              <button class="btn btn-rd btn-sm" onclick="openRefus('${a.id}')">✗ Refuser</button>`;
+    } else if (PROFILE?.role==='admin') {
+      if (a.status!=='publie') acts += ` <button class="btn btn-vt btn-sm" onclick="publishArt('${a.id}')">Publier</button>`;
+      acts += ` <button class="btn btn-rd btn-sm" onclick="delArt('${a.id}')">Suppr.</button>`;
+    }
+    return `<div class="tbl-row cols-art">
+      <div class="tbl-title">${a.title}</div>
+      <div class="tbl-meta">${a.author_name||'·'}</div>
+      <div>${statusBadge(a.status)}</div>
+      <div class="tbl-meta">${dateStr(a.created_at)}</div>
+      <div class="tbl-acts">${acts}</div>
+    </div>`;
+  }).join('');
+  return head + body;
+}
+
+async function loadMesArt() {
+  const { data } = await sb.from('articles').select('*').eq('author_id',ME.id).order('updated_at',{ascending:false});
+  document.getElementById('tbl-mes-art').innerHTML = renderArtTable(data||[]);
+}
+async function loadValid() {
+  const { data } = await sb.from('articles').select('*').eq('status','soumis').order('created_at',{ascending:false});
+  document.getElementById('tbl-valid').innerHTML = renderArtTable(data||[], true);
+}
+async function loadAllArt() {
+  const { data } = await sb.from('articles').select('*').order('created_at',{ascending:false});
+  document.getElementById('tbl-all-art').innerHTML = renderArtTable(data||[]);
+}
+
+// ─── ACTIONS ARTICLES ─────────────────────────────────
+async function publishArt(id) {
+  await sb.from('articles').update({status:'publie',published_at:new Date().toISOString()}).eq('id',id);
+  toast('Article publié !'); loadDash(); loadValid();
+}
+async function delArt(id) {
+  if (!confirm('Supprimer cet article ?')) return;
+  await sb.from('articles').delete().eq('id',id);
+  toast('Article supprimé'); loadAllArt();
+}
+
+// ─── REFUS ────────────────────────────────────────────
+function openRefus(id) {
+  document.getElementById('refus-id').value = id;
+  document.getElementById('refus-reason').value = '';
+  openOv('ov-refus');
+}
+async function doRefus() {
+  const id = document.getElementById('refus-id').value;
+  const r  = document.getElementById('refus-reason').value.trim();
+  if (!r) { toast('Indique une raison','err'); return; }
+  await sb.from('articles').update({status:'refuse',refusal_reason:r}).eq('id',id);
+  closeOv('ov-refus'); toast('Article refusé');
+  loadValid(); loadDash();
+}
+
+// ─── ÉDITEUR (execCommand natif) ──────────────────────
+function fmt(cmd) {
+  document.getElementById('editor-content').focus();
+  document.execCommand(cmd, false, null);
+  updateToolbar();
+}
+function fmtBlock(tag) {
+  document.getElementById('editor-content').focus();
+  if (tag === 'blockquote') {
+    document.execCommand('formatBlock', false, 'blockquote');
+  } else {
+    document.execCommand('formatBlock', false, tag);
+  }
+}
+function insLink() {
+  const url = prompt('URL du lien :');
+  if (url) { document.getElementById('editor-content').focus(); document.execCommand('createLink', false, url); }
+}
+function insImg() {
+  const url = prompt('URL de l\'image :');
+  if (url) { document.getElementById('editor-content').focus(); document.execCommand('insertImage', false, url); }
+}
+function updateToolbar() {
+  ['bold','italic','underline','strikeThrough'].forEach(c => {
+    const map = {bold:'tb-b',italic:'tb-i',underline:'tb-u',strikeThrough:'tb-s'};
+    const el = document.getElementById(map[c]);
+    if (el) el.classList.toggle('on', document.queryCommandState(c));
+  });
+}
+document.addEventListener('selectionchange', updateToolbar);
+
+// ─── TAGS ─────────────────────────────────────────────
+function addTag(e) {
+  if (e.key !== 'Enter') return;
+  e.preventDefault();
+  const val = e.target.value.trim();
+  if (val && !TAGS.includes(val)) { TAGS.push(val); renderTags(); }
+  e.target.value = '';
+}
+function removeTag(t) { TAGS = TAGS.filter(x=>x!==t); renderTags(); }
+function renderTags() {
+  const w = document.getElementById('tags-wrap');
+  w.innerHTML = TAGS.map(t =>
+    `<span class="tag-chip">${t}<span class="tag-x" onclick="removeTag('${t}')">×</span></span>`
+  ).join('');
+}
+
+// ─── SAVE ARTICLE ─────────────────────────────────────
+async function saveArt(status) {
+  const title   = document.getElementById('ed-title').value.trim();
+  const content = document.getElementById('editor-content').innerHTML;
+  const id      = document.getElementById('ed-id').value;
+  if (!title) { toast('Ajoute un titre','err'); return; }
+  if (!content || content === '<br>') { toast('L\'article est vide','err'); return; }
+
+  const payload = {
+    title, content, status,
+    cover_url:    document.getElementById('ed-cover').value.trim() || null,
+    excerpt:      document.getElementById('ed-excerpt').value.trim() || null,
+    author_name:  document.getElementById('ed-author').value.trim() || null,
+    show_author:  document.getElementById('ed-show-author').checked,
+    tags: TAGS, author_id: ME.id,
+    updated_at: new Date().toISOString(),
+  };
+
+  let error;
+  if (id) {
+    ({ error } = await sb.from('articles').update(payload).eq('id', id));
+  } else {
+    const res = await sb.from('articles').insert(payload).select('id').single();
+    error = res.error;
+    if (res.data) document.getElementById('ed-id').value = res.data.id;
+  }
+  if (error) { toast('Erreur : ' + error.message, 'err'); return; }
+  toast(status==='soumis' ? 'Article soumis pour validation !' : 'Brouillon enregistré');
+}
+
+async function editArt(id) {
+  const { data } = await sb.from('articles').select('*').eq('id',id).single();
+  if (!data) { toast('Introuvable','err'); return; }
+  go('new-art');
+  document.getElementById('ed-view-title').textContent = 'Modifier l\'article';
+  document.getElementById('ed-id').value = id;
+  document.getElementById('ed-title').value = data.title;
+  document.getElementById('editor-content').innerHTML = data.content||'';
+  document.getElementById('ed-cover').value = data.cover_url||'';
+  document.getElementById('ed-excerpt').value = data.excerpt||'';
+  document.getElementById('ed-author').value = data.author_name||'';
+  document.getElementById('ed-show-author').checked = data.show_author;
+  TAGS = data.tags||[]; renderTags();
+  if (data.status === 'refuse' && data.refusal_reason) {
+    document.getElementById('ed-refuse-block').style.display = 'block';
+    document.getElementById('ed-refuse-reason').textContent = data.refusal_reason;
+  }
+}
+
+function resetEditor() {
+  document.getElementById('ed-view-title').textContent = 'Nouvel article';
+  document.getElementById('ed-id').value = '';
+  document.getElementById('ed-title').value = '';
+  document.getElementById('editor-content').innerHTML = '';
+  document.getElementById('ed-cover').value = '';
+  document.getElementById('ed-excerpt').value = '';
+  document.getElementById('ed-author').value = PROFILE?.full_name||'';
+  document.getElementById('ed-show-author').checked = true;
+  document.getElementById('ed-refuse-block').style.display = 'none';
+  TAGS = []; renderTags();
+}
+
+// ─── ÉVÉNEMENTS À LA UNE ──────────────────────────────
+async function loadEvents() {
+  const { data } = await sb.from('evenements_une').select('*').order('ordre');
+  const tbl = document.getElementById('tbl-events');
+  if (!data?.length) { tbl.innerHTML = '<div class="tbl-empty">Aucun événement.</div>'; return; }
+  const head = `<div class="tbl-head cols-evt"><span>Titre</span><span>Date / Lieu</span><span>Actif</span><span>Actions</span></div>`;
+  const rows = data.map(e => `
+    <div class="tbl-row cols-evt">
+      <div class="tbl-title">${e.titre}</div>
+      <div class="tbl-meta">${e.date_event||'·'}<br>${e.lieu||''}</div>
+      <div><label class="sw"><input type="checkbox" ${e.actif?'checked':''} onchange="toggleEvt('${e.id}',this.checked)"><span class="sw-slider"></span></label></div>
+      <div class="tbl-acts">
+        <button class="btn btn-out btn-sm" onclick="openEvtModal('${e.id}')">Modifier</button>
+        <button class="btn btn-rd btn-sm" onclick="delEvt('${e.id}')">Suppr.</button>
+      </div>
+    </div>`).join('');
+  tbl.innerHTML = head + rows;
+}
+
+function openEvtModal(id='') {
+  ['evt-titre','evt-date','evt-desc','evt-lieu','evt-affiche','evt-lien','evt-billet','evt-billet-label'].forEach(f => {
+    document.getElementById(f).value = '';
+  });
+  document.getElementById('evt-id').value = id;
+  document.getElementById('evt-actif').checked = true;
+  document.getElementById('evt-modal-title').textContent = id ? 'Modifier l\'événement' : 'Ajouter un événement';
+  if (id) {
+    sb.from('evenements_une').select('*').eq('id',id).single().then(({data:e}) => {
+      if (!e) return;
+      document.getElementById('evt-titre').value = e.titre||'';
+      document.getElementById('evt-date').value  = e.date_event||'';
+      document.getElementById('evt-desc').value  = e.description||'';
+      document.getElementById('evt-lieu').value  = e.lieu||'';
+      document.getElementById('evt-affiche').value = e.affiche_url||'';
+      document.getElementById('evt-lien').value  = e.lien_page||'';
+      document.getElementById('evt-billet').value = e.lien_billetterie||'';
+      document.getElementById('evt-billet-label').value = e.lien_billetterie_label||'Réserver';
+      document.getElementById('evt-actif').checked = e.actif;
+    });
+  }
+  openOv('ov-evt');
+}
+
+async function saveEvt() {
+  const titre = document.getElementById('evt-titre').value.trim();
+  if (!titre) { toast('Le titre est obligatoire','err'); return; }
+  const id = document.getElementById('evt-id').value;
+  const payload = {
+    titre, description: document.getElementById('evt-desc').value.trim()||null,
+    date_event: document.getElementById('evt-date').value.trim()||null,
+    lieu: document.getElementById('evt-lieu').value.trim()||null,
+    affiche_url: document.getElementById('evt-affiche').value.trim()||null,
+    lien_page: document.getElementById('evt-lien').value.trim()||null,
+    lien_billetterie: document.getElementById('evt-billet').value.trim()||null,
+    lien_billetterie_label: document.getElementById('evt-billet-label').value.trim()||'Réserver',
+    actif: document.getElementById('evt-actif').checked,
+    updated_at: new Date().toISOString(),
+  };
+  if (id) {
+    await sb.from('evenements_une').update(payload).eq('id',id);
+  } else {
+    await sb.from('evenements_une').insert(payload);
+  }
+  closeOv('ov-evt'); toast('Événement enregistré !'); loadEvents();
+}
+
+async function toggleEvt(id, actif) {
+  await sb.from('evenements_une').update({actif}).eq('id',id);
+  toast(actif ? 'Événement activé' : 'Événement désactivé');
+}
+async function delEvt(id) {
+  if (!confirm('Supprimer cet événement ?')) return;
+  await sb.from('evenements_une').delete().eq('id',id);
+  toast('Supprimé'); loadEvents();
+}
+
+// ─── ANNONCES ─────────────────────────────────────────
+async function loadAnn() {
+  const { data } = await sb.from('annonces').select('*').order('ordre');
+  const tbl = document.getElementById('tbl-ann');
+  if (!data?.length) { tbl.innerHTML = '<div class="tbl-empty">Aucune annonce.</div>'; return; }
+  const head = `<div class="tbl-head cols-ann"><span>Texte</span><span>Actif</span><span>Actions</span></div>`;
+  const rows = data.map(a => `
+    <div class="tbl-row cols-ann">
+      <div class="tbl-title">${a.texte}</div>
+      <div><label class="sw"><input type="checkbox" ${a.actif?'checked':''} onchange="toggleAnn('${a.id}',this.checked)"><span class="sw-slider"></span></label></div>
+      <div class="tbl-acts">
+        <button class="btn btn-out btn-sm" onclick="openAnnModal('${a.id}')">Modifier</button>
+        <button class="btn btn-rd btn-sm" onclick="delAnn('${a.id}')">Suppr.</button>
+      </div>
+    </div>`).join('');
+  tbl.innerHTML = head + rows;
+}
+
+function openAnnModal(id='') {
+  document.getElementById('ann-id').value = id;
+  document.getElementById('ann-texte').value = '';
+  document.getElementById('ann-ordre').value = '0';
+  document.getElementById('ann-actif').checked = true;
+  document.getElementById('ann-modal-title').textContent = id ? 'Modifier l\'annonce' : 'Ajouter une annonce';
+  if (id) {
+    sb.from('annonces').select('*').eq('id',id).single().then(({data:a}) => {
+      if (!a) return;
+      document.getElementById('ann-texte').value = a.texte||'';
+      document.getElementById('ann-ordre').value = a.ordre||0;
+      document.getElementById('ann-actif').checked = a.actif;
+    });
+  }
+  openOv('ov-ann');
+}
+
+async function saveAnn() {
+  const texte = document.getElementById('ann-texte').value.trim();
+  if (!texte) { toast('Le texte est obligatoire','err'); return; }
+  const id = document.getElementById('ann-id').value;
+  const payload = { texte, ordre: parseInt(document.getElementById('ann-ordre').value)||0, actif: document.getElementById('ann-actif').checked };
+  if (id) { await sb.from('annonces').update(payload).eq('id',id); }
+  else    { await sb.from('annonces').insert(payload); }
+  closeOv('ov-ann'); toast('Annonce enregistrée !'); loadAnn();
+}
+
+async function toggleAnn(id, actif) {
+  await sb.from('annonces').update({actif}).eq('id',id);
+}
+async function delAnn(id) {
+  if (!confirm('Supprimer cette annonce ?')) return;
+  await sb.from('annonces').delete().eq('id',id);
+  toast('Supprimée'); loadAnn();
+}
+
+// ─── MEMBRES ──────────────────────────────────────────
+async function loadMembres() {
+  const { data } = await sb.from('profiles').select('*').order('created_at',{ascending:false});
+  const tbl = document.getElementById('tbl-mbr');
+  if (!data?.length) { tbl.innerHTML = '<div class="tbl-empty">Aucun membre.</div>'; return; }
+  const head = `<div class="tbl-head cols-mbr"><span>Nom</span><span>Email</span><span>Rôle</span><span>Actions</span></div>`;
+  const rows = data.map(p => `
+    <div class="tbl-row cols-mbr">
+      <div class="tbl-title">${p.full_name||'·'}</div>
+      <div class="tbl-meta">${p.email}</div>
+      <div><span class="badge b-${p.role}">${p.role}</span></div>
+      <div>${PROFILE?.role==='admin' ? `
+        <select class="fsel" style="font-size:11px;padding:3px 8px;" onchange="changeRole('${p.id}',this.value)">
+          <option value="editeur"     ${p.role==='editeur'?'selected':''}>Éditeur</option>
+          <option value="moderateur" ${p.role==='moderateur'?'selected':''}>Modérateur</option>
+          <option value="admin"      ${p.role==='admin'?'selected':''}>Admin</option>
+        </select>` : ''}</div>
+    </div>`).join('');
+  tbl.innerHTML = head + rows;
+}
+
+async function changeRole(userId, role) {
+  await sb.from('profiles').update({role}).eq('id',userId);
+  toast('Rôle mis à jour');
+}
+
+// ─── INIT ─────────────────────────────────────────────
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (session?.user) await initAdmin(session.user);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDL Viollet-le-Duc · Actualités</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="description" content="Les actualités de la MDL du lycée Viollet-le-Duc.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    .actu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .article-card {
+      background: white;
+      border: 1px solid var(--lilas-pale);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .22s, box-shadow .22s;
+      text-decoration: none;
+      display: block;
+    }
+    .article-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+    .article-card-cover {
+      height: 180px;
+      background: var(--lilas-pale);
+      overflow: hidden;
+      position: relative;
+    }
+    .article-card-cover img { width:100%; height:100%; object-fit:cover; transition: transform .4s; }
+    .article-card:hover .article-card-cover img { transform: scale(1.04); }
+    .article-card-cover-placeholder {
+      width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, var(--lilas-pale), var(--rose-pale));
+      font-size: 48px;
+    }
+    .article-card-body { padding: 20px; }
+    .article-card-tags {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .article-tag {
+      font-family: var(--syne);
+      font-size: 9px; font-weight: 700;
+      letter-spacing: .10em; text-transform: uppercase;
+      background: var(--lilas-pale);
+      color: var(--magenta);
+      padding: 3px 8px; border-radius: 3px;
+    }
+    .article-card-title {
+      font-family: var(--syne);
+      font-size: 16px; font-weight: 700;
+      color: var(--prune); line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .article-card-excerpt {
+      font-size: 13px; color: var(--gris-texte);
+      line-height: 1.65; margin-bottom: 14px;
+    }
+    .article-card-meta {
+      font-size: 11px; color: var(--gris-texte);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .article-card-meta-link {
+      font-family: var(--syne); font-size: 11px; font-weight: 700;
+      color: var(--magenta); text-transform: uppercase; letter-spacing: .06em;
+    }
+
+    /* Article full */
+    .article-full { max-width: 720px; margin: 0 auto; }
+    .article-full-cover {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      height: 360px;
+      margin-bottom: 32px;
+    }
+    .article-full-cover img { width:100%; height:100%; object-fit:cover; }
+    .article-full-title {
+      font-family: var(--syne);
+      font-size: clamp(28px,4vw,44px); font-weight: 800;
+      color: var(--prune); line-height: 1.1;
+      letter-spacing: -.02em; margin-bottom: 16px;
+    }
+    .article-full-meta {
+      font-size: 13px; color: var(--gris-texte);
+      margin-bottom: 32px; padding-bottom: 24px;
+      border-bottom: 1px solid var(--lilas-pale);
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .article-full-content {
+      font-size: 16px; line-height: 1.8;
+      color: #3a2a36;
+    }
+    .article-full-content h2 { font-family: var(--syne); font-size: 22px; font-weight: 700; color: var(--prune); margin: 32px 0 12px; }
+    .article-full-content h3 { font-family: var(--syne); font-size: 18px; font-weight: 700; color: var(--prune); margin: 24px 0 10px; }
+    .article-full-content p { margin-bottom: 16px; }
+    .article-full-content strong { color: var(--prune); font-weight: 600; }
+    .article-full-content a { color: var(--magenta); }
+    .article-full-content img { max-width: 100%; border-radius: var(--radius-md); margin: 20px 0; }
+    .article-full-content blockquote {
+      border-left: 3px solid var(--magenta);
+      margin: 24px 0; padding: 12px 20px;
+      background: var(--lilas-pale);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic; color: var(--gris-texte);
+    }
+
+    /* États */
+    .actu-loading, .actu-empty { text-align: center; padding: 80px 20px; color: var(--gris-texte); }
+    .actu-loading-spinner {
+      width: 40px; height: 40px;
+      border: 3px solid var(--lilas-pale);
+      border-top-color: var(--magenta);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #view-list { display: block; }
+    #view-article { display: none; }
+
+    @media (max-width: 900px) { .actu-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .actu-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL"></div>
+    <div>
+      <div class="nav-logo-text">MDL Viollet-le-Duc</div>
+      <span class="nav-logo-sub">Maison des Lycéens</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li class="nav-dropdown">
+      <a href="evenements.html">Activités</a>
+      <div class="nav-dropdown-menu">
+        <a href="evenements.html">Événements</a>
+        <a href="projets.html">Projets</a>
+        <a href="clubs.html">Clubs</a>
+        <a href="merch.html">Merch</a>
+      </div>
+    </li>
+    <li><a href="actu.html" class="active">Actualités</a></li>
+    <li><a href="planning.html">Planning</a></li>
+    <li class="nav-dropdown">
+      <a href="mdl.html">La MDL</a>
+      <div class="nav-dropdown-menu">
+        <a href="mdl.html">La MDL</a>
+        <a href="equipe.html">Équipe</a>
+        <a href="partenaires.html">Partenaires</a>
+        <div class="nav-dropdown-menu-sep"></div>
+        <a href="documents.html">Documents</a>
+        <a href="credits.html">Crédits</a>
+      </div>
+    </li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="adhesion.html" class="nav-cta">Adhérer</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-search-btn" id="searchOpenBtn" aria-label="Rechercher">🔍 Rechercher</button>
+    <button class="dark-toggle" id="darkToggle" aria-label="Mode sombre">🌙</button>
+    <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mobile-menu">
+  <a href="index.html">Accueil</a>
+  <a href="evenements.html">Événements</a>
+  <a href="actu.html">Actualités</a>
+  <a href="planning.html">Planning</a>
+  <a href="mdl.html">La MDL</a>
+  <a href="contact.html">Contact</a>
+  <a href="adhesion.html" class="nav-cta">Adhérer</a>
+</div>
+<script>
+function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
+document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
+</script>
+<span id="main-content" tabindex="-1"></span>
+
+<!-- HERO -->
+<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-1.jpg'); --hero-pos: center 40%;">
+  <div class="page-hero-inner">
+    <div class="da-hero-eyebrow">Blog · Actualités</div>
+    <h1 class="da-hero-title">La vie de la MDL</h1>
+    <p class="da-hero-sub">Articles, comptes-rendus et actualités rédigés par les membres de la MDL et des clubs du lycée.</p>
+  </div>
+</div>
+
+<!-- VUE LISTE -->
+<div id="view-list">
+  <section class="section">
+    <div id="actu-loading" class="actu-loading">
+      <div class="actu-loading-spinner"></div>
+      <p>Chargement des articles…</p>
+    </div>
+    <div id="actu-empty" class="actu-empty" style="display:none;">
+      <p style="font-size:48px;margin-bottom:12px;">✍️</p>
+      <p style="font-family:var(--syne);font-size:18px;font-weight:700;color:var(--prune);margin-bottom:8px;">Aucun article pour l'instant</p>
+      <p>Les premiers articles arrivent bientôt. Reviens dans quelques jours !</p>
+    </div>
+    <div id="actu-grid" class="actu-grid" style="display:none;"></div>
+  </section>
+</div>
+
+<!-- VUE ARTICLE -->
+<div id="view-article" style="display:none;">
+  <section class="section">
+    <button onclick="showList()" style="font-family:var(--syne);font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--magenta);background:none;border:none;cursor:pointer;margin-bottom:32px;display:flex;align-items:center;gap:6px;">← Retour aux actualités</button>
+    <div class="article-full" id="article-full-content"></div>
+  </section>
+</div>
+
+<div class="footer-tagline-block">
+  <p class="footer-tagline-text">Fait par des <strong>lycéens</strong>, pour des lycéens.</p>
+  <p class="footer-tagline-sub">MDL Viollet-le-Duc · Villiers-Saint-Frédéric · depuis 2014</p>
+</div>
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-row">
+        <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
+        <div class="footer-logo-name">MDL Viollet-le-Duc</div>
+      </div>
+      <p class="footer-desc">Association loi 1901 · gérée par et pour les lycéens du lycée Viollet-le-Duc.</p>
+    </div>
+    <div class="footer-col"><div class="footer-col-title">Activités</div><ul>
+      <li><a href="evenements.html">Événements</a></li>
+      <li><a href="projets.html">Projets</a></li>
+      <li><a href="clubs.html">Clubs</a></li>
+      <li><a href="merch.html">Merch</a></li>
+    </ul></div>
+    <div class="footer-col"><div class="footer-col-title">La MDL</div><ul>
+      <li><a href="mdl.html">La MDL</a></li>
+      <li><a href="equipe.html">Équipe</a></li>
+      <li><a href="adhesion.html">Adhérer</a></li>
+      <li><a href="partenaires.html">Partenaires</a></li>
+    </ul></div>
+    <div class="footer-col"><div class="footer-col-title">Infos</div><ul>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="credits.html">Crédits</a></li>
+      <li><a href="mentions-legales.html">Mentions légales</a></li>
+    </ul></div>
+  </div>
+  <div style="padding:12px 64px;border-top:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.15);">
+  <a href="admin.html" style="font-size:11px;color:rgba(255,255,255,0.25);text-decoration:none;font-family:var(--syne,sans-serif);letter-spacing:.06em;">
+    🔐 Espace membres
+  </a>
+</div>
+<div class="footer-bottom">
+    <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627</span>
+    <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" role="alertdialog">
+  <p class="cookie-banner-text">Ce site utilise uniquement des cookies techniques nécessaires. <a href="confidentialite.html">En savoir plus</a></p>
+  <div class="cookie-banner-actions">
+    <button class="cookie-btn cookie-btn-refuse" id="cookieRefuse">Refuser</button>
+    <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Accepter</button>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://ksvqjbcnqphnyxfpjhvz.supabase.co';
+const SUPABASE_ANON = 'sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+document.querySelectorAll('.year-auto').forEach(e => e.textContent = new Date().getFullYear());
+
+function formatDate(iso) {
+  return new Date(iso).toLocaleDateString('fr-FR', {day:'numeric',month:'long',year:'numeric'});
+}
+
+function showList() {
+  document.getElementById('view-list').style.display = 'block';
+  document.getElementById('view-article').style.display = 'none';
+  window.scrollTo(0,0);
+}
+
+function showArticle(article) {
+  document.getElementById('view-list').style.display = 'none';
+  document.getElementById('view-article').style.display = 'block';
+  const tags = (article.tags||[]).map(t=>`<span class="article-tag">${t}</span>`).join('');
+  const cover = article.cover_url
+    ? `<div class="article-full-cover"><img src="${article.cover_url}" alt="${article.title}"></div>`
+    : '';
+  const author = article.show_author && article.author_name
+    ? `<span>✍️ ${article.author_name}</span>` : '';
+  document.getElementById('article-full-content').innerHTML = `
+    ${cover}
+    <div class="article-card-tags" style="margin-bottom:16px;">${tags}</div>
+    <h1 class="article-full-title">${article.title}</h1>
+    <div class="article-full-meta">
+      <span>📅 ${formatDate(article.published_at || article.created_at)}</span>
+      ${author}
+    </div>
+    <div class="article-full-content">${article.content}</div>
+  `;
+  window.scrollTo(0,0);
+}
+
+async function loadArticles() {
+  try {
+    const { data, error } = await sb
+      .from('articles')
+      .select('*')
+      .eq('status', 'publie')
+      .order('published_at', { ascending: false });
+
+    document.getElementById('actu-loading').style.display = 'none';
+
+    if (error) throw error;
+    if (!data || data.length === 0) {
+      document.getElementById('actu-empty').style.display = 'block';
+      return;
+    }
+
+    const grid = document.getElementById('actu-grid');
+    grid.style.display = 'grid';
+    grid.innerHTML = data.map(a => {
+      const tags = (a.tags||[]).map(t=>`<span class="article-tag">${t}</span>`).join('');
+      const cover = a.cover_url
+        ? `<img src="${a.cover_url}" alt="${a.title}">`
+        : `<div class="article-card-cover-placeholder">📰</div>`;
+      const excerpt = a.excerpt || a.content.replace(/<[^>]+>/g,'').substring(0,120) + '…';
+      return `
+        <div class="article-card" onclick='showArticle(${JSON.stringify(a).replace(/'/g,"&#39;")})'>
+          <div class="article-card-cover">${cover}</div>
+          <div class="article-card-body">
+            <div class="article-card-tags">${tags}</div>
+            <div class="article-card-title">${a.title}</div>
+            <div class="article-card-excerpt">${excerpt}</div>
+            <div class="article-card-meta">
+              <span>${formatDate(a.published_at || a.created_at)}</span>
+              <span class="article-card-meta-link">Lire →</span>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  } catch(e) {
+    document.getElementById('actu-loading').innerHTML = '<p style="color:var(--gris-texte);">Impossible de charger les articles.</p>';
+  }
+}
+
+loadArticles();
+</script>
+<script src="mdl-core.js" defer></script>
+</body>
+</html>

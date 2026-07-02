@@ -3,60 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-  <title>Accueil · MDL Viollet-le-Duc</title>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "MDL Viollet-le-Duc",
-    "alternateName": "Maison des Lycéens du lycée Viollet-le-Duc",
-    "url": "https://mdl-vld.fr/",
-    "logo": "https://mdl-vld.fr/assets/logo.png",
-    "description": "La Maison des Lycéens du lycée Viollet-le-Duc — événements, projets et vie lycéenne à Villiers-Saint-Frédéric.",
-    "location": {
-      "@type": "Place",
-      "name": "Lycée Viollet-le-Duc",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Villiers-Saint-Frédéric",
-        "postalCode": "78640",
-        "addressCountry": "FR"
-      }
-    }
-  }
-  </script>
+  <title>MDL Viollet-le-Duc · Maison des Lycéens</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
+  <meta name="author" content="Ewan Foucaud · MDL Viollet-le-Duc">
   <meta name="robots" content="index, follow">
-  <meta name="description" content="La Maison des Lycéens du Lycée Viollet-le-Duc à Villiers-Saint-Frédéric. Événements, projets et vie lycéenne.">
+  <meta name="description" content="La Maison des Lycéens du Lycée Viollet-le-Duc · Villiers-Saint-Frédéric.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap">
   <link rel="stylesheet" href="style.css">
+
+<style>
+/* Nav couleurs sombres uniquement · aucun layout modifié */
+nav { background: #f0cce8 !important; border-bottom: 1px solid #d9a0cc !important; }
+/* trait retiré */
+.nav-logo-text { color:var(--prune) !important; }
+.nav-logo-sub { color:var(--gris-texte) !important; }
+.nav-links a { color:var(--gris-texte) !important; }
+    .nav-links a.nav-cta { color:white !important; }
+.nav-links a:hover { color:var(--magenta) !important; background:var(--rose-pale) !important; }
+.nav-links a.active { color:var(--magenta) !important; font-weight:500 !important; }
+.nav-dropdown-menu { background:#3a1830 !important; border-color:rgba(255,255,255,0.10) !important; }
+.nav-dropdown-menu a { color:rgba(255,255,255,0.72) !important; }
+.nav-dropdown-menu a:hover { color:white !important; background:rgba(255,255,255,0.08) !important; }
+.nav-dropdown-menu-sep { background:rgba(255,255,255,0.08) !important; }
+.nav-cta { background:var(--magenta) !important; color:white !important; font-weight:600 !important; opacity:1 !important; }
+.nav-cta:hover { background:var(--magenta-hover) !important; }
+.nav-search-btn { background:rgba(255,255,255,0.6) !important; border:1px solid #c490bc !important; color:var(--prune) !important; border-radius:6px !important; min-width:auto !important; width:auto !important; }
+.nav-search-btn:hover { background:rgba(255,255,255,0.9) !important; color:var(--magenta) !important; border-color:var(--magenta) !important; }
+.dark-toggle { background:rgba(255,255,255,0.6) !important; border-color:#c490bc !important; }
+.dark-toggle:hover { background:rgba(255,255,255,0.9) !important; }
+.nav-burger span { background:white !important; }
+
+.ticker-wrap { background: #3d1835 !important; border-top: 1px solid rgba(255,255,255,0.08) !important; }
+.ticker-item { color: rgba(255,255,255,0.80) !important; }
+.ticker-sep { color: rgba(255,255,255,0.40) !important; }
+
+/* Skip-link invisible */
+.skip-link { position:absolute; top:-100px; left:16px; z-index:9999; background:var(--magenta); color:white; padding:10px 18px; border-radius:4px; font-size:13px; text-decoration:none; transition:top .2s; }
+.skip-link:focus { top:80px; }
+
+/* Footer tagline */
+.footer-tagline-block { background:#f5f0f4; padding:40px 64px; text-align:center; border-top:3px solid var(--magenta); }
+.footer-tagline-text { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(22px,3vw,34px); color:var(--prune); margin:0; }
+.footer-tagline-text strong { font-style:normal; color:var(--magenta); }
+.footer-tagline-sub { font-size:11px; color:var(--gris-texte); margin-top:10px; letter-spacing:.08em; text-transform:uppercase; }
+footer { background:#2d1a28 !important; border-top:none !important; }
+.footer-logo-name { color:white !important; }
+.footer-desc { color:rgba(255,255,255,0.40) !important; }
+.footer-col-title { color:rgba(255,255,255,0.40) !important; }
+.footer-col ul a { color:rgba(255,255,255,0.55) !important; }
+.footer-col ul a:hover { color:white !important; }
+.footer-bottom { background:rgba(0,0,0,0.2); border-top-color:rgba(255,255,255,0.06) !important; }
+.footer-bottom span, .footer-bottom a { color:rgba(255,255,255,0.35) !important; }
+.footer-bottom a:hover { color:rgba(255,255,255,0.65) !important; }
+@media (max-width:768px) { .footer-tagline-block { padding:28px 24px; } }
+</style>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#930f7c">
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script>
   <style>
-    /* HERO */
+    :root { --syne: 'Syne', sans-serif; }
+
+    /* ---- HERO SLIDER (base identique à l'original) ---- */
     .hero {
-      min-height: calc(100vh - 60px);
+      min-height: calc(100vh - 64px);
       display: flex;
       flex-direction: column;
       position: relative;
       overflow: hidden;
     }
-    .hero-slider {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
+    .hero-slider { position: absolute; inset: 0; z-index: 0; }
     .hero-slide {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background-size: cover;
       background-position: center;
       opacity: 0;
-      transition: opacity 1s ease;
+      transition: opacity 1.2s ease;
     }
     .hero-slide.active { opacity: 1; }
     .hero-slide-1 { background: url('assets/lycee-entree.jpg') center 35% / cover no-repeat; }
@@ -65,181 +91,500 @@
     .hero-slide-4 { background: url('assets/photo-course-lycees.jpg') center 30% / cover no-repeat; }
     .hero-slide-5 { background: url('assets/lycee-5.jpg') center center / cover no-repeat; }
     .hero-slide-6 { background: url('assets/lycee-1.jpg') center 40% / cover no-repeat; }
+
+    /* Voile plus dense à gauche pour lire le texte, s'estompe vers la droite */
     .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(45,26,40,0.55) 0%, rgba(45,26,40,0.3) 50%, rgba(45,26,40,0.7) 100%);
-      z-index: 1;
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(
+        110deg,
+        rgba(45,26,40,0.82) 0%,
+        rgba(45,26,40,0.65) 45%,
+        rgba(45,26,40,0.20) 100%
+      );
     }
+
+    /* ---- CONTENU HERO ---- */
     .hero-content {
-      position: relative;
-      z-index: 2;
+      position: relative; z-index: 2;
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 80px 64px 48px;
-      max-width: 720px;
+      padding: 72px 64px 40px;
+      max-width: 680px;
     }
-    .hero-eyebrow {
+
+    .hero-label {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-      color: white;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-      width: fit-content;
-    }
-    .hero-eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--or); }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 62px;
+      gap: 10px;
+      font-family: var(--syne);
+      font-size: 10px;
       font-weight: 700;
-      line-height: 1.08;
-      color: white;
-      margin-bottom: 20px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 22px;
     }
-    .hero h1 em { font-style: italic; color: var(--or); }
+    .hero-label-line {
+      width: 24px; height: 1px;
+      background: var(--or);
+      display: block;
+    }
+
+    .hero h1 {
+      font-family: var(--syne);
+      font-size: clamp(38px, 4.5vw, 58px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: white;
+      margin-bottom: 18px;
+    }
+    /* Le mot en italique Playfair - comme avant mais en Syne pour le reste */
+    .hero h1 .italic-accent {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--lilas);
+      font-size: 0.92em;
+    }
+
     .hero-sub {
-      font-size: 16px;
-      color: rgba(255,255,255,0.75);
+      font-size: 15px;
+      color: rgba(255,255,255,0.70);
       font-weight: 300;
-      line-height: 1.75;
-      max-width: 520px;
+      line-height: 1.8;
+      max-width: 480px;
       margin-bottom: 36px;
     }
+
     .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-    /* Événement épinglé (si présent) */
+    .btn-hero-main {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--magenta);
+      color: white;
+      padding: 13px 26px;
+      border-radius: 4px;
+      font-family: var(--syne);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-hero-main:hover { background: var(--magenta-hover); transform: translateY(-2px); }
+
+    .btn-hero-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.10);
+      color: white;
+      padding: 13px 26px;
+      border-radius: 4px;
+      font-family: var(--syne);
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(8px);
+      transition: background .2s, border-color .2s;
+    }
+    .btn-hero-ghost:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.5); }
+
+    /* Dots slider */
+    .hero-dots {
+      display: flex; gap: 8px;
+      margin-top: 32px;
+    }
+    .hero-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.30);
+      border: none; cursor: pointer; padding: 0;
+      transition: background .2s, transform .2s;
+    }
+    .hero-dot.active { background: white; transform: scale(1.3); }
+
+    /* Bandeau événement épinglé en bas du hero */
     .hero-pinned {
-      position: relative;
-      z-index: 2;
-      margin: 0 64px 64px;
-      background: rgba(255,255,255,0.1);
-      -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: var(--radius-lg);
-      padding: 20px 28px;
+      position: relative; z-index: 2;
+      margin: 0 64px 56px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 8px;
+      padding: 18px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
     }
-    .hero-pinned-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--or); margin-bottom: 4px; }
-    .hero-pinned-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: white; }
-    .hero-pinned-meta { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 3px; }
-    .hero-pinned-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
-    .hero-pinned-price { font-size: 24px; font-weight: 700; color: white; }
-    .hero-pinned-price span { font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.6); }
-
-    /* Slider dots */
-    .hero-dots {
-      display: flex;
-      gap: 8px;
-      margin-top: 28px;
+    .hero-pinned-tag {
+      font-family: var(--syne);
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--or); margin-bottom: 5px;
     }
-    .hero-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.35);
-      border: none; cursor: pointer; padding: 0;
-      transition: background 0.2s, transform 0.2s;
+    .hero-pinned-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 700; color: white;
     }
-    .hero-dot.active { background: white; transform: scale(1.3); }
+    .hero-pinned-meta { font-size: 12px; color: rgba(255,255,255,.55); margin-top: 3px; }
+    .hero-pinned-right { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+    .hero-pinned-price { font-size: 22px; font-weight: 700; color: white; font-family: var(--syne); }
+    .hero-pinned-price small { font-size: 11px; font-weight: 400; color: rgba(255,255,255,.5); }
 
-    /* QUI SOMMES-NOUS - split */
+    /* ---- TICKER ---- */
+    .ticker-wrap { background: var(--prune); border-top: 1px solid rgba(255,255,255,.06); }
+    .ticker-item { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: rgba(255,255,255,.75); }
+    .ticker-sep { color: var(--magenta); }
+
+    /* ---- BANDE STATS ---- */
+    .stats-band {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      background: var(--magenta);
+      position: relative;
+      overflow: hidden;
+    }
+    .stats-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        -55deg, transparent, transparent 18px,
+        rgba(255,255,255,0.025) 18px, rgba(255,255,255,0.025) 19px
+      );
+      pointer-events: none;
+    }
+    .stat-cell {
+      padding: 32px 28px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,.12);
+      position: relative; z-index: 1;
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--syne);
+      font-size: 44px; font-weight: 800;
+      color: white; line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+      margin-top: 5px; display: block;
+    }
+
+    /* ---- SECTION PROCHAIN ÉVÉNEMENT ---- */
+    .next-event-section {
+      padding: 72px 64px;
+      background: var(--blanc);
+    }
+    .section-eyebrow-v2 {
+      font-family: var(--syne);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--magenta);
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 10px;
+    }
+    .section-eyebrow-v2::before {
+      content: ''; display: block;
+      width: 18px; height: 2px;
+      background: var(--magenta); border-radius: 1px;
+    }
+    .section-h2 {
+      font-family: var(--syne);
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 800; letter-spacing: -.02em;
+      color: var(--prune); line-height: 1.1;
+      margin-bottom: 36px;
+    }
+    .section-h2 em {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-weight: 400;
+      color: var(--gris-texte); font-size: .88em;
+    }
+
+    .event-feature-card {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      background: var(--prune);
+      border-radius: 10px;
+      overflow: hidden;
+      min-height: 360px;
+      box-shadow: var(--shadow-card);
+    }
+    .event-feature-img {
+      overflow: hidden;
+      position: relative;
+    }
+    .event-feature-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
+      transition: transform .6s ease;
+    }
+    .event-feature-card:hover .event-feature-img img { transform: scale(1.04); }
+    .event-feature-body {
+      padding: 40px 36px;
+      display: flex; flex-direction: column;
+      justify-content: center; gap: 0;
+    }
+    .event-chip-v2 {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.08);
+      color: var(--or);
+      font-family: var(--syne);
+      font-size: 9px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 3px;
+      margin-bottom: 16px; width: fit-content;
+    }
+    .event-feature-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; font-weight: 700;
+      color: white; line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .event-feature-meta {
+      font-size: 13px;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 4px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .event-feature-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,.60);
+      line-height: 1.7;
+      margin: 16px 0 24px;
+    }
+    .event-feature-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* ---- BENTO ACTIVITÉS ---- */
+    .bento-section {
+      padding: 72px 64px;
+      background: var(--rose-pale);
+    }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 40px;
+    }
+    .bento-card {
+      display: block; text-decoration: none;
+      border-radius: 8px; overflow: hidden;
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .bento-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+    .bento-a { grid-column: span 5; }
+    .bento-b { grid-column: span 4; }
+    .bento-c { grid-column: span 3; }
+    .bento-d { grid-column: span 7; }
+    .bento-e { grid-column: span 5; }
+
+    .bento-inner {
+      min-height: 220px; height: 100%;
+      padding: 24px;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+    }
+    .bento-tag {
+      font-family: var(--syne);
+      font-size: 9px; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .bento-name {
+      font-family: var(--syne);
+      font-size: 17px; font-weight: 700;
+      line-height: 1.2; margin-bottom: 5px;
+    }
+    .bento-hint { font-size: 12px; line-height: 1.55; }
+    .bento-arrow {
+      position: absolute; top: 20px; right: 20px;
+      font-size: 16px;
+      transition: transform .2s;
+    }
+    .bento-card:hover .bento-arrow { transform: translate(3px,-3px); }
+
+    /* Variantes couleur */
+    .bento-dark { background: var(--prune); }
+    .bento-dark .bento-tag { color: var(--or); }
+    .bento-dark .bento-name { color: white; }
+    .bento-dark .bento-hint { color: rgba(255,255,255,.5); }
+    .bento-dark .bento-arrow { color: rgba(255,255,255,.4); }
+
+    .bento-magenta { background: var(--magenta); }
+    .bento-magenta .bento-tag { color: rgba(255,255,255,.6); }
+    .bento-magenta .bento-name { color: white; }
+    .bento-magenta .bento-hint { color: rgba(255,255,255,.65); }
+    .bento-magenta .bento-arrow { color: rgba(255,255,255,.5); }
+
+    .bento-or { background: var(--or-pale); border: 1px solid var(--or); }
+    .bento-or .bento-tag { color: var(--or-texte, #7a5e20); }
+    .bento-or .bento-name { color: var(--prune); }
+    .bento-or .bento-hint { color: var(--gris-texte); }
+    .bento-or .bento-arrow { color: var(--or-texte, #7a5e20); }
+
+    .bento-white { background: white; border: 1px solid var(--lilas-pale); }
+    .bento-white .bento-tag { color: var(--magenta); }
+    .bento-white .bento-name { color: var(--prune); }
+    .bento-white .bento-hint { color: var(--gris-texte); }
+    .bento-white .bento-arrow { color: var(--lilas); }
+
+    /* ---- ABOUT SPLIT (conservé de l'original) ---- */
     .about-split {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0;
     }
     .about-left {
-      padding: 60px 56px 60px 48px;
+      padding: 60px 56px 60px 64px;
       background: white;
     }
     .about-right {
-      padding: 60px 48px 60px 56px;
-      background: var(--rose-pale);
+      padding: 60px 64px 60px 56px;
+      background: var(--lilas-pale);
     }
-    .about-missions { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-    .about-mission-item {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
+    .about-missions { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .about-mission-item { display: flex; gap: 14px; align-items: flex-start; }
     .about-mission-icon {
       width: 36px; height: 36px;
-      border-radius: var(--radius-sm);
+      border-radius: 6px;
       background: var(--lilas-pale);
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
-      flex-shrink: 0;
-      margin-top: 2px;
+      font-size: 16px; flex-shrink: 0; margin-top: 2px;
     }
+    .about-right .about-mission-icon { background: white; }
     .about-mission-title { font-size: 14px; font-weight: 500; color: var(--prune); margin-bottom: 3px; }
-    .about-mission-desc { font-size: 13px; color: var(--gris-texte); line-height: 1.6; }
+    .about-mission-desc { font-size: 13px; color: var(--gris-texte); line-height: 1.65; }
 
-    /* BUREAU */
-    .bureau-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .bureau-card { text-align: center; padding: 28px 20px 24px; }
-    .bureau-avatar {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: var(--lilas-pale);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 20px; font-weight: 700; color: var(--magenta);
-      margin: 0 auto 14px;
-      border: 2px solid var(--lilas);
-    }
-    .bureau-role { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--or-texte); margin-bottom: 5px; }
-    .bureau-name { font-size: 15px; font-weight: 500; color: var(--prune); }
-
-    /* ADHÉSION CTA */
-    .adhesion-band {
-      background: var(--prune-soft);
-      padding: 40px 48px;
+    /* ---- CTA ADHÉSION ---- */
+    .cta-band {
+      background: var(--prune);
+      padding: 56px 64px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 32px;
+      gap: 40px;
+      position: relative;
+      overflow: hidden;
     }
-    .adhesion-band-text { color: rgba(255,255,255,0.7); font-size: 14px; max-width: 520px; line-height: 1.7; }
-    .adhesion-band-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: white; margin-bottom: 8px; }
+    .cta-band::before {
+      content: '';
+      position: absolute; top: -50%; right: -5%;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(147,15,124,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-band-left { position: relative; z-index: 1; }
+    .cta-band-pre {
+      font-family: var(--syne);
+      font-size: 9px; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--or); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .cta-band-pre::before { content: ''; display: block; width: 18px; height: 1px; background: var(--or); }
+    .cta-band-title {
+      font-family: var(--syne);
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 800; letter-spacing: -.02em;
+      color: white; line-height: 1.05;
+      margin-bottom: 12px;
+    }
+    .cta-band-title em {
+      font-family: 'Playfair Display', serif;
+      font-style: italic; font-weight: 400;
+      color: var(--lilas); font-size: .9em;
+    }
+    .cta-band-sub { font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.7; max-width: 420px; }
+    .cta-band-right {
+      position: relative; z-index: 1;
+      text-align: center; flex-shrink: 0;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 14px;
+    }
+    .cta-price-display {
+      font-family: var(--syne);
+      font-size: 64px; font-weight: 800;
+      color: var(--or); line-height: 1;
+    }
+    .cta-price-note { font-size: 12px; color: rgba(255,255,255,.4); font-family: var(--syne); letter-spacing: .06em; }
 
-    @media (max-width: 900px) {
-      .hero h1 { font-size: 40px; }
-      .hero-content { padding: 60px 24px 32px; }
-      .hero-pinned { margin: 0 20px 40px; flex-direction: column; align-items: flex-start; }
-      .about-split { grid-template-columns: 1fr; }
-      .about-left, .about-right { padding: 40px 20px; }
-      .bureau-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
-      .adhesion-band { flex-direction: column; padding: 36px 20px; }
+    /* ---- NEWSLETTER ---- */
+    .newsletter-bar {
+      background: var(--magenta);
+      padding: 36px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
     }
+    .newsletter-bar-copy {}
+    .newsletter-bar-title {
+      font-family: var(--syne);
+      font-size: 18px; font-weight: 700;
+      color: white; margin-bottom: 2px;
+    }
+    .newsletter-bar-sub { font-size: 13px; color: rgba(255,255,255,.6); }
+    .newsletter-bar-form { display: flex; min-width: 340px; }
+    .newsletter-bar-input {
+      flex: 1; padding: 12px 16px;
+      border: none; border-radius: 4px 0 0 4px;
+      font-family: 'DM Sans', sans-serif; font-size: 14px;
+      background: rgba(255,255,255,.92); color: var(--prune);
+      outline: none;
+    }
+    .newsletter-bar-btn {
+      background: var(--prune); color: white;
+      border: none; padding: 12px 18px;
+      border-radius: 0 4px 4px 0;
+      font-family: var(--syne);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      cursor: pointer; white-space: nowrap;
+      transition: background .2s;
+    }
+    .newsletter-bar-btn:hover { background: #1a0a14; }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      .hero-content { padding: 56px 24px 32px; max-width: none; }
+      .hero h1 { font-size: 36px; }
+      .hero-pinned { margin: 0 20px 40px; flex-direction: column; align-items: flex-start; gap: 14px; }
+      .stats-band { grid-template-columns: repeat(2,1fr); }
+      .next-event-section { padding: 48px 24px; }
+      .event-feature-card { grid-template-columns: 1fr; }
+      .event-feature-img { height: 220px; }
+      .bento-section { padding: 48px 24px; }
+      .bento-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .bento-a,.bento-b,.bento-c,.bento-d,.bento-e { grid-column: span 1; }
+      .about-split { grid-template-columns: 1fr; }
+      .about-left { padding: 40px 24px; }
+      .about-right { padding: 40px 24px; }
+      .cta-band { flex-direction: column; padding: 48px 24px; }
+      .newsletter-bar { flex-direction: column; padding: 36px 24px; gap: 20px; }
+      .newsletter-bar-form { min-width: auto; width: 100%; }
+    }
+
+    /* ---- REVEAL ---- */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
   </style>
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="MDL Viollet-le-Duc">
-  <meta property="og:title" content="MDL Viollet-le-Duc">
-  <meta property="og:description" content="La Maison des Lycéens du lycée Viollet-le-Duc. Événements, projets et vie lycéenne à Villiers-Saint-Frédéric.">
-  <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
-  <meta property="og:url" content="https://mdl-vld.fr/index.html">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#930f7c">
-  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
+</head>
 <body>
 <a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
+<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
-    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL"></div>
+    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL Viollet-le-Duc"></div>
     <div>
       <div class="nav-logo-text">MDL Viollet-le-Duc</div>
       <span class="nav-logo-sub">Maison des Lycéens</span>
@@ -250,21 +595,22 @@
     <li class="nav-dropdown">
       <a href="evenements.html">Activités</a>
       <div class="nav-dropdown-menu">
-        <a href="evenements.html">🎉 Événements</a>
-        <a href="projets.html">💡 Projets</a>
-        <a href="clubs.html">🎭 Clubs</a>
-        <a href="merch.html">🛍 Merch</a>
+        <a href="evenements.html">Événements</a>
+        <a href="projets.html">Projets</a>
+        <a href="clubs.html">Clubs</a>
+        <a href="merch.html">Merch</a>
       </div>
     </li>
     <li><a href="planning.html">Planning</a></li>
     <li class="nav-dropdown">
       <a href="mdl.html">La MDL</a>
       <div class="nav-dropdown-menu">
-        <a href="mdl.html">🏠 La MDL</a>
-        <a href="equipe.html">👥 Équipe</a>
-        <a href="partenaires.html">🤝 Partenaires</a>
+        <a href="mdl.html">La MDL</a>
+        <a href="equipe.html">Équipe</a>
+        <a href="partenaires.html">Partenaires</a>
         <div class="nav-dropdown-menu-sep"></div>
-        <a href="documents.html">📄 Documents</a>
+        <a href="documents.html">Documents</a>
+        <a href="credits.html">Crédits</a>
       </div>
     </li>
     <li><a href="contact.html">Contact</a></li>
@@ -273,23 +619,23 @@
   <div class="nav-right">
     <button class="nav-search-btn" id="searchOpenBtn" title="Ctrl+K" aria-label="Rechercher">🔍 Rechercher</button>
     <button class="dark-toggle" id="darkToggle" aria-label="Mode sombre" title="Mode sombre">🌙</button>
+    <a href="admin.html" style="font-family:var(--syne,sans-serif);font-size:10px;font-weight:700;letter-spacing:.06em;color:rgba(var(--prune-rgb,45,26,40),.45);padding:5px 10px;border:1px solid rgba(0,0,0,.12);border-radius:4px;text-decoration:none;white-space:nowrap;margin-left:4px;" title="Connexion membres">🔐</a>
     <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="nav-mobile-menu" id="mobile-menu">
   <a href="index.html">Accueil</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">Activités</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">Activités</div>
   <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
   <a href="projets.html" style="padding-left:32px!important;">Projets</a>
   <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
   <a href="merch.html" style="padding-left:32px!important;">Merch</a>
   <a href="planning.html">Planning</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">La MDL</div>
+  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or);">La MDL</div>
   <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
   <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
   <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
   <a href="documents.html" style="padding-left:32px!important;">Documents</a>
-  <a href="credits.html" style="padding-left:32px!important;">Crédits</a>
   <a href="contact.html">Contact</a>
   <a href="adhesion.html" class="nav-cta">Adhérer</a>
 </div>
@@ -306,25 +652,28 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <span class="ticker-sep">·</span>
     <span class="ticker-item">🎟 Places disponibles · 5€ / personne</span>
     <span class="ticker-sep">·</span>
-    <span class="ticker-item">📩 Adhésion MDL 2025-2026 ouverte</span>
+    <span class="ticker-item">✋ Adhésion MDL 2026-2027 ouverte</span>
     <span class="ticker-sep">·</span>
     <span class="ticker-item">✉️ contact@mdl-vld.fr</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">🎭 8 clubs actifs au lycée Viollet-le-Duc</span>
     <span class="ticker-sep">·</span>
     <span class="ticker-item">🎬 Bal des Terminales · 3 juillet 2026 · Salle de Thoiry</span>
     <span class="ticker-sep">·</span>
     <span class="ticker-item">🎟 Places disponibles · 5€ / personne</span>
     <span class="ticker-sep">·</span>
-    <span class="ticker-item">📩 Adhésion MDL 2025-2026 ouverte</span>
+    <span class="ticker-item">✋ Adhésion MDL 2026-2027 ouverte</span>
     <span class="ticker-sep">·</span>
     <span class="ticker-item">✉️ contact@mdl-vld.fr</span>
+    <span class="ticker-sep">·</span>
+    <span class="ticker-item">🎭 8 clubs actifs au lycée Viollet-le-Duc</span>
     <span class="ticker-sep">·</span>
   </div>
 </div>
 
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-slider">
+<!-- HERO AVEC SLIDER -->
+<section class="hero" aria-label="Accueil MDL Viollet-le-Duc">
+  <div class="hero-slider" aria-hidden="true">
     <div class="hero-slide hero-slide-1 active"></div>
     <div class="hero-slide hero-slide-2"></div>
     <div class="hero-slide hero-slide-3"></div>
@@ -335,188 +684,207 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   <div class="hero-overlay"></div>
 
   <div class="hero-content">
-    <div class="hero-eyebrow">
-      <div class="hero-eyebrow-dot"></div>
-      Lycée Viollet-le-Duc - Villiers-Saint-Frédéric
+    <div class="hero-label">
+      <span class="hero-label-line"></span>
+      Lycée Viollet-le-Duc · Villiers-Saint-Frédéric
     </div>
-    <h1>La vie lycéenne,<br><em>c'est nous.</em></h1>
-    <p class="hero-sub">
-      La Maison des Lycéens anime, fédère et donne vie au lycée Viollet-le-Duc.
-      Événements, projets solidaires, clubs, sorties : tout ce qu'on construit ensemble, pour vous.
-    </p>
+    <h1>La vie lycéenne,<br><span class="italic-accent">par vous.</span></h1>
+    <p class="hero-sub">La MDL anime, fédère et donne vie au lycée. Événements, projets, clubs : tout ce qu'on construit ensemble, pour vous.</p>
     <div class="hero-actions">
-      <a href="evenements.html" class="btn btn-or btn-lg">Nos événements</a>
-      <a href="mdl.html" class="btn btn-lg" style="background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);">Découvrir la MDL</a>
+      <a href="evenements.html" class="btn-hero-main">Voir les événements</a>
+      <a href="mdl.html" class="btn-hero-ghost">Découvrir la MDL</a>
     </div>
-    <div class="hero-dots">
-      <button class="hero-dot active" onclick="goSlide(0)"></button>
-      <button class="hero-dot" onclick="goSlide(1)"></button>
-      <button class="hero-dot" onclick="goSlide(2)"></button>
-      <button class="hero-dot" onclick="goSlide(3)"></button>
-      <button class="hero-dot" onclick="goSlide(4)"></button>
-      <button class="hero-dot" onclick="goSlide(5)"></button>
+    <div class="hero-dots" role="tablist" aria-label="Diaporama">
+      <button class="hero-dot active" onclick="goSlide(0)" aria-label="Photo 1"></button>
+      <button class="hero-dot" onclick="goSlide(1)" aria-label="Photo 2"></button>
+      <button class="hero-dot" onclick="goSlide(2)" aria-label="Photo 3"></button>
+      <button class="hero-dot" onclick="goSlide(3)" aria-label="Photo 4"></button>
+      <button class="hero-dot" onclick="goSlide(4)" aria-label="Photo 5"></button>
+      <button class="hero-dot" onclick="goSlide(5)" aria-label="Photo 6"></button>
     </div>
   </div>
 
+  <!-- Bandeau événement épinglé -->
   <div class="hero-pinned">
     <div>
-      <div class="hero-pinned-label">Événement en cours</div>
-      <div class="hero-pinned-title">Bal des Terminales 2026 - Cannes Film Festival</div>
-      <div class="hero-pinned-meta">Jeudi 3 juillet 2026 - Salle polyvalente de Thoiry - 500 places</div>
+      <div class="hero-pinned-tag">🎬 Prochain événement</div>
+      <div class="hero-pinned-title">Bal des Terminales · Promo 2026 · Festival de Cannes</div>
+      <div class="hero-pinned-meta">Jeudi 3 juillet 2026 · Salle polyvalente de Thoiry · 500 places</div>
     </div>
     <div class="hero-pinned-right">
-      <div class="hero-pinned-price">5€ <span>/ pers.</span></div>
-      <a href="https://www.billetweb.fr/bal-des-terminales-vld-2026" target="_blank" rel="noopener" class="btn btn-or">Réserver</a>
+      <div class="hero-pinned-price">5€ <small>/ pers.</small></div>
+      <a href="evenement-bal.html" class="btn-hero-ghost" style="font-size:11px;padding:10px 20px;">Voir la page</a>
+      <a href="https://www.billetweb.fr/bal-des-terminales-vld-2026" target="_blank" rel="noopener" class="btn-hero-main" style="font-size:11px;padding:10px 20px;">Réserver</a>
     </div>
   </div>
+</section>
 
+<!-- STATS -->
+<div class="stats-band" aria-label="La MDL en chiffres">
+  <div class="stat-cell reveal">
+    <span class="stat-num" data-target="8">0</span>
+    <span class="stat-label">Événements / an</span>
+  </div>
+  <div class="stat-cell reveal reveal-delay-1">
+    <span class="stat-num" data-target="500">0</span>
+    <span class="stat-label">Lycéens concernés</span>
+  </div>
+  <div class="stat-cell reveal reveal-delay-2">
+    <span class="stat-num" data-target="8">0</span>
+    <span class="stat-label">Clubs soutenus</span>
+  </div>
+  <div class="stat-cell reveal reveal-delay-3">
+    <span class="stat-num" data-target="10">0</span>
+    <span class="stat-label">Membres au bureau</span>
+  </div>
+</div>
+
+<!-- PROCHAIN ÉVÉNEMENT -->
+<section class="next-event-section" aria-label="Prochain événement">
+  <div class="reveal">
+    <div class="section-eyebrow-v2">À la une</div>
+    <h2 class="section-h2">Prochain <em>événement</em></h2>
+  </div>
+  <div class="event-feature-card reveal">
+    <div class="event-feature-img">
+      <img id="next-event-cover" src="assets/affiche-bal.jpg" alt="Affiche événement">
+    </div>
+    <div class="event-feature-body">
+      <div class="event-chip-v2">⭐ Événement phare · 2026-2027</div>
+      <h3 class="event-feature-title">Bal des Terminales · Promo 2026</h3>
+      <div class="event-feature-meta">📅 <span id="next-event-date">Jeudi 3 juillet 2026 · 19h–00h</span></div>
+      <div class="event-feature-meta">📍 <span id="next-event-lieu">Salle polyvalente de Thoiry · Thème Cannes</span></div>
+      <p class="event-feature-desc" id="next-event-desc">La grande soirée de fin d'année pour toutes les Terminales. Dress code élégant exigé. Places limitées à 500.</p>
+      <div class="event-feature-actions">
+        <a href="evenement-bal.html" class="btn btn-outline btn-sm" id="next-event-btn-page">Voir la page</a>
+        <a href="https://www.billetweb.fr/bal-des-terminales-vld-2026" target="_blank" rel="noopener" class="btn btn-or btn-sm" id="next-event-btn-billet">Réserver · 5€</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENTO ACTIVITÉS -->
+<section class="bento-section" aria-label="Nos activités">
+  <div class="reveal">
+    <div class="section-eyebrow-v2">Ce qu'on fait</div>
+    <h2 class="section-h2">Nos <em>activités</em></h2>
+  </div>
+  <div class="bento-grid">
+    <a href="evenements.html" class="bento-card bento-a reveal" style="background-image:url('assets/photo-course-lycees.jpg');background-size:cover;background-position:center;">
+      <div class="bento-inner bento-dark" style="background:rgba(45,26,40,.78);">
+        <div class="bento-arrow">↗</div>
+        <div class="bento-tag">Vie lycéenne</div>
+        <div class="bento-name" style="font-size:20px;">Événements</div>
+        <div class="bento-hint">Bal, Carnaval, Halloween, Noël et bien d'autres tout au long de l'année.</div>
+      </div>
+    </a>
+    <a href="clubs.html" class="bento-card bento-b reveal reveal-delay-1">
+      <div class="bento-inner bento-magenta">
+        <div class="bento-arrow">↗</div>
+        <span style="font-size:30px;margin-bottom:14px;display:block;">🎭</span>
+        <div class="bento-tag">8 clubs actifs</div>
+        <div class="bento-name">Clubs</div>
+        <div class="bento-hint">Théâtre, chorale, manga, radio, vidéo…</div>
+      </div>
+    </a>
+    <a href="projets.html" class="bento-card bento-c reveal reveal-delay-2">
+      <div class="bento-inner bento-or">
+        <div class="bento-arrow">↗</div>
+        <span style="font-size:30px;margin-bottom:14px;display:block;">💡</span>
+        <div class="bento-tag">Solidarité</div>
+        <div class="bento-name">Projets</div>
+        <div class="bento-hint">CCF, sorties culturelles…</div>
+      </div>
+    </a>
+    <a href="adhesion.html" class="bento-card bento-d reveal reveal-delay-1">
+      <div class="bento-inner bento-dark" style="flex-direction:row;align-items:center;justify-content:space-between;gap:20px;min-height:160px;">
+        <div>
+          <div class="bento-tag" style="margin-bottom:8px;">Association loi 1901</div>
+          <div class="bento-name" style="font-size:19px;color:white;">Rejoins la MDL et fais partie de l'aventure →</div>
+        </div>
+        <div style="font-family:var(--syne);font-size:48px;font-weight:800;color:var(--or);flex-shrink:0;">5€</div>
+      </div>
+    </a>
+    <a href="merch.html" class="bento-card bento-e reveal reveal-delay-2">
+      <div class="bento-inner bento-white" style="min-height:160px;">
+        <div class="bento-arrow">↗</div>
+        <span style="font-size:28px;margin-bottom:12px;display:block;">🛍</span>
+        <div class="bento-tag">Boutique</div>
+        <div class="bento-name">Merch VLD</div>
+        <div class="bento-hint">Hoodies, tote-bags aux couleurs du lycée.</div>
+      </div>
+    </a>
+  </div>
 </section>
 
 <!-- QUI SOMMES-NOUS -->
-<!-- À LA UNE -->
-<section class="section section-alt">
-  <span class="section-eyebrow">À la une</span>
-  <h2 class="section-title">Prochain événement</h2>
-  <p class="section-sub">Ne manquez pas la grande soirée de fin d'année.</p>
-  <div class="card reveal" style="max-width:720px;overflow:hidden;display:grid;grid-template-columns:240px 1fr;">
-    <div style="overflow:hidden;">
-      <img src="assets/affiche-bal.jpg" alt="Bal des Terminales 2026"
-           style="width:100%;height:100%;object-fit:cover;object-position:top;" loading="lazy">
-    </div>
-    <div style="padding:28px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-        <span style="background:#eaf5ec;color:#276237;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">● Places disponibles</span>
-        <span style="background:var(--or-pale);color:#7a5a00;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;">3 juillet 2026</span>
-      </div>
-      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--prune);margin-bottom:6px;">Bal des Terminales · Promo 2026</div>
-      <div style="font-size:13px;color:var(--gris-texte);margin-bottom:14px;">📍 Salle polyvalente de Thoiry · 19h-00h · Thème Festival de Cannes</div>
-      <p style="font-size:13px;color:var(--gris-texte);line-height:1.65;margin-bottom:20px;">La grande soirée de fin d'année pour toutes les Terminales. Dress code élégant exigé. Places limitées à 500.</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="evenement-bal.html" class="btn btn-magenta btn-sm">Voir la page</a>
-        <a href="https://www.billetweb.fr/bal-des-terminales-vld-2026" target="_blank" rel="noopener" class="btn btn-or btn-sm">Réserver · 5€</a>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- ACTIVITÉS PREVIEW -->
-<section class="section section-alt">
-  <div style="text-align:center;margin-bottom:36px;">
-    <span class="section-eyebrow">Ce qu'on fait</span>
-    <h2 class="section-title">Nos activités</h2>
-    <p class="section-sub">Événements, projets solidaires, clubs, merch · la MDL anime toute la vie du lycée.</p>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
-    <a href="evenements.html" class="card reveal" style="padding:28px;text-align:center;text-decoration:none;transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
-      <div style="font-size:36px;margin-bottom:12px;" aria-hidden="true">🎉</div>
-      <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--prune);margin-bottom:8px;">Événements</div>
-      <p style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Bal des Terminales, Carnaval, Halloween, Noël et bien d'autres.</p>
-    </a>
-    <a href="projets.html" class="card reveal reveal-delay-1" style="padding:28px;text-align:center;text-decoration:none;transition:transform .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
-      <div style="font-size:36px;margin-bottom:12px;" aria-hidden="true">💡</div>
-      <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--prune);margin-bottom:8px;">Projets</div>
-      <p style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Course contre la Faim, sorties culturelles, actions solidaires.</p>
-    </a>
-    <a href="clubs.html" class="card reveal reveal-delay-2" style="padding:28px;text-align:center;text-decoration:none;transition:transform .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
-      <div style="font-size:36px;margin-bottom:12px;" aria-hidden="true">🎭</div>
-      <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--prune);margin-bottom:8px;">Clubs</div>
-      <p style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Théâtre, chorale, manga, lecture, vidéo, radio et plus encore.</p>
-    </a>
-    <a href="merch.html" class="card reveal reveal-delay-3" style="padding:28px;text-align:center;text-decoration:none;transition:transform .2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
-      <div style="font-size:36px;margin-bottom:12px;" aria-hidden="true">🛍</div>
-      <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--prune);margin-bottom:8px;">Merch</div>
-      <p style="font-size:12px;color:var(--gris-texte);line-height:1.6;">Hoodies officiels VLD. Ventes reprennent en 2026-2027.</p>
-    </a>
-  </div>
-</section>
-
-
-
 <div class="about-split">
-  <div class="about-left">
-    <span class="section-eyebrow">Notre rôle</span>
-    <h2 class="section-title">Une association<br>par et pour les lycéens</h2>
-    <p style="font-size: 14px; color: var(--gris-texte); line-height: 1.75; margin-bottom: 28px;">
-      La MDL est une association loi 1901 gérée entièrement par les élèves. Elle existe pour rendre le lycée plus vivant, plus convivial, et pour donner aux lycéens un vrai rôle actif dans leur établissement.
-    </p>
+  <div class="about-left reveal">
+    <div class="section-eyebrow-v2" style="margin-bottom:10px;">Notre rôle</div>
+    <h2 class="section-h2" style="margin-bottom:18px;">Une association<br><em>par et pour</em><br>les lycéens</h2>
+    <p style="font-size:14px;color:var(--gris-texte);line-height:1.75;margin-bottom:28px;">La MDL est une association loi 1901 gérée entièrement par les élèves. Elle existe pour rendre le lycée plus vivant, plus convivial, et pour donner aux lycéens un vrai rôle actif dans leur établissement.</p>
     <a href="mdl.html" class="btn btn-outline">En savoir plus</a>
   </div>
-  <div class="about-right">
-    <span class="section-eyebrow">Nos missions</span>
+  <div class="about-right reveal reveal-delay-1">
+    <div class="section-eyebrow-v2" style="margin-bottom:16px;">Nos missions</div>
     <ul class="about-missions">
       <li class="about-mission-item">
-        <div class="about-mission-icon" aria-hidden="true">🎉</div>
+        <div class="about-mission-icon">🎉</div>
         <div>
           <div class="about-mission-title">Animer et divertir</div>
-          <div class="about-mission-desc">Tournois sportifs, événements culturels, soirées, carnaval, clubs...</div>
+          <div class="about-mission-desc">Événements culturels, soirées, carnaval, clubs, tournois…</div>
         </div>
       </li>
       <li class="about-mission-item">
-        <div class="about-mission-icon" aria-hidden="true">💡</div>
+        <div class="about-mission-icon">💡</div>
         <div>
           <div class="about-mission-title">Accompagner les projets</div>
-          <div class="about-mission-desc">Chaque élève peut proposer un projet - sortie, atelier, action solidaire - et la MDL l'aide à le réaliser.</div>
+          <div class="about-mission-desc">Chaque élève peut proposer un projet · sortie, atelier, action solidaire · et la MDL l'aide à le réaliser.</div>
         </div>
       </li>
       <li class="about-mission-item">
-        <div class="about-mission-icon" aria-hidden="true">🤝</div>
+        <div class="about-mission-icon">🤝</div>
         <div>
           <div class="about-mission-title">Créer du lien</div>
-          <div class="about-mission-desc">Favoriser les rencontres et la convivialité entre lycéens à travers des activités variées.</div>
+          <div class="about-mission-desc">Favoriser les rencontres entre lycéens à travers des activités variées et inclusives.</div>
         </div>
       </li>
     </ul>
   </div>
 </div>
 
-<!-- PHOTO PLEINE LARGEUR - Course contre la faim -->
-<div style="position: relative; height: 420px; overflow: hidden;">
-  <img src="assets/photo-course-lycees.jpg"
-       alt="Lycéens participant à la Course contre la Faim organisée par la MDL"
-       style="width: 100%; height: 100%; object-fit: cover; object-position: center 40%;" loading="lazy">
-  <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(45,26,40,0.7) 0%, rgba(45,26,40,0.2) 60%, transparent 100%);"></div>
-  <div style="position: absolute; top: 50%; left: 48px; transform: translateY(-50%); color: white; max-width: 480px;">
-    <span style="font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--or-pale, #f5ecd0); display: block; margin-bottom: 10px;">Projet solidaire</span>
-    <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; line-height: 1.2; margin-bottom: 12px;">Course contre la Faim<br>avec Action Contre la Faim</div>
-    <p style="font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 20px;">Chaque année, la MDL mobilise les lycéens pour courir et collecter des fonds au profit d'Action Contre la Faim. Un projet citoyen et solidaire au coeur de la vie du lycée.</p>
-    <a href="evenements.html" style="display: inline-flex; align-items: center; gap: 7px; background: var(--or, #c9a84c); color: white; padding: 10px 22px; border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: 500;">Voir nos actions</a>
+<!-- CTA ADHÉSION -->
+<section class="cta-band" aria-label="Adhésion">
+  <div class="cta-band-left reveal">
+    <div class="cta-band-pre">Association ouverte à tous</div>
+    <h2 class="cta-band-title">Fais partie<br>de <em>la MDL.</em></h2>
+    <p class="cta-band-sub" style="margin-top:14px;margin-bottom:28px;">Rejoins des élèves qui organisent, proposent et agissent. Entrée gratuite au bal, droit de vote en AG, accès à tous les projets.</p>
+    <a href="adhesion.html" class="btn-hero-main">Adhérer maintenant →</a>
   </div>
-</div>
-
-
-
-<!-- ADHÉSION BAND -->
-<div class="adhesion-band">
-  <div>
-    <div class="adhesion-band-title">Rejoindre la MDL</div>
-    <p class="adhesion-band-text">
-      La MDL est ouverte à tous les élèves volontaires du lycée. En adhérant, tu peux participer aux projets, en proposer toi-même, et t'investir dans la vie de l'association.
-    </p>
-  </div>
-  <a href="https://www.helloasso.com/associations/maison-des-lyceens-mld-du-lycee-viollet-le-duc/adhesions/adhesion-mdl-2025-2026" target="_blank" rel="noopener" class="btn btn-or btn-lg" style="white-space: nowrap; flex-shrink: 0;">
-    Adhérer via HelloAsso
-  </a>
-</div>
-
-<!-- NEWSLETTER -->
-<section class="section">
-  <div style="max-width:700px;margin:0 auto;">
-    <div class="newsletter-wrap reveal">
-      <div class="newsletter-title">🔔 Restez informés</div>
-      <p class="newsletter-sub">Recevez un email à chaque nouvel événement MDL. Pas de spam, juste l'essentiel.</p>
-      <form class="newsletter-form" id="newsletterForm" action="https://app.brevo.com/api/v3/contacts" method="POST">
-        <input type="email" class="newsletter-input" placeholder="votre@email.fr" required aria-label="Adresse email">
-        <button type="submit" class="newsletter-btn">S'inscrire</button>
-      </form>
-      <div class="newsletter-success" id="newsletterSuccess">
-        ✅ Inscription confirmée ! Vous recevrez nos prochaines actualités.
-      </div>
-      <p style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:12px;position:relative;z-index:1;">
-        Vos données ne sont jamais partagées. <a href="confidentialite.html" style="color:rgba(255,255,255,0.6);">Politique de confidentialité</a>
-      </p>
-    </div>
+  <div class="cta-band-right reveal reveal-delay-1">
+    <div class="cta-price-display">5€</div>
+    <div class="cta-price-note">par lycéen · 2026-2027</div>
+    <a href="https://www.helloasso.com/associations/maison-des-lyceens-mld-du-lycee-viollet-le-duc/adhesions/adhesions-mdl-2026-2027" target="_blank" rel="noopener" class="btn-hero-main" style="margin-top:4px;">Payer via HelloAsso</a>
   </div>
 </section>
 
+<!-- NEWSLETTER -->
+<div class="newsletter-bar" id="newsletter">
+  <div class="newsletter-bar-copy">
+    <div class="newsletter-bar-title">🔔 Restez informés</div>
+    <div class="newsletter-bar-sub">Un email à chaque événement · pas de spam · désinscription en un clic</div>
+  </div>
+  <form class="newsletter-bar-form" id="newsletterForm" onsubmit="return false;">
+    <input type="email" class="newsletter-bar-input" placeholder="votre@email.fr" aria-label="Votre adresse email" required>
+    <button type="submit" class="newsletter-bar-btn">S'inscrire</button>
+  </form>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-tagline-block">
+  <p class="footer-tagline-text">Fait par des <strong>lycéens</strong>, pour des lycéens.</p>
+  <p class="footer-tagline-sub">MDL Viollet-le-Duc · Villiers-Saint-Frédéric · depuis 2014</p>
+</div>
 <footer>
   <div class="footer-grid">
     <div>
@@ -557,16 +925,22 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">
+  <div style="padding:12px 64px;border-top:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.15);">
+  <a href="admin.html" style="font-size:11px;color:rgba(255,255,255,0.25);text-decoration:none;font-family:var(--syne,sans-serif);letter-spacing:.06em;">
+    🔐 Espace membres
+  </a>
+</div>
+<div class="footer-bottom">
     <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627</span>
     <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
   </div>
 </footer>
+
 <button class="back-to-top" id="backToTop" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon" aria-hidden="true">🔍</span>
+      <span class="search-icon">🔍</span>
       <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>
@@ -585,12 +959,123 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Accepter</button>
   </div>
 </div>
-<script>document.querySelectorAll('.year-auto').forEach(function(e){{e.textContent=new Date().getFullYear();}});</script>
+
 <script>
+// Année
+document.querySelectorAll('.year-auto').forEach(function(e){e.textContent=new Date().getFullYear();});
+
+// Back to top
+var btn=document.getElementById('backToTop');
+window.addEventListener('scroll',function(){if(btn)btn.classList.toggle('visible',window.scrollY>400);});
+
+// Slider
 var cur=0,sl=document.querySelectorAll('.hero-slide'),dt=document.querySelectorAll('.hero-dot');
-function goSlide(n){if(sl[cur])sl[cur].classList.remove('active');if(dt[cur])dt[cur].classList.remove('active');cur=n;if(sl[cur])sl[cur].classList.add('active');if(dt[cur])dt[cur].classList.add('active');}
-if(sl.length)setInterval(function(){goSlide((cur+1)%sl.length);},4500);
+function goSlide(n){
+  if(sl[cur])sl[cur].classList.remove('active');
+  if(dt[cur])dt[cur].classList.remove('active');
+  cur=n;
+  if(sl[cur])sl[cur].classList.add('active');
+  if(dt[cur])dt[cur].classList.add('active');
+}
+if(sl.length)setInterval(function(){goSlide((cur+1)%sl.length);},4800);
+
+// Compteurs animés
+function animCount(el,target){
+  var s=0,step=Math.max(1,Math.ceil(target/60));
+  var t=setInterval(function(){
+    s=Math.min(s+step,target);
+    el.textContent=s+(target>=10?'+':'');
+    if(s>=target)clearInterval(t);
+  },18);
+}
+
+// Reveal + compteurs
+var seen=new Set();
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      var n=e.target.querySelector('[data-target]');
+      if(n&&!seen.has(n)){seen.add(n);animCount(n,parseInt(n.dataset.target));}
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.12,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="mdl-core.js" defer></script>
+
+<script>
+// Chargement dynamique depuis Supabase
+(async function() {
+  const SB_URL = 'https://ksvqjbcnqphnyxfpjhvz.supabase.co';
+  const SB_KEY = 'sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0';
+  const sb = supabase.createClient(SB_URL, SB_KEY);
+
+  // 1. Charger les annonces du ticker
+  try {
+    const { data: annonces } = await sb.from('annonces').select('*').eq('actif', true).order('ordre');
+    if (annonces && annonces.length > 0) {
+      const track = document.querySelector('.ticker-track');
+      if (track) {
+        // Doubler pour le défilement infini
+        const items = annonces.map(a =>
+          `<span class="ticker-item">${a.texte}</span><span class="ticker-sep">·</span>`
+        ).join('') ;
+        track.innerHTML = items + items;
+      }
+    }
+  } catch(e) { /* ticker statique en fallback */ }
+
+  // 2. Charger le prochain événement à la une
+  try {
+    const { data: evts } = await sb
+      .from('evenements_une')
+      .select('*')
+      .eq('actif', true)
+      .order('ordre')
+      .limit(1);
+
+    if (evts && evts.length > 0) {
+      const e = evts[0];
+
+      // Mettre à jour la card prochain événement
+      const cover = document.getElementById('next-event-cover');
+      if (cover && e.affiche_url) cover.src = e.affiche_url;
+
+      const title = document.getElementById('next-event-title');
+      if (title) title.textContent = e.titre;
+
+      const date = document.getElementById('next-event-date');
+      if (date) date.textContent = e.date_event || '';
+
+      const lieu = document.getElementById('next-event-lieu');
+      if (lieu) lieu.textContent = e.lieu || '';
+
+      const desc = document.getElementById('next-event-desc');
+      if (desc) desc.textContent = e.description || '';
+
+      const btnPage = document.getElementById('next-event-btn-page');
+      if (btnPage && e.lien_page) { btnPage.href = e.lien_page; btnPage.style.display = 'inline-flex'; }
+      else if (btnPage) btnPage.style.display = 'none';
+
+      const btnBillet = document.getElementById('next-event-btn-billet');
+      if (btnBillet && e.lien_billetterie) {
+        btnBillet.href = e.lien_billetterie;
+        btnBillet.textContent = e.lien_billetterie_label || 'Réserver';
+        btnBillet.style.display = 'inline-flex';
+      } else if (btnBillet) btnBillet.style.display = 'none';
+
+      // Mettre à jour le bandeau épinglé
+      const pinTitle = document.getElementById('pin-event-title');
+      if (pinTitle) pinTitle.textContent = e.titre;
+      const pinDate = document.getElementById('pin-event-date');
+      if (pinDate) pinDate.textContent = (e.date_event || '') + (e.lieu ? ' · ' + e.lieu : '');
+    }
+  } catch(e) { /* event statique en fallback */ }
+})();
+</script>
+
 </body>
 </html>

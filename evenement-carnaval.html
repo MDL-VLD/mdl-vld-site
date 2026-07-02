@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>(function(){try{var t=localStorage.getItem('mdl-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
   <meta name="robots" content="index, follow">
   <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
-  <title>Carnaval · MDL Viollet-le-Duc</title>
+  <title>MDL Viollet-le-Duc · Carnaval</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -19,7 +18,7 @@
   <meta property="og:image" content="https://mdl-vld.fr/assets/affiche-carnaval.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap">
   <link rel="stylesheet" href="style.css">
   <style>
     .event-hero {
@@ -45,7 +44,7 @@
       text-decoration:none;margin-bottom:16px;transition:color .2s;
     }
     .event-hero-back:hover { color:white; }
-    .event-hero h1 {
+    .event-hero h1 { font-family: var(--syne); letter-spacing: -0.02em;
       font-family:'Playfair Display',serif;
       font-size:44px;font-weight:700;line-height:1.1;
       color:white;margin-bottom:6px;
@@ -61,7 +60,7 @@
     .event-section { margin-bottom:32px; }
     .event-section-title {
       font-family:'Playfair Display',serif;font-size:20px;font-weight:700;
-      color:var(--prune); margin-top:0; margin-bottom:12px;padding-bottom:10px;
+      color:var(--prune);margin-bottom:12px;padding-bottom:10px;
       border-bottom:1px solid var(--lilas-pale);
     }
     .event-section-text { font-size:14px;color:var(--gris-texte);line-height:1.8; }
@@ -80,7 +79,7 @@
     .event-info-val { font-size:12px;color:var(--prune);line-height:1.5; }
     @media (max-width:768px) {
       .event-hero { grid-template-columns:1fr;padding:36px 20px;min-height:auto; }
-      .event-hero h1 { font-size:32px; }
+      .event-hero h1 { font-family: var(--syne); letter-spacing: -0.02em; font-size:32px; }
       .event-hero-poster { display:none; }
       .event-layout { grid-template-columns:1fr; }
     }
@@ -101,21 +100,21 @@
     <li class="nav-dropdown">
       <a href="evenements.html" class="active">Activités</a>
       <div class="nav-dropdown-menu">
-        <a href="evenements.html" class="active">🎉 Événements</a>
-        <a href="projets.html">💡 Projets</a>
-        <a href="clubs.html">🎭 Clubs</a>
-        <a href="merch.html">🛍 Merch</a>
+        <a href="evenements.html" class="active">Événements</a>
+        <a href="projets.html">Projets</a>
+        <a href="clubs.html">Clubs</a>
+        <a href="merch.html">Merch</a>
       </div>
     </li>
     <li><a href="planning.html">Planning</a></li>
     <li class="nav-dropdown">
       <a href="mdl.html">La MDL</a>
       <div class="nav-dropdown-menu">
-        <a href="mdl.html">🏠 La MDL</a>
-        <a href="equipe.html">👥 Équipe</a>
-        <a href="partenaires.html">🤝 Partenaires</a>
+        <a href="mdl.html">La MDL</a>
+        <a href="equipe.html">Équipe</a>
+        <a href="partenaires.html">Partenaires</a>
         <div class="nav-dropdown-menu-sep"></div>
-        <a href="documents.html">📄 Documents</a>
+        <a href="documents.html">Documents</a>
       </div>
     </li>
     <li><a href="contact.html">Contact</a></li>
@@ -124,6 +123,7 @@
   <div class="nav-right">
     <button class="nav-search-btn" id="searchOpenBtn" title="Ctrl+K" aria-label="Rechercher">🔍 Rechercher</button>
     <button class="dark-toggle" id="darkToggle" aria-label="Mode sombre" title="Mode sombre">🌙</button>
+    <a href="admin.html" style="font-family:var(--syne,sans-serif);font-size:10px;font-weight:700;letter-spacing:.06em;color:rgba(var(--prune-rgb,45,26,40),.45);padding:5px 10px;border:1px solid rgba(0,0,0,.12);border-radius:4px;text-decoration:none;white-space:nowrap;margin-left:4px;" title="Connexion membres">🔐</a>
     <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -160,7 +160,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
     <a href="evenements.html" class="btn btn-lg" style="background:rgba(255,255,255,.15);color:white;border:1px solid rgba(255,255,255,.25);">Tous les événements</a>
   </div>
   <div class="event-hero-poster">
-    <img src="assets/affiche-carnaval.jpg" alt="Affiche Carnaval" loading="lazy">
+    <img src="assets/affiche-carnaval.jpg" alt="Affiche Carnaval">
   </div>
 </div>
 
@@ -168,7 +168,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
   <div class="event-layout">
     <div>
       <div class="event-section">
-        <h2 class="event-section-title">À propos de l'événement</h2>
+        <div class="event-section-title">À propos de l'événement</div>
         <div class="event-section-text"><p>Le Carnaval est l'événement festif du milieu d'année organisé par la MDL. Les lycéens sont invités à venir déguisés pour participer au concours de déguisements. Un jury désigne les meilleurs costumes avec des cartes cadeaux à gagner : 80€ pour le TOP 1, 50€ pour le TOP 2, et 20€ pour le TOP 3. La remise des prix a lieu à 15h.</p></div>
       </div>
       
@@ -182,19 +182,19 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
         <div class="event-sidebar-body">
           
           <div class="event-info-row">
-            <div class="event-info-icon" aria-hidden="true">📅</div>
+            <div class="event-info-icon">📅</div>
             <div><div class="event-info-label">Date</div><div class="event-info-val">Jeudi 12 mars 2026</div></div>
           </div>
           <div class="event-info-row">
-            <div class="event-info-icon" aria-hidden="true">🕙</div>
+            <div class="event-info-icon">🕙</div>
             <div><div class="event-info-label">Horaires</div><div class="event-info-val">10h à 11h · Remise des prix à 15h</div></div>
           </div>
           <div class="event-info-row">
-            <div class="event-info-icon" aria-hidden="true">📍</div>
+            <div class="event-info-icon">📍</div>
             <div><div class="event-info-label">Lieu</div><div class="event-info-val">Lycée Viollet-le-Duc</div></div>
           </div>
           <div class="event-info-row">
-            <div class="event-info-icon" aria-hidden="true">🏆</div>
+            <div class="event-info-icon">🏆</div>
             <div><div class="event-info-label">Prix</div><div class="event-info-val">Cartes cadeaux 80€ / 50€ / 20€</div></div>
           </div>
           <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--lilas-pale);">
@@ -204,7 +204,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
       </div>
       <div class="event-sidebar-card">
         <div class="event-sidebar-body">
-          <img src="assets/affiche-carnaval.jpg" alt="Affiche Carnaval" style="width:100%;border-radius:var(--radius-md);box-shadow:var(--shadow-soft);" class="lightbox-trigger" loading="lazy">
+          <img src="assets/affiche-carnaval.jpg" alt="Affiche Carnaval" style="width:100%;border-radius:var(--radius-md);box-shadow:var(--shadow-soft);" class="lightbox-trigger">
         </div>
       </div>
     </div>
@@ -214,13 +214,17 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <!-- PROPOSER LE PROCHAIN ÉVÉNEMENT -->
 <section class="section section-alt" style="text-align:center;">
   <div style="max-width:520px;margin:0 auto;">
-    <div style="font-size:32px;margin-bottom:12px;" aria-hidden="true">💡</div>
+    <div style="font-size:32px;margin-bottom:12px;">💡</div>
     <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--prune);margin-bottom:10px;">Une idée pour le prochain ?</div>
     <p style="font-size:14px;color:var(--gris-texte);line-height:1.7;margin-bottom:20px;">Cet événement appartient déjà à l'histoire de la MDL. Tu as une idée pour la prochaine édition, ou pour un tout nouvel événement ? Le bureau est à l'écoute.</p>
     <a href="contact.html" class="btn btn-magenta">Proposer une idée</a>
   </div>
 </section>
 
+<div class="footer-tagline-block">
+  <p class="footer-tagline-text">Fait par des <strong>lycéens</strong>, pour des lycéens.</p>
+  <p class="footer-tagline-sub">MDL Viollet-le-Duc · Villiers-Saint-Frédéric · depuis 2014</p>
+</div>
 <footer>
   <div class="footer-grid">
     <div>
@@ -261,7 +265,12 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">
+  <div style="padding:12px 64px;border-top:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.15);">
+  <a href="admin.html" style="font-size:11px;color:rgba(255,255,255,0.25);text-decoration:none;font-family:var(--syne,sans-serif);letter-spacing:.06em;">
+    🔐 Espace membres
+  </a>
+</div>
+<div class="footer-bottom">
     <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627</span>
     <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
   </div>
@@ -270,7 +279,7 @@ document.addEventListener('click',function(e){var m=document.getElementById('mob
 <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-modal">
     <div class="search-input-row">
-      <span class="search-icon" aria-hidden="true">🔍</span>
+      <span class="search-icon">🔍</span>
       <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
       <button class="search-close-btn" id="searchCloseBtn">Échap</button>
     </div>
