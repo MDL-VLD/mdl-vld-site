@@ -1,0 +1,23 @@
+# Garde la base Supabase de la MDL active (offre gratuite = pause après 7 jours).
+# Tourne sur les serveurs de GitHub, gratuitement, sans rien ouvrir.
+
+# OÙ LE METTRE : dans dépôt GitHub, au chemin exact :
+#   .github/workflows/keep-supabase-alive.yml
+
+name: Garder la base Supabase active
+
+on:
+  schedule:
+    - cron: "0 8 * * 1,4"   # lundi et jeudi à 08h00 (UTC) — 2x/semaine, marge de sécurité
+  workflow_dispatch:         # bouton "Run workflow" pour tester à la main
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping de la base MDL
+        run: |
+          curl -sS -o /dev/null -w "Ping OK (code HTTP %{http_code})\n" \
+            "https://ksvqjbcnqphnyxfpjhvz.supabase.co/rest/v1/articles?select=id&limit=1" \
+            -H "apikey: sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0" \
+            -H "Authorization: Bearer sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0"
