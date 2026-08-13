@@ -1,18 +1,22 @@
-<!DOCTYPE html><html lang="fr"><head>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MDL VLD · Merch</title>
-<meta name="description" content="Le merch du lycée Viollet-le-Duc, imaginé par les élèves de la MDL.">
+<title>MDL VLD · Galerie</title>
+<meta name="description" content="La galerie photos de la MDL du Lycée Viollet-le-Duc.">
 <link rel="icon" href="favicon.ico"><link rel="icon" type="image/png" href="favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{--ink:#241019;--prune:#2d1a28;--mg:#7d0f64;--mg2:#63104f;--paper:#f6f2ef;--paper2:#efe8e3;--line:rgba(45,26,40,.12);--grey:#6d6169;--syne:'Syne',sans-serif;--body:'DM Sans',sans-serif;--serif:'Fraunces',serif}
   html{scroll-behavior:smooth}
   body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+  .notice{background:var(--prune);color:#fff;text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:8px}
+  .notice b{color:#f3b9e2;font-weight:600}
   nav{position:sticky;top:0;z-index:50;background:rgba(246,242,239,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:70px}
   .brand{display:flex;align-items:center;gap:12px}.brand img{height:34px;width:auto;display:block}
@@ -20,31 +24,48 @@
   .brand-name small{display:block;font-family:var(--body);font-weight:400;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-top:4px}
   .nav-links{display:flex;align-items:center;gap:30px}
   .nav-links a{font-size:14px;font-weight:500;color:var(--prune);opacity:.75;transition:opacity .2s}.nav-links a:hover{opacity:1}
-  .cta{display:inline-flex;align-items:center;gap:8px;background:var(--mg);color:#fff;font-family:var(--syne);font-weight:700;font-size:13px;padding:11px 20px;border-radius:100px;transition:background .2s}.cta:hover{background:var(--mg2)}.nav-links a.cta{opacity:1;color:#fff}
+  .nav-links a.active{opacity:1;color:var(--mg);font-weight:600}
+  .cta{display:inline-flex;align-items:center;gap:8px;background:var(--mg);color:#fff;font-family:var(--syne);font-weight:700;font-size:13px;letter-spacing:.02em;padding:11px 20px;border-radius:100px;transition:background .2s,transform .2s;cursor:pointer;border:none}
+  .cta:hover{background:var(--mg2);transform:translateY(-1px)}.nav-links a.cta{opacity:1;color:#fff}
   .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}.burger span{width:24px;height:2px;background:var(--prune)}
-  .phero{position:relative;min-height:44vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
-  .phero-bg{position:absolute;inset:0;background-size:cover;background-position:center 42%;transform:scale(1.03)}
+  .phero{position:relative;min-height:46vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+  .phero-bg{position:absolute;inset:0;background-size:cover;background-position:center 40%;transform:scale(1.03)}
   .phero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,6,15,.9) 4%,rgba(20,6,15,.5) 55%,rgba(20,6,15,.4) 100%)}
-  .phero-in{position:relative;z-index:2;width:100%;padding:0 0 46px}
-  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#f3b9e2;font-weight:600;margin-bottom:16px}
-  .phero h1{font-family:var(--syne);font-weight:800;line-height:.95;letter-spacing:-.03em;font-size:clamp(46px,9vw,104px)}
-  .phero p{max-width:600px;margin-top:18px;font-size:clamp(16px,1.7vw,18px);color:rgba(255,255,255,.88)}
-  section{padding:80px 0}
-  .catblock{margin-bottom:48px}
-  .catt{font-family:var(--syne);font-weight:800;font-size:20px;letter-spacing:-.01em;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-  .catt span{color:var(--mg)}
-  .merch-intro{font-size:17px;color:var(--grey);max-width:640px;margin-bottom:36px}
-  .merch-sub{font-family:var(--syne);font-weight:800;font-size:20px;margin:34px 0 14px}
-  .merch-sub.first{margin-top:0}
-  .merch-colors{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin-bottom:30px;font-size:14px}
-  .mc-label{font-family:var(--syne);font-weight:700;margin-right:6px}
-  .mc-dot{width:18px;height:18px;border-radius:50%;border:1px solid rgba(0,0,0,.18);display:inline-block}
-  .mc-name{margin-right:12px;color:var(--grey)}
-  .mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .mcard{border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--line)}
-  .mcard img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
-  .mcap{padding:12px 16px;font-family:var(--syne);font-weight:700;font-size:15px}
-  @media(max-width:760px){.mgrid{grid-template-columns:repeat(2,1fr)}}
+  .phero-in{position:relative;z-index:2;width:100%;padding:0 0 48px}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#f3b9e2;font-weight:600;margin-bottom:18px}
+  .phero h1{font-family:var(--syne);font-weight:800;line-height:.95;letter-spacing:-.03em;font-size:clamp(46px,9vw,100px)}
+  .phero p{max-width:560px;margin-top:20px;font-size:clamp(16px,1.7vw,18px);color:rgba(255,255,255,.88)}
+  section{padding:72px 0}
+  .filters{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:32px}
+  .search{flex:1;min-width:200px;padding:12px 18px;border:1px solid var(--line);border-radius:100px;font-family:inherit;font-size:14px;background:#fff;outline:none;color:var(--ink)}
+  .search:focus{border-color:var(--mg)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:100px;padding:8px 15px;font-family:var(--syne);font-weight:700;font-size:12px;cursor:pointer;color:var(--prune);transition:background .2s,color .2s,border-color .2s}
+  .chip:hover{border-color:var(--mg)}.chip.active{background:var(--mg);color:#fff;border-color:var(--mg)}
+  .gal{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .gitem{position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;cursor:pointer;background:var(--prune);border:none;padding:0}
+  .gitem img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .gitem:hover img{transform:scale(1.07)}
+  .gitem::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,8,16,.7) 0%,transparent 45%);opacity:0;transition:opacity .3s}
+  .gitem:hover::after{opacity:1}
+  .gitem .cap{position:absolute;left:12px;right:12px;bottom:10px;z-index:2;color:#fff;font-family:var(--syne);font-weight:700;font-size:13px;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
+  .gitem:hover .cap{opacity:1;transform:none}
+  .empty{color:var(--grey);padding:26px 0}
+  /* albums privés */
+  .private{background:var(--paper2);border-radius:16px;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:56px}
+  .private h3{font-family:var(--syne);font-weight:800;font-size:22px;letter-spacing:-.01em;margin-bottom:6px}
+  .private p{color:var(--grey);font-size:15px;max-width:520px}
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:100;background:rgba(14,4,10,.92);display:none;align-items:center;justify-content:center}
+  .lb.open{display:flex}
+  .lb img{max-width:88vw;max-height:82vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .lb-cap{position:absolute;bottom:24px;left:0;right:0;text-align:center;color:#fff;font-size:14px}
+  .lb-cap b{font-family:var(--syne);font-weight:700}
+  .lb-cap span{color:rgba(255,255,255,.6);margin-left:8px}
+  .lb-close{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:22px;cursor:pointer}
+  .lb-close:hover{background:rgba(255,255,255,.25)}
+  .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:24px;cursor:pointer}
+  .lb-nav:hover{background:rgba(255,255,255,.25)}.lb-prev{left:20px}.lb-next{right:20px}
   footer{background:var(--ink);color:#fff;padding:70px 0 32px}
   .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.12)}
   .foot-brand{font-family:var(--syne);font-weight:800;font-size:20px}.foot-brand-row{display:flex;align-items:center;gap:12px}.foot-logo{height:42px;width:auto;display:block}
@@ -53,33 +74,66 @@
   .foot-social a{color:rgba(255,255,255,.6);display:flex;transition:color .2s}.foot-social a:hover{color:#f3b9e2}.foot-social svg{width:20px;height:20px;fill:currentColor}
   .foot-lycee{font-size:13px;font-weight:500;border-left:1px solid rgba(255,255,255,.22);padding-left:16px}
   .foot-col h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:16px}
-  .foot-col a{display:block;font-size:14px;color:rgba(255,255,255,.7);padding:5px 0}.foot-col a:hover{color:#fff}
+  .foot-col a{display:block;font-size:14px;color:rgba(255,255,255,.7);padding:5px 0;transition:color .2s}.foot-col a:hover{color:#fff}
   .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;font-size:12px;color:rgba(255,255,255,.4)}
-  .foot-bottom a{color:rgba(255,255,255,.4)}.foot-bottom a:hover{color:#fff}
   .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}.rv.in{opacity:1;transform:none}
-  @media(max-width:900px){.nav-links{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 0;box-shadow:0 14px 30px rgba(45,26,40,.12)}.nav-links.open{display:flex}.nav-links a{padding:13px 32px;opacity:1}.nav-links a.cta{margin:10px 24px;justify-content:center}.burger{display:flex}.burger span{transition:transform .2s,opacity .2s}.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger.open span:nth-child(2){opacity:0}.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}section{padding:58px 0}.foot-top{grid-template-columns:1fr 1fr;gap:30px}footer{padding:54px 0 28px}}
-  @media(max-width:560px){.wrap{padding:0 18px}section{padding:44px 0}.foot-top{grid-template-columns:1fr;gap:22px}.foot-bottom{flex-direction:column;gap:6px}}
-  .drow{display:flex;align-items:center;gap:18px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:12px}
-  .dic{width:46px;height:46px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--paper2);font-size:20px}
-  .drow .grow{flex:1;min-width:0}
-  .drow h3{font-family:var(--syne);font-weight:700;font-size:17px}
-  .drow p{color:var(--grey);font-size:14px;margin-top:2px}
-  .dbtn{flex-shrink:0;background:var(--mg);color:#fff;font-family:var(--syne);font-weight:700;font-size:12px;padding:9px 16px;border-radius:100px}
-  .dbtn:hover{background:var(--mg2)}
-  .dnote{background:var(--paper2);border-radius:12px;padding:18px 22px;color:var(--grey);font-size:14px;margin-top:10px}
-  .lrow{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-bottom:10px}
-  .lrow .grow{flex:1}.lrow h3{font-family:var(--syne);font-weight:700;font-size:16px}.lrow .u{color:var(--grey);font-size:13px;word-break:break-all}
-</style></head><body>
+  @media(max-width:900px){
+    .nav-links{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 0;box-shadow:0 14px 30px rgba(45,26,40,.12)}.nav-links.open{display:flex}.nav-links a{padding:13px 32px;opacity:1}.nav-links a.cta{margin:10px 24px;justify-content:center}.burger{display:flex}.burger span{transition:transform .2s,opacity .2s}.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger.open span:nth-child(2){opacity:0}.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}section{padding:56px 0}
+    .gal{grid-template-columns:repeat(3,1fr)}
+    .private{flex-direction:column;align-items:flex-start}
+    .foot-top{grid-template-columns:1fr 1fr;gap:30px}footer{padding:54px 0 28px}
+  }
+  @media(max-width:560px){.wrap{padding:0 18px}section{padding:44px 0}.gal{grid-template-columns:repeat(2,1fr);gap:10px}.foot-top{grid-template-columns:1fr;gap:22px}.foot-bottom{flex-direction:column;gap:6px}}
+</style>
+</head>
+<body>
 <a href="#main" style="position:absolute;left:8px;top:-60px;z-index:9999;background:#7d0f64;color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;text-decoration:none;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-60px'">Aller au contenu</a>
-<nav><div class="wrap nav-in">
-  <a href="index.html" class="brand"><img loading="lazy" src="assets/logo.png" alt="MDL"><span class="brand-name">MDL Viollet-le-Duc<small>Maison des Lycéens</small></span></a>
-  <div class="nav-links"><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><a href="adherer.html" class="cta">Adhérer</a><a href="admin.html" title="Espace membres" aria-label="Espace membres" style="opacity:.4;display:inline-flex;align-items:center;color:var(--prune)"><svg viewBox="0 0 16 16" style="width:15px;height:15px;fill:currentColor" aria-hidden="true"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg></a></div>
-  <div class="burger"><span></span><span></span><span></span></div>
-</div></nav>
-<header id="main" class="phero"><div class="phero-bg" style="background-image:url(assets/lycee-facade2.jpg)"></div>
-<div class="wrap phero-in"><div class="eyebrow rv">La boutique</div><h1 class="rv">Merch</h1>
-<p class="rv">Le merch du lycée, imaginé par les élèves de la MDL.</p></div></header>
-<section><div class="wrap"><div id="merch"><p style="color:var(--grey)">Chargement…</p></div></div></section>
+<nav>
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand"><img loading="lazy" src="assets/logo.png" alt="MDL"><span class="brand-name">MDL Viollet-le-Duc<small>Maison des Lycéens</small></span></a>
+    <div class="nav-links">
+      <a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a>
+      <a href="galerie.html" class="active">Galerie</a><a href="contact.html">Contact</a><a href="adherer.html" class="cta">Adhérer</a><a href="admin.html" title="Espace membres" aria-label="Espace membres" style="opacity:.4;display:inline-flex;align-items:center;color:var(--prune)"><svg viewBox="0 0 16 16" style="width:15px;height:15px;fill:currentColor" aria-hidden="true"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg></a>
+    </div>
+    <div class="burger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<header id="main" class="phero">
+  <div class="phero-bg" style="background-image:url(assets/lycee-piste.jpg)"></div>
+  <div class="wrap phero-in">
+    <div class="eyebrow rv">En images</div>
+    <h1 class="rv">Galerie</h1>
+    <p class="rv">Les temps forts de la MDL et la vie du lycée, en photos.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="filters">
+      <input id="search" class="search" type="search" placeholder="Rechercher une photo…" oninput="applyFilters()" aria-label="Rechercher une photo">
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="gal" id="gal"><p style="color:var(--grey)">Chargement des photos…</p></div>
+
+    <div class="private">
+      <div>
+        <h3>Albums privés</h3>
+        <p>Certains albums (photos où l'on reconnaît des élèves) sont réservés aux membres et hébergés en privé sur OneDrive, pour respecter le droit à l'image.</p>
+      </div>
+      <a href="#" target="_blank" rel="noopener" class="cta">Ouvrir sur OneDrive</a>
+    </div>
+  </div>
+</section>
+
+<div class="lb" id="lb" onclick="if(event.target===this)closeLb()">
+  <button class="lb-close" onclick="closeLb()" aria-label="Fermer">×</button>
+  <button class="lb-nav lb-prev" onclick="lbStep(-1)" aria-label="Précédent">‹</button>
+  <img loading="lazy" id="lb-img" src="" alt="">
+  <button class="lb-nav lb-next" onclick="lbStep(1)" aria-label="Suivant">›</button>
+  <div class="lb-cap" id="lb-cap"></div>
+</div>
+
 <footer>
   <div class="wrap">
     <div class="foot-top">
@@ -99,34 +153,69 @@
     <div class="foot-bottom"><span>© 2026 MDL Viollet-le-Duc · Fait par les lycéens</span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="admin.html">Espace membres</a></span></div>
   </div>
 </footer>
+
 <script>
-const SB_URL='https://ksvqjbcnqphnyxfpjhvz.supabase.co',SB_KEY='sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0';
-function esc(s){return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function render(params,photos){
-  var el=document.getElementById('merch');
-  if(params.merch_actif!=='true'){el.innerHTML='<div class="dnote">La boutique n\'est pas encore disponible. Reviens bientôt !</div>';return;}
-  var coll=params.merch_collection?('<h2 style="font-family:var(--syne);font-weight:800;font-size:24px;letter-spacing:-.01em;margin-bottom:10px">'+esc(params.merch_collection)+'</h2>'):'';
-  var intro=params.merch_intro?('<p class="merch-intro">'+esc(params.merch_intro)+'</p>'):'';
-  function card(p){return '<div class="mcard"><img loading="lazy" src="'+esc(p.image_url)+'" alt="'+esc(p.titre||'Modèle')+'">'+(p.titre?'<div class="mcap">'+esc(p.titre)+'</div>':'')+'</div>';}
-  function subc(p){return (p.tags&&p.tags[0])||'Autres';}
-  var subs=[];photos.forEach(function(p){var c=subc(p);if(subs.indexOf(c)<0)subs.push(c);});
-  var grid=photos.length?subs.map(function(sc,i){var items=photos.filter(function(p){return subc(p)===sc;});return '<h3 class="merch-sub'+(i===0?' first':'')+'">'+esc(sc)+'</h3><div class="mgrid">'+items.map(card).join('')+'</div>';}).join(''):'<div class="dnote">Les modèles arrivent bientôt.</div>';
-  var cols=[['Blanc','#f4f4f2'],['Noir','#1a1a1a'],['Bleu marine','#1b2a4a'],['Bordeaux','#6b1f2a']];
-  var colors='<div class="merch-colors"><span class="mc-label">Couleurs des pulls :</span>'+cols.map(function(c){return '<span class="mc-dot" style="background:'+c[1]+'"></span><span class="mc-name">'+c[0]+'</span>';}).join('')+'</div>';
-  var btn=params.merch_boutique_url?('<div style="text-align:center;margin-top:40px"><a class="cta" style="padding:15px 30px" href="'+esc(params.merch_boutique_url)+'" target="_blank" rel="noopener">Voir la boutique</a></div>'):'';
-  el.innerHTML=coll+intro+colors+grid+btn;
+const SB_URL='https://ksvqjbcnqphnyxfpjhvz.supabase.co';
+const SB_KEY='sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0';
+const FALLBACK=[
+ {titre:'La façade du lycée',image_url:'assets/lycee-entree.jpg',categorie:'Le lycée',tags:['Façade']},
+ {titre:'Le bâtiment rond',image_url:'assets/lycee-facade2.jpg',categorie:'Le lycée',tags:['Bâtiment']},
+ {titre:"Vue d'ensemble",image_url:'assets/lycee-1.jpg',categorie:'Le lycée',tags:['Bâtiment']},
+ {titre:'Les bâtiments',image_url:'assets/lycee-3.jpg',categorie:'Le lycée',tags:['Bâtiment']},
+ {titre:'Aux abords',image_url:'assets/lycee-5.jpg',categorie:'Le lycée',tags:['Extérieur']},
+ {titre:'Les allées',image_url:'assets/lycee-escaliers.jpg',categorie:'Le lycée',tags:['Extérieur']},
+ {titre:"L'étang du lycée",image_url:'assets/lycee-etang.jpg',categorie:'Nature',tags:['Étang']},
+ {titre:"Le plan d'eau",image_url:'assets/lycee-2.jpg',categorie:'Nature',tags:['Étang']},
+ {titre:"La piste d'athlétisme",image_url:'assets/lycee-piste.jpg',categorie:'Sport',tags:['Piste']}
+];
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+let ALL=[],activeCat='Toutes',LIST=[],cur=0;
+function buildChips(){
+  var cats=['Toutes'];
+  ALL.forEach(function(p){if(p.categorie&&cats.indexOf(p.categorie)<0)cats.push(p.categorie)});
+  document.getElementById('chips').innerHTML=cats.map(function(c){
+    return '<button class="chip'+(c===activeCat?' active':'')+'" data-c="'+esc(c)+'" onclick="setCat(this.dataset.c)">'+esc(c)+'</button>';
+  }).join('');
 }
+function setCat(c){activeCat=c;buildChips();applyFilters()}
+function applyFilters(){
+  var q=(document.getElementById('search').value||'').toLowerCase().trim();
+  LIST=ALL.filter(function(p){
+    var okCat=activeCat==='Toutes'||p.categorie===activeCat;
+    var hay=((p.titre||'')+' '+(p.categorie||'')+' '+((p.tags||[]).join(' '))).toLowerCase();
+    return okCat && (q===''||hay.indexOf(q)>=0);
+  });
+  var g=document.getElementById('gal');
+  g.innerHTML=LIST.length?LIST.map(function(p,i){
+    return '<button class="gitem rv in" onclick="openLb('+i+')"><img loading="lazy" src="'+p.image_url+'" alt="'+esc(p.titre)+'"><span class="cap">'+esc(p.titre)+'</span></button>';
+  }).join(''):'<p class="empty">Aucune photo ne correspond.</p>';
+}
+function openLb(i){cur=i;showLb()}
+function showLb(){
+  var p=LIST[cur];if(!p)return;
+  document.getElementById('lb-img').src=p.image_url;
+  document.getElementById('lb-cap').innerHTML='<b>'+esc(p.titre)+'</b><span>'+esc(p.categorie||'')+'</span>';
+  document.getElementById('lb').classList.add('open');
+}
+function lbStep(d){cur=(cur+d+LIST.length)%LIST.length;showLb()}
+function closeLb(){document.getElementById('lb').classList.remove('open')}
+document.addEventListener('keydown',function(e){
+  if(!document.getElementById('lb').classList.contains('open'))return;
+  if(e.key==='Escape')closeLb();if(e.key==='ArrowRight')lbStep(1);if(e.key==='ArrowLeft')lbStep(-1);
+});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 (async function(){
-  var params={},photos=[];
+  var data=null;
   try{
     var sb=supabase.createClient(SB_URL,SB_KEY);
-    var pr=await sb.from('parametres').select('*'); if(!pr.error&&pr.data)pr.data.forEach(function(p){params[p.cle]=p.valeur});
-    var ph=await sb.from('photos').select('*').eq('categorie','Merch').order('created_at'); if(!ph.error&&ph.data)photos=ph.data;
+    var r=await sb.from('photos').select('*').eq('public_galerie',true).order('created_at',{ascending:false});
+    if(!r.error && r.data && r.data.length) data=r.data;
   }catch(e){}
-  render(params,photos);
-  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')});
+  ALL=data||FALLBACK;buildChips();applyFilters();
 })();
-</script><script>(function(){var b=document.querySelector(".burger"),n=document.querySelector(".nav-links");if(b&&n){b.addEventListener("click",function(){n.classList.toggle("open");b.classList.toggle("open")});n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");b.classList.remove("open")}})}})();</script>
+</script>
+<script>(function(){var b=document.querySelector(".burger"),n=document.querySelector(".nav-links");if(b&&n){b.addEventListener("click",function(){n.classList.toggle("open");b.classList.toggle("open")});n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");b.classList.remove("open")}})}})();</script>
 <style id="a11y-css">
   html.a11y-dys, html.a11y-dys *{font-family:'OpenDyslexic','DM Sans',sans-serif !important;letter-spacing:normal !important}
   html.a11y-big{zoom:1.15}
@@ -199,4 +288,5 @@ function render(params,photos){
 })();
 </script>
 
-</body></html>
+</body>
+</html>

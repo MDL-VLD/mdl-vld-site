@@ -1,346 +1,187 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDL Viollet-le-Duc</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" type="image/png" href="favicon-32.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
-  <meta name="robots" content="index, follow">
-  <meta name="description" content="Politique de confidentialité de la MDL du Lycée Viollet-le-Duc.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .legal-content { max-width: 760px; margin: 0 auto; }
-    .legal-section { margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--lilas-pale); }
-    .legal-section:last-child { border-bottom: none; margin-bottom: 0; }
-    .legal-section-title {
-      font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
-      color: var(--prune); margin-bottom: 16px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .legal-section-num {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 28px; height: 28px; background: var(--lilas-pale); color: var(--magenta);
-      border-radius: 50%; font-size: 12px; font-weight: 700; font-family: 'DM Sans', sans-serif; flex-shrink: 0;
-    }
-    .legal-text { font-size: 14px; color: var(--gris-texte); line-height: 1.8; }
-    .legal-text p { margin-bottom: 12px; }
-    .legal-text p:last-child { margin-bottom: 0; }
-    .legal-highlight {
-      background: var(--lilas-pale); border-left: 3px solid var(--magenta);
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      padding: 14px 18px; font-size: 13px; color: var(--gris-texte); line-height: 1.7; margin: 16px 0;
-    }
-    .legal-highlight strong { color: var(--magenta); }
-    .legal-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 12px; }
-    .legal-table td { padding: 10px 14px; border-bottom: 1px solid var(--lilas-pale); vertical-align: top; }
-    .legal-table td:first-child { font-weight: 500; color: var(--prune); width: 200px; }
-    .legal-table td:last-child { color: var(--gris-texte); }
-    .legal-table tr:last-child td { border-bottom: none; }
-    .droits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
-    .droit-item {
-      display: flex; gap: 12px; align-items: flex-start;
-      background: white; border: 1px solid var(--lilas-pale);
-      border-radius: var(--radius-md); padding: 14px;
-    }
-    .droit-icon { font-size: 20px; flex-shrink: 0; }
-    .droit-title { font-size: 13px; font-weight: 500; color: var(--prune); margin-bottom: 3px; }
-    .droit-desc { font-size: 12px; color: var(--gris-texte); line-height: 1.55; }
-    .legal-date {
-      font-size: 12px;
-      color: var(--gris-texte);
-      text-align: right;
-      margin-top: 32px;
-      font-style: italic;
-    }
-  </style>
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="MDL Viollet-le-Duc">
-  <meta property="og:title" content="MDL Viollet-le-Duc">
-  <meta property="og:description" content="MDL Viollet-le-Duc · Maison des Lycéens">
-  <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
-  <meta property="og:url" content="https://mdl-vld.fr/confidentialite.html">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#930f7c">
-  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
-<body>
-<a href="#main-content" class="skip-link">Aller au contenu principal</a>
-
+<html lang="fr"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDL VLD · Confidentialité</title>
+<meta name="description" content="Politique de confidentialité de la Maison des Lycéens du Lycée Viollet-le-Duc.">
+<link rel="icon" href="favicon.ico"><link rel="icon" type="image/png" href="favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--ink:#241019;--prune:#2d1a28;--mg:#7d0f64;--mg2:#63104f;--paper:#f6f2ef;--paper2:#efe8e3;--line:rgba(45,26,40,.12);--grey:#6d6169;--syne:'Syne',sans-serif;--body:'DM Sans',sans-serif;--serif:'Fraunces',serif}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+  .notice{background:var(--prune);color:#fff;text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:8px}.notice b{color:#f3b9e2;font-weight:600}
+  nav{position:sticky;top:0;z-index:50;background:rgba(246,242,239,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none}.brand img{height:34px;width:auto;display:block}
+  .brand-name{font-family:var(--syne);font-weight:800;font-size:15px;letter-spacing:-.01em;line-height:1;color:var(--ink)}
+  .brand-name small{display:block;font-family:var(--body);font-weight:400;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-top:4px}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--prune);opacity:.75;transition:opacity .2s;text-decoration:none}.nav-links a:hover{opacity:1}
+  .cta{display:inline-flex;align-items:center;gap:8px;background:var(--mg);color:#fff;font-family:var(--syne);font-weight:700;font-size:13px;padding:11px 20px;border-radius:100px;text-decoration:none;transition:background .2s}.cta:hover{background:var(--mg2)}
+  .nav-links a.cta{opacity:1;color:#fff}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}.burger span{width:24px;height:2px;background:var(--prune)}
+  .lhead{padding:64px 0 20px}
+  .lhead .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mg);font-weight:600;margin-bottom:16px}
+  .lhead h1{font-family:var(--syne);font-weight:800;font-size:clamp(34px,6vw,60px);letter-spacing:-.02em;line-height:1}
+  .lhead .maj{color:var(--grey);font-size:13px;margin-top:14px}
+  .legal{padding:20px 0 90px}
+  .legal .col{max-width:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:46px 52px}
+  .legal h2{font-family:var(--syne);font-weight:700;font-size:22px;letter-spacing:-.01em;margin:38px 0 12px;color:var(--prune)}
+  .legal .col>h2:first-child{margin-top:0}
+  .legal p{margin-bottom:14px;color:#3a2a34}
+  .legal ul{margin:0 0 14px 20px;color:#3a2a34}.legal li{margin-bottom:7px}
+  .legal a{color:var(--mg)}
+  .idcard{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:26px 30px;margin:8px 0 8px}
+  .idcard dl{display:grid;grid-template-columns:210px 1fr;gap:10px 20px}
+  .idcard dt{font-family:var(--syne);font-weight:700;font-size:13px;color:var(--grey)}
+  .idcard dd{font-size:15px;color:var(--ink)}
+  footer{background:var(--ink);color:#fff;padding:64px 0 30px;margin-top:20px}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .foot-brand{font-family:var(--syne);font-weight:800;font-size:20px}.foot-brand-row{display:flex;align-items:center;gap:12px}.foot-logo{height:40px;width:auto}
+  .foot-brand p{font-family:var(--body);font-weight:400;font-size:14px;color:rgba(255,255,255,.5);margin-top:14px;max-width:320px}
+  .foot-col h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:16px}
+  .foot-col a{display:block;font-size:14px;color:rgba(255,255,255,.7);padding:5px 0;text-decoration:none}.foot-col a:hover{color:#fff}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:22px;font-size:12px;color:rgba(255,255,255,.4)}
+  .foot-bottom a{color:rgba(255,255,255,.4);text-decoration:none}.foot-bottom a:hover{color:#fff}
+  @media(max-width:900px){.nav-links{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 0;box-shadow:0 14px 30px rgba(45,26,40,.12)}.nav-links.open{display:flex}.nav-links a{padding:13px 32px;opacity:1}.nav-links a.cta{margin:10px 24px;justify-content:center}.burger{display:flex}.burger span{transition:transform .2s,opacity .2s}.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger.open span:nth-child(2){opacity:0}.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}.foot-top{grid-template-columns:1fr 1fr;gap:30px}}
+  @media(max-width:560px){.wrap{padding:0 18px}.legal .col{padding:28px 22px}.idcard dl{grid-template-columns:1fr;gap:2px 0}.idcard dt{margin-top:10px}.foot-top{grid-template-columns:1fr;gap:22px}.foot-bottom{flex-direction:column;gap:6px}}
+</style></head><body>
+<a href="#main" style="position:absolute;left:8px;top:-60px;z-index:9999;background:#7d0f64;color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;text-decoration:none;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-60px'">Aller au contenu</a>
 <nav>
-  <a href="index.html" class="nav-logo">
-    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL"></div>
-    <div>
-      <div class="nav-logo-text">MDL Viollet-le-Duc</div>
-      <span class="nav-logo-sub">Maison des Lycéens</span>
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand"><img loading="lazy" src="assets/logo.png" alt="MDL"><span class="brand-name">MDL Viollet-le-Duc<small>Maison des Lycéens</small></span></a>
+    <div class="nav-links">
+      <a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a>
+      <a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><a href="adherer.html" class="cta">Adhérer</a><a href="admin.html" title="Espace membres" aria-label="Espace membres" style="opacity:.4;display:inline-flex;align-items:center;color:var(--prune)"><svg viewBox="0 0 16 16" style="width:15px;height:15px;fill:currentColor" aria-hidden="true"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg></a>
     </div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html">Accueil</a></li>
-    <li class="nav-dropdown">
-      <a href="evenements.html">Activités</a>
-      <div class="nav-dropdown-menu">
-        <a href="evenements.html">Événements</a>
-        <a href="projets.html">Projets</a>
-        <a href="clubs.html">Clubs</a>
-        <a href="merch.html">Merch</a>
-      </div>
-    </li>
-    <li><a href="planning.html">Planning</a></li>
-    <li class="nav-dropdown">
-      <a href="mdl.html">La MDL</a>
-      <div class="nav-dropdown-menu">
-        <a href="mdl.html">La MDL</a>
-        <a href="equipe.html">Équipe</a>
-        <a href="partenaires.html">Partenaires</a>
-        <div class="nav-dropdown-menu-sep"></div>
-        <a href="documents.html">Documents</a>
-      </div>
-    </li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="adhesion.html" class="nav-cta">Adhérer</a></li>
-  </ul>
-  <div class="nav-right">
-    <button class="nav-search-btn" id="searchOpenBtn" title="Ctrl+K" aria-label="Rechercher">🔍 Rechercher</button>
-    <button class="dark-toggle" id="darkToggle" aria-label="Mode sombre" title="Mode sombre">🌙</button>
-    <a href="admin.html" style="font-family:var(--syne,sans-serif);font-size:10px;font-weight:700;letter-spacing:.06em;color:rgba(var(--prune-rgb,45,26,40),.45);padding:5px 10px;border:1px solid rgba(0,0,0,.12);border-radius:4px;text-decoration:none;white-space:nowrap;margin-left:4px;" title="Connexion membres">🔐</a>
-    <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
+    <div class="burger"><span></span><span></span><span></span></div>
   </div>
 </nav>
-<div class="nav-mobile-menu" id="mobile-menu">
-  <a href="index.html">Accueil</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">Activités</div>
-  <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
-  <a href="projets.html" style="padding-left:32px!important;">Projets</a>
-  <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
-  <a href="merch.html" style="padding-left:32px!important;">Merch</a>
-  <a href="planning.html">Planning</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">La MDL</div>
-  <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
-  <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
-  <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
-  <a href="documents.html" style="padding-left:32px!important;">Documents</a>
-  <a href="credits.html" style="padding-left:32px!important;">Crédits</a>
-  <a href="contact.html">Contact</a>
-  <a href="adhesion.html" class="nav-cta">Adhérer</a>
-</div>
-<script>
-function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
-document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
-</script>
-<span id="main-content" tabindex="-1"></span>
+<header id="main" class="lhead"><div class="wrap"><div class="eyebrow">Vos données</div><h1>Politique de confidentialité</h1><div class="maj">Conformément au Règlement Général sur la Protection des Données (RGPD).</div></div></header>
+<main class="legal"><div class="wrap"><div class="col">
 
-<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-facade.jpg'); --hero-pos: center center;">
-  <span class="section-eyebrow">Vie privée</span>
-  <h1 class="section-title">Politique de confidentialité</h1>
-  <p class="section-sub">Conformément au Règlement Général sur la Protection des Données (RGPD - UE 2016/679) et à la loi Informatique et Libertés du 6 janvier 1978 modifiée.</p>
-</div>
+<h2>Responsable du traitement</h2>
+<p>Les données collectées sur ce site sont traitées par la Maison des Lycéens du Lycée Viollet-le-Duc (1 route de Septeuil, 78640 Villiers-Saint-Frédéric). Contact : <a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a>.</p>
 
-<section class="section">
-  <div class="legal-content">
+<h2>Données que nous collectons</h2>
+<ul>
+<li><strong>Via le formulaire de contact</strong> : ton prénom (facultatif), ton email (facultatif), le sujet et le message que tu écris.</li>
+<li><strong>Via l'adhésion</strong> : l'adhésion est gérée par HelloAsso, qui collecte les informations nécessaires (nom, email, paiement). Voir la politique de confidentialité de HelloAsso.</li>
+</ul>
+<p>Le site n'utilise aucun outil de suivi publicitaire ni de statistiques traçant les visiteurs.</p>
 
-    <div class="legal-section">
-      <div class="legal-section-title"><span class="legal-section-num">1</span>Responsable du traitement</div>
-      <div class="legal-text">
-        <table class="legal-table">
-          <tr><td>Organisme</td><td>Maison des Lycéens (MDL) du Lycée Viollet-le-Duc</td></tr>
-          <tr><td>Forme juridique</td><td>Association loi 1901</td></tr>
-          <tr><td>SIRET</td><td>907 864 995 00010</td></tr>
-          <tr><td>Adresse</td><td>Lycée Viollet-le-Duc, Villiers-Saint-Frédéric, 78640</td></tr>
-          <tr><td>Contact DPO</td><td><a href="mailto:contact@mdl-vld.fr" style="color: var(--magenta);">contact@mdl-vld.fr</a></td></tr>
-        </table>
-      </div>
-    </div>
+<h2>Pourquoi nous les collectons</h2>
+<ul>
+<li>Répondre à tes messages et à tes demandes.</li>
+<li>Gérer les adhésions à l'association (via HelloAsso).</li>
+</ul>
+<p>La base légale est ton consentement, que tu donnes en nous envoyant un message ou en adhérant.</p>
 
-    <div class="legal-section">
-      <div class="legal-section-title"><span class="legal-section-num">2</span>Données collectées et finalités</div>
-      <div class="legal-text">
-        <p>La MDL collecte uniquement les données strictement nécessaires à son fonctionnement associatif. Voici le détail des traitements :</p>
-        <div class="legal-highlight">
-          <strong>Formulaire de contact</strong> - Données : prénom, nom, email, message, pièce jointe optionnelle. Finalité : répondre aux demandes. Base légale : intérêt légitime. Conservation : durée de la correspondance, suppression sur demande.
-        </div>
-        <div class="legal-highlight">
-          <strong>Adhésion MDL (via HelloAsso)</strong> - Données : identité, coordonnées, classe. Finalité : gestion des membres. Base légale : exécution du contrat d'adhésion. Conservation : année scolaire en cours + 1 an.
-        </div>
-        <div class="legal-highlight">
-          <strong>Billetterie événements (via Billetweb)</strong> - Données : identité, email, paiement géré par Billetweb. Finalité : gestion des entrées aux événements. Base légale : exécution du contrat. Conservation : durée légale comptable (10 ans pour les données financières).
-        </div>
-        <p>La MDL ne collecte aucune donnée sensible (origine ethnique, opinions politiques, religion, santé, orientation sexuelle) et ne pratique aucun profilage ou prise de décision automatisée.</p>
-      </div>
-    </div>
+<h2>Combien de temps nous les gardons</h2>
+<p>Les messages envoyés via le formulaire sont conservés le temps nécessaire pour te répondre, puis supprimés (au maximum un an). Les données d'adhésion sont conservées par HelloAsso selon ses propres règles.</p>
 
-    <div class="legal-section">
-      <div class="legal-section-title"><span class="legal-section-num">3</span>Destinataires des données</div>
-      <div class="legal-text">
-        <p>Les données collectées sont destinées exclusivement aux membres du bureau de la MDL dans le cadre de leurs missions associatives. Elles ne sont jamais vendues, louées ou cédées à des tiers.</p>
-        <p>Les sous-traitants utilisés sont :</p>
-        <table class="legal-table">
-          <tr><td>Formspree</td><td>Transmission des messages de contact - basé aux États-Unis, conforme au Data Privacy Framework</td></tr>
-          <tr><td>HelloAsso</td><td>Gestion des adhésions - basé en France, conforme RGPD</td></tr>
-          <tr><td>Billetweb</td><td>Gestion de la billetterie - basé en France, conforme RGPD</td></tr>
-          <tr><td>Cloudflare</td><td>Hébergement du site - transfert encadré par des clauses contractuelles types</td></tr>
-        </table>
-      </div>
-    </div>
+<h2>Qui y a accès</h2>
+<p>Seuls les membres du bureau de la MDL ont accès aux messages reçus. Les données sont stockées via Supabase, sur des serveurs situés dans l'Union européenne. Elles ne sont jamais vendues ni transmises à des tiers à des fins commerciales.</p>
 
-    <div class="legal-section">
-      <div class="legal-section-title"><span class="legal-section-num">4</span>Vos droits</div>
-      <div class="legal-text">
-        <p>Conformément au RGPD, vous disposez des droits suivants sur vos données personnelles. Pour les exercer, écrivez à <a href="mailto:contact@mdl-vld.fr" style="color: var(--magenta);">contact@mdl-vld.fr</a>. Réponse sous 30 jours.</p>
-        <div class="droits-grid">
-          <div class="droit-item">
-            <div class="droit-icon">👁</div>
-            <div><div class="droit-title">Droit d'accès</div><div class="droit-desc">Obtenir une copie des données vous concernant.</div></div>
-          </div>
-          <div class="droit-item">
-            <div class="droit-icon">✏️</div>
-            <div><div class="droit-title">Droit de rectification</div><div class="droit-desc">Faire corriger des données inexactes ou incomplètes.</div></div>
-          </div>
-          <div class="droit-item">
-            <div class="droit-icon">🗑</div>
-            <div><div class="droit-title">Droit à l'effacement</div><div class="droit-desc">Demander la suppression de vos données ("droit à l'oubli").</div></div>
-          </div>
-          <div class="droit-item">
-            <div class="droit-icon">⏸</div>
-            <div><div class="droit-title">Droit à la limitation</div><div class="droit-desc">Restreindre temporairement l'utilisation de vos données.</div></div>
-          </div>
-          <div class="droit-item">
-            <div class="droit-icon">🚫</div>
-            <div><div class="droit-title">Droit d'opposition</div><div class="droit-desc">S'opposer au traitement de vos données pour des raisons légitimes.</div></div>
-          </div>
-          <div class="droit-item">
-            <div class="droit-icon">📦</div>
-            <div><div class="droit-title">Portabilité</div><div class="droit-desc">Recevoir vos données dans un format structuré et lisible.</div></div>
-          </div>
-        </div>
-        <p style="margin-top: 16px;">Vous disposez également du droit d'introduire une réclamation auprès de la <a href="https://www.cnil.fr" target="_blank" rel="noopener" style="color: var(--magenta);">CNIL</a> (Commission Nationale de l'Informatique et des Libertés).</p>
-      </div>
-    </div>
+<h2>Tes droits</h2>
+<p>Tu disposes d'un droit d'accès, de rectification, de suppression et d'opposition sur tes données. Pour les exercer, écris-nous à <a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a>.</p>
+<p>Tu peux également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).</p>
 
-    <div class="legal-section">
-      <div class="legal-section-title"><span class="legal-section-num">5</span>Cookies et traceurs</div>
-      <div class="legal-text">
-        <p>Ce site n'utilise <strong>aucun cookie publicitaire ou de traçage</strong>. Aucun outil d'analyse de trafic (Google Analytics, etc.) n'est installé.</p>
-        <p>Les seuls cookies susceptibles d'être déposés sont des cookies techniques strictement nécessaires au bon fonctionnement du site (session, sécurité du formulaire). Ces cookies ne nécessitent pas votre consentement au titre de l'article 82 de la loi Informatique et Libertés.</p>
-        <p>Le site utilise également le <strong>stockage local de votre navigateur (localStorage)</strong> pour mémoriser deux préférences strictement techniques : votre choix de réponse au bandeau cookie, et votre préférence d'affichage (mode clair ou sombre). Ces informations restent sur votre appareil, ne sont jamais transmises à la MDL ni à un tiers, et peuvent être effacées à tout moment depuis les paramètres de votre navigateur.</p>
-        <p>Les services tiers intégrés (HelloAsso, Billetweb via liens externes) peuvent déposer leurs propres cookies lorsque vous accédez à leurs plateformes. Consultez leurs politiques de confidentialité respectives.</p>
-      </div>
-    </div>
+<h2>Liens vers des sites externes</h2>
+<p>Notre site contient des liens vers des services tiers : HelloAsso (adhésion et paiement), les billetteries de nos événements, et nos réseaux sociaux. Quand tu cliques sur ces liens, tu quittes notre site. Ces services sont sécurisés et disposent de leurs propres politiques de confidentialité, que nous t'invitons à consulter. La MDL n'est pas responsable du traitement de tes données par ces plateformes.</p>
 
-    <div class="legal-section">
-      <div class="legal-section-title"><span class="legal-section-num">6</span>Sécurité des données</div>
-      <div class="legal-text">
-        <p>La MDL met en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données contre toute perte, destruction, altération, accès ou divulgation non autorisés :</p>
-        <p>Le site est servi en HTTPS (chiffrement TLS). L'accès aux données est limité aux membres du bureau ayant un besoin opérationnel. Les mots de passe des comptes associatifs sont stockés de façon sécurisée.</p>
-        <p>En cas de violation de données susceptible d'engendrer un risque pour vos droits et libertés, la MDL s'engage à notifier la CNIL dans les 72 heures et les personnes concernées sans délai injustifié.</p>
-      </div>
-    </div>
+<h2>Cookies</h2>
+<p>Ce site n'utilise que les cookies et technologies strictement nécessaires à son fonctionnement. Aucun cookie de suivi ou de publicité n'est déposé.</p>
 
-    <div class="legal-section">
-      <div class="legal-section-title"><span class="legal-section-num">7</span>Mineurs</div>
-      <div class="legal-text">
-        <p>Ce site est destiné aux lycéens, dont certains peuvent être mineurs. Conformément au RGPD, pour les mineurs de moins de 15 ans, le consentement d'un parent ou tuteur légal est requis pour tout traitement de données personnelles. La MDL ne collecte pas sciemment des données de mineurs de moins de 15 ans sans consentement parental.</p>
-        <p>Si vous êtes parent et estimez que des données de votre enfant ont été collectées sans votre accord, contactez-nous à <a href="mailto:contact@mdl-vld.fr" style="color: var(--magenta);">contact@mdl-vld.fr</a>.</p>
-      </div>
-    </div>
-
-    <div class="legal-section">
-      <div class="legal-section-title"><span class="legal-section-num">8</span>Mise à jour de cette politique</div>
-      <div class="legal-text">
-        <p>Cette politique de confidentialité peut être mise à jour pour refléter des changements dans nos pratiques ou dans la réglementation applicable. La date de dernière mise à jour est indiquée ci-dessous. En cas de modification substantielle, un avis sera affiché sur le site.</p>
-      </div>
-    </div>
-
-    <div class="legal-date">
-      Dernière mise à jour : <strong>juin 2026</strong>
-    </div>
-
-  </div>
-</section>
-
-<div class="footer-tagline-block">
-  <p class="footer-tagline-text">Fait par des <strong>lycéens</strong>, pour des lycéens.</p>
-  <p class="footer-tagline-sub">MDL Viollet-le-Duc · Villiers-Saint-Frédéric · depuis 2014</p>
-</div>
+</div></div></main>
 <footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-logo-row">
-        <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
-        <div class="footer-logo-name">MDL Viollet-le-Duc</div>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="foot-brand-row"><img loading="lazy" src="assets/logo.png" alt="" class="foot-logo"><span>MDL Viollet-le-Duc</span></div>
+        <p>La Maison des Lycéens du Lycée Viollet-le-Duc.<br>Villiers-Saint-Frédéric (78640), Yvelines, France.</p>
       </div>
-      <p class="footer-desc">Association loi 1901 · gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+      <div class="foot-col"><h4>Le site</h4><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a></div>
+      <div class="foot-col"><h4>Pratique</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a></div>
     </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Activités</div>
-      <ul>
-        <li><a href="evenements.html">Événements</a></li>
-        <li><a href="projets.html">Projets</a></li>
-        <li><a href="clubs.html">Clubs</a></li>
-        <li><a href="merch.html">Merch</a></li>
-        <li><a href="planning.html">Planning</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">La MDL</div>
-      <ul>
-        <li><a href="mdl.html">La MDL</a></li>
-        <li><a href="equipe.html">Équipe</a></li>
-        <li><a href="adhesion.html">Adhérer</a></li>
-        <li><a href="partenaires.html">Partenaires</a></li>
-        <li><a href="documents.html">Documents</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Infos</div>
-      <ul>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a></li>
-        <li><a href="credits.html">Crédits</a></li>
-        <li><a href="mentions-legales.html">Mentions légales</a></li>
-        <li><a href="confidentialite.html">Confidentialité</a></li>
-      </ul>
-    </div>
-  </div>
-  <div style="padding:12px 64px;border-top:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.15);">
-  <a href="admin.html" style="font-size:11px;color:rgba(255,255,255,0.25);text-decoration:none;font-family:var(--syne,sans-serif);letter-spacing:.06em;">
-    🔐 Espace membres
-  </a>
-</div>
-<div class="footer-bottom">
-    <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627</span>
-    <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
+    <div class="foot-bottom"><span>© 2026 MDL Viollet-le-Duc · Fait par les lycéens</span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="admin.html">Espace membres</a></span></div>
   </div>
 </footer>
-<button class="back-to-top" id="backToTop" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
-  <div class="search-modal">
-    <div class="search-input-row">
-      <span class="search-icon">🔍</span>
-      <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
-      <button class="search-close-btn" id="searchCloseBtn">Échap</button>
-    </div>
-    <div class="search-results" id="searchResults"><div class="search-empty">Tapez pour rechercher...</div></div>
-  </div>
+<script>(function(){var b=document.querySelector(".burger"),n=document.querySelector(".nav-links");if(b&&n){b.addEventListener("click",function(){n.classList.toggle("open");b.classList.toggle("open")});n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");b.classList.remove("open")}})}})();</script>
+<style id="a11y-css">
+  html.a11y-dys, html.a11y-dys *{font-family:'OpenDyslexic','DM Sans',sans-serif !important;letter-spacing:normal !important}
+  html.a11y-big{zoom:1.15}
+  html.a11y-contrast{--grey:#241019;--line:rgba(45,26,40,.42)}
+  .a11y-btn{position:fixed;right:18px;bottom:18px;z-index:300;width:50px;height:50px;border-radius:50%;background:#7d0f64;color:#fff;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.28);font-size:22px;display:flex;align-items:center;justify-content:center}
+  .a11y-btn:hover{background:#63104f}
+  .a11y-panel{position:fixed;right:18px;bottom:78px;z-index:300;background:#fff;border:1px solid #e7e1ea;border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.2);padding:16px 18px;width:250px;display:none;font-family:'DM Sans',sans-serif}
+  .a11y-panel.open{display:block}
+  .a11y-panel h4{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;margin:0 0 12px;color:#241019}
+  .a11y-opt{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;font-size:14px;color:#241019;border-top:1px solid #eee}
+  .a11y-opt:first-of-type{border-top:none}
+  .a11y-opt button{background:#f3e7ef;border:none;border-radius:100px;padding:6px 13px;font-size:12px;font-weight:700;cursor:pointer;color:#7d0f64;font-family:'Syne',sans-serif;white-space:nowrap}
+  .a11y-opt button.on{background:#7d0f64;color:#fff}
+  html.dark{--paper:#141019;--paper2:#1c1524;--line:rgba(255,255,255,.12);--grey:#b3a9b1;--ink:#ece7ea;--prune:#ece7ea}
+  html.dark footer{background:#0f0b13!important}
+  html.dark .feat,html.dark .ctaband,html.dark .avenir{background:#1b1426!important}
+  html.dark .card-tag{color:#241019!important}
+  html.dark ::placeholder{color:#8a808a!important}
+  html.dark body{background:#141019;color:#ece7ea}
+  html.dark nav{background:rgba(20,15,25,.88)!important}
+  html.dark .ag-tab{background:#1e1726!important;color:#ece7ea!important;border-color:rgba(255,255,255,.14)!important}
+  html.dark .ag-tab.on{background:var(--mg)!important;color:#fff!important}
+  html.dark .cta-light{color:#241019!important}
+  html.dark .acard,html.dark .acard-body h3{color:#ece7ea!important}
+  html.dark .nav-links a{color:#ece7ea!important}
+  html.dark .brand-name,html.dark .brand-name small{color:#ece7ea!important}
+  html.dark .burger span{background:#ece7ea!important}
+  html.dark .card,html.dark .acard,html.dark .cbox,html.dark .benefit,html.dark .step,html.dark .gov-card,html.dark .mission,html.dark .drow,html.dark .lrow,html.dark .ag-row,html.dark .cal-cell,html.dark .pcard,html.dark .mcard,html.dark .faq details,html.dark .gov-note .box{background:#1e1726!important;border-color:rgba(255,255,255,.1)!important}
+  html.dark .join{background:#1b1426!important}
+  html.dark .finp,html.dark .fta,html.dark .search,html.dark .chip{background:#1e1726!important;color:#ece7ea!important;border-color:rgba(255,255,255,.14)!important}
+  html.dark .chip.active{background:var(--mg)!important;color:#fff!important}
+  html.dark .cal-cell.empty{background:transparent!important;border:none!important}
+  html.dark .cal-cell.d-vacances{background:#152318!important}html.dark .cal-cell.d-ferie{background:#231e13!important}html.dark .cal-cell.d-evenement{background:#231522!important}html.dark .cal-cell.d-bac{background:#1d1923!important}html.dark .cal-cell.d-autre{background:#151a27!important}
+  html.dark .legal h2,html.dark .mail,html.dark .addr,html.dark .idcard dd,html.dark .about-body .hl,html.dark .intro-body .hl,html.dark .cbox h2,html.dark .step h3,html.dark .benefit h3,html.dark .gov-card h3,html.dark .mission h3,html.dark .drow h3,html.dark .lrow h3,html.dark .ag-row h3,html.dark .pcard h3,html.dark .mcap,html.dark .dnum,html.dark .sec-title,html.dark .ag-mtitle,html.dark .merch-sub,html.dark .cal-title{color:#ece7ea!important}
+  html.dark .cal-nav{background:#1e1726!important;border-color:rgba(255,255,255,.12)!important;color:#ece7ea!important}
+  html.dark .mc-name,html.dark details p,html.dark .desc{color:#b3a9b1!important}
+  html.dark .a11y-panel{background:#1e1726!important;color:#ece7ea}
+  html.dark .a11y-panel h4,html.dark .a11y-opt{color:#ece7ea}
+  html.dark .a11y-opt{border-color:rgba(255,255,255,.1)}
+  html.a11y-big .a11y-btn,html.a11y-big .a11y-panel{zoom:.87}
+</style>
+<button class="a11y-btn" id="a11yBtn" aria-label="Options d'accessibilité" title="Accessibilité"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:currentColor" aria-hidden="true"><path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm9 6h-6v13a1 1 0 1 1-2 0v-6h-2v6a1 1 0 1 1-2 0V8H3a1 1 0 1 1 0-2h18a1 1 0 1 1 0 2Z"/></svg></button>
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="Options d'accessibilité">
+  <h4>Accessibilité</h4>
+  <div class="a11y-opt"><span>Police dyslexie</span><button data-a11y="dys">Activer</button></div>
+  <div class="a11y-opt"><span>Texte plus grand</span><button data-a11y="big">Activer</button></div>
+  <div class="a11y-opt"><span>Contraste renforcé</span><button data-a11y="contrast">Activer</button></div>
+  <div class="a11y-opt"><span>Mode sombre</span><button data-a11y="dark">Activer</button></div>
+  <div class="a11y-opt"><span style="color:#6b7280;font-size:13px">Réinitialiser</span><button data-a11y="reset">Remettre à zéro</button></div>
 </div>
-<div class="lightbox-overlay" id="lightboxOverlay">
-  <button class="lightbox-close" aria-label="Fermer">✕</button>
-  <img class="lightbox-img" src="" alt="">
-  <div class="lightbox-caption"></div>
-</div>
-<div class="cookie-banner" id="cookieBanner" role="alertdialog">
-  <p class="cookie-banner-text">Ce site utilise uniquement des cookies techniques nécessaires. <a href="confidentialite.html">En savoir plus</a></p>
-  <div class="cookie-banner-actions">
-    <button class="cookie-btn cookie-btn-refuse" id="cookieRefuse">Refuser</button>
-    <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Accepter</button>
-  </div>
-</div>
-<script>document.querySelectorAll('.year-auto').forEach(function(e){{e.textContent=new Date().getFullYear();}});</script>
-<script src="mdl-core.js" defer></script>
-</body>
-</html>
+<script>
+(function(){
+  var root=document.documentElement;
+  function load(){try{return JSON.parse(localStorage.getItem('mdl-a11y')||'{}')}catch(e){return {}}}
+  function save(s){try{localStorage.setItem('mdl-a11y',JSON.stringify(s))}catch(e){}}
+  function ensureFont(){if(!document.getElementById('a11y-font')){var l=document.createElement('link');l.id='a11y-font';l.rel='stylesheet';l.href='https://fonts.cdnfonts.com/css/opendyslexic';document.head.appendChild(l);}}
+  var st=load();
+  function apply(){
+    root.classList.toggle('a11y-dys',!!st.dys); if(st.dys)ensureFont();
+    root.classList.toggle('a11y-big',!!st.big);
+    root.classList.toggle('a11y-contrast',!!st.contrast);
+    root.classList.toggle('dark',!!st.dark);
+    document.querySelectorAll('[data-a11y]').forEach(function(b){var k=b.getAttribute('data-a11y');if(k==='reset')return;var on=!!st[k];b.classList.toggle('on',on);b.textContent=on?'Activé':'Activer';});
+  }
+  apply();
+  var btn=document.getElementById('a11yBtn'),panel=document.getElementById('a11yPanel');
+  btn.addEventListener('click',function(){panel.classList.toggle('open')});
+  document.addEventListener('click',function(e){if(!panel.contains(e.target)&&!btn.contains(e.target))panel.classList.remove('open')});
+  panel.addEventListener('click',function(e){var b=e.target.closest('[data-a11y]');if(!b)return;var k=b.getAttribute('data-a11y');if(k==='reset'){st={};}else{st[k]=!st[k];}save(st);apply();});
+})();
+</script>
+
+</body></html>

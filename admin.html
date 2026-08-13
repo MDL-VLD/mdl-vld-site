@@ -1,882 +1,684 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDL · Administration</title>
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --mg: #930f7c; --mg2: #7a0d67;
-      --prune: #2d1a28; --lilas: #eddde9;
-      --gris: #6b7280; --gris-pale: #f9f8fa;
-      --rouge: #dc2626; --vert: #16a34a;
-      --or: #c9a84c; --syne: 'Syne', sans-serif;
-      --radius: 8px; --border: #e9e3ec;
-    }
-    body { font-family: 'DM Sans', sans-serif; background: #f5f3f7; color: var(--prune); min-height: 100vh; font-size: 14px; }
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDL VLD · Administration</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--ink:#241019;--prune:#2d1a28;--mg:#7d0f64;--mg2:#63104f;--paper:#f5f3f7;--line:#e7e1ea;--grey:#6b7280;--vert:#16a34a;--rouge:#dc2626;--or:#c9a84c;--syne:'Syne',sans-serif;--body:'DM Sans',sans-serif}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:14px;line-height:1.5}
+  a{color:inherit}
+  /* LOGIN */
+  #login{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--prune);padding:20px}
+  .lbox{background:#fff;border-radius:16px;padding:44px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  .llogo{font-family:var(--syne);font-weight:800;font-size:20px;color:var(--prune)}
+  .lsub{font-size:13px;color:var(--grey);margin:4px 0 28px}
+  .fld{margin-bottom:16px}
+  .fld label{display:block;font-size:12px;font-weight:600;margin-bottom:6px}
+  .inp{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;outline:none}
+  .inp:focus{border-color:var(--mg)}
+  .btn{font-family:var(--syne);font-weight:700;font-size:13px;border:none;border-radius:8px;padding:11px 18px;cursor:pointer;background:var(--mg);color:#fff;transition:background .2s}
+  .btn:hover{background:var(--mg2)}.btn:disabled{opacity:.6;cursor:default}
+  .btn-full{width:100%;padding:13px}
+  .btn-out{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn-out:hover{background:var(--paper)}
+  .btn-vt{background:var(--vert)}.btn-vt:hover{filter:brightness(.92)}
+  .btn-rg{background:#fff;color:var(--rouge);border:1px solid var(--line)}.btn-rg:hover{background:#fef2f2}
+  .btn-sm{padding:6px 12px;font-size:12px}
+  .lerr{color:var(--rouge);font-size:13px;margin-top:10px;min-height:18px}
+  /* LAYOUT */
+  #app{display:none;min-height:100vh}
+  .top{background:var(--prune);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:30}
+  .top .lg{font-family:var(--syne);font-weight:800;font-size:15px;color:#fff;display:flex;align-items:center;gap:10px}
+  .top .lg a{color:rgba(255,255,255,.5);font-weight:400;font-size:12px;text-decoration:none}.top .lg a:hover{color:#fff}
+  .top .rt{display:flex;align-items:center;gap:12px}
+  .top .usr{font-size:12px;color:rgba(255,255,255,.5)}
+  .top .out{font-family:var(--syne);font-weight:700;font-size:11px;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);padding:6px 12px;border-radius:6px;cursor:pointer}
+  .body{display:flex;min-height:calc(100vh - 56px)}
+  .side{width:210px;flex-shrink:0;background:#fff;border-right:1px solid var(--line);padding:14px 0}
+  .side button{width:100%;text-align:left;background:none;border:none;padding:11px 22px;font-family:var(--body);font-size:14px;font-weight:500;color:var(--prune);cursor:pointer;display:flex;align-items:center;gap:10px}
+  .side button:hover{background:var(--paper)}
+  .side .nav-ic{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+  .btn-sm svg{vertical-align:-2px}
+  .side button.on{background:#f3e7ef;color:var(--mg);font-weight:600;box-shadow:inset 3px 0 var(--mg)}
+  .side .badge{margin-left:auto;background:var(--mg);color:#fff;font-size:11px;font-weight:700;border-radius:100px;padding:1px 8px}
+  .main{flex:1;padding:30px 34px;overflow:auto}
+  .view{display:none}.view.on{display:block}
+  .vhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap}
+  .vtitle{font-family:var(--syne);font-weight:800;font-size:24px;letter-spacing:-.01em}
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
+  .stat .n{font-family:var(--syne);font-weight:800;font-size:32px;color:var(--mg)}
+  .stat .l{font-size:13px;color:var(--grey);margin-top:2px}
+  /* table */
+  .tbl{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .row{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--line)}
+  .row:last-child{border-bottom:none}
+  .row .grow{flex:1;min-width:0}
+  .row .t{font-weight:600}
+  .row .m{font-size:12px;color:var(--grey);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .row .acts{display:flex;gap:8px;flex-shrink:0}
+  .b{font-size:11px;font-weight:700;padding:3px 9px;border-radius:100px}
+  .b-pub{background:#dcfce7;color:#166534}.b-bro{background:#f3f4f6;color:#6b7280}.b-av{background:#fef9c3;color:#a16207}
+  .thumb{width:52px;height:52px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--prune)}
+  .empty{padding:30px;text-align:center;color:var(--grey)}
+  /* form panel */
+  .panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px;max-width:840px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .fta{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;outline:none;resize:vertical;min-height:90px}
+  .fta:focus{border-color:var(--mg)}
+  label.flbl{display:block;font-size:12px;font-weight:600;margin-bottom:6px}
+  .chkrow{display:flex;align-items:center;gap:8px;font-size:13px}
+  /* editor */
+  .toolbar{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+  .editor .video-embed{position:relative;width:100%;aspect-ratio:16/9;margin:16px 0;border-radius:10px;overflow:hidden;background:#000}
+  .editor .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .tb{font-size:12px;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:6px 10px;cursor:pointer}
+  .tb:hover{background:#ece7f0}
+  .editor{min-height:220px;border:1px solid var(--line);border-radius:8px;padding:14px 16px;outline:none;font-size:15px;line-height:1.6}
+  .editor:focus{border-color:var(--mg)}
+  .editor h2{font-family:var(--syne);font-size:20px;margin:14px 0 8px}
+  .editor h3{font-family:var(--syne);font-size:16px;margin:12px 0 6px}
+  .editor ul,.editor ol{padding-left:24px;margin:8px 0}
+  .editor img{max-width:100%;height:auto;border-radius:8px;margin:10px 0;display:block}
+  .msgbox{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:12px}
+  .msgbox.unread{border-left:3px solid var(--mg)}
+  .msgbox .mh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+  .msgbox .who{font-weight:700}
+  .msgbox .dt{font-size:12px;color:var(--grey)}
+  .msgbox .txt{white-space:pre-wrap;color:#33232e}
+  /* toast */
+  #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--prune);color:#fff;padding:12px 22px;border-radius:100px;font-size:13px;font-weight:600;opacity:0;transition:.3s;z-index:100;pointer-events:none}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .hint{font-size:12px;color:var(--grey);margin-top:5px}
+  .help{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:18px;padding:0 16px}
+  .help summary{font-family:var(--syne);font-weight:700;font-size:13px;padding:12px 0;cursor:pointer;color:var(--mg);list-style:none}
+  .help summary::-webkit-details-marker{display:none}
+  .help summary::before{content:"› "}
+  .help ol{margin:0 0 14px 20px;color:var(--grey);font-size:13px;line-height:1.85}
 
-    /* LOGIN */
-    #pg-login { min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--prune); }
-    .login-box { background:white; border-radius:12px; padding:48px; width:100%; max-width:400px; box-shadow:0 20px 60px rgba(0,0,0,.3); }
-    .login-logo { font-family:var(--syne); font-size:20px; font-weight:800; color:var(--prune); margin-bottom:4px; }
-    .login-sub  { font-size:12px; color:var(--gris); margin-bottom:32px; }
-    .lbl { display:block; font-size:12px; font-weight:600; margin-bottom:5px; }
-    .inp { width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:6px; font-size:14px; font-family:inherit; outline:none; margin-bottom:14px; transition:border-color .2s; }
-    .inp:focus { border-color:var(--mg); }
-    .login-btn { width:100%; background:var(--mg); color:white; border:none; padding:12px; border-radius:6px; font-family:var(--syne); font-size:13px; font-weight:700; cursor:pointer; }
-    .login-btn:hover { background:var(--mg2); }
-    .login-err { font-size:12px; color:var(--rouge); margin-top:8px; min-height:16px; }
-
-    /* LAYOUT */
-    #pg-admin { display:none; min-height:100vh; }
-    .adm-header { background:var(--prune); height:58px; display:flex; align-items:center; justify-content:space-between; padding:0 28px; position:sticky; top:0; z-index:200; }
-    .adm-logo { font-family:var(--syne); font-size:15px; font-weight:800; color:white; display:flex; align-items:center; gap:10px; }
-    .adm-logo a { color:rgba(255,255,255,.4); font-weight:400; font-size:12px; text-decoration:none; }
-    .adm-logo a:hover { color:rgba(255,255,255,.7); }
-    .adm-right { display:flex; align-items:center; gap:10px; }
-    .adm-user { font-size:12px; color:rgba(255,255,255,.45); }
-    .adm-logout { font-family:var(--syne); font-size:11px; font-weight:700; background:rgba(255,255,255,.1); color:white; border:1px solid rgba(255,255,255,.2); padding:5px 12px; border-radius:4px; cursor:pointer; }
-    .adm-logout:hover { background:rgba(255,255,255,.18); }
-    .adm-body { display:flex; min-height:calc(100vh - 58px); }
-
-    /* SIDEBAR */
-    .adm-sidebar { width:210px; flex-shrink:0; background:white; border-right:1px solid var(--border); padding:16px 0; }
-    .sb-section { font-family:var(--syne); font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#bbb; padding:0 18px; margin:16px 0 5px; }
-    .sb-btn { display:flex; align-items:center; gap:9px; width:100%; padding:8px 18px; font-size:13px; font-weight:500; color:var(--gris); background:none; border:none; cursor:pointer; text-align:left; transition:background .15s,color .15s; }
-    .sb-btn:hover { background:var(--lilas); color:var(--prune); }
-    .sb-btn.on { background:var(--lilas); color:var(--mg); font-weight:600; }
-    .sb-icon { font-size:15px; width:20px; text-align:center; }
-    .sb-badge { margin-left:auto; background:var(--mg); color:white; border-radius:20px; padding:1px 7px; font-size:10px; font-weight:700; display:none; }
-
-    /* MAIN */
-    .adm-main { flex:1; padding:28px; overflow-y:auto; }
-    .view { display:none; } .view.on { display:block; }
-    .view-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
-    .view-title { font-family:var(--syne); font-size:22px; font-weight:800; color:var(--prune); }
-
-    /* BOUTONS */
-    .btn { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:6px; font-family:var(--syne); font-size:12px; font-weight:700; cursor:pointer; border:none; transition:all .15s; text-decoration:none; }
-    .btn-mg  { background:var(--mg); color:white; } .btn-mg:hover  { background:var(--mg2); transform:translateY(-1px); }
-    .btn-out { background:white; color:var(--prune); border:1px solid var(--border); } .btn-out:hover { border-color:var(--mg); color:var(--mg); }
-    .btn-vt  { background:var(--vert); color:white; } .btn-vt:hover  { background:#15803d; }
-    .btn-rd  { background:var(--rouge); color:white; } .btn-rd:hover  { background:#b91c1c; }
-    .btn-sm  { padding:5px 11px; font-size:11px; }
-
-    /* STATS */
-    .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px; }
-    .stat { background:white; border-radius:var(--radius); padding:18px; border:1px solid var(--border); }
-    .stat-n { font-family:var(--syne); font-size:28px; font-weight:800; color:var(--prune); }
-    .stat-l { font-size:11px; color:var(--gris); margin-top:2px; }
-
-    /* TABLE */
-    .tbl { background:white; border-radius:var(--radius); border:1px solid var(--border); overflow:hidden; }
-    .tbl-head { display:grid; padding:10px 18px; background:var(--gris-pale); font-size:10px; font-weight:700; color:var(--gris); letter-spacing:.06em; text-transform:uppercase; border-bottom:1px solid var(--border); }
-    .tbl-row  { display:grid; padding:12px 18px; border-bottom:1px solid #f3f0f5; align-items:center; transition:background .12s; }
-    .tbl-row:last-child { border-bottom:none; }
-    .tbl-row:hover { background:#faf8fc; }
-    .tbl-title { font-size:13px; font-weight:500; color:var(--prune); }
-    .tbl-meta  { font-size:12px; color:var(--gris); }
-    .tbl-acts  { display:flex; gap:6px; }
-    .tbl-empty { text-align:center; padding:40px; color:var(--gris); }
-    .cols-art  { grid-template-columns:1fr 130px 100px 90px 170px; }
-    .cols-evt  { grid-template-columns:1fr 160px 80px 120px; }
-    .cols-ann  { grid-template-columns:1fr 70px 100px; }
-    .cols-mbr  { grid-template-columns:1fr 180px 110px 90px; }
-
-    /* BADGES */
-    .badge { display:inline-flex; padding:3px 9px; border-radius:20px; font-size:10px; font-weight:700; }
-    .b-publie   { background:#dcfce7; color:#15803d; }
-    .b-soumis   { background:#fef9c3; color:#a16207; }
-    .b-brouillon{ background:#f3f4f6; color:#6b7280; }
-    .b-refuse   { background:#fee2e2; color:#dc2626; }
-    .b-admin    { background:rgba(147,15,124,.12); color:var(--mg); }
-    .b-moderateur { background:rgba(201,168,76,.15); color:#9a6f00; }
-    .b-editeur  { background:#f3f4f6; color:var(--gris); }
-
-    /* FORM */
-    .fg { margin-bottom:16px; }
-    .flbl { display:block; font-size:12px; font-weight:600; margin-bottom:5px; }
-    .finp,.fsel,.fta { width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:13px; font-family:inherit; outline:none; color:var(--prune); transition:border-color .2s; }
-    .finp:focus,.fsel:focus,.fta:focus { border-color:var(--mg); }
-    .fta { resize:vertical; }
-    .fhint { font-size:11px; color:var(--gris); margin-top:4px; }
-    .frow { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-    .fcb { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--gris); cursor:pointer; }
-    .fcb input { cursor:pointer; accent-color:var(--mg); }
-
-    /* ÉDITEUR */
-    .ed-layout { display:grid; grid-template-columns:1fr 270px; gap:20px; align-items:start; }
-    .ed-main { background:white; border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
-    .ed-panel { background:white; border:1px solid var(--border); border-radius:var(--radius); padding:18px; }
-    .ed-panel + .ed-panel { margin-top:14px; }
-    .ed-panel-title { font-family:var(--syne); font-size:13px; font-weight:700; color:var(--prune); margin-bottom:12px; }
-    .ed-title { width:100%; padding:14px 18px; border:none; border-bottom:1px solid var(--border); font-family:var(--syne); font-size:20px; font-weight:800; color:var(--prune); outline:none; resize:none; }
-    .ed-title::placeholder { color:#d1c8ce; }
-
-    /* TOOLBAR */
-    .toolbar { display:flex; align-items:center; gap:2px; flex-wrap:wrap; padding:7px 10px; border-bottom:1px solid var(--border); background:var(--gris-pale); }
-    .tb { background:none; border:none; cursor:pointer; padding:5px 7px; border-radius:4px; font-size:13px; font-weight:600; color:var(--gris); transition:background .12s,color .12s; font-family:inherit; min-width:28px; text-align:center; line-height:1; }
-    .tb:hover { background:var(--lilas); color:var(--prune); }
-    .tb.on { background:var(--lilas); color:var(--mg); }
-    .tb-sep { width:1px; height:16px; background:var(--border); margin:0 3px; flex-shrink:0; }
-
-    /* ZONE ÉDITION */
-    .ed-zone { padding:18px; min-height:300px; }
-    #editor-content {
-      outline:none; min-height:260px;
-      font-size:15px; line-height:1.8; color:#374151;
-    }
-    #editor-content:empty::before { content:attr(data-placeholder); color:#c8bcc6; }
-    #editor-content h2 { font-family:var(--syne); font-size:20px; font-weight:700; color:var(--prune); margin:22px 0 8px; }
-    #editor-content h3 { font-family:var(--syne); font-size:16px; font-weight:700; color:var(--prune); margin:18px 0 6px; }
-    #editor-content p  { margin-bottom:10px; }
-    #editor-content ul,#editor-content ol { padding-left:22px; margin-bottom:10px; }
-    #editor-content li { margin-bottom:4px; }
-    #editor-content blockquote { border-left:3px solid var(--mg); padding:8px 14px; margin:14px 0; background:#faf8fc; color:var(--gris); font-style:italic; border-radius:0 4px 4px 0; }
-    #editor-content a { color:var(--mg); }
-    #editor-content img { max-width:100%; border-radius:6px; margin:10px 0; }
-    #editor-content strong { font-weight:700; }
-    #editor-content em { font-style:italic; }
-    #editor-content u  { text-decoration:underline; }
-    #editor-content s  { text-decoration:line-through; }
-
-    /* TAGS */
-    .tags-wrap { display:flex; flex-wrap:wrap; gap:5px; padding:6px 10px; border:1px solid var(--border); border-radius:6px; cursor:text; min-height:36px; align-items:center; }
-    .tags-wrap:focus-within { border-color:var(--mg); }
-    .tag-chip { background:var(--lilas); color:var(--mg); padding:2px 8px; border-radius:20px; font-size:11px; font-weight:600; display:flex; align-items:center; gap:3px; }
-    .tag-x { cursor:pointer; opacity:.6; font-size:13px; line-height:1; }
-    .tag-x:hover { opacity:1; }
-    .tag-inp { border:none; outline:none; font-size:13px; font-family:inherit; min-width:80px; flex:1; background:transparent; }
-
-    /* TOAST */
-    .toast { position:fixed; bottom:20px; right:20px; background:var(--prune); color:white; padding:11px 18px; border-radius:var(--radius); font-size:13px; font-weight:500; box-shadow:0 8px 24px rgba(0,0,0,.2); transform:translateY(60px); opacity:0; transition:all .25s; z-index:9999; }
-    .toast.show { transform:translateY(0); opacity:1; }
-    .toast.ok  { border-left:3px solid var(--vert); }
-    .toast.err { border-left:3px solid var(--rouge); }
-
-    /* MODAL */
-    .overlay { position:fixed; inset:0; background:rgba(0,0,0,.45); display:none; align-items:center; justify-content:center; z-index:500; }
-    .overlay.open { display:flex; }
-    .modal { background:white; border-radius:12px; padding:28px; max-width:420px; width:90%; }
-    .modal-title { font-family:var(--syne); font-size:17px; font-weight:700; color:var(--prune); margin-bottom:8px; }
-    .modal-sub { font-size:13px; color:var(--gris); margin-bottom:18px; }
-    .modal-acts { display:flex; gap:10px; justify-content:flex-end; margin-top:18px; }
-
-    /* SWITCH */
-    .sw { position:relative; display:inline-block; width:40px; height:22px; }
-    .sw input { opacity:0; width:0; height:0; }
-    .sw-slider { position:absolute; inset:0; background:#ddd; border-radius:22px; cursor:pointer; transition:.2s; }
-    .sw-slider::before { content:''; position:absolute; width:16px; height:16px; left:3px; bottom:3px; background:white; border-radius:50%; transition:.2s; }
-    .sw input:checked + .sw-slider { background:var(--mg); }
-    .sw input:checked + .sw-slider::before { transform:translateX(18px); }
-
-    @media (max-width:900px) {
-      .ed-layout { grid-template-columns:1fr; }
-      .stats { grid-template-columns:1fr 1fr; }
-      .adm-sidebar { display:none; }
-      .cols-art { grid-template-columns:1fr 90px 120px; }
-    }
-  </style>
+  .pickov{position:fixed;inset:0;z-index:60;background:rgba(20,6,15,.6);display:none;align-items:center;justify-content:center;padding:20px}
+  .pickov.open{display:flex}
+  .pickmodal{background:#fff;border-radius:14px;max-width:640px;width:100%;max-height:82vh;overflow:auto;padding:24px}
+  .pickgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .pickimg{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent}
+  .pickimg:hover{border-color:var(--mg)}
+  @media(max-width:820px){.side{width:64px}.side button span.lbl{display:none}.stats{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.main{padding:22px 16px}}
+</style>
 </head>
 <body>
 
 <!-- LOGIN -->
-<div id="pg-login">
-  <div class="login-box">
-    <div class="login-logo">MDL Viollet-le-Duc</div>
-    <div class="login-sub">Interface d'administration · Connexion</div>
-    <label class="lbl" for="li-email">Adresse email</label>
-    <input class="inp" type="email" id="li-email" placeholder="prenom@mdl-vld.fr" autocomplete="email">
-    <label class="lbl" for="li-pwd">Mot de passe</label>
-    <input class="inp" type="password" id="li-pwd" placeholder="••••••••" autocomplete="current-password"
-      onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="login-btn" onclick="doLogin()">Se connecter</button>
-    <div class="login-err" id="li-err"></div>
-    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);text-align:center;">
-      <a href="index.html" style="font-size:12px;color:var(--gris);text-decoration:none;">← Retour au site</a>
-    </div>
-  </div>
+<div id="login">
+  <form class="lbox" id="lform">
+    <div class="llogo">MDL · Administration</div>
+    <div class="lsub">Espace réservé au bureau de la MDL.</div>
+    <div class="fld"><label>Email</label><input class="inp" type="email" id="li-email" placeholder="contact@mdl-vld.fr" autocomplete="username"></div>
+    <div class="fld"><label>Mot de passe</label><input class="inp" type="password" id="li-pwd" placeholder="••••••••" autocomplete="current-password"></div>
+    <button class="btn btn-full" type="submit" id="li-btn">Se connecter</button>
+    <div class="lerr" id="li-err"></div>
+  </form>
 </div>
 
-<!-- ADMIN -->
-<div id="pg-admin">
-  <header class="adm-header">
-    <div class="adm-logo">
-      MDL Viollet-le-Duc
-      <a href="index.html">← Retour au site</a>
-    </div>
-    <div class="adm-right">
-      <span class="adm-user" id="adm-username"></span>
-      <button class="adm-logout" onclick="doLogout()">Déconnexion</button>
-    </div>
-  </header>
-
-  <div class="adm-body">
-    <aside class="adm-sidebar">
-      <div class="sb-section">Tableau de bord</div>
-      <button class="sb-btn on" id="sb-dash"    onclick="go('dash')"><span class="sb-icon">📊</span>Accueil</button>
-
-      <div class="sb-section">Articles</div>
-      <button class="sb-btn" id="sb-new-art"  onclick="go('new-art')"><span class="sb-icon">✏️</span>Nouvel article</button>
-      <button class="sb-btn" id="sb-mes-art"  onclick="go('mes-art')"><span class="sb-icon">📝</span>Mes articles</button>
-
-      <div id="sb-admin" style="display:none;">
-        <div class="sb-section">Modération</div>
-        <button class="sb-btn" id="sb-valid"   onclick="go('valid')">
-          <span class="sb-icon">✅</span>À valider
-          <span class="sb-badge" id="badge-n"></span>
-        </button>
-        <button class="sb-btn" id="sb-all-art" onclick="go('all-art')"><span class="sb-icon">📋</span>Tous les articles</button>
-
-        <div class="sb-section">Site</div>
-        <button class="sb-btn" id="sb-events"  onclick="go('events')"><span class="sb-icon">🎉</span>Événements à la une</button>
-        <button class="sb-btn" id="sb-annonces" onclick="go('annonces')"><span class="sb-icon">📢</span>Annonces ticker</button>
-
-        <div class="sb-section">Équipe</div>
-        <button class="sb-btn" id="sb-membres" onclick="go('membres')"><span class="sb-icon">👥</span>Membres</button>
-      </div>
+<!-- APP -->
+<div id="app">
+  <div class="top">
+    <div class="lg">MDL Admin <a href="index.html" target="_blank"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg> voir le site</a></div>
+    <div class="rt"><span class="usr" id="usr"></span><button class="out" id="logout">Déconnexion</button></div>
+  </div>
+  <div class="body">
+    <aside class="side">
+      <button data-nav="dash" class="on"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span><span class="lbl">Tableau de bord</span></button>
+      <button data-nav="articles"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 13h6M9 17h6"/></svg></span><span class="lbl">Articles</span></button>
+      <button data-nav="evenements"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span class="lbl">Événements</span></button>
+      <button data-nav="agenda"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span><span class="lbl">Agenda</span></button>
+      <button data-nav="galerie"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></span><span class="lbl">Galerie</span></button>
+      <button data-nav="documents"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></span><span class="lbl">Documents</span></button>
+      <button data-nav="partenaires"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="lbl">Partenaires</span></button>
+      <button data-nav="merch"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span class="lbl">Merch</span></button>
+      <button data-nav="messages"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><span class="lbl">Messages</span><span class="badge" id="nav-msg-badge" style="display:none">0</span></button>
+      <button data-nav="annonce"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></span><span class="lbl">Annonce</span></button>
+      <button data-nav="adhesion"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></span><span class="lbl">Adhésion</span></button>
+      <button data-nav="liens"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></span><span class="lbl">Liens utiles</span></button>
     </aside>
-
-    <main class="adm-main">
+    <main class="main">
 
       <!-- DASHBOARD -->
-      <div class="view on" id="v-dash">
-        <div class="view-header">
-          <div class="view-title">Tableau de bord</div>
-          <button class="btn btn-mg" onclick="go('new-art')">✏️ Nouvel article</button>
-        </div>
-        <div class="stats" id="stats-row"></div>
-        <div id="dash-soumis"></div>
-      </div>
-
-      <!-- MES ARTICLES -->
-      <div class="view" id="v-mes-art">
-        <div class="view-header">
-          <div class="view-title">Mes articles</div>
-          <button class="btn btn-mg" onclick="go('new-art')">✏️ Nouvel article</button>
-        </div>
-        <div class="tbl" id="tbl-mes-art"><div class="tbl-empty">Chargement…</div></div>
-      </div>
-
-      <!-- ÉDITEUR -->
-      <div class="view" id="v-new-art">
-        <div class="view-header">
-          <div class="view-title" id="ed-view-title">Nouvel article</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button class="btn btn-out" onclick="saveArt('brouillon')">💾 Enregistrer brouillon</button>
-            <button class="btn btn-mg"  onclick="saveArt('soumis')">📨 Soumettre pour validation</button>
+      <section class="view on" id="v-dash">
+        <div class="vhead"><div class="vtitle">Tableau de bord</div></div>
+        <div class="stats" id="dash-stats"></div>
+        <div class="panel" style="margin-top:24px;max-width:none">
+          <h3 style="font-family:var(--syne);margin-bottom:10px">Bien démarrer</h3>
+          <p style="color:var(--grey);margin-bottom:10px">Chaque section te laisse ajouter, modifier ou supprimer du contenu, et les changements apparaissent tout de suite sur le site. Un rappel « Comment faire ? » est disponible en haut de chaque section.</p>
+          <ul style="margin:0 0 12px 18px;color:var(--grey);line-height:1.9">
+            <li><b>Articles</b> : écris et publie des actualités (brouillon possible avant publication).</li>
+            <li><b>Événements</b> : gère les temps forts de l'année, épingle-les et choisis ceux qui s'affichent en page d'accueil (3 maximum).</li>
+            <li><b>Agenda</b> : ajoute les dates (événements, vacances, épreuves du bac). Elles se rangent toutes seules dans le calendrier et le planning.</li>
+            <li><b>Galerie</b> : ajoute une sélection de photos (sans visage reconnaissable, ou avec accord) et les liens des albums complets.</li>
+            <li><b>Documents</b> : statuts, règlement intérieur et autres fichiers (via liens OneDrive).</li>
+            <li><b>Partenaires</b> : les clubs et associations partenaires.</li>
+            <li><b>Merch</b> : active ou désactive la boutique, la collection en cours et le lien d'achat.</li>
+            <li><b>Messages</b> : les messages reçus via le formulaire de contact.</li>
+            <li><b>Annonce</b> : la bannière « à la une » affichée en page d'accueil.</li>
+            <li><b>Adhésion</b> : le montant, les avantages et le lien pour adhérer.</li>
+            <li><b>Liens utiles</b> : les raccourcis affichés en bas des pages.</li>
+          </ul>
+          <div class="hint" style="font-size:13px">Besoin d'aide pour le <b>contenu</b> ? Contacte un membre référent de la MDL.</div>
+          <details class="help" style="margin-top:14px"><summary>Photos et vidéos : où les mettre ?</summary>
+            <p style="margin-bottom:8px"><b>Photos.</b> Le site n'héberge qu'une <b>sélection</b> de photos (les plus belles, sans visage reconnaissable ou avec accord). Tu les ajoutes dans <b>Galerie</b> et le site les compresse tout seul. Les <b>albums complets</b> (des centaines de photos) restent sur OneDrive : dans Galerie, colle simplement le <b>lien de l'album</b>, un bouton « Ouvrir l'album » y mènera. On ne met jamais des centaines de photos sur le site, cela le remplirait.</p>
+            <p style="margin-bottom:8px"><b>Vidéos.</b> Elles ne se mettent <b>jamais</b> directement sur le site (trop lourd). Pour qu'une vidéo se lise <b>dans</b> un article (sans quitter le site), ouvre l'article, clique le bouton <b>« Vidéo »</b> de l'éditeur et colle un lien :</p>
+            <ul style="margin:0 0 8px 18px;line-height:1.8">
+              <li><b>YouTube</b> (conseillé) : mets d'abord la vidéo sur YouTube, puis colle son lien. Choisis <b>« Non répertorié »</b> s'il y a des visages (la vidéo n'apparaît pas dans les recherches YouTube, elle est visible seulement via le lien), ou <b>« Public »</b> pour un projet assumé/officiel dont on a les droits.</li>
+              <li><b>OneDrive</b> : ouvre la vidéo sur OneDrive, clique <b>« Intégrer »</b>, copie le lien (ou le code) proposé, puis colle-le. La vidéo se lira aussi directement dans l'article.</li>
+            </ul>
+            <p style="margin:0"><b>Important :</b> un lien collé comme simple texte ne se transforme pas en lecteur. Il faut passer par le bouton <b>« Vidéo »</b> pour que la vidéo s'affiche et se lise dans la page.</p>
+          </details>
+          <div style="margin-top:14px;padding:16px 18px;background:var(--paper2);border:1px solid var(--line);border-radius:12px">
+            <div style="font-family:var(--syne);font-weight:700;font-size:14px;margin-bottom:6px">À propos de ce site</div>
+            <p style="color:var(--grey);font-size:13.5px;line-height:1.7;margin:0">Ce site a été conçu et développé par <b>Ewan Foucaud</b>. Cet espace d'administration te permet de gérer tout le <b>contenu</b> sans toucher au code. En revanche, pour toute modification de la <b>structure du site</b> (mise en page, fonctionnement, code, nouvelle fonctionnalité), merci de le contacter directement à <a href="mailto:ewan.foucaud@ik.me">ewan.foucaud@ik.me</a> plutôt que d'y toucher, afin de ne rien casser.</p>
           </div>
         </div>
-        <input type="hidden" id="ed-id">
-        <div class="ed-layout">
-          <div class="ed-main">
-            <textarea class="ed-title" id="ed-title" placeholder="Titre de l'article…" rows="1"
-              oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
-            <div class="toolbar">
-              <button class="tb" id="tb-b"  onclick="fmt('bold')"       title="Gras"><b>G</b></button>
-              <button class="tb" id="tb-i"  onclick="fmt('italic')"     title="Italique"><i>I</i></button>
-              <button class="tb" id="tb-u"  onclick="fmt('underline')"  title="Souligné"><u>S</u></button>
-              <button class="tb" id="tb-s"  onclick="fmt('strikeThrough')" title="Barré"><s>A</s></button>
-              <div class="tb-sep"></div>
-              <button class="tb" onclick="fmtBlock('h2')"  title="Titre 2">H2</button>
-              <button class="tb" onclick="fmtBlock('h3')"  title="Titre 3">H3</button>
-              <button class="tb" onclick="fmtBlock('p')"   title="Paragraphe">¶</button>
-              <div class="tb-sep"></div>
-              <button class="tb" onclick="fmt('insertUnorderedList')"  title="Liste à puces">• Liste</button>
-              <button class="tb" onclick="fmt('insertOrderedList')"    title="Liste numérotée">1. Liste</button>
-              <button class="tb" onclick="fmtBlock('blockquote')"      title="Citation">❝</button>
-              <div class="tb-sep"></div>
-              <button class="tb" onclick="insLink()"  title="Lien">🔗 Lien</button>
-              <button class="tb" onclick="insImg()"   title="Image">🖼️ Image</button>
-              <div class="tb-sep"></div>
-              <button class="tb" onclick="document.execCommand('undo')" title="Annuler">↩</button>
-              <button class="tb" onclick="document.execCommand('redo')" title="Refaire">↪</button>
-            </div>
-            <div class="ed-zone">
-              <div id="editor-content" contenteditable="true" data-placeholder="Écris ton article ici…"></div>
-            </div>
-          </div>
-          <div>
-            <div class="ed-panel">
-              <div class="ed-panel-title">Image de couverture</div>
-              <div class="fg">
-                <input class="finp" type="url" id="ed-cover" placeholder="https://…">
-                <div class="fhint">Héberge l'image sur <a href="https://imgbb.com" target="_blank" style="color:var(--mg);">ImgBB</a> (gratuit)</div>
-              </div>
-            </div>
-            <div class="ed-panel">
-              <div class="ed-panel-title">Résumé</div>
-              <textarea class="fta" id="ed-excerpt" rows="3" placeholder="Affiché dans la liste des articles…"></textarea>
-            </div>
-            <div class="ed-panel">
-              <div class="ed-panel-title">Tags</div>
-              <div class="tags-wrap" id="tags-wrap" onclick="document.getElementById('tag-inp').focus()"></div>
-              <input id="tag-inp" class="tag-inp" style="width:100%;margin-top:8px;border:none;border-bottom:1px solid var(--border);padding:4px 0;outline:none;font-size:13px;" placeholder="Ajouter un tag + Entrée" onkeydown="addTag(event)">
-              <div class="fhint">Appuie sur Entrée pour valider</div>
-            </div>
-            <div class="ed-panel">
-              <div class="ed-panel-title">Auteur</div>
-              <div class="fg">
-                <label class="flbl">Nom affiché sur l'article</label>
-                <input class="finp" type="text" id="ed-author" placeholder="Prénom Nom">
-              </div>
-              <label class="fcb">
-                <input type="checkbox" id="ed-show-author" checked>
-                Afficher mon nom publiquement
-              </label>
-            </div>
-            <div class="ed-panel" id="ed-refuse-block" style="display:none;">
-              <div class="ed-panel-title" style="color:var(--rouge);">⚠ Article refusé</div>
-              <div class="fhint" id="ed-refuse-reason" style="color:var(--rouge);font-size:12px;"></div>
-            </div>
-          </div>
+      </section>
+
+      <!-- ARTICLES -->
+      <section class="view" id="v-articles">
+        <div class="vhead"><div class="vtitle">Articles</div><button class="btn" data-act="art-new">+ Nouvel article</button></div>
+        <details class="help"><summary>Comment faire ?</summary><ol><li>Clique sur « + Nouvel article » et lis le petit rappel.</li><li>Mets un titre, puis écris ton texte (gras, italique, titre, liste, lien, image, vidéo).</li><li><b>Insérer une vidéo</b> : clique sur « Vidéo » et colle un lien. Pour YouTube, mets d'abord la vidéo en « Non répertorié » (visible seulement via le lien, pas dans les recherches YouTube) puis colle son lien. Pour OneDrive, ouvre la vidéo, clique « Intégrer » et colle le lien proposé. La vidéo se lira directement dans l'article.</li><li>Choisis une image de couverture : un fichier, une image de la galerie, ou une adresse.</li><li>« Publier » pour le mettre en ligne, ou « Enregistrer en brouillon » pour finir plus tard.</li></ol></details>
+        <div id="art-list"></div>
+        <div id="art-editor" style="display:none"></div>
+      </section>
+
+      <!-- ÉVÉNEMENTS -->
+      <section class="view" id="v-evenements">
+        <div class="vhead"><div class="vtitle">Événements</div><button class="btn" data-act="evt-new">+ Nouvel événement</button></div>
+        <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouvel événement » : titre, période (ex. « Octobre »), lieu, description.</li><li>Ajoute une affiche (envoi de fichier ou « Choisir dans la galerie »).</li><li>Dans la liste, le bouton « épingle » met l'événement en avant, et le bouton « maison » l'affiche sur la page d'accueil (3 maximum).</li></ol></details>
+        <div id="evt-list"></div>
+        <div id="evt-editor" style="display:none"></div>
+      </section>
+
+      <section class="view" id="v-agenda">
+        <div class="vhead"><div class="vtitle">Agenda</div><button class="btn" data-act="ag-new">+ Nouvelle entrée</button></div>
+        <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouvelle entrée ».</li><li>Choisis un type (ou « Personnalisé… »), une date de début, et une date de fin si ça dure plusieurs jours.</li><li>Enregistre : ça apparaît sur la page Agenda (vue calendrier et vue planning).</li></ol></details>
+        <div id="ag-list"></div><div id="ag-editor" style="display:none"></div>
+      </section>
+
+      <!-- GALERIE -->
+      <section class="view" id="v-galerie">
+        <div class="vhead"><div class="vtitle">Galerie</div><button class="btn" data-act="pho-new">+ Ajouter une photo</button></div>
+        <details class="help"><summary>Comment faire ?</summary><ol><li>« + Ajouter une photo », choisis un fichier (il est compressé automatiquement).</li><li>Donne un titre, une catégorie et des tags.</li><li>Bouton « Public / Privé » : Privé = gardée dans la réserve (utilisable pour les articles) mais cachée de la galerie publique.</li></ol></details>
+        <div id="pho-list"></div>
+        <div id="pho-editor" style="display:none"></div>
+      </section>
+
+      <section class="view" id="v-documents">
+        <div class="vhead"><div class="vtitle">Documents</div><button class="btn" data-act="doc-new">+ Nouveau document</button></div>
+        <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouveau document ».</li><li>Titre, catégorie (même nom = même section), et le lien (dossier OneDrive, PDF…).</li><li>Astuce : écris une nouvelle catégorie pour créer une nouvelle section automatiquement.</li></ol></details>
+        <div id="doc-list"></div><div id="doc-editor" style="display:none"></div>
+      </section>
+
+      <section class="view" id="v-partenaires">
+        <div class="vhead"><div class="vtitle">Partenaires</div><button class="btn" data-act="par-new">+ Nouveau partenaire</button></div>
+        <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouveau partenaire ».</li><li>Nom, description, catégorie, lien (Instagram, site…), et un logo (facultatif).</li><li>Un lien Instagram s'affiche automatiquement avec le logo Instagram.</li></ol></details>
+        <div id="par-list"></div><div id="par-editor" style="display:none"></div>
+      </section>
+
+      <!-- MESSAGES -->
+      <section class="view" id="v-messages">
+        <div class="vhead"><div class="vtitle">Messages reçus</div></div>
+        <details class="help"><summary>Comment faire ?</summary><ol><li>Les messages envoyés depuis le formulaire de contact arrivent ici.</li><li>Clique sur l'adresse email pour répondre.</li><li>Marque « lu » quand c'est traité, ou supprime le message.</li></ol></details>
+        <div id="msg-list"></div>
+      </section>
+
+      <!-- PARAMÈTRES -->
+            <section class="view" id="v-annonce">
+        <div class="vhead"><div class="vtitle">Annonce à la une</div></div>
+        <div class="panel">
+          <details class="help"><summary>Comment faire ?</summary><ol><li>Coche « Afficher l'annonce ».</li><li>Écris un petit titre, un texte court, et un lien (billetterie ou site).</li><li>Enregistre : le bandeau apparaît en haut de la page d'accueil.</li></ol></details>
+        <p class="hint" style="margin-bottom:16px">Une bannière en haut de la page d'accueil (ex : prochain événement). Garde une phrase courte.</p>
+          <label class="chkrow" style="margin-bottom:14px"><input type="checkbox" id="an-active"> Afficher l'annonce sur l'accueil</label>
+          <div class="grid2"><div class="fld"><label class="flbl">Petit titre</label><input class="inp" id="an-titre" placeholder="Prochain événement"></div>
+          <div class="fld"><label class="flbl">Label du bouton</label><input class="inp" id="an-label" placeholder="En savoir plus"></div></div>
+          <div class="fld"><label class="flbl">Texte de l'annonce</label><input class="inp" id="an-texte" placeholder="Bal des Terminales · 3 juillet · réservez vite !"></div>
+          <div class="fld"><label class="flbl">Lien du bouton (billetterie, site…)</label><input class="inp" id="an-lien" placeholder="https://…"></div>
+          <button class="btn" data-act="annonce-save">Enregistrer l'annonce</button>
         </div>
-      </div>
+      </section>
 
-      <!-- VALIDATION -->
-      <div class="view" id="v-valid">
-        <div class="view-header"><div class="view-title">Articles à valider</div></div>
-        <div class="tbl" id="tbl-valid"><div class="tbl-empty">Chargement…</div></div>
-      </div>
-
-      <!-- TOUS ARTICLES -->
-      <div class="view" id="v-all-art">
-        <div class="view-header"><div class="view-title">Tous les articles</div></div>
-        <div class="tbl" id="tbl-all-art"><div class="tbl-empty">Chargement…</div></div>
-      </div>
-
-      <!-- ÉVÉNEMENTS À LA UNE -->
-      <div class="view" id="v-events">
-        <div class="view-header">
-          <div class="view-title">Événements à la une</div>
-          <button class="btn btn-mg" onclick="openEvtModal()">+ Ajouter un événement</button>
+      <section class="view" id="v-adhesion">
+        <div class="vhead"><div class="vtitle">Adhésion</div></div>
+        <div class="panel">
+          <details class="help"><summary>Comment faire ?</summary><ol><li>Colle le lien du formulaire HelloAsso de l'année.</li><li>Indique l'année affichée (ex. 2026-2027).</li><li>Enregistre : le lien et l'année se mettent à jour partout sur le site.</li></ol></details>
+        <h3 style="font-family:var(--syne);margin-bottom:16px">Formulaire HelloAsso</h3>
+          <div class="fld"><label class="flbl">Lien du formulaire HelloAsso</label><input class="inp" id="p-hello"></div>
+          <div class="fld"><label class="flbl">Année d'adhésion affichée (mise à jour sur tout le site)</label><input class="inp" id="p-annee" placeholder="2026-2027"></div>
+          <button class="btn" data-act="params-save">Enregistrer</button>
         </div>
-        <div class="fhint" style="margin-bottom:16px;">Ces événements s'affichent dans la section "Prochain événement" de la page d'accueil.</div>
-        <div class="tbl" id="tbl-events"><div class="tbl-empty">Chargement…</div></div>
-      </div>
+      </section>
 
-      <!-- ANNONCES TICKER -->
-      <div class="view" id="v-annonces">
-        <div class="view-header">
-          <div class="view-title">Annonces du bandeau défilant</div>
-          <button class="btn btn-mg" onclick="openAnnModal()">+ Ajouter une annonce</button>
+      <section class="view" id="v-liens">
+        <div class="vhead"><div class="vtitle">Liens utiles</div></div>
+        <div class="panel">
+          <details class="help"><summary>Comment faire ?</summary><ol><li>Écris un nom (ex. « OneDrive photos ») et l'adresse du lien.</li><li>« + Ajouter le lien ».</li><li>Les liens s'affichent en bas de la page Documents.</li></ol></details>
+        <p class="hint" style="margin-bottom:16px">OneDrive, Notion, Drive… affichés sur la page Documents.</p>
+          <div id="liens-list" style="margin-bottom:16px"></div>
+          <div class="grid2"><input class="inp" id="lien-lib" placeholder="Nom (ex : OneDrive photos)"><input class="inp" id="lien-url" placeholder="https://…"></div>
+          <button class="btn" data-act="lien-add" style="margin-top:12px">+ Ajouter le lien</button>
         </div>
-        <div class="fhint" style="margin-bottom:16px;">Ces textes défilent en haut de toutes les pages du site.</div>
-        <div class="tbl" id="tbl-ann"><div class="tbl-empty">Chargement…</div></div>
-      </div>
+      </section>
 
-      <!-- MEMBRES -->
-      <div class="view" id="v-membres">
-        <div class="view-header"><div class="view-title">Membres</div></div>
-        <div class="tbl" id="tbl-mbr"><div class="tbl-empty">Chargement…</div></div>
-      </div>
+      <section class="view" id="v-merch">
+        <div class="vhead"><div class="vtitle">Merch</div></div>
+        <div class="panel">
+          <details class="help"><summary>Comment faire ?</summary><ol><li>Coche « Activer la page Merch » pour la rendre visible sur le site.</li><li>Mets le nom de la collection et le lien de ta boutique (SumUp…).</li><li>Les modèles (photos) se gèrent dans « Galerie », catégorie « Merch ».</li></ol></details>
+        <p class="hint" style="margin-bottom:16px">Active la page Merch et pointe vers ta boutique. Les modèles (photos) se gèrent dans « Galerie », catégorie « Merch ».</p>
+          <label class="chkrow" style="margin-bottom:14px"><input type="checkbox" id="m-actif"> Activer la page Merch (visible sur le site)</label>
+          <div class="fld"><label class="flbl">Nom de la collection</label><input class="inp" id="m-collection" placeholder="Collection 2025-2026"></div>
+          <div class="fld"><label class="flbl">Texte d'intro</label><input class="inp" id="m-intro"></div>
+          <div class="fld"><label class="flbl">Lien de la boutique (SumUp…)</label><input class="inp" id="m-url" placeholder="https://…"></div>
+          <button class="btn" data-act="merch-save">Enregistrer</button>
+        </div>
+      </section>
 
     </main>
   </div>
 </div>
 
-<!-- MODAL REFUS -->
-<div class="overlay" id="ov-refus">
-  <div class="modal">
-    <div class="modal-title">Refuser l'article</div>
-    <div class="modal-sub">Le rédacteur sera informé de la raison pour améliorer son article.</div>
-    <label class="flbl">Raison du refus</label>
-    <textarea class="fta" id="refus-reason" rows="4" placeholder="Ex : Contenu insuffisant, ton inapproprié…"></textarea>
-    <input type="hidden" id="refus-id">
-    <div class="modal-acts">
-      <button class="btn btn-out" onclick="closeOv('ov-refus')">Annuler</button>
-      <button class="btn btn-rd" onclick="doRefus()">Refuser</button>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL ÉVÉNEMENT -->
-<div class="overlay" id="ov-evt">
-  <div class="modal" style="max-width:560px;">
-    <div class="modal-title" id="evt-modal-title">Ajouter un événement</div>
-    <input type="hidden" id="evt-id">
-    <div class="frow">
-      <div class="fg"><label class="flbl">Titre *</label><input class="finp" id="evt-titre" placeholder="Bal des Terminales…"></div>
-      <div class="fg"><label class="flbl">Date</label><input class="finp" id="evt-date" placeholder="3 juillet 2026 · 19h"></div>
-    </div>
-    <div class="fg"><label class="flbl">Description</label><textarea class="fta" id="evt-desc" rows="3" placeholder="Description courte…"></textarea></div>
-    <div class="frow">
-      <div class="fg"><label class="flbl">Lieu</label><input class="finp" id="evt-lieu" placeholder="Salle polyvalente…"></div>
-      <div class="fg"><label class="flbl">URL affiche</label><input class="finp" id="evt-affiche" placeholder="https://…"></div>
-    </div>
-    <div class="frow">
-      <div class="fg"><label class="flbl">Lien "Voir la page"</label><input class="finp" id="evt-lien" placeholder="evenement-bal.html"></div>
-      <div class="fg"><label class="flbl">Lien billetterie</label><input class="finp" id="evt-billet" placeholder="https://billetweb…"></div>
-    </div>
-    <div class="fg"><label class="flbl">Label bouton billetterie</label><input class="finp" id="evt-billet-label" placeholder="Réserver · 5€"></div>
-    <div class="fg" style="display:flex;align-items:center;gap:12px;">
-      <label class="sw"><input type="checkbox" id="evt-actif" checked><span class="sw-slider"></span></label>
-      <span style="font-size:13px;color:var(--gris);">Afficher sur l'accueil</span>
-    </div>
-    <div class="modal-acts">
-      <button class="btn btn-out" onclick="closeOv('ov-evt')">Annuler</button>
-      <button class="btn btn-mg" onclick="saveEvt()">Enregistrer</button>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL ANNONCE -->
-<div class="overlay" id="ov-ann">
-  <div class="modal">
-    <div class="modal-title" id="ann-modal-title">Ajouter une annonce</div>
-    <input type="hidden" id="ann-id">
-    <div class="fg"><label class="flbl">Texte de l'annonce *</label><input class="finp" id="ann-texte" placeholder="🎉 Bal des Terminales · 3 juillet 2026"></div>
-    <div class="fg"><label class="flbl">Ordre d'affichage</label><input class="finp" type="number" id="ann-ordre" placeholder="0" value="0"></div>
-    <div class="fg" style="display:flex;align-items:center;gap:12px;">
-      <label class="sw"><input type="checkbox" id="ann-actif" checked><span class="sw-slider"></span></label>
-      <span style="font-size:13px;color:var(--gris);">Activer cette annonce</span>
-    </div>
-    <div class="modal-acts">
-      <button class="btn btn-out" onclick="closeOv('ov-ann')">Annuler</button>
-      <button class="btn btn-mg" onclick="saveAnn()">Enregistrer</button>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
+<div class="pickov" id="imgpick"><div class="pickmodal"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><b style="font-family:var(--syne)">Choisir une image</b><button class="btn btn-out btn-sm" data-act="pick-close">Fermer</button></div><div class="pick-body"></div></div></div>
+<div class="pickov" id="rules"><div class="pickmodal" style="max-width:520px"><h3 style="font-family:var(--syne);font-size:19px;margin-bottom:12px;display:flex;align-items:center;gap:8px"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg> Avant de publier un article</h3><p style="color:var(--grey);margin-bottom:10px">Cet article sera visible <b>publiquement</b> sur le site de la MDL. Merci de vérifier que :</p><ul style="margin:0 0 16px 18px;color:var(--grey);line-height:1.9"><li>le contenu est approprié, respectueux et représente bien la MDL ;</li><li>tu as le droit d'utiliser les images (aucun visage sans accord, aucune image protégée) ;</li><li>aucune donnée personnelle ni propos déplacé ;</li><li>tu ne colles pas de code inconnu dans l'article.</li></ul><div style="display:flex;gap:10px"><button class="btn btn-vt" data-act="rules-ok">J'ai compris, continuer</button><button class="btn btn-out" data-act="rules-cancel">Annuler</button></div></div></div>
+<div class="pickov" id="confirmov"><div class="pickmodal" style="max-width:420px"><h3 id="confirm-title" style="font-family:var(--syne);font-size:19px;margin-bottom:10px">Confirmer la suppression</h3><p id="confirm-msg" style="color:var(--grey);margin-bottom:20px">Cette action est définitive.</p><div style="display:flex;gap:10px"><button class="btn" id="confirm-ok" style="background:#b42318">Supprimer</button><button class="btn btn-out" id="confirm-no">Annuler</button></div></div></div>
+<div id="toast"></div>
 
 <script>
-const SB_URL = 'https://ksvqjbcnqphnyxfpjhvz.supabase.co';
-const SB_KEY = 'sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0';
-const sb = supabase.createClient(SB_URL, SB_KEY);
+const SB_URL='https://ksvqjbcnqphnyxfpjhvz.supabase.co';
+const SB_KEY='sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0';
+const sb=supabase.createClient(SB_URL,SB_KEY);
+const $=function(s){return document.querySelector(s)};
+function esc(s){return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function toast(t){var e=$('#toast');e.textContent=t;e.classList.add('show');setTimeout(function(){e.classList.remove('show')},2200)}
+function askConfirm(msg,title){return new Promise(function(resolve){var ov=$('#confirmov'),okB=$('#confirm-ok'),noB=$('#confirm-no');$('#confirm-msg').textContent=msg||'Cette action est définitive.';$('#confirm-title').textContent=title||'Confirmer la suppression';ov.classList.add('open');function done(v){ov.classList.remove('open');okB.onclick=null;noB.onclick=null;ov.onclick=null;resolve(v)}okB.onclick=function(){done(true)};noB.onclick=function(){done(false)};ov.onclick=function(e){if(e.target===ov)done(false)}})}
+function ytId(u){var m=(u||'').match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);return m?m[1]:null}
+function videoEmbedSrc(u){u=(u||'').trim();var id=ytId(u);if(id)return 'https://www.youtube-nocookie.com/embed/'+id;var m=u.match(/src=["']([^"']+)["']/i);if(m)return m[1];return u}
+function videoEmbedHTML(u){var src=videoEmbedSrc(u);return '<div class="video-embed"><iframe src="'+esc(src)+'" title="Vidéo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><p><br></p>'}
+function tagsToStr(a){return (a||[]).join(', ')}
+function strToTags(s){return (s||'').split(',').map(function(x){return x.trim()}).filter(Boolean)}
+function resizeImage(file){return new Promise(function(res){if(!file.type||file.type.indexOf('image')<0){res(file);return;}var img=new Image();img.onload=function(){var max=1600,w=img.width,h=img.height;if(w>max||h>max){if(w>h){h=Math.round(h*max/w);w=max;}else{w=Math.round(w*max/h);h=max;}}var c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);c.toBlob(function(b){res(b||file);},'image/jpeg',0.82);};img.onerror=function(){res(file);};img.src=URL.createObjectURL(file);});}
+async function uploadFile(file){var blob=await resizeImage(file);var base=(file.name||'image').replace(/\.[^.]+$/,'').replace(/[^a-zA-Z0-9._-]/g,'_');var path='uploads/'+Date.now()+'_'+base+'.jpg';var up=await sb.storage.from('medias').upload(path,blob,{contentType:'image/jpeg',upsert:false});if(up.error)throw up.error;return sb.storage.from('medias').getPublicUrl(path).data.publicUrl}
+var IMGCB=null;
+function fdate(d){try{return new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'})}catch(e){return ''}}
 
-let ME = null, PROFILE = null, TAGS = [];
-
-// ─── TOAST ───────────────────────────────────────────
-function toast(msg, type='ok') {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.className = `toast ${type} show`;
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-// ─── OVERLAY ─────────────────────────────────────────
-function openOv(id)  { document.getElementById(id).classList.add('open'); }
-function closeOv(id) { document.getElementById(id).classList.remove('open'); }
-
-// ─── AUTH ─────────────────────────────────────────────
-async function doLogin() {
-  const email = document.getElementById('li-email').value.trim();
-  const pwd   = document.getElementById('li-pwd').value;
-  const err   = document.getElementById('li-err');
-  err.textContent = '';
-  const { data, error } = await sb.auth.signInWithPassword({ email, password: pwd });
-  if (error) { err.textContent = 'Email ou mot de passe incorrect.'; return; }
-  await initAdmin(data.user);
-}
-async function doLogout() { await sb.auth.signOut(); location.reload(); }
-
-async function initAdmin(user) {
-  ME = user;
-  const { data: p } = await sb.from('profiles').select('*').eq('id', user.id).single();
-  PROFILE = p;
-  document.getElementById('pg-login').style.display = 'none';
-  document.getElementById('pg-admin').style.display  = 'block';
-  document.getElementById('adm-username').textContent = p?.full_name || user.email;
-  document.getElementById('ed-author').value = p?.full_name || '';
-  if (p?.role === 'admin' || p?.role === 'moderateur') {
-    document.getElementById('sb-admin').style.display = 'block';
-  }
-  loadDash();
-}
-
-// ─── NAVIGATION ───────────────────────────────────────
-function go(name) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('on'));
-  document.querySelectorAll('.sb-btn').forEach(b => b.classList.remove('on'));
-  document.getElementById(`v-${name}`).classList.add('on');
-  const sb = document.getElementById(`sb-${name}`);
-  if (sb) sb.classList.add('on');
-  const loaders = {
-    'mes-art': loadMesArt,
-    'valid':   loadValid,
-    'all-art': loadAllArt,
-    'events':  loadEvents,
-    'annonces': loadAnn,
-    'membres': loadMembres,
-    'new-art': resetEditor,
-    'dash':    loadDash,
-  };
-  if (loaders[name]) loaders[name]();
-}
-
-// ─── DASHBOARD ────────────────────────────────────────
-async function loadDash() {
-  const [pub, sub, bro, mbr] = await Promise.all([
-    sb.from('articles').select('id',{count:'exact',head:true}).eq('status','publie'),
-    sb.from('articles').select('id',{count:'exact',head:true}).eq('status','soumis'),
-    sb.from('articles').select('id',{count:'exact',head:true}).eq('status','brouillon').eq('author_id',ME.id),
-    sb.from('profiles').select('id',{count:'exact',head:true}),
-  ]);
-  document.getElementById('stats-row').innerHTML = `
-    <div class="stat"><div class="stat-n">${pub.count??0}</div><div class="stat-l">Articles publiés</div></div>
-    <div class="stat"><div class="stat-n">${sub.count??0}</div><div class="stat-l">En attente de validation</div></div>
-    <div class="stat"><div class="stat-n">${bro.count??0}</div><div class="stat-l">Mes brouillons</div></div>
-    <div class="stat"><div class="stat-n">${mbr.count??0}</div><div class="stat-l">Membres</div></div>
-  `;
-  if ((sub.count||0) > 0) {
-    const badge = document.getElementById('badge-n');
-    badge.textContent = sub.count; badge.style.display = 'inline-block';
-  }
-  if (PROFILE?.role === 'admin' || PROFILE?.role === 'moderateur') {
-    const { data } = await sb.from('articles').select('*').eq('status','soumis').order('created_at',{ascending:false}).limit(5);
-    if (data?.length) {
-      document.getElementById('dash-soumis').innerHTML = `
-        <h3 style="font-family:var(--syne);font-size:15px;font-weight:700;color:var(--prune);margin-bottom:12px;">⏳ À valider en priorité</h3>
-        <div class="tbl">${renderArtTable(data,true)}</div>`;
-    }
-  }
-}
-
-// ─── TABLES ARTICLES ──────────────────────────────────
-function statusBadge(s) {
-  const lbl = {brouillon:'Brouillon',soumis:'Soumis',publie:'Publié',refuse:'Refusé'}[s]||s;
-  return `<span class="badge b-${s}">${lbl}</span>`;
-}
-function dateStr(iso) { return new Date(iso).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'2-digit'}); }
-
-function renderArtTable(rows, validation=false) {
-  if (!rows.length) return '<div class="tbl-empty">Aucun article.</div>';
-  const head = `<div class="tbl-head cols-art"><span>Titre</span><span>Auteur</span><span>Statut</span><span>Date</span><span>Actions</span></div>`;
-  const body = rows.map(a => {
-    let acts = `<button class="btn btn-out btn-sm" onclick="editArt('${a.id}')">Modifier</button>`;
-    if (validation) {
-      acts = `<button class="btn btn-vt btn-sm" onclick="publishArt('${a.id}')">✓ Publier</button>
-              <button class="btn btn-rd btn-sm" onclick="openRefus('${a.id}')">✗ Refuser</button>`;
-    } else if (PROFILE?.role==='admin') {
-      if (a.status!=='publie') acts += ` <button class="btn btn-vt btn-sm" onclick="publishArt('${a.id}')">Publier</button>`;
-      acts += ` <button class="btn btn-rd btn-sm" onclick="delArt('${a.id}')">Suppr.</button>`;
-    }
-    return `<div class="tbl-row cols-art">
-      <div class="tbl-title">${a.title}</div>
-      <div class="tbl-meta">${a.author_name||'·'}</div>
-      <div>${statusBadge(a.status)}</div>
-      <div class="tbl-meta">${dateStr(a.created_at)}</div>
-      <div class="tbl-acts">${acts}</div>
-    </div>`;
-  }).join('');
-  return head + body;
-}
-
-async function loadMesArt() {
-  const { data } = await sb.from('articles').select('*').eq('author_id',ME.id).order('updated_at',{ascending:false});
-  document.getElementById('tbl-mes-art').innerHTML = renderArtTable(data||[]);
-}
-async function loadValid() {
-  const { data } = await sb.from('articles').select('*').eq('status','soumis').order('created_at',{ascending:false});
-  document.getElementById('tbl-valid').innerHTML = renderArtTable(data||[], true);
-}
-async function loadAllArt() {
-  const { data } = await sb.from('articles').select('*').order('created_at',{ascending:false});
-  document.getElementById('tbl-all-art').innerHTML = renderArtTable(data||[]);
-}
-
-// ─── ACTIONS ARTICLES ─────────────────────────────────
-async function publishArt(id) {
-  await sb.from('articles').update({status:'publie',published_at:new Date().toISOString()}).eq('id',id);
-  toast('Article publié !'); loadDash(); loadValid();
-}
-async function delArt(id) {
-  if (!confirm('Supprimer cet article ?')) return;
-  await sb.from('articles').delete().eq('id',id);
-  toast('Article supprimé'); loadAllArt();
-}
-
-// ─── REFUS ────────────────────────────────────────────
-function openRefus(id) {
-  document.getElementById('refus-id').value = id;
-  document.getElementById('refus-reason').value = '';
-  openOv('ov-refus');
-}
-async function doRefus() {
-  const id = document.getElementById('refus-id').value;
-  const r  = document.getElementById('refus-reason').value.trim();
-  if (!r) { toast('Indique une raison','err'); return; }
-  await sb.from('articles').update({status:'refuse',refusal_reason:r}).eq('id',id);
-  closeOv('ov-refus'); toast('Article refusé');
-  loadValid(); loadDash();
-}
-
-// ─── ÉDITEUR (execCommand natif) ──────────────────────
-function fmt(cmd) {
-  document.getElementById('editor-content').focus();
-  document.execCommand(cmd, false, null);
-  updateToolbar();
-}
-function fmtBlock(tag) {
-  document.getElementById('editor-content').focus();
-  if (tag === 'blockquote') {
-    document.execCommand('formatBlock', false, 'blockquote');
-  } else {
-    document.execCommand('formatBlock', false, tag);
-  }
-}
-function insLink() {
-  const url = prompt('URL du lien :');
-  if (url) { document.getElementById('editor-content').focus(); document.execCommand('createLink', false, url); }
-}
-function insImg() {
-  const url = prompt('URL de l\'image :');
-  if (url) { document.getElementById('editor-content').focus(); document.execCommand('insertImage', false, url); }
-}
-function updateToolbar() {
-  ['bold','italic','underline','strikeThrough'].forEach(c => {
-    const map = {bold:'tb-b',italic:'tb-i',underline:'tb-u',strikeThrough:'tb-s'};
-    const el = document.getElementById(map[c]);
-    if (el) el.classList.toggle('on', document.queryCommandState(c));
-  });
-}
-document.addEventListener('selectionchange', updateToolbar);
-
-// ─── TAGS ─────────────────────────────────────────────
-function addTag(e) {
-  if (e.key !== 'Enter') return;
-  e.preventDefault();
-  const val = e.target.value.trim();
-  if (val && !TAGS.includes(val)) { TAGS.push(val); renderTags(); }
-  e.target.value = '';
-}
-function removeTag(t) { TAGS = TAGS.filter(x=>x!==t); renderTags(); }
-function renderTags() {
-  const w = document.getElementById('tags-wrap');
-  w.innerHTML = TAGS.map(t =>
-    `<span class="tag-chip">${t}<span class="tag-x" onclick="removeTag('${t}')">×</span></span>`
-  ).join('');
-}
-
-// ─── SAVE ARTICLE ─────────────────────────────────────
-async function saveArt(status) {
-  const title   = document.getElementById('ed-title').value.trim();
-  const content = document.getElementById('editor-content').innerHTML;
-  const id      = document.getElementById('ed-id').value;
-  if (!title) { toast('Ajoute un titre','err'); return; }
-  if (!content || content === '<br>') { toast('L\'article est vide','err'); return; }
-
-  const payload = {
-    title, content, status,
-    cover_url:    document.getElementById('ed-cover').value.trim() || null,
-    excerpt:      document.getElementById('ed-excerpt').value.trim() || null,
-    author_name:  document.getElementById('ed-author').value.trim() || null,
-    show_author:  document.getElementById('ed-show-author').checked,
-    tags: TAGS, author_id: ME.id,
-    updated_at: new Date().toISOString(),
-  };
-
-  let error;
-  if (id) {
-    ({ error } = await sb.from('articles').update(payload).eq('id', id));
-  } else {
-    const res = await sb.from('articles').insert(payload).select('id').single();
-    error = res.error;
-    if (res.data) document.getElementById('ed-id').value = res.data.id;
-  }
-  if (error) { toast('Erreur : ' + error.message, 'err'); return; }
-  toast(status==='soumis' ? 'Article soumis pour validation !' : 'Brouillon enregistré');
-}
-
-async function editArt(id) {
-  const { data } = await sb.from('articles').select('*').eq('id',id).single();
-  if (!data) { toast('Introuvable','err'); return; }
-  go('new-art');
-  document.getElementById('ed-view-title').textContent = 'Modifier l\'article';
-  document.getElementById('ed-id').value = id;
-  document.getElementById('ed-title').value = data.title;
-  document.getElementById('editor-content').innerHTML = data.content||'';
-  document.getElementById('ed-cover').value = data.cover_url||'';
-  document.getElementById('ed-excerpt').value = data.excerpt||'';
-  document.getElementById('ed-author').value = data.author_name||'';
-  document.getElementById('ed-show-author').checked = data.show_author;
-  TAGS = data.tags||[]; renderTags();
-  if (data.status === 'refuse' && data.refusal_reason) {
-    document.getElementById('ed-refuse-block').style.display = 'block';
-    document.getElementById('ed-refuse-reason').textContent = data.refusal_reason;
-  }
-}
-
-function resetEditor() {
-  document.getElementById('ed-view-title').textContent = 'Nouvel article';
-  document.getElementById('ed-id').value = '';
-  document.getElementById('ed-title').value = '';
-  document.getElementById('editor-content').innerHTML = '';
-  document.getElementById('ed-cover').value = '';
-  document.getElementById('ed-excerpt').value = '';
-  document.getElementById('ed-author').value = PROFILE?.full_name||'';
-  document.getElementById('ed-show-author').checked = true;
-  document.getElementById('ed-refuse-block').style.display = 'none';
-  TAGS = []; renderTags();
-}
-
-// ─── ÉVÉNEMENTS À LA UNE ──────────────────────────────
-async function loadEvents() {
-  const { data } = await sb.from('evenements_une').select('*').order('ordre');
-  const tbl = document.getElementById('tbl-events');
-  if (!data?.length) { tbl.innerHTML = '<div class="tbl-empty">Aucun événement.</div>'; return; }
-  const head = `<div class="tbl-head cols-evt"><span>Titre</span><span>Date / Lieu</span><span>Actif</span><span>Actions</span></div>`;
-  const rows = data.map(e => `
-    <div class="tbl-row cols-evt">
-      <div class="tbl-title">${e.titre}</div>
-      <div class="tbl-meta">${e.date_event||'·'}<br>${e.lieu||''}</div>
-      <div><label class="sw"><input type="checkbox" ${e.actif?'checked':''} onchange="toggleEvt('${e.id}',this.checked)"><span class="sw-slider"></span></label></div>
-      <div class="tbl-acts">
-        <button class="btn btn-out btn-sm" onclick="openEvtModal('${e.id}')">Modifier</button>
-        <button class="btn btn-rd btn-sm" onclick="delEvt('${e.id}')">Suppr.</button>
-      </div>
-    </div>`).join('');
-  tbl.innerHTML = head + rows;
-}
-
-function openEvtModal(id='') {
-  ['evt-titre','evt-date','evt-desc','evt-lieu','evt-affiche','evt-lien','evt-billet','evt-billet-label'].forEach(f => {
-    document.getElementById(f).value = '';
-  });
-  document.getElementById('evt-id').value = id;
-  document.getElementById('evt-actif').checked = true;
-  document.getElementById('evt-modal-title').textContent = id ? 'Modifier l\'événement' : 'Ajouter un événement';
-  if (id) {
-    sb.from('evenements_une').select('*').eq('id',id).single().then(({data:e}) => {
-      if (!e) return;
-      document.getElementById('evt-titre').value = e.titre||'';
-      document.getElementById('evt-date').value  = e.date_event||'';
-      document.getElementById('evt-desc').value  = e.description||'';
-      document.getElementById('evt-lieu').value  = e.lieu||'';
-      document.getElementById('evt-affiche').value = e.affiche_url||'';
-      document.getElementById('evt-lien').value  = e.lien_page||'';
-      document.getElementById('evt-billet').value = e.lien_billetterie||'';
-      document.getElementById('evt-billet-label').value = e.lien_billetterie_label||'Réserver';
-      document.getElementById('evt-actif').checked = e.actif;
-    });
-  }
-  openOv('ov-evt');
-}
-
-async function saveEvt() {
-  const titre = document.getElementById('evt-titre').value.trim();
-  if (!titre) { toast('Le titre est obligatoire','err'); return; }
-  const id = document.getElementById('evt-id').value;
-  const payload = {
-    titre, description: document.getElementById('evt-desc').value.trim()||null,
-    date_event: document.getElementById('evt-date').value.trim()||null,
-    lieu: document.getElementById('evt-lieu').value.trim()||null,
-    affiche_url: document.getElementById('evt-affiche').value.trim()||null,
-    lien_page: document.getElementById('evt-lien').value.trim()||null,
-    lien_billetterie: document.getElementById('evt-billet').value.trim()||null,
-    lien_billetterie_label: document.getElementById('evt-billet-label').value.trim()||'Réserver',
-    actif: document.getElementById('evt-actif').checked,
-    updated_at: new Date().toISOString(),
-  };
-  if (id) {
-    await sb.from('evenements_une').update(payload).eq('id',id);
-  } else {
-    await sb.from('evenements_une').insert(payload);
-  }
-  closeOv('ov-evt'); toast('Événement enregistré !'); loadEvents();
-}
-
-async function toggleEvt(id, actif) {
-  await sb.from('evenements_une').update({actif}).eq('id',id);
-  toast(actif ? 'Événement activé' : 'Événement désactivé');
-}
-async function delEvt(id) {
-  if (!confirm('Supprimer cet événement ?')) return;
-  await sb.from('evenements_une').delete().eq('id',id);
-  toast('Supprimé'); loadEvents();
-}
-
-// ─── ANNONCES ─────────────────────────────────────────
-async function loadAnn() {
-  const { data } = await sb.from('annonces').select('*').order('ordre');
-  const tbl = document.getElementById('tbl-ann');
-  if (!data?.length) { tbl.innerHTML = '<div class="tbl-empty">Aucune annonce.</div>'; return; }
-  const head = `<div class="tbl-head cols-ann"><span>Texte</span><span>Actif</span><span>Actions</span></div>`;
-  const rows = data.map(a => `
-    <div class="tbl-row cols-ann">
-      <div class="tbl-title">${a.texte}</div>
-      <div><label class="sw"><input type="checkbox" ${a.actif?'checked':''} onchange="toggleAnn('${a.id}',this.checked)"><span class="sw-slider"></span></label></div>
-      <div class="tbl-acts">
-        <button class="btn btn-out btn-sm" onclick="openAnnModal('${a.id}')">Modifier</button>
-        <button class="btn btn-rd btn-sm" onclick="delAnn('${a.id}')">Suppr.</button>
-      </div>
-    </div>`).join('');
-  tbl.innerHTML = head + rows;
-}
-
-function openAnnModal(id='') {
-  document.getElementById('ann-id').value = id;
-  document.getElementById('ann-texte').value = '';
-  document.getElementById('ann-ordre').value = '0';
-  document.getElementById('ann-actif').checked = true;
-  document.getElementById('ann-modal-title').textContent = id ? 'Modifier l\'annonce' : 'Ajouter une annonce';
-  if (id) {
-    sb.from('annonces').select('*').eq('id',id).single().then(({data:a}) => {
-      if (!a) return;
-      document.getElementById('ann-texte').value = a.texte||'';
-      document.getElementById('ann-ordre').value = a.ordre||0;
-      document.getElementById('ann-actif').checked = a.actif;
-    });
-  }
-  openOv('ov-ann');
-}
-
-async function saveAnn() {
-  const texte = document.getElementById('ann-texte').value.trim();
-  if (!texte) { toast('Le texte est obligatoire','err'); return; }
-  const id = document.getElementById('ann-id').value;
-  const payload = { texte, ordre: parseInt(document.getElementById('ann-ordre').value)||0, actif: document.getElementById('ann-actif').checked };
-  if (id) { await sb.from('annonces').update(payload).eq('id',id); }
-  else    { await sb.from('annonces').insert(payload); }
-  closeOv('ov-ann'); toast('Annonce enregistrée !'); loadAnn();
-}
-
-async function toggleAnn(id, actif) {
-  await sb.from('annonces').update({actif}).eq('id',id);
-}
-async function delAnn(id) {
-  if (!confirm('Supprimer cette annonce ?')) return;
-  await sb.from('annonces').delete().eq('id',id);
-  toast('Supprimée'); loadAnn();
-}
-
-// ─── MEMBRES ──────────────────────────────────────────
-async function loadMembres() {
-  const { data } = await sb.from('profiles').select('*').order('created_at',{ascending:false});
-  const tbl = document.getElementById('tbl-mbr');
-  if (!data?.length) { tbl.innerHTML = '<div class="tbl-empty">Aucun membre.</div>'; return; }
-  const head = `<div class="tbl-head cols-mbr"><span>Nom</span><span>Email</span><span>Rôle</span><span>Actions</span></div>`;
-  const rows = data.map(p => `
-    <div class="tbl-row cols-mbr">
-      <div class="tbl-title">${p.full_name||'·'}</div>
-      <div class="tbl-meta">${p.email}</div>
-      <div><span class="badge b-${p.role}">${p.role}</span></div>
-      <div>${PROFILE?.role==='admin' ? `
-        <select class="fsel" style="font-size:11px;padding:3px 8px;" onchange="changeRole('${p.id}',this.value)">
-          <option value="editeur"     ${p.role==='editeur'?'selected':''}>Éditeur</option>
-          <option value="moderateur" ${p.role==='moderateur'?'selected':''}>Modérateur</option>
-          <option value="admin"      ${p.role==='admin'?'selected':''}>Admin</option>
-        </select>` : ''}</div>
-    </div>`).join('');
-  tbl.innerHTML = head + rows;
-}
-
-async function changeRole(userId, role) {
-  await sb.from('profiles').update({role}).eq('id',userId);
-  toast('Rôle mis à jour');
-}
-
-// ─── INIT ─────────────────────────────────────────────
-sb.auth.onAuthStateChange(async (event, session) => {
-  if (session?.user) await initAdmin(session.user);
+/* ---------- AUTH ---------- */
+$('#lform').addEventListener('submit',async function(e){
+  e.preventDefault();var b=$('#li-btn');b.disabled=true;$('#li-err').textContent='';
+  var {error}=await sb.auth.signInWithPassword({email:$('#li-email').value.trim(),password:$('#li-pwd').value});
+  b.disabled=false;
+  if(error){$('#li-err').textContent='Connexion refusée. Vérifie l\'email et le mot de passe.';return}
+  boot();
 });
+$('#logout').addEventListener('click',async function(){await sb.auth.signOut();location.reload()});
+async function checkSession(){var {data}=await sb.auth.getSession();if(data.session){boot()}else{$('#login').style.display='flex';$('#app').style.display='none'}}
+async function boot(){
+  var {data}=await sb.auth.getUser();
+  $('#login').style.display='none';$('#app').style.display='block';
+  $('#usr').textContent=data.user?data.user.email:'';
+  nav('dash');loadDash();
+}
+
+/* ---------- NAV ---------- */
+function nav(id){
+  document.querySelectorAll('.side button[data-nav]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-nav')===id)});
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on')});
+  $('#v-'+id).classList.add('on');
+  if(id==='articles')loadArticles();
+  if(id==='evenements')loadEvenements();
+  if(id==='agenda')loadAgenda();
+  if(id==='galerie')loadPhotos();
+  if(id==='documents')loadDocuments();
+  if(id==='partenaires')loadPartenaires();
+  if(id==='messages')loadMessages();
+  if(id==='annonce'||id==='adhesion'||id==='liens'||id==='merch')loadParams();
+  if(id==='dash')loadDash();
+}
+
+/* ---------- DASHBOARD ---------- */
+async function loadDash(){
+  var pub=await sb.from('articles').select('id',{count:'exact',head:true}).eq('status','publie');
+  var bro=await sb.from('articles').select('id',{count:'exact',head:true}).eq('status','brouillon');
+  var evt=await sb.from('evenements').select('id',{count:'exact',head:true});
+  var pho=await sb.from('photos').select('id',{count:'exact',head:true});
+  var msg=await sb.from('messages').select('id',{count:'exact',head:true}).eq('lu',false);
+  $('#dash-stats').innerHTML=
+    stat(pub.count||0,'Articles publiés')+stat(bro.count||0,'Brouillons')+
+    stat(evt.count||0,'Événements')+stat(pho.count||0,'Photos')+
+    stat(msg.count||0,'Messages non lus');
+  var badge=$('#nav-msg-badge');
+  if(msg.count){badge.style.display='inline-block';badge.textContent=msg.count}else{badge.style.display='none'}
+}
+function stat(n,l){return '<div class="stat"><div class="n">'+n+'</div><div class="l">'+l+'</div></div>'}
+
+/* ---------- ARTICLES ---------- */
+async function loadArticles(){
+  $('#art-editor').style.display='none';$('#art-list').style.display='block';
+  var {data}=await sb.from('articles').select('*').order('created_at',{ascending:false});
+  if(!data||!data.length){$('#art-list').innerHTML='<div class="tbl"><div class="empty">Aucun article. Clique sur « Nouvel article ».</div></div>';return}
+  $('#art-list').innerHTML='<div class="tbl">'+data.map(function(a){
+    var badge=a.status==='publie'?'<span class="b b-pub">Publié</span>':'<span class="b b-bro">Brouillon</span>';
+    var pub=a.status==='publie'?'<button class="btn btn-out btn-sm" data-act="art-unpub" data-id="'+a.id+'">Dépublier</button>':'<button class="btn btn-vt btn-sm" data-act="art-pub" data-id="'+a.id+'">Publier</button>';
+    return '<div class="row"><div class="grow"><div class="t">'+esc(a.title)+' '+badge+'</div><div class="m">'+esc(a.excerpt||'')+'</div></div><div class="acts">'+pub+'<button class="btn btn-out btn-sm" data-act="art-edit" data-id="'+a.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="art-del" data-id="'+a.id+'">Suppr.</button></div></div>';
+  }).join('')+'</div>';
+}
+function artEditor(a){
+  a=a||{};
+  $('#art-list').style.display='none';var e=$('#art-editor');e.style.display='block';
+  e.innerHTML='<div class="panel"><input type="hidden" id="a-id" value="'+(a.id||'')+'">'
+   +'<div class="fld"><label class="flbl">Titre *</label><input class="inp" id="a-title" value="'+esc(a.title)+'"></div>'
+   +'<div class="fld"><label class="flbl">Contenu</label><div class="toolbar">'
+     +'<button type="button" class="tb" data-cmd="bold"><b>B</b></button>'
+     +'<button type="button" class="tb" data-cmd="italic"><i>I</i></button>'
+     +'<button type="button" class="tb" data-cmd="underline"><u>S</u></button>'
+     +'<button type="button" class="tb" data-cmd="h2">Titre</button>'
+     +'<button type="button" class="tb" data-cmd="h3">Sous-titre</button>'
+     +'<button type="button" class="tb" data-cmd="ul">Liste</button>'
+     +'<button type="button" class="tb" data-cmd="link">Lien</button>'
+     +'<button type="button" class="tb" data-cmd="img">Image</button>'
+     +'<button type="button" class="tb" data-cmd="video">Vidéo</button>'
+   +'</div><div class="editor" id="a-content" contenteditable="true">'+(a.content||'')+'</div><div class="hint">Astuce : tu peux insérer jusqu\'à 5 images dans un article.</div></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Extrait (résumé court)</label><textarea class="fta" id="a-excerpt" style="min-height:70px">'+esc(a.excerpt)+'</textarea></div>'
+   +'<div class="fld"><label class="flbl">Image de couverture</label><input class="inp" type="file" id="a-cover-file" accept="image/*"><div class="hint">Envoie un fichier, choisis-en une existante, ou colle une adresse.</div><div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="a-cover" value="'+esc(a.cover_url)+'" placeholder="https://…"><button type="button" class="btn btn-out btn-sm" data-act="pick-cover">Choisir dans la galerie</button></div></div></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Tags (séparés par des virgules)</label><input class="inp" id="a-tags" value="'+esc(tagsToStr(a.tags))+'"></div>'
+   +'<div class="fld"><label class="flbl">Auteur affiché</label><input class="inp" id="a-author" value="'+esc(a.author_name||'Le bureau de la MDL')+'"></div></div>'
+   +'<div style="display:flex;gap:10px;margin-top:10px"><button class="btn btn-vt" data-act="art-save" data-status="publie">Publier</button>'
+   +'<button class="btn btn-out" data-act="art-save" data-status="brouillon">Enregistrer en brouillon</button>'
+   +'<button class="btn btn-out" data-act="art-cancel">Annuler</button></div></div>';
+}
+async function artSave(status){
+  var id=$('#a-id').value, title=$('#a-title').value.trim();
+  if(!title){toast('Il faut un titre.');return}
+  var cover=$('#a-cover').value.trim()||null;
+  var covFile=$('#a-cover-file').files[0];
+  if(covFile){try{cover=await uploadFile(covFile)}catch(e){toast('Envoi de la couverture echoue');return}}
+  var payload={title:title,content:$('#a-content').innerHTML,excerpt:$('#a-excerpt').value.trim()||null,cover_url:cover,tags:strToTags($('#a-tags').value),author_name:$('#a-author').value.trim()||null,status:status,updated_at:new Date().toISOString()};
+  if(status==='publie')payload.published_at=new Date().toISOString();
+  var res=id?await sb.from('articles').update(payload).eq('id',id):await sb.from('articles').insert(payload);
+  if(res.error){toast('Erreur : '+res.error.message);return}
+  toast(status==='publie'?'Article publié !':'Brouillon enregistré');loadArticles();
+}
+
+/* ---------- ÉVÉNEMENTS ---------- */
+async function loadEvenements(){
+  $('#evt-editor').style.display='none';$('#evt-list').style.display='block';
+  var {data}=await sb.from('evenements').select('*').order('epingle',{ascending:false}).order('titre');
+  if(!data||!data.length){$('#evt-list').innerHTML='<div class="tbl"><div class="empty">Aucun événement.</div></div>';return}
+  $('#evt-list').innerHTML='<div class="tbl">'+data.map(function(v){
+    var b=v.statut==='a_venir'?'<span class="b b-av">À venir</span>':'<span class="b b-bro">Passé</span>';
+    var img=v.affiche_url?'<img class="thumb" src="'+esc(v.affiche_url)+'">':'<div class="thumb"></div>';
+    var pin='<button class="btn btn-sm '+(v.epingle?'btn-vt':'btn-out')+'" data-act="evt-pin" data-id="'+v.id+'" data-on="'+(v.epingle?1:0)+'" title="Mettre en avant"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></button>';
+    var acc='<button class="btn btn-sm '+(v.en_accueil?'btn-vt':'btn-out')+'" data-act="evt-accueil" data-id="'+v.id+'" data-on="'+(v.en_accueil?1:0)+'" title="Afficher sur la page d accueil"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg></button>';
+    return '<div class="row">'+img+'<div class="grow"><div class="t">'+esc(v.titre)+' '+b+'</div><div class="m">'+esc(v.date_affichee||'')+' · '+esc(v.lieu||'')+'</div></div><div class="acts">'+pin+acc+'<button class="btn btn-out btn-sm" data-act="evt-edit" data-id="'+v.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="evt-del" data-id="'+v.id+'">Suppr.</button></div></div>';
+  }).join('')+'</div>';
+}
+function evtEditor(v){
+  v=v||{};$('#evt-list').style.display='none';var e=$('#evt-editor');e.style.display='block';
+  e.innerHTML='<div class="panel"><input type="hidden" id="e-id" value="'+(v.id||'')+'">'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Titre *</label><input class="inp" id="e-titre" value="'+esc(v.titre)+'"></div>'
+   +'<div class="fld"><label class="flbl">Sous-titre / thème</label><input class="inp" id="e-sous" value="'+esc(v.sous_titre)+'"></div></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Période affichée</label><input class="inp" id="e-date" value="'+esc(v.date_affichee)+'" placeholder="Octobre, Juillet…"></div>'
+   +'<div class="fld"><label class="flbl">Lieu</label><input class="inp" id="e-lieu" value="'+esc(v.lieu||'Lycée Viollet-le-Duc')+'"></div></div>'
+   +'<div class="fld"><label class="flbl">Description</label><textarea class="fta" id="e-desc">'+esc(v.description)+'</textarea></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Affiche</label><input class="inp" type="file" id="e-affiche-file" accept="image/*"><div class="hint">Choisis un fichier, ou colle une adresse. Vide = carte de couleur avec le titre.</div><div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="e-affiche" value="'+esc(v.affiche_url)+'" placeholder="https://…"><button type="button" class="btn btn-out btn-sm" data-act="pick-affiche">Choisir dans la galerie</button></div></div>'
+   +'<div class="fld"><label class="flbl">Lien billetterie (facultatif)</label><input class="inp" id="e-billet" value="'+esc(v.lien_billetterie)+'"></div></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Tags (virgules)</label><input class="inp" id="e-tags" value="'+esc(tagsToStr(v.tags))+'"></div>'
+   +'<div class="fld"><label class="flbl">Statut</label><select class="inp" id="e-statut"><option value="passe"'+(v.statut!=='a_venir'?' selected':'')+'>Passé</option><option value="a_venir"'+(v.statut==='a_venir'?' selected':'')+'>À venir</option></select></div></div>'
+   +'<label class="chkrow" style="margin:6px 0 14px"><input type="checkbox" id="e-epingle"'+(v.epingle?' checked':'')+'> Mettre en avant (épingler)</label>'
+   +'<label class="chkrow" style="margin:6px 0 14px"><input type="checkbox" id="e-accueil"'+(v.en_accueil?' checked':'')+'> Afficher sur la page d\'accueil (max 3)</label>'
+   +'<div style="display:flex;gap:10px"><button class="btn btn-vt" data-act="evt-save">Enregistrer</button><button class="btn btn-out" data-act="evt-cancel">Annuler</button></div></div>';
+}
+async function evtSave(){
+  var id=$('#e-id').value, titre=$('#e-titre').value.trim();
+  if(!titre){toast('Il faut un titre.');return}
+  var affiche=$('#e-affiche').value.trim()||null;
+  var afFile=$('#e-affiche-file').files[0];
+  if(afFile){try{affiche=await uploadFile(afFile)}catch(err){toast('Envoi de l\'affiche echoue');return}}
+  var payload={titre:titre,sous_titre:$('#e-sous').value.trim()||null,date_affichee:$('#e-date').value.trim()||null,lieu:$('#e-lieu').value.trim()||null,description:$('#e-desc').value.trim()||null,affiche_url:affiche,lien_billetterie:$('#e-billet').value.trim()||null,tags:strToTags($('#e-tags').value),statut:$('#e-statut').value,epingle:$('#e-epingle').checked,en_accueil:$('#e-accueil').checked,updated_at:new Date().toISOString()};
+  var res=id?await sb.from('evenements').update(payload).eq('id',id):await sb.from('evenements').insert(payload);
+  if(res.error){toast('Erreur : '+res.error.message);return}
+  toast('Événement enregistré');loadEvenements();
+}
+/* ---------- AGENDA ---------- */
+var AGTL={evenement:'Événement',bac:'Bac',vacances:'Vacances',ferie:'Férié',autre:'À noter'};
+async function loadAgenda(){
+  $('#ag-editor').style.display='none';$('#ag-list').style.display='block';
+  var {data}=await sb.from('agenda').select('*').order('date_debut');
+  if(!data||!data.length){$('#ag-list').innerHTML='<div class="tbl"><div class="empty">Aucune entrée.</div></div>';return}
+  $('#ag-list').innerHTML='<div class="tbl">'+data.map(function(a){
+    var d=(a.date_fin&&a.date_fin!==a.date_debut)?(a.date_debut+' → '+a.date_fin):a.date_debut;
+    return '<div class="row"><div class="grow"><div class="t">'+esc(a.titre)+' <span class="b b-bro">'+(AGTL[a.type]||a.type)+'</span></div><div class="m">'+esc(d)+(a.lieu?' · '+esc(a.lieu):'')+'</div></div><div class="acts"><button class="btn btn-out btn-sm" data-act="ag-edit" data-id="'+a.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="ag-del" data-id="'+a.id+'">Suppr.</button></div></div>';
+  }).join('')+'</div>';
+}
+function agEditor(a){a=a||{};$('#ag-list').style.display='none';var e=$('#ag-editor');e.style.display='block';
+  var presets=['evenement','bac','vacances','ferie','autre'];var isC=a.type&&presets.indexOf(a.type)<0;var selV=isC?'__custom__':(a.type||'evenement');
+  var topts=presets.map(function(t){return '<option value="'+t+'"'+(selV===t?' selected':'')+'>'+AGTL[t]+'</option>';}).join('')+'<option value="__custom__"'+(isC?' selected':'')+'>Personnalisé…</option>';
+  e.innerHTML='<div class="panel"><input type="hidden" id="ag-id" value="'+(a.id||'')+'">'
+   +'<div class="fld"><label class="flbl">Titre *</label><input class="inp" id="ag-titre" value="'+esc(a.titre)+'"></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Type</label><select class="inp" id="ag-type-sel" onchange="agTypeToggle()">'+topts+'</select><input class="inp" id="ag-type-custom" placeholder="Type personnalisé" value="'+(isC?esc(a.type):'')+'" style="margin-top:8px;display:'+(isC?'block':'none')+'"></div>'
+   +'<div class="fld"><label class="flbl">Lieu (facultatif)</label><input class="inp" id="ag-lieu" value="'+esc(a.lieu)+'"></div></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Date de début *</label><input class="inp" type="date" id="ag-debut" value="'+esc(a.date_debut)+'"></div>'
+   +'<div class="fld"><label class="flbl">Date de fin (plusieurs jours)</label><input class="inp" type="date" id="ag-fin" value="'+esc(a.date_fin)+'"></div></div>'
+   +'<div class="fld"><label class="flbl">Lien (facultatif)</label><input class="inp" id="ag-lien" value="'+esc(a.lien)+'"></div>'
+   +'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-vt" data-act="ag-save">Enregistrer</button><button class="btn btn-out" data-act="ag-cancel">Annuler</button></div></div>';
+}
+async function agSave(){var id=$('#ag-id').value,titre=$('#ag-titre').value.trim(),debut=$('#ag-debut').value;
+  if(!titre||!debut){toast('Titre et date de début requis.');return}
+  var typ=$('#ag-type-sel').value;if(typ==='__custom__')typ=$('#ag-type-custom').value.trim()||'autre';
+  var payload={titre:titre,type:typ,date_debut:debut,date_fin:$('#ag-fin').value||null,lieu:$('#ag-lieu').value.trim()||null,lien:$('#ag-lien').value.trim()||null};
+  var res=id?await sb.from('agenda').update(payload).eq('id',id):await sb.from('agenda').insert(payload);
+  if(res.error){toast('Erreur : '+res.error.message);return}toast('Entrée enregistrée');loadAgenda();
+}
+function agTypeToggle(){var v=document.getElementById('ag-type-sel').value;document.getElementById('ag-type-custom').style.display=(v==='__custom__')?'block':'none';}
+
+/* ---------- PHOTOS ---------- */
+async function loadPhotos(){
+  $('#pho-editor').style.display='none';$('#pho-list').style.display='block';
+  var {data}=await sb.from('photos').select('*').order('created_at',{ascending:false});
+  if(!data||!data.length){$('#pho-list').innerHTML='<div class="tbl"><div class="empty">Aucune photo.</div></div>';return}
+  $('#pho-list').innerHTML='<div class="tbl">'+data.map(function(p){
+    var vis='<button class="btn btn-sm '+(p.public_galerie===false?'btn-out':'btn-vt')+'" data-act="pho-vis" data-id="'+p.id+'" data-on="'+(p.public_galerie===false?0:1)+'" title="Visible dans la galerie publique">'+(p.public_galerie===false?'Privé':'Public')+'</button>';
+    return '<div class="row"><img class="thumb" src="'+esc(p.image_url)+'"><div class="grow"><div class="t">'+esc(p.titre||'(sans titre)')+'</div><div class="m">'+esc(p.categorie||'')+' · '+esc(tagsToStr(p.tags))+'</div></div><div class="acts">'+vis+'<button class="btn btn-out btn-sm" data-act="pho-edit" data-id="'+p.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="pho-del" data-id="'+p.id+'">Suppr.</button></div></div>';
+  }).join('')+'</div>';
+}
+function phoEditor(p){
+  p=p||{};$('#pho-list').style.display='none';var e=$('#pho-editor');e.style.display='block';
+  e.innerHTML='<div class="panel"><input type="hidden" id="p-id" value="'+(p.id||'')+'">'
+   +'<div class="fld"><label class="flbl">Photo</label><input class="inp" type="file" id="p-file" accept="image/*"><div class="hint">Choisis un fichier (il sera envoyé), ou colle une adresse ci-dessous.</div></div>'
+   +'<div class="fld"><label class="flbl">Adresse de l\'image (URL)</label><input class="inp" id="p-url" value="'+esc(p.image_url)+'"></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Titre</label><input class="inp" id="p-titre" value="'+esc(p.titre)+'"></div>'
+   +'<div class="fld"><label class="flbl">Catégorie</label><input class="inp" id="p-cat" value="'+esc(p.categorie)+'" placeholder="Le lycée, Bal, Halloween…"></div></div>'
+   +'<div class="fld"><label class="flbl">Tags (virgules)</label><input class="inp" id="p-tags" value="'+esc(tagsToStr(p.tags))+'"></div>'
+   +'<label class="chkrow" style="margin:4px 0 12px"><input type="checkbox" id="p-public"'+(p.public_galerie===false?'':' checked')+'> Visible dans la galerie publique <span style="color:#6b7280">(décoche pour la garder en réserve privée)</span></label>'
+   +'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-vt" data-act="pho-save">Enregistrer</button><button class="btn btn-out" data-act="pho-cancel">Annuler</button></div>'
+   +'<div class="hint" id="p-status" style="margin-top:10px"></div></div>';
+}
+async function phoSave(){
+  var id=$('#p-id').value, url=$('#p-url').value.trim();
+  var file=$('#p-file').files[0];
+  if(file){
+    $('#p-status').textContent='Envoi de la photo…';
+    var path='photos/'+Date.now()+'_'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+    var up=await sb.storage.from('medias').upload(path,file,{upsert:false});
+    if(up.error){toast('Envoi échoué : '+up.error.message);$('#p-status').textContent='';return}
+    url=sb.storage.from('medias').getPublicUrl(path).data.publicUrl;
+  }
+  if(!url){toast('Ajoute un fichier ou une adresse d\'image.');return}
+  var payload={titre:$('#p-titre').value.trim()||null,image_url:url,categorie:$('#p-cat').value.trim()||null,tags:strToTags($('#p-tags').value),public_galerie:$('#p-public').checked};
+  var res=id?await sb.from('photos').update(payload).eq('id',id):await sb.from('photos').insert(payload);
+  if(res.error){toast('Erreur : '+res.error.message);return}
+  toast('Photo enregistrée');loadPhotos();
+}
+
+/* ---------- MESSAGES ---------- */
+async function loadMessages(){
+  var {data}=await sb.from('messages').select('*').order('created_at',{ascending:false});
+  if(!data||!data.length){$('#msg-list').innerHTML='<div class="tbl"><div class="empty">Aucun message reçu.</div></div>';return}
+  $('#msg-list').innerHTML=data.map(function(m){
+    return '<div class="msgbox'+(m.lu?'':' unread')+'"><div class="mh"><div><span class="who">'+esc(m.nom||'Anonyme')+'</span> '+(m.email?'<a href="mailto:'+esc(m.email)+'">'+esc(m.email)+'</a>':'')+'</div><div class="dt">'+fdate(m.created_at)+'</div></div>'
+     +(m.sujet?'<div style="font-weight:600;margin-bottom:6px">'+esc(m.sujet)+'</div>':'')
+     +'<div class="txt">'+esc(m.message)+'</div>'
+     +'<div class="acts" style="margin-top:12px">'+(m.lu?'<button class="btn btn-out btn-sm" data-act="msg-unread" data-id="'+m.id+'">Marquer non lu</button>':'<button class="btn btn-vt btn-sm" data-act="msg-read" data-id="'+m.id+'">Marquer lu</button>')+'<button class="btn btn-rg btn-sm" data-act="msg-del" data-id="'+m.id+'">Supprimer</button></div></div>';
+  }).join('');
+}
+
+/* ---------- PARAMÈTRES ---------- */
+async function loadParams(){
+  var {data}=await sb.from('parametres').select('*');
+  var map={};(data||[]).forEach(function(p){map[p.cle]=p.valeur});
+  $('#p-hello').value=map.helloasso_url||'';
+  $('#p-annee').value=map.annee_adhesion||'';
+  $('#an-active').checked=(map.annonce_active==='true');
+  $('#an-titre').value=map.annonce_titre||'';$('#an-texte').value=map.annonce_texte||'';
+  $('#an-lien').value=map.annonce_lien||'';$('#an-label').value=map.annonce_lien_label||'';
+  $('#m-actif').checked=(map.merch_actif==='true');$('#m-collection').value=map.merch_collection||'';$('#m-intro').value=map.merch_intro||'';$('#m-url').value=map.merch_boutique_url||'';
+  var l=await sb.from('liens_utiles').select('*').order('ordre');
+  var list=$('#liens-list');
+  list.innerHTML=(l.data&&l.data.length)?l.data.map(function(x){
+    return '<div class="row" style="border:1px solid var(--line);border-radius:8px;margin-bottom:8px"><div class="grow"><div class="t">'+esc(x.libelle)+'</div><div class="m">'+esc(x.url)+'</div></div><button class="btn btn-rg btn-sm" data-act="lien-del" data-id="'+x.id+'">Suppr.</button></div>';
+  }).join(''):'<div class="hint">Aucun lien pour l\'instant.</div>';
+}
+async function paramsSave(){
+  await sb.from('parametres').upsert({cle:'helloasso_url',valeur:$('#p-hello').value.trim()});
+  await sb.from('parametres').upsert({cle:'annee_adhesion',valeur:$('#p-annee').value.trim()});
+  toast('Paramètres enregistrés');
+}
+function openImagePicker(cb){IMGCB=cb;var m=$('#imgpick');m.querySelector('.pick-body').innerHTML='<div class="hint">Chargement…</div>';m.classList.add('open');
+  sb.from('photos').select('*').order('created_at',{ascending:false}).then(function(r){var imgs=(r.data||[]);
+    m.querySelector('.pick-body').innerHTML='<div class="hint" style="margin-bottom:12px;color:#a16207"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg> Pour un article public, choisis de préférence une photo sans visage (sauf accord des personnes).</div><div class="fld"><label class="flbl">Envoyer une nouvelle image</label><input class="inp" type="file" id="pick-file" accept="image/*"></div><div class="hint" style="margin:6px 0 14px">ou choisis parmi les photos de la galerie :</div><div class="pickgrid">'+imgs.map(function(p){return '<img class="pickimg" src="'+esc(p.image_url)+'" data-url="'+esc(p.image_url)+'">'}).join('')+'</div>';});
+}
+function closePicker(){$('#imgpick').classList.remove('open')}
+/* ---------- DOCUMENTS ---------- */
+async function loadDocuments(){
+  $('#doc-editor').style.display='none';$('#doc-list').style.display='block';
+  var {data}=await sb.from('documents').select('*').order('ordre');
+  if(!data||!data.length){$('#doc-list').innerHTML='<div class="tbl"><div class="empty">Aucun document.</div></div>';return}
+  $('#doc-list').innerHTML='<div class="tbl">'+data.map(function(d){return '<div class="row"><div class="grow"><div class="t">'+esc(d.titre)+'</div><div class="m">'+esc(d.categorie||'')+' · '+esc(d.url)+'</div></div><div class="acts"><button class="btn btn-out btn-sm" data-act="doc-edit" data-id="'+d.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="doc-del" data-id="'+d.id+'">Suppr.</button></div></div>';}).join('')+'</div>';
+}
+function docEditor(d){d=d||{};$('#doc-list').style.display='none';var e=$('#doc-editor');e.style.display='block';
+  e.innerHTML='<div class="panel"><input type="hidden" id="d-id" value="'+(d.id||'')+'">'
+   +'<div class="fld"><label class="flbl">Titre *</label><input class="inp" id="d-titre" value="'+esc(d.titre)+'"></div>'
+   +'<div class="fld"><label class="flbl">Description</label><textarea class="fta" id="d-desc" style="min-height:70px">'+esc(d.description)+'</textarea></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Catégorie</label><input class="inp" id="d-cat" value="'+esc(d.categorie)+'" placeholder="Statuts & règlement, Rapports annuels…"></div>'
+   +'<div class="fld"><label class="flbl">Lien (OneDrive, PDF…)</label><input class="inp" id="d-url" value="'+esc(d.url)+'" placeholder="https://…"></div></div>'
+   +'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-vt" data-act="doc-save">Enregistrer</button><button class="btn btn-out" data-act="doc-cancel">Annuler</button></div></div>';
+}
+async function docSave(){var id=$('#d-id').value,titre=$('#d-titre').value.trim(),url=$('#d-url').value.trim();
+  if(!titre||!url){toast('Titre et lien requis.');return}
+  var payload={titre:titre,description:$('#d-desc').value.trim()||null,categorie:$('#d-cat').value.trim()||null,url:url};
+  var res=id?await sb.from('documents').update(payload).eq('id',id):await sb.from('documents').insert(payload);
+  if(res.error){toast('Erreur : '+res.error.message);return}toast('Document enregistré');loadDocuments();
+}
+/* ---------- PARTENAIRES ---------- */
+async function loadPartenaires(){
+  $('#par-editor').style.display='none';$('#par-list').style.display='block';
+  var {data}=await sb.from('partenaires').select('*').order('ordre');
+  if(!data||!data.length){$('#par-list').innerHTML='<div class="tbl"><div class="empty">Aucun partenaire.</div></div>';return}
+  $('#par-list').innerHTML='<div class="tbl">'+data.map(function(p){var img=p.logo_url?'<img class="thumb" src="'+esc(p.logo_url)+'">':'<div class="thumb"></div>';return '<div class="row">'+img+'<div class="grow"><div class="t">'+esc(p.nom)+'</div><div class="m">'+esc(p.categorie||'')+(p.url?' · '+esc(p.url):'')+'</div></div><div class="acts"><button class="btn btn-out btn-sm" data-act="par-edit" data-id="'+p.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="par-del" data-id="'+p.id+'">Suppr.</button></div></div>';}).join('')+'</div>';
+}
+function parEditor(p){p=p||{};$('#par-list').style.display='none';var e=$('#par-editor');e.style.display='block';
+  e.innerHTML='<div class="panel"><input type="hidden" id="pa-id" value="'+(p.id||'')+'">'
+   +'<div class="fld"><label class="flbl">Nom *</label><input class="inp" id="pa-nom" value="'+esc(p.nom)+'"></div>'
+   +'<div class="fld"><label class="flbl">Description</label><textarea class="fta" id="pa-desc" style="min-height:70px">'+esc(p.description)+'</textarea></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Catégorie</label><input class="inp" id="pa-cat" value="'+esc(p.categorie)+'"></div>'
+   +'<div class="fld"><label class="flbl">Lien (Instagram, site…)</label><input class="inp" id="pa-url" value="'+esc(p.url)+'"></div></div>'
+   +'<div class="fld"><label class="flbl">Logo</label><input class="inp" type="file" id="pa-logo-file" accept="image/*"><div class="hint">Envoie un logo, ou colle une adresse. Vide = initiales.</div><input class="inp" id="pa-logo" value="'+esc(p.logo_url)+'" placeholder="https://…" style="margin-top:8px"></div>'
+   +'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-vt" data-act="par-save">Enregistrer</button><button class="btn btn-out" data-act="par-cancel">Annuler</button></div></div>';
+}
+async function parSave(){var id=$('#pa-id').value,nom=$('#pa-nom').value.trim();
+  if(!nom){toast('Le nom est requis.');return}
+  var logo=$('#pa-logo').value.trim()||null;var lf=$('#pa-logo-file').files[0];
+  if(lf){try{logo=await uploadFile(lf)}catch(e){toast('Envoi du logo echoue');return}}
+  var payload={nom:nom,description:$('#pa-desc').value.trim()||null,categorie:$('#pa-cat').value.trim()||null,url:$('#pa-url').value.trim()||null,logo_url:logo};
+  var res=id?await sb.from('partenaires').update(payload).eq('id',id):await sb.from('partenaires').insert(payload);
+  if(res.error){toast('Erreur : '+res.error.message);return}toast('Partenaire enregistré');loadPartenaires();
+}
+
+/* ---------- HANDLERS (délégation) ---------- */
+document.addEventListener('click',async function(e){
+  var nb=e.target.closest('[data-nav]'); if(nb){nav(nb.getAttribute('data-nav'));return}
+  var cmd=e.target.closest('[data-cmd]'); if(cmd){e.preventDefault();var c=cmd.getAttribute('data-cmd');$('#a-content').focus();
+    if(c==='bold')document.execCommand('bold');
+    else if(c==='italic')document.execCommand('italic');
+    else if(c==='underline')document.execCommand('underline');
+    else if(c==='h3')document.execCommand('formatBlock',false,'h3');
+    else if(c==='h2')document.execCommand('formatBlock',false,'h2');
+    else if(c==='ul')document.execCommand('insertUnorderedList');
+    else if(c==='link'){var u=prompt('Adresse du lien :');if(u)document.execCommand('createLink',false,u)}
+    else if(c==='img'){openImagePicker(function(url){$('#a-content').focus();document.execCommand('insertImage',false,url)})}
+    else if(c==='video'){var vu=prompt('Colle le lien de la vidéo :\n\n• YouTube (conseillé) : mets la vidéo en « Non répertorié », puis colle son lien.\n• OneDrive : ouvre la vidéo, clique « Intégrer », et colle le lien (ou le code) proposé.');if(vu&&vu.trim()){$('#a-content').focus();document.execCommand('insertHTML',false,videoEmbedHTML(vu));}}
+    return}
+  var pk=e.target.closest('.pickimg'); if(pk){var pu=pk.getAttribute('data-url');closePicker();if(IMGCB)IMGCB(pu);IMGCB=null;return}
+  var t=e.target.closest('[data-act]'); if(!t)return;
+  var act=t.getAttribute('data-act'), id=t.getAttribute('data-id');
+  // Articles
+  if(act==='art-new'){document.getElementById('rules').classList.add('open');return}
+  if(act==='rules-ok'){document.getElementById('rules').classList.remove('open');return artEditor(null)}
+  if(act==='rules-cancel'){document.getElementById('rules').classList.remove('open');return}
+  if(act==='art-cancel')return loadArticles();
+  if(act==='art-save')return artSave(t.getAttribute('data-status'));
+  if(act==='art-edit'){var r=await sb.from('articles').select('*').eq('id',id).single();return artEditor(r.data)}
+  if(act==='art-pub'){await sb.from('articles').update({status:'publie',published_at:new Date().toISOString()}).eq('id',id);toast('Publié');return loadArticles()}
+  if(act==='art-unpub'){await sb.from('articles').update({status:'brouillon'}).eq('id',id);toast('Dépublié');return loadArticles()}
+  if(act==='art-del'){if(await askConfirm('Cet article sera supprimé définitivement.','Supprimer cet article ?')){await sb.from('articles').delete().eq('id',id);toast('Supprimé');loadArticles()}return}
+  // Événements
+  if(act==='pick-affiche'){openImagePicker(function(u){$('#e-affiche').value=u});return}
+  if(act==='evt-pin'){var on=t.getAttribute('data-on')==='1';await sb.from('evenements').update({epingle:!on}).eq('id',id);loadEvenements();return}
+  if(act==='evt-accueil'){var on=t.getAttribute('data-on')==='1';if(!on){var c=await sb.from('evenements').select('id',{count:'exact',head:true}).eq('en_accueil',true);if((c.count||0)>=3){toast('Maximum 3 événements en page d\'accueil.');return}}await sb.from('evenements').update({en_accueil:!on}).eq('id',id);toast(!on?'Ajouté à l\'accueil':'Retiré de l\'accueil');loadEvenements();return}
+  if(act==='evt-new')return evtEditor(null);
+  if(act==='evt-cancel')return loadEvenements();
+  if(act==='evt-save')return evtSave();
+  if(act==='evt-edit'){var r2=await sb.from('evenements').select('*').eq('id',id).single();return evtEditor(r2.data)}
+  if(act==='evt-del'){if(await askConfirm('Cet événement sera supprimé définitivement.','Supprimer cet événement ?')){await sb.from('evenements').delete().eq('id',id);toast('Supprimé');loadEvenements()}return}
+  if(act==='ag-new')return agEditor(null);
+  if(act==='ag-cancel')return loadAgenda();
+  if(act==='ag-save')return agSave();
+  if(act==='ag-edit'){var ra=await sb.from('agenda').select('*').eq('id',id).single();return agEditor(ra.data)}
+  if(act==='ag-del'){if(await askConfirm('Cette entrée de l\'agenda sera supprimée définitivement.','Supprimer cette entrée ?')){await sb.from('agenda').delete().eq('id',id);toast('Supprimé');loadAgenda()}return}
+  // Photos
+  if(act==='pho-vis'){var on=t.getAttribute('data-on')==='1';await sb.from('photos').update({public_galerie:!on}).eq('id',id);loadPhotos();return}
+  if(act==='pho-new')return phoEditor(null);
+  if(act==='pho-cancel')return loadPhotos();
+  if(act==='pho-save')return phoSave();
+  if(act==='pho-edit'){var r3=await sb.from('photos').select('*').eq('id',id).single();return phoEditor(r3.data)}
+  if(act==='pho-del'){if(await askConfirm('Cette photo sera supprimée définitivement.','Supprimer cette photo ?')){await sb.from('photos').delete().eq('id',id);toast('Supprimé');loadPhotos()}return}
+  // Messages
+  if(act==='msg-read'){await sb.from('messages').update({lu:true}).eq('id',id);loadMessages();loadDash();return}
+  if(act==='msg-unread'){await sb.from('messages').update({lu:false}).eq('id',id);loadMessages();loadDash();return}
+  if(act==='msg-del'){if(await askConfirm('Ce message sera supprimé définitivement.','Supprimer ce message ?')){await sb.from('messages').delete().eq('id',id);toast('Supprimé');loadMessages();loadDash()}return}
+  // Paramètres
+  if(act==='doc-new')return docEditor(null);
+  if(act==='doc-cancel')return loadDocuments();
+  if(act==='doc-save')return docSave();
+  if(act==='doc-edit'){var rd=await sb.from('documents').select('*').eq('id',id).single();return docEditor(rd.data)}
+  if(act==='doc-del'){if(await askConfirm('Ce document sera supprimé définitivement.','Supprimer ce document ?')){await sb.from('documents').delete().eq('id',id);toast('Supprimé');loadDocuments()}return}
+  if(act==='par-new')return parEditor(null);
+  if(act==='par-cancel')return loadPartenaires();
+  if(act==='par-save')return parSave();
+  if(act==='par-edit'){var rp=await sb.from('partenaires').select('*').eq('id',id).single();return parEditor(rp.data)}
+  if(act==='par-del'){if(await askConfirm('Ce partenaire sera supprimé définitivement.','Supprimer ce partenaire ?')){await sb.from('partenaires').delete().eq('id',id);toast('Supprimé');loadPartenaires()}return}
+  if(act==='pick-cover'){openImagePicker(function(u){$('#a-cover').value=u});return}
+  if(act==='pick-close'){closePicker();return}
+  if(act==='merch-save'){await sb.from('parametres').upsert({cle:'merch_actif',valeur:$('#m-actif').checked?'true':'false'});await sb.from('parametres').upsert({cle:'merch_collection',valeur:$('#m-collection').value.trim()});await sb.from('parametres').upsert({cle:'merch_intro',valeur:$('#m-intro').value.trim()});await sb.from('parametres').upsert({cle:'merch_boutique_url',valeur:$('#m-url').value.trim()});toast('Merch enregistré');return}
+  if(act==='annonce-save'){await sb.from('parametres').upsert({cle:'annonce_active',valeur:$('#an-active').checked?'true':'false'});await sb.from('parametres').upsert({cle:'annonce_titre',valeur:$('#an-titre').value.trim()});await sb.from('parametres').upsert({cle:'annonce_texte',valeur:$('#an-texte').value.trim()});await sb.from('parametres').upsert({cle:'annonce_lien',valeur:$('#an-lien').value.trim()});await sb.from('parametres').upsert({cle:'annonce_lien_label',valeur:$('#an-label').value.trim()});toast('Annonce enregistrée');return}
+  if(act==='params-save')return paramsSave();
+  if(act==='lien-add'){var lib=$('#lien-lib').value.trim(),url=$('#lien-url').value.trim();if(!lib||!url){toast('Nom et adresse requis.');return}await sb.from('liens_utiles').insert({libelle:lib,url:url});$('#lien-lib').value='';$('#lien-url').value='';toast('Lien ajouté');return loadParams()}
+  if(act==='lien-del'){await sb.from('liens_utiles').delete().eq('id',id);toast('Lien supprimé');return loadParams()}
+});
+
+document.addEventListener('change',async function(e){
+  if(e.target && e.target.id==='pick-file'){var file=e.target.files[0];if(!file)return;try{var url=await uploadFile(file);closePicker();if(IMGCB)IMGCB(url);IMGCB=null}catch(err){toast('Envoi echoue')}}
+});
+checkSession();
 </script>
 </body>
 </html>

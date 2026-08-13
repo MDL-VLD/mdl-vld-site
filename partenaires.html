@@ -1,389 +1,192 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MDL Viollet-le-Duc</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" type="image/png" href="favicon-32.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <meta name="author" content="Ewan Foucaud — MDL Viollet-le-Duc">
-  <meta name="robots" content="index, follow">
-  <meta name="description" content="Les partenaires et structures associées à la MDL du lycée Viollet-le-Duc.">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="MDL Viollet-le-Duc">
-  <meta property="og:title" content="MDL Viollet-le-Duc">
-  <meta property="og:description" content="Les partenaires et structures associées à la MDL du lycée Viollet-le-Duc.">
-  <meta property="og:image" content="https://mdl-vld.fr/assets/lycee-entree.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .partners-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .partner-card {
-      background: white;
-      border: 1px solid var(--lilas-pale);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-decoration: none;
-    }
-    .partner-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
-    .partner-icon {
-      width: 52px; height: 52px;
-      background: var(--lilas-pale);
-      border-radius: var(--radius-md);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px;
-    }
-    .partner-type {
-      font-size: 10px; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--or-texte);
-    }
-    .partner-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 16px; font-weight: 700;
-      color: var(--prune);
-      line-height: 1.3;
-    }
-    .partner-desc {
-      font-size: 13px; color: var(--gris-texte);
-      line-height: 1.65; flex: 1;
-    }
-    .partner-link {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 12px; color: var(--magenta);
-      font-weight: 500; text-decoration: none;
-      margin-top: auto;
-    }
-    .partner-link:hover { color: var(--magenta-hover); }
-
-    .insta-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 11px; background: var(--lilas-pale);
-      color: var(--magenta); padding: 3px 10px;
-      border-radius: 20px; font-weight: 500;
-    }
-
-    .section-divider {
-      height: 2px;
-      background: linear-gradient(90deg, var(--magenta), var(--lilas), transparent);
-      border-radius: 2px;
-      margin: 0 0 32px;
-    }
-
-    @media (max-width: 768px) {
-      .partners-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 480px) {
-      .partners-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#930f7c">
-  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js');}</script></head>
-<body>
-<a href="#main-content" class="skip-link">Aller au contenu principal</a>
-
-<nav>
-  <a href="index.html" class="nav-logo">
-    <div class="nav-logo-img"><img src="assets/logo.png" alt="Logo MDL"></div>
-    <div>
-      <div class="nav-logo-text">MDL Viollet-le-Duc</div>
-      <span class="nav-logo-sub">Maison des Lycéens</span>
-    </div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html">Accueil</a></li>
-    <li class="nav-dropdown">
-      <a href="evenements.html">Activités</a>
-      <div class="nav-dropdown-menu">
-        <a href="evenements.html">Événements</a>
-        <a href="projets.html">Projets</a>
-        <a href="clubs.html">Clubs</a>
-        <a href="merch.html">Merch</a>
-      </div>
-    </li>
-    <li><a href="planning.html">Planning</a></li>
-    <li class="nav-dropdown">
-      <a href="mdl.html" class="active">La MDL</a>
-      <div class="nav-dropdown-menu">
-        <a href="mdl.html">La MDL</a>
-        <a href="equipe.html">Équipe</a>
-        <a href="partenaires.html" class="active">Partenaires</a>
-        <div class="nav-dropdown-menu-sep"></div>
-        <a href="documents.html">Documents</a>
-      </div>
-    </li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="adhesion.html" class="nav-cta">Adhérer</a></li>
-  </ul>
-  <div class="nav-right">
-    <button class="nav-search-btn" id="searchOpenBtn" title="Ctrl+K" aria-label="Rechercher">🔍 Rechercher</button>
-    <button class="dark-toggle" id="darkToggle" aria-label="Mode sombre" title="Mode sombre">🌙</button>
-    <a href="admin.html" style="font-family:var(--syne,sans-serif);font-size:10px;font-weight:700;letter-spacing:.06em;color:rgba(var(--prune-rgb,45,26,40),.45);padding:5px 10px;border:1px solid rgba(0,0,0,.12);border-radius:4px;text-decoration:none;white-space:nowrap;margin-left:4px;" title="Connexion membres">🔐</a>
-    <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu" id="burger"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-<div class="nav-mobile-menu" id="mobile-menu">
-  <a href="index.html">Accueil</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">Activités</div>
-  <a href="evenements.html" style="padding-left:32px!important;">Événements</a>
-  <a href="projets.html" style="padding-left:32px!important;">Projets</a>
-  <a href="clubs.html" style="padding-left:32px!important;">Clubs</a>
-  <a href="merch.html" style="padding-left:32px!important;">Merch</a>
-  <a href="planning.html">Planning</a>
-  <div style="padding:10px 20px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--or-texte);">La MDL</div>
-  <a href="mdl.html" style="padding-left:32px!important;">La MDL</a>
-  <a href="equipe.html" style="padding-left:32px!important;">Équipe</a>
-  <a href="partenaires.html" style="padding-left:32px!important;">Partenaires</a>
-  <a href="documents.html" style="padding-left:32px!important;">Documents</a>
-  <a href="credits.html" style="padding-left:32px!important;">Crédits</a>
-  <a href="contact.html">Contact</a>
-  <a href="adhesion.html" class="nav-cta">Adhérer</a>
-</div>
-<script>
-function toggleMenu(){var m=document.getElementById('mobile-menu');m.classList.toggle('open');}
-document.addEventListener('click',function(e){var m=document.getElementById('mobile-menu');var b=document.getElementById('burger');if(m&&b&&m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){m.classList.remove('open');}});
-</script>
-<span id="main-content" tabindex="-1"></span>
-
-<div class="page-hero page-hero-photo" style="--hero-photo: url('assets/lycee-facade2.jpg'); --hero-pos: center 35%;">
-  <div class="page-hero-inner">
-    <div class="da-hero-eyebrow">Écosystème lycéen</div>
-    <h1 class="da-hero-title">Nos partenaires</h1>
-    <p class="da-hero-sub">Le lycée Viollet-le-Duc, c'est bien plus que la MDL. Voici les structures, associations et comptes qui animent la vie du lycée à nos côtés.</p>
-  </div>
-</div>
-
-<!-- ÉTABLISSEMENT -->
-<section class="section">
-  <div class="section-divider"></div>
-  <span class="section-eyebrow">L'établissement</span>
-  <h2 class="section-title">Le lycée</h2>
-  <p class="section-sub">Notre établissement de référence.</p>
-  <div class="partners-grid">
-    <a href="https://lyc-violletleduc.ac-versailles.fr/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">🏫</div>
-      <div class="partner-type">Établissement</div>
-      <div class="partner-name">Lycée Viollet-le-Duc</div>
-      <p class="partner-desc">Le lycée général et technologique de Villiers-Saint-Frédéric, qui accueille la MDL en son sein.</p>
-      <span class="partner-link">Voir le site →</span>
-    </a>
-    <div class="partner-card" style="padding:0;overflow:hidden;cursor:default;">
-      <img src="assets/lycee-facade.jpg" alt="Façade du lycée Viollet-le-Duc"
-           style="width:100%;height:100%;object-fit:cover;min-height:220px;display:block;">
-    </div>
-  </div>
-</section>
-
-<!-- INSTANCES LYCÉENNES -->
-<section class="section section-alt">
-  <div class="section-divider"></div>
-  <span class="section-eyebrow">Instances lycéennes</span>
-  <h2 class="section-title">Vie institutionnelle</h2>
-  <p class="section-sub">Les structures officielles de représentation et d'engagement lycéen.</p>
-  <div class="partners-grid">
-    <a href="https://www.instagram.com/cvl.vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon" style="background:none;padding:0;overflow:hidden;border-radius:var(--radius-sm);">
-        <img src="assets/partner-cvl.jpg" alt="Logo CVL" style="width:52px;height:52px;object-fit:cover;border-radius:var(--radius-sm);">
-      </div>
-      <div class="partner-type">Instance officielle</div>
-      <div class="partner-name">Conseil de Vie Lycéenne</div>
-      <p class="partner-desc">Le CVL représente les lycéens auprès de la direction et des instances académiques. Instance élective officielle.</p>
-      <span class="insta-badge">📸 @cvl.vld</span>
-    </a>
-    <a href="https://www.instagram.com/ambassadeurs_vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon" style="background:none;padding:0;overflow:hidden;border-radius:var(--radius-sm);">
-        <img src="assets/partner-ambassadeurs.jpg" alt="Logo Ambassadeurs lycéens VLD" style="width:52px;height:52px;object-fit:cover;border-radius:var(--radius-sm);">
-      </div>
-      <div class="partner-type">Ambassadeurs anti-harcèlement</div>
-      <div class="partner-name">Ambassadeurs VLD</div>
-      <p class="partner-desc">Ambassadeurs anti-harcèlement et représentants du lycée. Ils agissent pour un climat scolaire bienveillant et sécurisé.</p>
-      <span class="insta-badge">📸 @ambassadeurs_vld</span>
-    </a>
-  </div>
-</section>
-
-<!-- CULTURE ET ENGAGEMENT -->
-<section class="section">
-  <div class="section-divider"></div>
-  <span class="section-eyebrow">Culture et engagement</span>
-  <h2 class="section-title">Vie culturelle</h2>
-  <p class="section-sub">Les initiatives culturelles et citoyennes du lycée.</p>
-  <div class="partners-grid">
-    <a href="https://www.instagram.com/ambassadeurs.culturevld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">🎨</div>
-      <div class="partner-type">Culture</div>
-      <div class="partner-name">Ambassadeurs Culture VLD</div>
-      <p class="partner-desc">Promotion de la culture au sein du lycée, organisation de sorties et d'événements culturels.</p>
-      <span class="insta-badge">📸 @ambassadeurs.culturevld</span>
-    </a>
-    <a href="https://www.instagram.com/culture.vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">🎭</div>
-      <div class="partner-type">Pass Culture</div>
-      <div class="partner-name">Pass Culture VLD</div>
-      <p class="partner-desc">Référents Pass Culture du lycée, pour aider les lycéens à profiter de leurs crédits culturels.</p>
-      <span class="insta-badge">📸 @culture.vld</span>
-    </a>
-    <a href="https://www.instagram.com/as.vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">⚽</div>
-      <div class="partner-type">Sport</div>
-      <div class="partner-name">Association Sportive VLD</div>
-      <p class="partner-desc">L'association sportive du lycée, qui organise les activités et compétitions sportives inter-lycées.</p>
-      <span class="insta-badge">📸 @as.vld</span>
-    </a>
-  </div>
-</section>
-
-<!-- PHOTO PLEINE LARGEUR - Vie lycéenne -->
-<div style="position: relative; height: 360px; overflow: hidden;">
-  <img src="assets/photo-course-banniere.jpg"
-       alt="Lycéens du lycée Viollet-le-Duc lors d'un événement collectif"
-       style="width: 100%; height: 100%; object-fit: cover; object-position: center 40%;">
-  <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(45,26,40,0.72) 0%, rgba(45,26,40,0.25) 60%, transparent 100%);"></div>
-  <div style="position: absolute; top: 50%; left: 48px; transform: translateY(-50%); color: white; max-width: 460px;">
-    <span style="font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--or-pale, #f5ecd0); display: block; margin-bottom: 10px;">Un écosystème commun</span>
-    <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; line-height: 1.25; margin-bottom: 12px;">Toutes ces structures<br>font vivre le même lycée</div>
-    <p style="font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.7;">Instances officielles, clubs, médias lycéens : autant de façons différentes de s'impliquer à Viollet-le-Duc.</p>
-  </div>
-</div>
-
-<!-- MÉDIAS ET COMMUNICATION -->
-<section class="section section-alt">
-  <div class="section-divider"></div>
-  <span class="section-eyebrow">Médias lycéens</span>
-  <h2 class="section-title">Communication et médias</h2>
-  <p class="section-sub">Les comptes et médias qui font l'info au lycée.</p>
-  <div class="partners-grid">
-    <a href="https://www.instagram.com/vlmag_lemagdevld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">📻</div>
-      <div class="partner-type">Média</div>
-      <div class="partner-name">VLMag · Web Radio</div>
-      <p class="partner-desc">Le magazine et la web radio du lycée Viollet-le-Duc. Actualités, émissions et contenus produits par les élèves.</p>
-      <span class="insta-badge">📸 @vlmag_lemagdevld</span>
-    </a>
-    <a href="https://www.instagram.com/crush_.vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">💬</div>
-      <div class="partner-type">Compte lycéen</div>
-      <div class="partner-name">Crush VLD</div>
-      <p class="partner-desc">Compte communautaire des lycéens de Viollet-le-Duc. Page d'expression libre et de partage entre élèves.</p>
-      <span class="insta-badge">📸 @crush_.vld</span>
-    </a>
-  </div>
-</section>
-
-<!-- FORMATIONS / FILIÈRES -->
-<section class="section">
-  <div class="section-divider"></div>
-  <span class="section-eyebrow">Filières et formations</span>
-  <h2 class="section-title">Comptes de formation</h2>
-  <p class="section-sub">Les comptes des filières et sections du lycée.</p>
-  <div class="partners-grid">
-    <a href="https://www.instagram.com/formation.deco.vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">🎀</div>
-      <div class="partner-type">Formation</div>
-      <div class="partner-name">Formation Déco VLD</div>
-      <p class="partner-desc">Compte de la filière décoration du lycée Viollet-le-Duc. Projets, créations et actualités de la section.</p>
-      <span class="insta-badge">📸 @formation.deco.vld</span>
-    </a>
-    <a href="https://www.instagram.com/arts_appliques_vld/" target="_blank" rel="noopener" class="partner-card">
-      <div class="partner-icon">✏️</div>
-      <div class="partner-type">Formation</div>
-      <div class="partner-name">Arts Appliqués VLD</div>
-      <p class="partner-desc">La section arts appliqués du lycée. Créations artistiques, projets et actualités de la filière.</p>
-      <span class="insta-badge">📸 @arts_appliques_vld</span>
-    </a>
-  </div>
-</section>
-
-<div class="footer-tagline-block">
-  <p class="footer-tagline-text">Fait par des <strong>lycéens</strong>, pour des lycéens.</p>
-  <p class="footer-tagline-sub">MDL Viollet-le-Duc · Villiers-Saint-Frédéric · depuis 2014</p>
-</div>
+<!DOCTYPE html><html lang="fr"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDL VLD · Partenaires</title>
+<meta name="description" content="Les partenaires de la MDL du Lycée Viollet-le-Duc.">
+<link rel="icon" href="favicon.ico"><link rel="icon" type="image/png" href="favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--ink:#241019;--prune:#2d1a28;--mg:#7d0f64;--mg2:#63104f;--paper:#f6f2ef;--paper2:#efe8e3;--line:rgba(45,26,40,.12);--grey:#6d6169;--syne:'Syne',sans-serif;--body:'DM Sans',sans-serif;--serif:'Fraunces',serif}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+  nav{position:sticky;top:0;z-index:50;background:rgba(246,242,239,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:12px}.brand img{height:34px;width:auto;display:block}
+  .brand-name{font-family:var(--syne);font-weight:800;font-size:15px;letter-spacing:-.01em;line-height:1;color:var(--ink)}
+  .brand-name small{display:block;font-family:var(--body);font-weight:400;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-top:4px}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--prune);opacity:.75;transition:opacity .2s}.nav-links a:hover{opacity:1}
+  .cta{display:inline-flex;align-items:center;gap:8px;background:var(--mg);color:#fff;font-family:var(--syne);font-weight:700;font-size:13px;padding:11px 20px;border-radius:100px;transition:background .2s}.cta:hover{background:var(--mg2)}.nav-links a.cta{opacity:1;color:#fff}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}.burger span{width:24px;height:2px;background:var(--prune)}
+  .phero{position:relative;min-height:44vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+  .phero-bg{position:absolute;inset:0;background-size:cover;background-position:center 42%;transform:scale(1.03)}
+  .phero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,6,15,.9) 4%,rgba(20,6,15,.5) 55%,rgba(20,6,15,.4) 100%)}
+  .phero-in{position:relative;z-index:2;width:100%;padding:0 0 46px}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#f3b9e2;font-weight:600;margin-bottom:16px}
+  .phero h1{font-family:var(--syne);font-weight:800;line-height:.95;letter-spacing:-.03em;font-size:clamp(46px,9vw,104px)}
+  .phero p{max-width:600px;margin-top:18px;font-size:clamp(16px,1.7vw,18px);color:rgba(255,255,255,.88)}
+  section{padding:80px 0}
+  .catblock{margin-bottom:48px}
+  .catt{font-family:var(--syne);font-weight:800;font-size:20px;letter-spacing:-.01em;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .catt span{color:var(--mg)}
+  footer{background:var(--ink);color:#fff;padding:70px 0 32px}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .foot-brand{font-family:var(--syne);font-weight:800;font-size:20px}.foot-brand-row{display:flex;align-items:center;gap:12px}.foot-logo{height:42px;width:auto;display:block}
+  .foot-brand p{font-family:var(--body);font-weight:400;font-size:14px;color:rgba(255,255,255,.5);margin-top:14px;max-width:320px}
+  .foot-social{display:flex;align-items:center;gap:16px;margin-top:22px}
+  .foot-social a{color:rgba(255,255,255,.6);display:flex;transition:color .2s}.foot-social a:hover{color:#f3b9e2}.foot-social svg{width:20px;height:20px;fill:currentColor}
+  .foot-lycee{font-size:13px;font-weight:500;border-left:1px solid rgba(255,255,255,.22);padding-left:16px}
+  .foot-col h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:16px}
+  .foot-col a{display:block;font-size:14px;color:rgba(255,255,255,.7);padding:5px 0}.foot-col a:hover{color:#fff}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;font-size:12px;color:rgba(255,255,255,.4)}
+  .foot-bottom a{color:rgba(255,255,255,.4)}.foot-bottom a:hover{color:#fff}
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}.rv.in{opacity:1;transform:none}
+  @media(max-width:900px){.nav-links{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 0;box-shadow:0 14px 30px rgba(45,26,40,.12)}.nav-links.open{display:flex}.nav-links a{padding:13px 32px;opacity:1}.nav-links a.cta{margin:10px 24px;justify-content:center}.burger{display:flex}.burger span{transition:transform .2s,opacity .2s}.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger.open span:nth-child(2){opacity:0}.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}section{padding:58px 0}.foot-top{grid-template-columns:1fr 1fr;gap:30px}footer{padding:54px 0 28px}}
+  @media(max-width:560px){.wrap{padding:0 18px}section{padding:44px 0}.foot-top{grid-template-columns:1fr;gap:22px}.foot-bottom{flex-direction:column;gap:6px}}
+  .pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .pcard{display:flex;gap:18px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+  .plogo{width:56px;height:56px;border-radius:12px;object-fit:cover;flex-shrink:0;background:var(--paper2)}
+  .pini{width:56px;height:56px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(140deg,var(--mg),var(--prune));color:#fff;font-family:var(--syne);font-weight:800;font-size:20px}
+  .pcard h3{font-family:var(--syne);font-weight:700;font-size:17px;margin-bottom:4px}
+  .pcard p{color:var(--grey);font-size:14px}
+  .pcard a.lnk{display:inline-block;margin-top:8px;font-family:var(--syne);font-weight:700;font-size:12px;color:var(--mg)}
+  .pcard a.lnk.iglnk{display:inline-flex;align-items:center;gap:6px}
+  .pcard a.lnk svg{width:14px;height:14px;fill:currentColor}
+  @media(max-width:760px){.pgrid{grid-template-columns:1fr}}
+</style></head><body>
+<a href="#main" style="position:absolute;left:8px;top:-60px;z-index:9999;background:#7d0f64;color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;text-decoration:none;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-60px'">Aller au contenu</a>
+<nav><div class="wrap nav-in">
+  <a href="index.html" class="brand"><img loading="lazy" src="assets/logo.png" alt="MDL"><span class="brand-name">MDL Viollet-le-Duc<small>Maison des Lycéens</small></span></a>
+  <div class="nav-links"><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><a href="adherer.html" class="cta">Adhérer</a><a href="admin.html" title="Espace membres" aria-label="Espace membres" style="opacity:.4;display:inline-flex;align-items:center;color:var(--prune)"><svg viewBox="0 0 16 16" style="width:15px;height:15px;fill:currentColor" aria-hidden="true"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg></a></div>
+  <div class="burger"><span></span><span></span><span></span></div>
+</div></nav>
+<header id="main" class="phero"><div class="phero-bg" style="background-image:url(assets/lycee-3.jpg)"></div>
+<div class="wrap phero-in"><div class="eyebrow rv">Avec nous</div><h1 class="rv">Partenaires</h1>
+<p class="rv">Le lycée Viollet-le-Duc, c'est bien plus que la MDL : voici les structures et comptes qui font vivre le lycée à nos côtés.</p></div></header>
+<section><div class="wrap"><div id="content"><p style="color:var(--grey)">Chargement…</p></div></div></section>
 <footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-logo-row">
-        <div class="footer-logo-mark"><img src="assets/logo.png" alt="Logo MDL"></div>
-        <div class="footer-logo-name">MDL Viollet-le-Duc</div>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="foot-brand-row"><img loading="lazy" src="assets/logo.png" alt="" class="foot-logo"><span>MDL Viollet-le-Duc</span></div>
+        <p>La Maison des Lycéens du Lycée Viollet-le-Duc.<br>Villiers-Saint-Frédéric (78640), Yvelines, France.</p>
+        <div class="foot-social">
+          <a href="https://www.instagram.com/mdl.vld/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.9 5.9 0 0 0-2.12 1.38A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.9 5.9 0 0 0 1.38 2.12 5.9 5.9 0 0 0 2.12 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.12-1.38 5.9 5.9 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.12A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0m0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84M12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4m6.41-10.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44"/></svg></a>
+          <a href="https://www.tiktok.com/@mdl.vld" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.05-2.82h-3.2v12.9a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 0 1 0-5.18c.27 0 .53.04.77.12v-3.3a5.9 5.9 0 0 0-.77-.05 5.86 5.86 0 1 0 5.86 5.86V9.01a7.5 7.5 0 0 0 4.38 1.4V7.2a4.28 4.28 0 0 1-3.4-1.38"/></svg></a>
+          <a href="https://lyc-violletleduc.ac-versailles.fr/" target="_blank" rel="noopener" class="foot-lycee">Site du lycée</a>
+        </div>
+        <a href="https://search.google.com/local/writereview?placeid=ChIJCc3KzrOb5kcR2pEyC0TCt2g" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;margin-top:26px;background:#c9a84c;color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;padding:10px 18px;border-radius:100px;text-decoration:none">★ Laisser un avis Google</a>
       </div>
-      <p class="footer-desc">Association loi 1901 · gérée par et pour les lycéens du lycée Viollet-le-Duc à Villiers-Saint-Frédéric (78640).</p>
+      <div class="foot-col"><h4>Le site</h4><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a></div>
+      <div class="foot-col"><h4>Pratique</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="documents.html">Documents</a><a href="partenaires.html">Partenaires</a><a href="merch.html">Merch</a></div>
     </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Activités</div>
-      <ul>
-        <li><a href="evenements.html">Événements</a></li>
-        <li><a href="projets.html">Projets</a></li>
-        <li><a href="clubs.html">Clubs</a></li>
-        <li><a href="merch.html">Merch</a></li>
-        <li><a href="planning.html">Planning</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">La MDL</div>
-      <ul>
-        <li><a href="mdl.html">La MDL</a></li>
-        <li><a href="equipe.html">Équipe</a></li>
-        <li><a href="adhesion.html">Adhérer</a></li>
-        <li><a href="partenaires.html">Partenaires</a></li>
-        <li><a href="documents.html">Documents</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <div class="footer-col-title">Infos</div>
-      <ul>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a></li>
-        <li><a href="credits.html">Crédits</a></li>
-        <li><a href="mentions-legales.html">Mentions légales</a></li>
-        <li><a href="confidentialite.html">Confidentialité</a></li>
-      </ul>
-    </div>
-  </div>
-  <div style="padding:12px 64px;border-top:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.15);">
-  <a href="admin.html" style="font-size:11px;color:rgba(255,255,255,0.25);text-decoration:none;font-family:var(--syne,sans-serif);letter-spacing:.06em;">
-    🔐 Espace membres
-  </a>
-</div>
-<div class="footer-bottom">
-    <span>© <span class="year-auto"></span> MDL Viollet-le-Duc · RNA W782004627</span>
-    <span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a></span>
+    <div class="foot-bottom"><span>© 2026 MDL Viollet-le-Duc · Fait par les lycéens</span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="admin.html">Espace membres</a></span></div>
   </div>
 </footer>
-<button class="back-to-top" id="backToTop" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
-  <div class="search-modal">
-    <div class="search-input-row">
-      <span class="search-icon">🔍</span>
-      <input type="search" class="search-input" id="searchInput" placeholder="Rechercher une page, un événement..." autocomplete="off">
-      <button class="search-close-btn" id="searchCloseBtn">Échap</button>
-    </div>
-    <div class="search-results" id="searchResults"><div class="search-empty">Tapez pour rechercher...</div></div>
-  </div>
+<script>
+const SB_URL='https://ksvqjbcnqphnyxfpjhvz.supabase.co',SB_KEY='sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0';
+const FALLBACK=[
+ {nom:'Lycée Viollet-le-Duc',description:"Notre établissement de référence : le lycée général et technologique de Villiers-Saint-Frédéric, qui accueille la MDL en son sein.",categorie:"L'établissement",logo_url:null,url:'https://lyc-violletleduc.ac-versailles.fr/'},
+ {nom:'Conseil de la Vie Lycéenne (CVL)',description:"Le CVL représente les lycéens auprès de la direction et des instances académiques. C'est l'instance élective officielle des élèves.",categorie:'Vie lycéenne',logo_url:'assets/partner-cvl.jpg',url:'https://www.instagram.com/cvl.vld/'},
+ {nom:'Ambassadeurs anti-harcèlement',description:"Représentants du lycée qui agissent pour un climat scolaire bienveillant et sécurisé.",categorie:'Vie lycéenne',logo_url:'assets/partner-ambassadeurs.jpg',url:'https://www.instagram.com/ambassadeurs_vld/'},
+ {nom:'Association sportive (AS)',description:"L'association sportive du lycée, qui organise les activités et compétitions sportives inter-lycées.",categorie:'Culture & sport',logo_url:null,url:'https://www.instagram.com/as.vld/'},
+ {nom:'Référents Pass Culture',description:"Les référents Pass Culture du lycée, pour aider les lycéens à profiter de leurs crédits culturels.",categorie:'Culture & sport',logo_url:null,url:'https://www.instagram.com/culture.vld/'},
+ {nom:'Web radio & magazine',description:"Le magazine et la web radio du lycée : actualités, émissions et contenus produits par les élèves.",categorie:'Médias & comptes',logo_url:'assets/partner-web-radio.jpg',url:'https://www.instagram.com/vlmag_lemagdevld/'},
+ {nom:'Compte communautaire des lycéens',description:"Compte d'expression libre et de partage entre les élèves de Viollet-le-Duc.",categorie:'Médias & comptes',logo_url:null,url:'https://www.instagram.com/crush_.vld/'},
+ {nom:'Filière décoration',description:"Le compte de la filière décoration du lycée : projets, créations et actualités de la section.",categorie:'Filières',logo_url:null,url:'https://www.instagram.com/formation.deco.vld/'},
+ {nom:'Section arts appliqués',description:"La section arts appliqués du lycée : créations artistiques, projets et actualités de la filière.",categorie:'Filières',logo_url:null,url:'https://www.instagram.com/arts_appliques_vld/'}
+];
+function esc(s){return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+var IGSVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.9 5.9 0 0 0-2.12 1.38A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.9 5.9 0 0 0 1.38 2.12 5.9 5.9 0 0 0 2.12 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.12-1.38 5.9 5.9 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.12A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0m0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84M12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4m6.41-10.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44"/></svg>';
+function ini(n){return (n||'?').replace(/\(.*?\)/g,'').trim().split(/\s+/).slice(0,2).map(function(w){return w[0]}).join('').toUpperCase()}
+function render(data){
+  var cats=[];data.forEach(function(p){if(cats.indexOf(p.categorie)<0)cats.push(p.categorie)});
+  document.getElementById('content').innerHTML=cats.map(function(c){
+    var items=data.filter(function(p){return p.categorie===c});
+    return '<div class="catblock rv"><h2 class="catt">'+esc(c)+'<span>.</span></h2><div class="pgrid">'+items.map(function(p){
+      var logo=p.logo_url?'<img loading="lazy" class="plogo" src="'+esc(p.logo_url)+'" alt="">':'<div class="pini">'+esc(ini(p.nom))+'</div>';
+      var lnk='';if(p.url){var ig=p.url.match(/instagram\.com\/([^\/?]+)/);if(ig){lnk='<a class="lnk iglnk" href="'+esc(p.url)+'" target="_blank" rel="noopener">'+IGSVG+'@'+esc(ig[1])+'</a>';}else{lnk='<a class="lnk" href="'+esc(p.url)+'" target="_blank" rel="noopener">Voir →</a>';}}
+      return '<div class="pcard">'+logo+'<div><h3>'+esc(p.nom)+'</h3><p>'+esc(p.description)+'</p>'+lnk+'</div></div>';
+    }).join('')+'</div></div>';
+  }).join('');
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')});
+}
+(async function(){var data=null;try{var sb=supabase.createClient(SB_URL,SB_KEY);var r=await sb.from('partenaires').select('*').order('ordre');if(!r.error&&r.data&&r.data.length)data=r.data;}catch(e){}render(data||FALLBACK)})();
+</script><script>(function(){var b=document.querySelector(".burger"),n=document.querySelector(".nav-links");if(b&&n){b.addEventListener("click",function(){n.classList.toggle("open");b.classList.toggle("open")});n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");b.classList.remove("open")}})}})();</script>
+<style id="a11y-css">
+  html.a11y-dys, html.a11y-dys *{font-family:'OpenDyslexic','DM Sans',sans-serif !important;letter-spacing:normal !important}
+  html.a11y-big{zoom:1.15}
+  html.a11y-contrast{--grey:#241019;--line:rgba(45,26,40,.42)}
+  .a11y-btn{position:fixed;right:18px;bottom:18px;z-index:300;width:50px;height:50px;border-radius:50%;background:#7d0f64;color:#fff;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.28);font-size:22px;display:flex;align-items:center;justify-content:center}
+  .a11y-btn:hover{background:#63104f}
+  .a11y-panel{position:fixed;right:18px;bottom:78px;z-index:300;background:#fff;border:1px solid #e7e1ea;border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.2);padding:16px 18px;width:250px;display:none;font-family:'DM Sans',sans-serif}
+  .a11y-panel.open{display:block}
+  .a11y-panel h4{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;margin:0 0 12px;color:#241019}
+  .a11y-opt{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 0;font-size:14px;color:#241019;border-top:1px solid #eee}
+  .a11y-opt:first-of-type{border-top:none}
+  .a11y-opt button{background:#f3e7ef;border:none;border-radius:100px;padding:6px 13px;font-size:12px;font-weight:700;cursor:pointer;color:#7d0f64;font-family:'Syne',sans-serif;white-space:nowrap}
+  .a11y-opt button.on{background:#7d0f64;color:#fff}
+  html.dark{--paper:#141019;--paper2:#1c1524;--line:rgba(255,255,255,.12);--grey:#b3a9b1;--ink:#ece7ea;--prune:#ece7ea}
+  html.dark footer{background:#0f0b13!important}
+  html.dark .feat,html.dark .ctaband,html.dark .avenir{background:#1b1426!important}
+  html.dark .card-tag{color:#241019!important}
+  html.dark ::placeholder{color:#8a808a!important}
+  html.dark body{background:#141019;color:#ece7ea}
+  html.dark nav{background:rgba(20,15,25,.88)!important}
+  html.dark .ag-tab{background:#1e1726!important;color:#ece7ea!important;border-color:rgba(255,255,255,.14)!important}
+  html.dark .ag-tab.on{background:var(--mg)!important;color:#fff!important}
+  html.dark .cta-light{color:#241019!important}
+  html.dark .acard,html.dark .acard-body h3{color:#ece7ea!important}
+  html.dark .nav-links a{color:#ece7ea!important}
+  html.dark .brand-name,html.dark .brand-name small{color:#ece7ea!important}
+  html.dark .burger span{background:#ece7ea!important}
+  html.dark .card,html.dark .acard,html.dark .cbox,html.dark .benefit,html.dark .step,html.dark .gov-card,html.dark .mission,html.dark .drow,html.dark .lrow,html.dark .ag-row,html.dark .cal-cell,html.dark .pcard,html.dark .mcard,html.dark .faq details,html.dark .gov-note .box{background:#1e1726!important;border-color:rgba(255,255,255,.1)!important}
+  html.dark .join{background:#1b1426!important}
+  html.dark .finp,html.dark .fta,html.dark .search,html.dark .chip{background:#1e1726!important;color:#ece7ea!important;border-color:rgba(255,255,255,.14)!important}
+  html.dark .chip.active{background:var(--mg)!important;color:#fff!important}
+  html.dark .cal-cell.empty{background:transparent!important;border:none!important}
+  html.dark .cal-cell.d-vacances{background:#152318!important}html.dark .cal-cell.d-ferie{background:#231e13!important}html.dark .cal-cell.d-evenement{background:#231522!important}html.dark .cal-cell.d-bac{background:#1d1923!important}html.dark .cal-cell.d-autre{background:#151a27!important}
+  html.dark .legal h2,html.dark .mail,html.dark .addr,html.dark .idcard dd,html.dark .about-body .hl,html.dark .intro-body .hl,html.dark .cbox h2,html.dark .step h3,html.dark .benefit h3,html.dark .gov-card h3,html.dark .mission h3,html.dark .drow h3,html.dark .lrow h3,html.dark .ag-row h3,html.dark .pcard h3,html.dark .mcap,html.dark .dnum,html.dark .sec-title,html.dark .ag-mtitle,html.dark .merch-sub,html.dark .cal-title{color:#ece7ea!important}
+  html.dark .cal-nav{background:#1e1726!important;border-color:rgba(255,255,255,.12)!important;color:#ece7ea!important}
+  html.dark .mc-name,html.dark details p,html.dark .desc{color:#b3a9b1!important}
+  html.dark .a11y-panel{background:#1e1726!important;color:#ece7ea}
+  html.dark .a11y-panel h4,html.dark .a11y-opt{color:#ece7ea}
+  html.dark .a11y-opt{border-color:rgba(255,255,255,.1)}
+  html.a11y-big .a11y-btn,html.a11y-big .a11y-panel{zoom:.87}
+</style>
+<button class="a11y-btn" id="a11yBtn" aria-label="Options d'accessibilité" title="Accessibilité"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:currentColor" aria-hidden="true"><path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm9 6h-6v13a1 1 0 1 1-2 0v-6h-2v6a1 1 0 1 1-2 0V8H3a1 1 0 1 1 0-2h18a1 1 0 1 1 0 2Z"/></svg></button>
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="Options d'accessibilité">
+  <h4>Accessibilité</h4>
+  <div class="a11y-opt"><span>Police dyslexie</span><button data-a11y="dys">Activer</button></div>
+  <div class="a11y-opt"><span>Texte plus grand</span><button data-a11y="big">Activer</button></div>
+  <div class="a11y-opt"><span>Contraste renforcé</span><button data-a11y="contrast">Activer</button></div>
+  <div class="a11y-opt"><span>Mode sombre</span><button data-a11y="dark">Activer</button></div>
+  <div class="a11y-opt"><span style="color:#6b7280;font-size:13px">Réinitialiser</span><button data-a11y="reset">Remettre à zéro</button></div>
 </div>
-<div class="lightbox-overlay" id="lightboxOverlay">
-  <button class="lightbox-close" aria-label="Fermer">✕</button>
-  <img class="lightbox-img" src="" alt="">
-  <div class="lightbox-caption"></div>
-</div>
-<div class="cookie-banner" id="cookieBanner" role="alertdialog">
-  <p class="cookie-banner-text">Ce site utilise uniquement des cookies techniques nécessaires. <a href="confidentialite.html">En savoir plus</a></p>
-  <div class="cookie-banner-actions">
-    <button class="cookie-btn cookie-btn-refuse" id="cookieRefuse">Refuser</button>
-    <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Accepter</button>
-  </div>
-</div>
-<script>document.querySelectorAll('.year-auto').forEach(function(e){{e.textContent=new Date().getFullYear();}});</script>
-<script src="mdl-core.js" defer></script>
-</body>
-</html>
+<script>
+(function(){
+  var root=document.documentElement;
+  function load(){try{return JSON.parse(localStorage.getItem('mdl-a11y')||'{}')}catch(e){return {}}}
+  function save(s){try{localStorage.setItem('mdl-a11y',JSON.stringify(s))}catch(e){}}
+  function ensureFont(){if(!document.getElementById('a11y-font')){var l=document.createElement('link');l.id='a11y-font';l.rel='stylesheet';l.href='https://fonts.cdnfonts.com/css/opendyslexic';document.head.appendChild(l);}}
+  var st=load();
+  function apply(){
+    root.classList.toggle('a11y-dys',!!st.dys); if(st.dys)ensureFont();
+    root.classList.toggle('a11y-big',!!st.big);
+    root.classList.toggle('a11y-contrast',!!st.contrast);
+    root.classList.toggle('dark',!!st.dark);
+    document.querySelectorAll('[data-a11y]').forEach(function(b){var k=b.getAttribute('data-a11y');if(k==='reset')return;var on=!!st[k];b.classList.toggle('on',on);b.textContent=on?'Activé':'Activer';});
+  }
+  apply();
+  var btn=document.getElementById('a11yBtn'),panel=document.getElementById('a11yPanel');
+  btn.addEventListener('click',function(){panel.classList.toggle('open')});
+  document.addEventListener('click',function(e){if(!panel.contains(e.target)&&!btn.contains(e.target))panel.classList.remove('open')});
+  panel.addEventListener('click',function(e){var b=e.target.closest('[data-a11y]');if(!b)return;var k=b.getAttribute('data-a11y');if(k==='reset'){st={};}else{st[k]=!st[k];}save(st);apply();});
+})();
+</script>
+
+</body></html>
