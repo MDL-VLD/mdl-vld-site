@@ -1,18 +1,14 @@
-# Cloudflare Pages - redirections
-# Sert l'accueil a la racine sans redirection forcee
-/ /index.html 200
-
-# Anciennes adresses -> nouvelles pages (evite les liens casses et preserve le referencement)
-/adhesion            /adherer.html      301
-/adhesion.html       /adherer.html      301
-/mdl                 /apropos.html      301
-/mdl.html            /apropos.html      301
-/equipe              /apropos.html      301
-/equipe.html         /apropos.html      301
-/clubs               /partenaires.html  301
-/clubs.html          /partenaires.html  301
-/projets             /evenements.html   301
-/projets.html        /evenements.html   301
-/evenement-*         /evenements.html   301
-/credits             /index.html        301
-/credits.html        /index.html        301
+# Redirections des anciennes adresses vers les nouvelles pages
+/adhesion       /adherer       301
+/adhesion.html  /adherer       301
+/mdl            /apropos       301
+/mdl.html       /apropos       301
+/equipe         /apropos       301
+/equipe.html    /apropos       301
+/clubs          /partenaires   301
+/clubs.html     /partenaires   301
+/projets        /evenements    301
+/projets.html   /evenements    301
+/evenement-*    /evenements    301
+/credits        /              301
+/credits.html   /              301
