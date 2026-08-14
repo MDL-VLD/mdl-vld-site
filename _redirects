@@ -1,4 +1,5 @@
 # Redirections des anciennes adresses vers les nouvelles pages
+# (evite les liens casses et preserve le referencement)
 /adhesion       /adherer       301
 /adhesion.html  /adherer       301
 /mdl            /apropos       301

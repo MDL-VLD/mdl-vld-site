@@ -82,7 +82,7 @@
         <a href="https://search.google.com/local/writereview?placeid=ChIJCc3KzrOb5kcR2pEyC0TCt2g" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;margin-top:26px;background:#c9a84c;color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;padding:10px 18px;border-radius:100px;text-decoration:none">★ Laisser un avis Google</a>
       </div>
       <div class="foot-col"><h4>Le site</h4><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a></div>
-      <div class="foot-col"><h4>Pratique</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="documents.html">Documents</a><a href="partenaires.html">Partenaires</a><a href="merch.html">Merch</a></div>
+      <div class="foot-col"><h4>Pratique</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="faq.html">FAQ</a><a href="documents.html">Documents</a><a href="partenaires.html">Partenaires</a><a href="merch.html">Merch</a></div>
     </div>
     <div class="foot-bottom"><span>© 2026 MDL Viollet-le-Duc · Fait par les lycéens</span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="admin.html">Espace membres</a></span></div>
   </div>
@@ -118,11 +118,22 @@ function render(data){
 (async function(){var data=null;try{var sb=supabase.createClient(SB_URL,SB_KEY);var r=await sb.from('partenaires').select('*').order('ordre');if(!r.error&&r.data&&r.data.length)data=r.data;}catch(e){}render(data||FALLBACK)})();
 </script><script>(function(){var b=document.querySelector(".burger"),n=document.querySelector(".nav-links");if(b&&n){b.addEventListener("click",function(){n.classList.toggle("open");b.classList.toggle("open")});n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");b.classList.remove("open")}})}})();</script>
 <style id="a11y-css">
+  @font-face{font-family:'OpenDyslexic';font-style:normal;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.3.0/files/opendyslexic-latin-400-normal.woff2') format('woff2')}
+  @font-face{font-family:'OpenDyslexic';font-style:normal;font-weight:700;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.3.0/files/opendyslexic-latin-700-normal.woff2') format('woff2')}
   html.a11y-dys, html.a11y-dys *{font-family:'OpenDyslexic','DM Sans',sans-serif !important;letter-spacing:normal !important}
   html.a11y-big{zoom:1.15}
   html.a11y-contrast{--grey:#241019;--line:rgba(45,26,40,.42)}
   .a11y-btn{position:fixed;right:18px;bottom:18px;z-index:300;width:50px;height:50px;border-radius:50%;background:#7d0f64;color:#fff;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.28);font-size:22px;display:flex;align-items:center;justify-content:center}
   .a11y-btn:hover{background:#63104f}
+  .totop{position:fixed;left:18px;bottom:18px;z-index:300;width:46px;height:46px;border-radius:50%;background:#fff;color:#7d0f64;border:1px solid #e7e1ea;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.22);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .25s,transform .25s,visibility .25s}
+  .totop.show{opacity:1;visibility:visible;transform:translateY(0)}
+  .totop:hover{background:#7d0f64;color:#fff}
+  html.dark .totop{background:#1e1726;color:#f3b9e2;border-color:rgba(255,255,255,.14)}
+  html.dark .legal .col{background:#1e1726!important;border-color:rgba(255,255,255,.1)!important}
+  html.dark .legal p,html.dark .legal li{color:#c9c0c7!important}
+  html.dark .a11y-btn,html.dark .totop{box-shadow:none!important}
+  a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #7d0f64;outline-offset:2px;border-radius:4px}
+  html.dark a:focus-visible,html.dark button:focus-visible,html.dark input:focus-visible,html.dark textarea:focus-visible,html.dark select:focus-visible{outline-color:#f3b9e2}
   .a11y-panel{position:fixed;right:18px;bottom:78px;z-index:300;background:#fff;border:1px solid #e7e1ea;border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.2);padding:16px 18px;width:250px;display:none;font-family:'DM Sans',sans-serif}
   .a11y-panel.open{display:block}
   .a11y-panel h4{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;margin:0 0 12px;color:#241019}
@@ -141,6 +152,10 @@ function render(data){
   html.dark .ag-tab.on{background:var(--mg)!important;color:#fff!important}
   html.dark .cta-light{color:#241019!important}
   html.dark .acard,html.dark .acard-body h3{color:#ece7ea!important}
+  html.dark .annonce-band{background:#1b1426!important;color:#ece7ea!important}
+  html.dark .annonce-band .cta{background:var(--mg)!important;color:#fff!important}
+  html.dark .role{background:#1e1726!important;color:#f3b9e2!important;border-color:rgba(255,255,255,.14)!important}
+  html.dark .article-content,html.dark .article-content p,html.dark .article-content li{color:#e7e0e6!important}
   html.dark .nav-links a{color:#ece7ea!important}
   html.dark .brand-name,html.dark .brand-name small{color:#ece7ea!important}
   html.dark .burger span{background:#ece7ea!important}
@@ -158,6 +173,8 @@ function render(data){
   html.dark .a11y-opt{border-color:rgba(255,255,255,.1)}
   html.a11y-big .a11y-btn,html.a11y-big .a11y-panel{zoom:.87}
 </style>
+<button class="totop" id="toTop" aria-label="Revenir en haut de la page" title="Revenir en haut"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<script>(function(){var t=document.getElementById("toTop");if(!t)return;function u(){t.classList.toggle("show",window.scrollY>420)}window.addEventListener("scroll",u,{passive:true});u();t.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})})})();</script>
 <button class="a11y-btn" id="a11yBtn" aria-label="Options d'accessibilité" title="Accessibilité"><svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:currentColor" aria-hidden="true"><path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm9 6h-6v13a1 1 0 1 1-2 0v-6h-2v6a1 1 0 1 1-2 0V8H3a1 1 0 1 1 0-2h18a1 1 0 1 1 0 2Z"/></svg></button>
 <div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="Options d'accessibilité">
   <h4>Accessibilité</h4>
