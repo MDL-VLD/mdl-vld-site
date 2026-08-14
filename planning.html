@@ -59,7 +59,15 @@
   .cal-cell.today{outline:2px solid var(--mg);outline-offset:-1px}
   .cal-cell.d-vacances{background:#e8fbef}.cal-cell.d-ferie{background:#fff6e0}.cal-cell.d-evenement{background:#fbe9f4}.cal-cell.d-bac{background:#efeaf3}.cal-cell.d-autre{background:#e9eefb}
   .cal-ev{margin-top:4px;font-size:10.5px;font-weight:700;padding:2px 5px;border-radius:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  @media(max-width:640px){.cal-cell{min-height:46px;padding:4px}.cal-ev{display:none}.cal-cell.has .dnum::after{content:" •";color:var(--mg)}}
+  .cal-legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px;font-size:12px;color:var(--grey)}
+  .cal-legend span{display:inline-flex;align-items:center;gap:6px}
+  .lg-dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0}
+  .lg-dot.t-evenement{background:#7d0f64}.lg-dot.t-vacances{background:#16a34a}.lg-dot.t-ferie{background:#d97706}.lg-dot.t-bac{background:#2d1a28}.lg-dot.t-autre{background:#6b7280}
+  @media(max-width:640px){
+    .cal-cell{min-height:54px;padding:4px}
+    .cal-ev{font-size:0;line-height:0;width:8px;height:8px;padding:0;border-radius:50%;display:inline-block;margin:3px 3px 0 0;overflow:visible}
+    .cal-ev.t-evenement{background:#7d0f64}.cal-ev.t-vacances{background:#16a34a}.cal-ev.t-ferie{background:#d97706}.cal-ev.t-bac{background:#2d1a28}.cal-ev.t-autre{background:#6b7280}
+  }
   footer{background:var(--ink);color:#fff;padding:70px 0 32px}
   .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.12)}
   .foot-brand{font-family:var(--syne);font-weight:800;font-size:20px}.foot-brand-row{display:flex;align-items:center;gap:12px}.foot-logo{height:42px;width:auto;display:block}
@@ -156,7 +164,9 @@ function renderCal(){
     var cls='cal-cell';if(evs.length)cls+=' has d-'+colorType(evs[0].type);if(iso===tiso)cls+=' today';
     h+='<div class="'+cls+'"><div class="dnum">'+day+'</div>'+evs.map(function(e){return '<div class="cal-ev t-'+colorType(e.type)+'">'+esc(e.titre)+'</div>'}).join('')+'</div>';
   }
-  h+='</div>';view.innerHTML=h;
+  h+='</div>';
+  h+='<div class="cal-legend"><span><i class="lg-dot t-evenement"></i>Événement</span><span><i class="lg-dot t-vacances"></i>Vacances</span><span><i class="lg-dot t-ferie"></i>Férié</span><span><i class="lg-dot t-bac"></i>Bac</span><span><i class="lg-dot t-autre"></i>À noter</span></div>';
+  view.innerHTML=h;
   document.getElementById('cal-prev').onclick=function(){calM--;if(calM<0){calM=11;calY--;}renderCal();};
   document.getElementById('cal-next').onclick=function(){calM++;if(calM>11){calM=0;calY++;}renderCal();};
 }
