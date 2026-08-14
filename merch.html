@@ -38,8 +38,9 @@
   .merch-sub.first{margin-top:0}
   .merch-colors{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin-bottom:30px;font-size:14px}
   .mc-label{font-family:var(--syne);font-weight:700;margin-right:6px}
-  .mc-dot{width:18px;height:18px;border-radius:50%;border:1px solid rgba(0,0,0,.18);display:inline-block}
-  .mc-name{margin-right:12px;color:var(--grey)}
+  .mc-item{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;margin-right:10px}
+  .mc-dot{width:18px;height:18px;border-radius:50%;border:1px solid rgba(0,0,0,.18);display:inline-block;flex-shrink:0}
+  .mc-name{color:var(--grey)}
   .mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .mcard{border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--line)}
   .mcard img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
@@ -73,7 +74,7 @@
 <a href="#main" style="position:absolute;left:8px;top:-60px;z-index:9999;background:#7d0f64;color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;text-decoration:none;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-60px'">Aller au contenu</a>
 <nav><div class="wrap nav-in">
   <a href="index.html" class="brand"><img loading="lazy" src="assets/logo.png" alt="MDL"><span class="brand-name">MDL Viollet-le-Duc<small>Maison des Lycéens</small></span></a>
-  <div class="nav-links"><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><a href="adherer.html" class="cta">Adhérer</a><a href="admin.html" title="Espace membres" aria-label="Espace membres" style="opacity:.4;display:inline-flex;align-items:center;color:var(--prune)"><svg viewBox="0 0 16 16" style="width:15px;height:15px;fill:currentColor" aria-hidden="true"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg></a></div>
+  <div class="nav-links"><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><a href="adherer.html" class="cta">Adhérer</a><a href="admin.html" title="Espace membres" aria-label="Espace membres" style="opacity:.4;display:inline-flex;align-items:center;color:var(--prune)"><svg viewBox="0 0 16 16" style="width:15px;height:15px;fill:currentColor" aria-hidden="true"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg><span class="ms-lbl">Espace membres</span></a></div>
   <div class="burger"><span></span><span></span><span></span></div>
 </div></nav>
 <header id="main" class="phero"><div class="phero-bg" style="background-image:url(assets/lycee-facade2.jpg)"></div>
@@ -112,7 +113,7 @@ function render(params,photos){
   var subs=[];photos.forEach(function(p){var c=subc(p);if(subs.indexOf(c)<0)subs.push(c);});
   var grid=photos.length?subs.map(function(sc,i){var items=photos.filter(function(p){return subc(p)===sc;});return '<h3 class="merch-sub'+(i===0?' first':'')+'">'+esc(sc)+'</h3><div class="mgrid">'+items.map(card).join('')+'</div>';}).join(''):'<div class="dnote">Les modèles arrivent bientôt.</div>';
   var cols=[['Blanc','#f4f4f2'],['Noir','#1a1a1a'],['Bleu marine','#1b2a4a'],['Bordeaux','#6b1f2a']];
-  var colors='<div class="merch-colors"><span class="mc-label">Couleurs des pulls :</span>'+cols.map(function(c){return '<span class="mc-dot" style="background:'+c[1]+'"></span><span class="mc-name">'+c[0]+'</span>';}).join('')+'</div>';
+  var colors='<div class="merch-colors"><span class="mc-label">Couleurs des pulls :</span>'+cols.map(function(c){return '<span class="mc-item"><span class="mc-dot" style="background:'+c[1]+'"></span><span class="mc-name">'+c[0]+'</span></span>';}).join('')+'</div>';
   var btn=params.merch_boutique_url?('<div style="text-align:center;margin-top:40px"><a class="cta" style="padding:15px 30px" href="'+esc(params.merch_boutique_url)+'" target="_blank" rel="noopener">Voir la boutique</a></div>'):'';
   el.innerHTML=coll+intro+colors+grid+btn;
 }
@@ -138,12 +139,25 @@ function render(params,photos){
   .totop{position:fixed;left:18px;bottom:18px;z-index:300;width:46px;height:46px;border-radius:50%;background:#fff;color:#7d0f64;border:1px solid #e7e1ea;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.22);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .25s,transform .25s,visibility .25s}
   .totop.show{opacity:1;visibility:visible;transform:translateY(0)}
   .totop:hover{background:#7d0f64;color:#fff}
+  .ms-lbl{display:none}
+  @media(max-width:900px){
+    .nav-links a[href="admin.html"]{opacity:1!important}
+    .ms-lbl{display:inline;margin-left:12px;font-weight:600;color:var(--prune)}
+    .nav-links a:hover,.nav-links a:active{background:var(--paper2)}
+  }
   html.dark .totop{background:#1e1726;color:#f3b9e2;border-color:rgba(255,255,255,.14)}
   html.dark .legal .col{background:#1e1726!important;border-color:rgba(255,255,255,.1)!important}
   html.dark .legal p,html.dark .legal li{color:#c9c0c7!important}
   html.dark .a11y-btn,html.dark .totop{box-shadow:none!important}
   a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #7d0f64;outline-offset:2px;border-radius:4px}
   html.dark a:focus-visible,html.dark button:focus-visible,html.dark input:focus-visible,html.dark textarea:focus-visible,html.dark select:focus-visible{outline-color:#f3b9e2}
+  html.a11y-dys .cta,html.a11y-dys .btn,html.a11y-dys .chip,html.a11y-dys .ag-tab,html.a11y-dys .sec-link,html.a11y-dys .a11y-opt button,html.a11y-dys button{white-space:normal;height:auto;line-height:1.25}
+  @media(max-width:560px){
+    html,body{overflow-x:hidden}
+    .phero h1{font-size:clamp(30px,9vw,40px)!important;overflow-wrap:break-word}
+    .phero-in{padding-bottom:56px!important}
+    footer{padding-bottom:88px!important}
+  }
   .a11y-panel{position:fixed;right:18px;bottom:78px;z-index:300;background:#fff;border:1px solid #e7e1ea;border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.2);padding:16px 18px;width:250px;display:none;font-family:'DM Sans',sans-serif}
   .a11y-panel.open{display:block}
   .a11y-panel h4{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;margin:0 0 12px;color:#241019}
