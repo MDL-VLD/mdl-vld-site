@@ -148,12 +148,14 @@
     .hero{min-height:78vh}
     .hero-in{padding-bottom:44px}
     .hero-actions{flex-direction:column;align-items:flex-start;gap:12px}
+    .hero-actions .btn-txt{padding-left:30px}
     .cards{grid-template-columns:1fr;gap:14px}
     .sec-head{margin-bottom:24px;flex-wrap:wrap;gap:12px}
     .stats-in{grid-template-columns:1fr}
     .stat{text-align:center;border-right:none;border-bottom:1px solid var(--line)}
     .stat:last-child{border-bottom:none}
     .annonce-in{flex-direction:column;align-items:center;text-align:center;gap:14px;padding:24px 0}
+    .annonce-txt{justify-content:center;width:100%}
     .foot-top{grid-template-columns:1fr;gap:22px}
     .foot-bottom{flex-direction:column;gap:6px}
     .join p{margin:18px auto 26px}
@@ -280,7 +282,7 @@
         <a href="adherer.html">Adhérer</a>
         <a href="contact.html">Contact</a>
         <a href="faq.html">FAQ</a><a href="documents.html">Documents</a>
-        <a href="partenaires.html">Partenaires</a><a href="merch.html">Merch</a>
+        <a href="partenaires.html">Partenaires</a><a href="merch.html">Merch</a><a href="concours-logos.html">Concours</a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -347,6 +349,16 @@
   .totop.show{opacity:1;visibility:visible;transform:translateY(0)}
   .totop:hover{background:#7d0f64;color:#fff}
   .ms-lbl{display:none}
+  .foot-col h4{padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.14);display:inline-block}
+  @media(max-width:560px){
+    .foot-brand{font-size:16px!important}
+    .foot-bottom{text-align:center;align-items:center;justify-content:center}
+  }
+  @media(max-width:900px){
+    .nav-links a:not(.cta){margin:2px 14px;border-radius:12px;padding:12px 18px!important}
+    .nav-links a:not(.cta):hover,.nav-links a:not(.cta):active{background:var(--paper2)}
+    .nav-links a[href="admin.html"]{border:1px solid var(--line);border-radius:100px;margin:12px 24px 6px;justify-content:flex-start}
+  }
   @media(max-width:900px){
     .nav-links a[href="admin.html"]{opacity:1!important}
     .ms-lbl{display:inline;margin-left:12px;font-weight:600;color:var(--prune)}

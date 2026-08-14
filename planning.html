@@ -43,7 +43,7 @@
   .ag-row .lieu{font-size:13px;color:var(--grey);margin-top:2px}
   .ag-type{flex-shrink:0;font-family:var(--syne);font-weight:700;font-size:11px;padding:5px 11px;border-radius:100px}
   .t-evenement{background:#f3e7ef;color:#7d0f64}.t-bac{background:#e9e3ec;color:#2d1a28}.t-vacances{background:#dcfce7;color:#166534}.t-ferie{background:#fef3c7;color:#a16207}.t-autre{background:#f3f4f6;color:#6b7280}
-  @media(max-width:600px){.ag-row{flex-wrap:wrap;gap:8px}.ag-date{min-width:0}.ag-type{order:2}}
+  @media(max-width:600px){.ag-row{flex-direction:column;align-items:flex-start;gap:6px;padding:14px 16px}.ag-date{min-width:0}.ag-row .grow{width:100%}.ag-type{order:0}}
   .ag-toggle{display:flex;gap:8px;margin-bottom:26px}
   .ag-tab{background:#fff;border:1px solid var(--line);border-radius:100px;padding:9px 22px;font-family:var(--syne);font-weight:700;font-size:13px;cursor:pointer;color:var(--prune)}
   .ag-tab.on{background:var(--mg);color:#fff;border-color:var(--mg)}
@@ -119,7 +119,7 @@
         <a href="https://search.google.com/local/writereview?placeid=ChIJCc3KzrOb5kcR2pEyC0TCt2g" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;margin-top:26px;background:#c9a84c;color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;padding:10px 18px;border-radius:100px;text-decoration:none">★ Laisser un avis Google</a>
       </div>
       <div class="foot-col"><h4>Le site</h4><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a></div>
-      <div class="foot-col"><h4>Pratique</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="faq.html">FAQ</a><a href="documents.html">Documents</a><a href="partenaires.html">Partenaires</a><a href="merch.html">Merch</a></div>
+      <div class="foot-col"><h4>Pratique</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="faq.html">FAQ</a><a href="documents.html">Documents</a><a href="partenaires.html">Partenaires</a><a href="merch.html">Merch</a><a href="concours-logos.html">Concours</a></div>
     </div>
     <div class="foot-bottom"><span>© 2026 MDL Viollet-le-Duc · Fait par les lycéens</span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="admin.html">Espace membres</a></span></div>
   </div>
@@ -191,6 +191,16 @@ function renderCal(){
   .totop.show{opacity:1;visibility:visible;transform:translateY(0)}
   .totop:hover{background:#7d0f64;color:#fff}
   .ms-lbl{display:none}
+  .foot-col h4{padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.14);display:inline-block}
+  @media(max-width:560px){
+    .foot-brand{font-size:16px!important}
+    .foot-bottom{text-align:center;align-items:center;justify-content:center}
+  }
+  @media(max-width:900px){
+    .nav-links a:not(.cta){margin:2px 14px;border-radius:12px;padding:12px 18px!important}
+    .nav-links a:not(.cta):hover,.nav-links a:not(.cta):active{background:var(--paper2)}
+    .nav-links a[href="admin.html"]{border:1px solid var(--line);border-radius:100px;margin:12px 24px 6px;justify-content:flex-start}
+  }
   @media(max-width:900px){
     .nav-links a[href="admin.html"]{opacity:1!important}
     .ms-lbl{display:inline;margin-left:12px;font-weight:600;color:var(--prune)}

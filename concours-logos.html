@@ -1,81 +1,138 @@
-<!DOCTYPE html>
-<html lang="fr"><head>
+<!DOCTYPE html><html lang="fr"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MDL VLD · Page introuvable (404)</title>
-<meta name="description" content="Page introuvable sur le site de la Maison des Lycéens du Lycée Viollet-le-Duc.">
+<title>MDL VLD · Concours de logos</title>
+<meta name="description" content="Le concours de logos de la MDL du Lycée Viollet-le-Duc : découvrez les logos proposés par les élèves et le grand vainqueur.">
 <link rel="icon" href="favicon.ico"><link rel="icon" type="image/png" href="favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{--ink:#241019;--prune:#2d1a28;--mg:#7d0f64;--mg2:#63104f;--paper:#f6f2ef;--paper2:#efe8e3;--line:rgba(45,26,40,.12);--grey:#6d6169;--syne:'Syne',sans-serif;--body:'DM Sans',sans-serif;--serif:'Fraunces',serif}
   html{scroll-behavior:smooth}
-  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  a{color:inherit}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
   .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
-  .notice{background:var(--prune);color:#fff;text-align:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:8px}.notice b{color:#f3b9e2;font-weight:600}
   nav{position:sticky;top:0;z-index:50;background:rgba(246,242,239,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:70px}
-  .brand{display:flex;align-items:center;gap:12px;text-decoration:none}.brand img{height:34px;width:auto;display:block}
+  .brand{display:flex;align-items:center;gap:12px}.brand img{height:34px;width:auto;display:block}
   .brand-name{font-family:var(--syne);font-weight:800;font-size:15px;letter-spacing:-.01em;line-height:1;color:var(--ink)}
   .brand-name small{display:block;font-family:var(--body);font-weight:400;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-top:4px}
   .nav-links{display:flex;align-items:center;gap:30px}
-  .nav-links a{font-size:14px;font-weight:500;color:var(--prune);opacity:.75;transition:opacity .2s;text-decoration:none}.nav-links a:hover{opacity:1}
-  .cta{display:inline-flex;align-items:center;gap:8px;background:var(--mg);color:#fff;font-family:var(--syne);font-weight:700;font-size:13px;padding:11px 20px;border-radius:100px;text-decoration:none;transition:background .2s}.cta:hover{background:var(--mg2)}
-  .nav-links a.cta{opacity:1;color:#fff}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--prune);opacity:.75;transition:opacity .2s}.nav-links a:hover{opacity:1}
+  .cta{display:inline-flex;align-items:center;gap:8px;background:var(--mg);color:#fff;font-family:var(--syne);font-weight:700;font-size:13px;padding:11px 20px;border-radius:100px;transition:background .2s}.cta:hover{background:var(--mg2)}.nav-links a.cta{opacity:1;color:#fff}
   .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}.burger span{width:24px;height:2px;background:var(--prune)}
-  .lhead{padding:64px 0 20px}
-  .lhead .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mg);font-weight:600;margin-bottom:16px}
-  .lhead h1{font-family:var(--syne);font-weight:800;font-size:clamp(34px,6vw,60px);letter-spacing:-.02em;line-height:1}
-  .lhead .maj{color:var(--grey);font-size:13px;margin-top:14px}
-  .legal{padding:20px 0 90px}
-  .legal .col{max-width:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:46px 52px}
-  .legal h2{font-family:var(--syne);font-weight:700;font-size:22px;letter-spacing:-.01em;margin:38px 0 12px;color:var(--prune)}
-  .legal .col>h2:first-child{margin-top:0}
-  .legal p{margin-bottom:14px;color:#3a2a34}
-  .legal ul{margin:0 0 14px 20px;color:#3a2a34}.legal li{margin-bottom:7px}
-  .legal a{color:var(--mg)}
-  .idcard{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:26px 30px;margin:8px 0 8px}
-  .idcard dl{display:grid;grid-template-columns:210px 1fr;gap:10px 20px}
-  .idcard dt{font-family:var(--syne);font-weight:700;font-size:13px;color:var(--grey)}
-  .idcard dd{font-size:15px;color:var(--ink)}
-  footer{background:var(--ink);color:#fff;padding:64px 0 30px;margin-top:20px}
-  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.12)}
-  .foot-brand{font-family:var(--syne);font-weight:800;font-size:20px}.foot-brand-row{display:flex;align-items:center;gap:12px}.foot-logo{height:40px;width:auto}
+  .phero{position:relative;min-height:44vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+  .phero-bg{position:absolute;inset:0;background-size:cover;background-position:center 42%;transform:scale(1.03)}
+  .phero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,6,15,.9) 4%,rgba(20,6,15,.5) 55%,rgba(20,6,15,.4) 100%)}
+  .phero-in{position:relative;z-index:2;width:100%;padding:0 0 46px}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#f3b9e2;font-weight:600;margin-bottom:16px}
+  .phero h1{font-family:var(--syne);font-weight:800;line-height:.95;letter-spacing:-.03em;font-size:clamp(46px,9vw,104px)}
+  .phero p{max-width:600px;margin-top:18px;font-size:clamp(16px,1.7vw,18px);color:rgba(255,255,255,.88)}
+  section{padding:80px 0}
+  .catblock{margin-bottom:48px}
+  .catt{font-family:var(--syne);font-weight:800;font-size:20px;letter-spacing:-.01em;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .catt span{color:var(--mg)}
+  .merch-intro{font-size:17px;color:var(--grey);max-width:640px;margin-bottom:36px}
+  .merch-sub{font-family:var(--syne);font-weight:800;font-size:20px;margin:34px 0 14px}
+  .merch-sub.first{margin-top:0}
+  .merch-collection{margin-bottom:46px}
+  .merch-col-title{font-family:var(--syne);font-weight:800;font-size:25px;letter-spacing:-.02em;margin:0 0 18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  html.dark .merch-col-title{color:#ece7ea}
+  .merch-colors{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin-bottom:30px;font-size:14px}
+  .mc-label{font-family:var(--syne);font-weight:700;margin-right:6px}
+  .mc-item{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;margin-right:10px}
+  .mc-dot{width:18px;height:18px;border-radius:50%;border:1px solid rgba(0,0,0,.18);display:inline-block;flex-shrink:0}
+  .mc-name{color:var(--grey)}
+  .mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .mcard{border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+  .mcard img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+  .mcap{padding:12px 16px;font-family:var(--syne);font-weight:700;font-size:15px}
+  .mcard{position:relative}
+  .mcard.win{border:2px solid var(--mg)}
+  .win-badge{position:absolute;top:10px;left:10px;z-index:2;background:var(--mg);color:#fff;font-family:var(--syne);font-weight:700;font-size:11px;padding:5px 10px;border-radius:100px}
+  @media(max-width:760px){.mgrid{grid-template-columns:repeat(2,1fr)}}
+  footer{background:var(--ink);color:#fff;padding:70px 0 32px}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .foot-brand{font-family:var(--syne);font-weight:800;font-size:20px}.foot-brand-row{display:flex;align-items:center;gap:12px}.foot-logo{height:42px;width:auto;display:block}
   .foot-brand p{font-family:var(--body);font-weight:400;font-size:14px;color:rgba(255,255,255,.5);margin-top:14px;max-width:320px}
+  .foot-social{display:flex;align-items:center;gap:16px;margin-top:22px}
+  .foot-social a{color:rgba(255,255,255,.6);display:flex;transition:color .2s}.foot-social a:hover{color:#f3b9e2}.foot-social svg{width:20px;height:20px;fill:currentColor}
+  .foot-lycee{font-size:13px;font-weight:500;border-left:1px solid rgba(255,255,255,.22);padding-left:16px}
   .foot-col h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:16px}
-  .foot-col a{display:block;font-size:14px;color:rgba(255,255,255,.7);padding:5px 0;text-decoration:none}.foot-col a:hover{color:#fff}
-  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:22px;font-size:12px;color:rgba(255,255,255,.4)}
-  .foot-bottom a{color:rgba(255,255,255,.4);text-decoration:none}.foot-bottom a:hover{color:#fff}
-  @media(max-width:900px){.nav-links{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 0;box-shadow:0 14px 30px rgba(45,26,40,.12)}.nav-links.open{display:flex}.nav-links a{padding:13px 32px;opacity:1}.nav-links a.cta{margin:10px 24px;justify-content:center}.burger{display:flex}.burger span{transition:transform .2s,opacity .2s}.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger.open span:nth-child(2){opacity:0}.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}.foot-top{grid-template-columns:1fr 1fr;gap:30px}}
-  @media(max-width:560px){.wrap{padding:0 18px}.legal .col{padding:28px 22px}.idcard dl{grid-template-columns:1fr;gap:2px 0}.idcard dt{margin-top:10px}.foot-top{grid-template-columns:1fr;gap:22px}.foot-bottom{flex-direction:column;gap:6px}}
+  .foot-col a{display:block;font-size:14px;color:rgba(255,255,255,.7);padding:5px 0}.foot-col a:hover{color:#fff}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;font-size:12px;color:rgba(255,255,255,.4)}
+  .foot-bottom a{color:rgba(255,255,255,.4)}.foot-bottom a:hover{color:#fff}
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}.rv.in{opacity:1;transform:none}
+  @media(max-width:900px){.nav-links{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 0;box-shadow:0 14px 30px rgba(45,26,40,.12)}.nav-links.open{display:flex}.nav-links a{padding:13px 32px;opacity:1}.nav-links a.cta{margin:10px 24px;justify-content:center}.burger{display:flex}.burger span{transition:transform .2s,opacity .2s}.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger.open span:nth-child(2){opacity:0}.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}section{padding:58px 0}.foot-top{grid-template-columns:1fr 1fr;gap:30px}footer{padding:54px 0 28px}}
+  @media(max-width:560px){.wrap{padding:0 18px}section{padding:44px 0}.foot-top{grid-template-columns:1fr;gap:22px}.foot-bottom{flex-direction:column;gap:6px}}
+  .drow{display:flex;align-items:center;gap:18px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:12px}
+  .dic{width:46px;height:46px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--paper2);font-size:20px}
+  .drow .grow{flex:1;min-width:0}
+  .drow h3{font-family:var(--syne);font-weight:700;font-size:17px}
+  .drow p{color:var(--grey);font-size:14px;margin-top:2px}
+  .dbtn{flex-shrink:0;background:var(--mg);color:#fff;font-family:var(--syne);font-weight:700;font-size:12px;padding:9px 16px;border-radius:100px}
+  .dbtn:hover{background:var(--mg2)}
+  .dnote{background:var(--paper2);border-radius:12px;padding:18px 22px;color:var(--grey);font-size:14px;margin-top:10px}
+  .lrow{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-bottom:10px}
+  .lrow .grow{flex:1}.lrow h3{font-family:var(--syne);font-weight:700;font-size:16px}.lrow .u{color:var(--grey);font-size:13px;word-break:break-all}
 </style></head><body>
 <a href="#main" style="position:absolute;left:8px;top:-60px;z-index:9999;background:#7d0f64;color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;text-decoration:none;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-60px'">Aller au contenu</a>
-<nav>
-  <div class="wrap nav-in">
-    <a href="index.html" class="brand"><img loading="lazy" src="assets/logo.png" alt="MDL"><span class="brand-name">MDL Viollet-le-Duc<small>Maison des Lycéens</small></span></a>
-    <div class="nav-links">
-      <a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a>
-      <a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><a href="adherer.html" class="cta">Adhérer</a><a href="admin.html" title="Espace membres" aria-label="Espace membres" style="opacity:.4;display:inline-flex;align-items:center;color:var(--prune)"><svg viewBox="0 0 16 16" style="width:15px;height:15px;fill:currentColor" aria-hidden="true"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg><span class="ms-lbl">Espace membres</span></a>
-    </div>
-    <div class="burger"><span></span><span></span><span></span></div>
-  </div>
-</nav>
-<header id="main" class="lhead"><div class="wrap" style="text-align:center;padding:80px 0 60px"><div class="eyebrow">Erreur 404</div><div style="font-family:var(--syne);font-weight:800;font-size:clamp(70px,16vw,140px);line-height:1;color:var(--prune)">404</div><h1 style="font-size:clamp(24px,4vw,34px);margin-top:6px">Cette page n'existe pas</h1><p style="color:var(--grey);font-size:17px;max-width:520px;margin:16px auto 0">La page que tu cherches a peut-être été déplacée ou supprimée. Tout le reste du site fonctionne normalement.</p><div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px"><a href="index.html" style="display:inline-flex;align-items:center;background:var(--mg);color:#fff;font-family:var(--syne);font-weight:700;font-size:14px;padding:13px 26px;border-radius:100px;text-decoration:none">Retour à l'accueil</a><a href="planning.html" style="display:inline-flex;align-items:center;color:var(--mg);font-weight:600;font-size:14px;text-decoration:none;padding:13px 6px">Voir l'agenda</a></div></div></header>
+<nav><div class="wrap nav-in">
+  <a href="index.html" class="brand"><img loading="lazy" src="assets/logo.png" alt="MDL"><span class="brand-name">MDL Viollet-le-Duc<small>Maison des Lycéens</small></span></a>
+  <div class="nav-links"><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><a href="adherer.html" class="cta">Adhérer</a><a href="admin.html" title="Espace membres" aria-label="Espace membres" style="opacity:.4;display:inline-flex;align-items:center;color:var(--prune)"><svg viewBox="0 0 16 16" style="width:15px;height:15px;fill:currentColor" aria-hidden="true"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg><span class="ms-lbl">Espace membres</span></a></div>
+  <div class="burger"><span></span><span></span><span></span></div>
+</div></nav>
+<header id="main" class="phero"><div class="phero-bg" style="background-image:url(assets/lycee-facade2.jpg)"></div>
+<div class="wrap phero-in"><div class="eyebrow rv">Le concours</div><h1 class="rv">Concours de logos</h1>
+<p class="rv">Les logos proposés par les élèves cette année, et le grand vainqueur.</p></div></header>
+<section><div class="wrap"><div id="concours"><p style="color:var(--grey)">Chargement…</p></div></div></section>
 <footer>
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
         <div class="foot-brand-row"><img loading="lazy" src="assets/logo.png" alt="" class="foot-logo"><span>MDL Viollet-le-Duc</span></div>
         <p>La Maison des Lycéens du Lycée Viollet-le-Duc.<br>Villiers-Saint-Frédéric (78640), Yvelines, France.</p>
+        <div class="foot-social">
+          <a href="https://www.instagram.com/mdl.vld/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.9 5.9 0 0 0-2.12 1.38A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91a5.9 5.9 0 0 0 1.38 2.12 5.9 5.9 0 0 0 2.12 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.12-1.38 5.9 5.9 0 0 0 1.38-2.12c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.12A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0m0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84M12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4m6.41-10.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44"/></svg></a>
+          <a href="https://www.tiktok.com/@mdl.vld" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.05-2.82h-3.2v12.9a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 0 1 0-5.18c.27 0 .53.04.77.12v-3.3a5.9 5.9 0 0 0-.77-.05 5.86 5.86 0 1 0 5.86 5.86V9.01a7.5 7.5 0 0 0 4.38 1.4V7.2a4.28 4.28 0 0 1-3.4-1.38"/></svg></a>
+          <a href="https://lyc-violletleduc.ac-versailles.fr/" target="_blank" rel="noopener" class="foot-lycee">Site du lycée</a>
+        </div>
+        <a href="https://search.google.com/local/writereview?placeid=ChIJCc3KzrOb5kcR2pEyC0TCt2g" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;margin-top:26px;background:#c9a84c;color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;padding:10px 18px;border-radius:100px;text-decoration:none">★ Laisser un avis Google</a>
       </div>
       <div class="foot-col"><h4>Le site</h4><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a></div>
-      <div class="foot-col"><h4>Pratique</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="mentions-legales.html">Mentions légales</a><a href="confidentialite.html">Confidentialité</a></div>
+      <div class="foot-col"><h4>Pratique</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="faq.html">FAQ</a><a href="documents.html">Documents</a><a href="partenaires.html">Partenaires</a><a href="merch.html">Merch</a><a href="concours-logos.html">Concours</a></div>
     </div>
     <div class="foot-bottom"><span>© 2026 MDL Viollet-le-Duc · Fait par les lycéens</span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="admin.html">Espace membres</a></span></div>
   </div>
 </footer>
-<script>(function(){var b=document.querySelector(".burger"),n=document.querySelector(".nav-links");if(b&&n){b.addEventListener("click",function(){n.classList.toggle("open");b.classList.toggle("open")});n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");b.classList.remove("open")}})}})();</script>
+<script>
+const SB_URL='https://ksvqjbcnqphnyxfpjhvz.supabase.co',SB_KEY='sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0';
+function esc(s){return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function render(params,years){
+  var el=document.getElementById('concours');
+  if(params.concours_actif!=='true'){el.innerHTML='<div class="dnote">La page du concours n\'est pas encore disponible. Reviens bientôt !</div>';return;}
+  var intro=params.concours_intro?('<p class="merch-intro">'+esc(params.concours_intro)+'</p>'):'';
+  function card(p,win){var w=(p.id===win);return '<div class="mcard'+(w?' win':'')+'">'+(w?'<div class="win-badge">★ Vainqueur</div>':'')+'<img loading="lazy" src="'+esc(p.image_url)+'" alt="'+esc(p.titre||'Logo')+'">'+(p.titre?'<div class="mcap">'+esc(p.titre)+'</div>':'')+'</div>';}
+  var grid=years.map(function(y){if(!y.photos.length)return '';var ph=y.photos.slice().sort(function(a,b){return (b.id===y.gagnant_id?1:0)-(a.id===y.gagnant_id?1:0);});return '<div class="merch-collection"><h2 class="merch-col-title">'+esc(y.nom)+'</h2><div class="mgrid">'+ph.map(function(p){return card(p,y.gagnant_id);}).join('')+'</div></div>';}).join('');
+  if(!grid)grid='<div class="dnote">Aucun logo pour l\'instant.</div>';
+  el.innerHTML=intro+grid;
+}
+(async function(){
+  var params={},years=[];
+  try{
+    var sb=supabase.createClient(SB_URL,SB_KEY);
+    var pr=await sb.from('parametres').select('*'); if(!pr.error&&pr.data)pr.data.forEach(function(p){params[p.cle]=p.valeur});
+    var cr=await sb.from('collections').select('*').eq('type','concours').eq('actif',true).order('ordre').order('created_at');
+    var cols=(!cr.error&&cr.data)?cr.data:[];
+    var ph=await sb.from('photos').select('*').eq('categorie','Concours logos').order('created_at');
+    var logos=(!ph.error&&ph.data)?ph.data:[];
+    years=cols.map(function(c){c.photos=logos.filter(function(p){return (p.collection||'')===c.nom;});return c;});
+  }catch(e){}
+  render(params,years);
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')});
+})();
+</script><script>(function(){var b=document.querySelector(".burger"),n=document.querySelector(".nav-links");if(b&&n){b.addEventListener("click",function(){n.classList.toggle("open");b.classList.toggle("open")});n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");b.classList.remove("open")}})}})();</script>
 <style id="a11y-css">
   @font-face{font-family:'OpenDyslexic';font-style:normal;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.3.0/files/opendyslexic-latin-400-normal.woff2') format('woff2')}
   @font-face{font-family:'OpenDyslexic';font-style:normal;font-weight:700;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.3.0/files/opendyslexic-latin-700-normal.woff2') format('woff2')}

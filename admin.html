@@ -81,8 +81,21 @@
   .thumb{width:52px;height:52px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--prune)}
   .empty{padding:30px;text-align:center;color:var(--grey)}
   /* form panel */
-  .panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px;max-width:840px}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px}
+  .fld .inp,.panel .inp{max-width:640px}
+  .fld,.panel>label.chkrow{max-width:none}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .coll-card{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:16px;background:var(--paper2)}
+  .coll-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .coll-head b{font-family:var(--syne);font-size:16px}
+  .mp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin:10px 0}
+  .mp-item{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:6px}
+  .mp-item.win{border:2px solid var(--mg)}
+  .mp-item img{width:100%;height:120px;object-fit:contain;background:#fff;border-radius:6px}
+  .mp-item .mp-titre{max-width:none;font-size:13px;padding:7px 10px}
+  .mp-item .acts{display:flex;gap:6px}
+  .mp-add{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+  .mp-add .inp{flex:1;min-width:150px;max-width:none}
   .fta{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;outline:none;resize:vertical;min-height:90px}
   .fta:focus{border-color:var(--mg)}
   label.flbl{display:block;font-size:12px;font-weight:600;margin-bottom:6px}
@@ -154,6 +167,7 @@
       <button data-nav="documents"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></span><span class="lbl">Documents</span></button>
       <button data-nav="partenaires"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="lbl">Partenaires</span></button>
       <button data-nav="merch"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span class="lbl">Merch</span></button>
+      <button data-nav="concours"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><span class="lbl">Concours logos</span></button>
       <button data-nav="messages"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><span class="lbl">Messages</span><span class="badge" id="nav-msg-badge" style="display:none">0</span></button>
       <button data-nav="annonce"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></span><span class="lbl">Annonce</span></button>
       <button data-nav="adhesion"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></span><span class="lbl">Adhésion</span></button>
@@ -287,13 +301,34 @@
       <section class="view" id="v-merch">
         <div class="vhead"><div class="vtitle">Merch</div></div>
         <div class="panel">
-          <details class="help"><summary>Comment faire ?</summary><ol><li>Coche « Activer la page Merch » pour la rendre visible sur le site.</li><li>Mets le nom de la collection et le lien de ta boutique (SumUp…).</li><li>Les modèles (photos) se gèrent dans « Galerie », catégorie « Merch ».</li></ol></details>
-        <p class="hint" style="margin-bottom:16px">Active la page Merch et pointe vers ta boutique. Les modèles (photos) se gèrent dans « Galerie », catégorie « Merch ».</p>
+          <details class="help"><summary>Comment faire ?</summary><ol><li>Coche « Activer la page Merch » pour la rendre visible sur le site.</li><li>Crée une ou plusieurs <b>collections</b> ci-dessous (ex. « Collection 2025-2026 »). Le bouton à droite de chaque collection l'affiche ou la masque sur le site.</li><li>Dans « Galerie », ajoute tes modèles avec la catégorie <b>« Merch »</b> et choisis leur <b>collection</b>.</li><li>Mets le lien de ta boutique (SumUp…) : il apparaît en gros bouton en bas de la page.</li></ol></details>
+        <p class="hint" style="margin-bottom:16px">Les modèles (photos) se gèrent dans « Galerie », catégorie « Merch », en les rattachant à une collection.</p>
           <label class="chkrow" style="margin-bottom:14px"><input type="checkbox" id="m-actif"> Activer la page Merch (visible sur le site)</label>
-          <div class="fld"><label class="flbl">Nom de la collection</label><input class="inp" id="m-collection" placeholder="Collection 2025-2026"></div>
+          <div class="fld"><label class="flbl">Collections</label>
+            <div class="hint" style="margin-bottom:8px">Crée tes collections et choisis lesquelles afficher (« Active ») ou cacher (« Masquée »).</div>
+            <div id="coll-list"></div>
+            <div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="coll-new" placeholder="Nom d'une nouvelle collection" style="flex:1"><button class="btn" data-act="col-add">Ajouter</button></div>
+          </div>
           <div class="fld"><label class="flbl">Texte d'intro</label><input class="inp" id="m-intro"></div>
           <div class="fld"><label class="flbl">Lien de la boutique (SumUp…)</label><input class="inp" id="m-url" placeholder="https://…"></div>
           <button class="btn" data-act="merch-save">Enregistrer</button>
+        </div>
+      </section>
+
+      <!-- CONCOURS LOGOS -->
+      <section class="view" id="v-concours">
+        <div class="vhead"><div class="vtitle">Concours de logos</div></div>
+        <div class="panel">
+          <details class="help"><summary>Comment faire ?</summary><ol><li>Coche « Afficher la page » pour la rendre visible sur le site.</li><li>Crée une <b>année</b> de concours (ex. « 2025-2026 »).</li><li>Ajoute les <b>logos</b> de cette année (image + nom si tu veux).</li><li>Clique <b>« Vainqueur »</b> sur le logo gagnant de l'année : il sera mis en avant.</li></ol></details>
+          <label class="chkrow" style="margin-bottom:14px"><input type="checkbox" id="cc-actif"> Afficher la page Concours de logos</label>
+          <div class="fld"><label class="flbl">Texte d'intro</label><input class="inp" id="cc-intro" placeholder="Découvrez les logos proposés cette année…"></div>
+          <button class="btn" data-act="concours-save">Enregistrer</button>
+          <hr style="margin:22px 0;border:none;border-top:1px solid var(--line)">
+          <div class="fld"><label class="flbl">Années de concours</label>
+            <div class="hint" style="margin-bottom:8px">Chaque année a ses logos et son vainqueur.</div>
+            <div style="display:flex;gap:8px"><input class="inp" id="cc-year-new" placeholder="Nouvelle année (ex. 2025-2026)" style="flex:1"><button class="btn" data-act="cc-year-add">Ajouter l'année</button></div>
+          </div>
+          <div id="cc-list" style="margin-top:18px"></div>
         </div>
       </section>
 
@@ -320,7 +355,51 @@ function videoEmbedSrc(u){u=(u||'').trim();var id=ytId(u);if(id)return 'https://
 function videoEmbedHTML(u){var src=videoEmbedSrc(u);return '<div class="video-embed"><iframe src="'+esc(src)+'" title="Vidéo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div><p><br></p>'}
 function askInput(o){o=o||{};return new Promise(function(resolve){var ov=$('#inputov'),f=$('#input-field'),okB=$('#input-ok'),noB=$('#input-no'),help=$('#input-help');$('#input-title').textContent=o.title||'Insérer';help.textContent=o.help||'';help.style.display=o.help?'block':'none';f.placeholder=o.placeholder||'';f.value=o.value||'';okB.textContent=o.ok||'Insérer';ov.classList.add('open');setTimeout(function(){f.focus()},40);function done(v){ov.classList.remove('open');okB.onclick=null;noB.onclick=null;ov.onclick=null;f.onkeydown=null;resolve(v)}okB.onclick=function(){done(f.value.trim()||null)};noB.onclick=function(){done(null)};ov.onclick=function(e){if(e.target===ov)done(null)};f.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();done(f.value.trim()||null)}else if(e.key==='Escape'){e.preventDefault();done(null)}}})}
 var lastEditRange=null;
+var COLLS=[];
+async function loadColls(){
+  var cr=await sb.from('collections').select('*').eq('type','merch').order('ordre').order('created_at');
+  COLLS=(cr.data||[]);
+  var el=$('#coll-list'); if(!el)return;
+  var pr=await sb.from('photos').select('*').eq('categorie','Merch').order('created_at');
+  var photos=pr.data||[];
+  if(!COLLS.length){el.innerHTML='<div class="hint">Aucune collection pour l\'instant. Crée-en une ci-dessous.</div>';return;}
+  el.innerHTML=COLLS.map(function(c){
+    var items=photos.filter(function(p){return (p.collection||'')===c.nom;});
+    var ph=items.length?items.map(function(p){
+      return '<div class="mp-item"><img loading="lazy" src="'+esc(p.image_url)+'"><input class="inp mp-titre" data-id="'+p.id+'" value="'+esc(p.titre)+'" placeholder="Nom du modèle"><div class="acts"><button class="btn btn-rg btn-sm" data-act="mp-del" data-id="'+p.id+'">Suppr.</button></div></div>';
+    }).join(''):'<div class="hint">Aucun modèle dans cette collection.</div>';
+    return '<div class="coll-card">'
+      +'<div class="coll-head"><b>'+esc(c.nom)+'</b><div class="acts"><button class="btn btn-sm '+(c.actif?'btn-vt':'btn-out')+'" data-act="col-toggle" data-id="'+c.id+'" data-on="'+(c.actif?1:0)+'">'+(c.actif?'Affichée':'Masquée')+'</button><button class="btn btn-rg btn-sm" data-act="col-del" data-id="'+c.id+'">Suppr.</button></div></div>'
+      +'<div class="fld" style="margin-bottom:8px"><label class="flbl">Couleurs disponibles (Nom:code, séparées par des virgules)</label><div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="colcol-'+c.id+'" value="'+esc(c.couleurs)+'" placeholder="Blanc:#f4f4f2, Noir:#1a1a1a, Bleu marine:#1b2a4a" style="flex:1;min-width:220px;max-width:none"><button class="btn btn-out btn-sm" data-act="col-colors" data-id="'+c.id+'">Enregistrer les couleurs</button></div></div>'
+      +'<div class="mp-grid">'+ph+'</div>'
+      +'<div class="mp-add"><input class="inp" type="file" id="mpf-'+c.id+'" accept="image/*"><input class="inp" id="mpt-'+c.id+'" placeholder="Nom du modèle (optionnel)"><button class="btn btn-vt btn-sm" data-act="mp-add" data-coll="'+esc(c.nom)+'" data-id="'+c.id+'">Ajouter le modèle</button></div>'
+      +'</div>';
+  }).join('');
+}
+async function loadConcours(){
+  var pr=await sb.from('parametres').select('*');var map={};(pr.data||[]).forEach(function(p){map[p.cle]=p.valeur});
+  if($('#cc-actif'))$('#cc-actif').checked=(map.concours_actif==='true');
+  if($('#cc-intro'))$('#cc-intro').value=map.concours_intro||'';
+  var cr=await sb.from('collections').select('*').eq('type','concours').order('ordre').order('created_at');
+  var years=cr.data||[];
+  var lr=await sb.from('photos').select('*').eq('categorie','Concours logos').order('created_at');
+  var logos=lr.data||[];
+  var el=$('#cc-list');if(!el)return;
+  if(!years.length){el.innerHTML='<div class="hint">Aucune année. Ajoute une année de concours ci-dessous.</div>';return;}
+  el.innerHTML=years.map(function(y){
+    var items=logos.filter(function(p){return (p.collection||'')===y.nom;});
+    var lg=items.length?items.map(function(p){var w=(p.id===y.gagnant_id);
+      return '<div class="mp-item'+(w?' win':'')+'"><img loading="lazy" src="'+esc(p.image_url)+'"><input class="inp mp-titre" data-id="'+p.id+'" value="'+esc(p.titre)+'" placeholder="Nom du logo"><div class="acts"><button class="btn btn-sm '+(w?'btn-vt':'btn-out')+'" data-act="cc-winner" data-id="'+p.id+'" data-coll="'+y.id+'">'+(w?'Vainqueur ✓':'Vainqueur')+'</button><button class="btn btn-rg btn-sm" data-act="cc-logo-del" data-id="'+p.id+'">Suppr.</button></div></div>';
+    }).join(''):'<div class="hint">Aucun logo pour cette année.</div>';
+    return '<div class="coll-card">'
+      +'<div class="coll-head"><b>'+esc(y.nom)+'</b><div class="acts"><button class="btn btn-sm '+(y.actif?'btn-vt':'btn-out')+'" data-act="col-toggle" data-id="'+y.id+'" data-on="'+(y.actif?1:0)+'">'+(y.actif?'Affichée':'Masquée')+'</button><button class="btn btn-rg btn-sm" data-act="cc-year-del" data-id="'+y.id+'">Suppr.</button></div></div>'
+      +'<div class="mp-grid">'+lg+'</div>'
+      +'<div class="mp-add"><input class="inp" type="file" id="ccf-'+y.id+'" accept="image/*"><input class="inp" id="cct-'+y.id+'" placeholder="Nom du logo (optionnel)"><button class="btn btn-vt btn-sm" data-act="cc-logo-add" data-coll="'+esc(y.nom)+'" data-id="'+y.id+'">Ajouter le logo</button></div>'
+      +'</div>';
+  }).join('');
+}
 document.addEventListener('selectionchange',function(){var ed=document.getElementById('a-content');if(!ed)return;var s=window.getSelection();if(s&&s.rangeCount){var r=s.getRangeAt(0);if(ed.contains(r.commonAncestorContainer))lastEditRange=r.cloneRange()}});
+document.addEventListener('change',function(e){var m=e.target.closest?e.target.closest('.mp-titre'):null;if(m){sb.from('photos').update({titre:m.value.trim()||null}).eq('id',m.getAttribute('data-id')).then(function(){toast('Nom enregistré')})}});
 function focusEditorSel(){var ed=$('#a-content');if(!ed)return;ed.focus();if(lastEditRange){try{var s=window.getSelection();s.removeAllRanges();s.addRange(lastEditRange)}catch(e){}}}
 function tagsToStr(a){return (a||[]).join(', ')}
 function strToTags(s){return (s||'').split(',').map(function(x){return x.trim()}).filter(Boolean)}
@@ -343,6 +422,7 @@ async function boot(){
   var {data}=await sb.auth.getUser();
   $('#login').style.display='none';$('#app').style.display='block';
   $('#usr').textContent=data.user?data.user.email:'';
+  loadColls();
   nav('dash');loadDash();
 }
 
@@ -359,6 +439,7 @@ function nav(id){
   if(id==='partenaires')loadPartenaires();
   if(id==='messages')loadMessages();
   if(id==='annonce'||id==='adhesion'||id==='liens'||id==='merch')loadParams();
+  if(id==='concours')loadConcours();
   if(id==='dash')loadDash();
 }
 
@@ -516,6 +597,7 @@ function phoEditor(p){
    +'<div class="grid2"><div class="fld"><label class="flbl">Titre</label><input class="inp" id="p-titre" value="'+esc(p.titre)+'"></div>'
    +'<div class="fld"><label class="flbl">Catégorie</label><input class="inp" id="p-cat" value="'+esc(p.categorie)+'" placeholder="Le lycée, Bal, Halloween…"></div></div>'
    +'<div class="fld"><label class="flbl">Tags (virgules)</label><input class="inp" id="p-tags" value="'+esc(tagsToStr(p.tags))+'"></div>'
+   +'<div class="fld"><label class="flbl">Collection (Merch uniquement)</label><input class="inp" id="p-collection" list="p-coll-dl" value="'+esc(p.collection)+'" placeholder="Ex. Collection 2025-2026"><datalist id="p-coll-dl">'+(COLLS||[]).map(function(c){return '<option value="'+esc(c.nom)+'">';}).join('')+'</datalist><div class="hint">À remplir seulement pour une photo de Merch (catégorie « Merch »), avec le nom exact d\'une collection.</div></div>'
    +'<label class="chkrow" style="margin:4px 0 12px"><input type="checkbox" id="p-public"'+(p.public_galerie===false?'':' checked')+'> Visible dans la galerie publique <span style="color:#6b7280">(décoche pour la garder en réserve privée)</span></label>'
    +'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-vt" data-act="pho-save">Enregistrer</button><button class="btn btn-out" data-act="pho-cancel">Annuler</button></div>'
    +'<div class="hint" id="p-status" style="margin-top:10px"></div></div>';
@@ -531,7 +613,7 @@ async function phoSave(){
     url=sb.storage.from('medias').getPublicUrl(path).data.publicUrl;
   }
   if(!url){toast('Ajoute un fichier ou une adresse d\'image.');return}
-  var payload={titre:$('#p-titre').value.trim()||null,image_url:url,categorie:$('#p-cat').value.trim()||null,tags:strToTags($('#p-tags').value),public_galerie:$('#p-public').checked};
+  var payload={titre:$('#p-titre').value.trim()||null,image_url:url,categorie:$('#p-cat').value.trim()||null,tags:strToTags($('#p-tags').value),collection:(document.getElementById('p-collection')?document.getElementById('p-collection').value.trim():'')||null,public_galerie:$('#p-public').checked};
   var res=id?await sb.from('photos').update(payload).eq('id',id):await sb.from('photos').insert(payload);
   if(res.error){toast('Erreur : '+res.error.message);return}
   toast('Photo enregistrée');loadPhotos();
@@ -558,7 +640,7 @@ async function loadParams(){
   $('#an-active').checked=(map.annonce_active==='true');
   $('#an-titre').value=map.annonce_titre||'';$('#an-texte').value=map.annonce_texte||'';
   $('#an-lien').value=map.annonce_lien||'';$('#an-label').value=map.annonce_lien_label||'';
-  $('#m-actif').checked=(map.merch_actif==='true');$('#m-collection').value=map.merch_collection||'';$('#m-intro').value=map.merch_intro||'';$('#m-url').value=map.merch_boutique_url||'';
+  $('#m-actif').checked=(map.merch_actif==='true');$('#m-intro').value=map.merch_intro||'';$('#m-url').value=map.merch_boutique_url||'';loadColls();
   var l=await sb.from('liens_utiles').select('*').order('ordre');
   var list=$('#liens-list');
   list.innerHTML=(l.data&&l.data.length)?l.data.map(function(x){
@@ -686,7 +768,19 @@ document.addEventListener('click',async function(e){
   if(act==='par-del'){if(await askConfirm('Ce partenaire sera supprimé définitivement.','Supprimer ce partenaire ?')){await sb.from('partenaires').delete().eq('id',id);toast('Supprimé');loadPartenaires()}return}
   if(act==='pick-cover'){openImagePicker(function(u){$('#a-cover').value=u});return}
   if(act==='pick-close'){closePicker();return}
-  if(act==='merch-save'){await sb.from('parametres').upsert({cle:'merch_actif',valeur:$('#m-actif').checked?'true':'false'});await sb.from('parametres').upsert({cle:'merch_collection',valeur:$('#m-collection').value.trim()});await sb.from('parametres').upsert({cle:'merch_intro',valeur:$('#m-intro').value.trim()});await sb.from('parametres').upsert({cle:'merch_boutique_url',valeur:$('#m-url').value.trim()});toast('Merch enregistré');return}
+  if(act==='merch-save'){await sb.from('parametres').upsert({cle:'merch_actif',valeur:$('#m-actif').checked?'true':'false'});await sb.from('parametres').upsert({cle:'merch_intro',valeur:$('#m-intro').value.trim()});await sb.from('parametres').upsert({cle:'merch_boutique_url',valeur:$('#m-url').value.trim()});toast('Merch enregistré');return}
+  if(act==='col-add'){var nm=$('#coll-new').value.trim();if(!nm){toast('Donne un nom de collection.');return}await sb.from('collections').insert({nom:nm,actif:true,ordre:COLLS.length,type:'merch'});$('#coll-new').value='';toast('Collection ajoutée');return loadColls()}
+  if(act==='col-toggle'){var con=t.getAttribute('data-on')==='1';await sb.from('collections').update({actif:!con}).eq('id',id);loadColls();loadConcours();return}
+  if(act==='col-del'){if(await askConfirm('Cette collection sera supprimée. Les modèles ne sont pas supprimés, ils perdent juste ce rangement.','Supprimer cette collection ?')){await sb.from('collections').delete().eq('id',id);toast('Collection supprimée');loadColls()}return}
+  if(act==='col-colors'){var cv=document.getElementById('colcol-'+id);await sb.from('collections').update({couleurs:(cv&&cv.value.trim())||null}).eq('id',id);toast('Couleurs enregistrées');return}
+  if(act==='mp-add'){var mf=document.getElementById('mpf-'+id).files[0];if(!mf){toast('Choisis une image.');return}toast('Envoi…');try{var miu=await uploadFile(mf);await sb.from('photos').insert({titre:(document.getElementById('mpt-'+id).value.trim()||null),image_url:miu,categorie:'Merch',collection:t.getAttribute('data-coll'),public_galerie:false});toast('Modèle ajouté')}catch(e){toast('Envoi échoué')}return loadColls()}
+  if(act==='mp-del'){if(await askConfirm('Ce modèle sera supprimé définitivement.','Supprimer ce modèle ?')){await sb.from('photos').delete().eq('id',id);toast('Modèle supprimé');loadColls()}return}
+  if(act==='concours-save'){await sb.from('parametres').upsert({cle:'concours_actif',valeur:$('#cc-actif').checked?'true':'false'});await sb.from('parametres').upsert({cle:'concours_intro',valeur:$('#cc-intro').value.trim()});toast('Concours enregistré');return}
+  if(act==='cc-year-add'){var yn=$('#cc-year-new').value.trim();if(!yn){toast('Donne une année (ex. 2025-2026).');return}await sb.from('collections').insert({nom:yn,actif:true,ordre:0,type:'concours'});$('#cc-year-new').value='';toast('Année ajoutée');return loadConcours()}
+  if(act==='cc-year-del'){if(await askConfirm('Cette année de concours sera supprimée. Les logos ne sont pas supprimés, ils perdent juste ce rangement.','Supprimer cette année ?')){await sb.from('collections').delete().eq('id',id);toast('Année supprimée');loadConcours()}return}
+  if(act==='cc-logo-add'){var lf=document.getElementById('ccf-'+id).files[0];if(!lf){toast('Choisis une image de logo.');return}toast('Envoi…');try{var liu=await uploadFile(lf);await sb.from('photos').insert({titre:(document.getElementById('cct-'+id).value.trim()||null),image_url:liu,categorie:'Concours logos',collection:t.getAttribute('data-coll'),public_galerie:false});toast('Logo ajouté')}catch(e){toast('Envoi échoué')}return loadConcours()}
+  if(act==='cc-winner'){await sb.from('collections').update({gagnant_id:id}).eq('id',t.getAttribute('data-coll'));toast('Vainqueur désigné');return loadConcours()}
+  if(act==='cc-logo-del'){if(await askConfirm('Ce logo sera supprimé définitivement.','Supprimer ce logo ?')){await sb.from('photos').delete().eq('id',id);toast('Logo supprimé');loadConcours()}return}
   if(act==='annonce-save'){await sb.from('parametres').upsert({cle:'annonce_active',valeur:$('#an-active').checked?'true':'false'});await sb.from('parametres').upsert({cle:'annonce_titre',valeur:$('#an-titre').value.trim()});await sb.from('parametres').upsert({cle:'annonce_texte',valeur:$('#an-texte').value.trim()});await sb.from('parametres').upsert({cle:'annonce_lien',valeur:$('#an-lien').value.trim()});await sb.from('parametres').upsert({cle:'annonce_lien_label',valeur:$('#an-label').value.trim()});toast('Annonce enregistrée');return}
   if(act==='params-save')return paramsSave();
   if(act==='lien-add'){var lib=$('#lien-lib').value.trim(),url=$('#lien-url').value.trim();if(!lib||!url){toast('Nom et adresse requis.');return}await sb.from('liens_utiles').insert({libelle:lib,url:url});$('#lien-lib').value='';$('#lien-url').value='';toast('Lien ajouté');return loadParams()}
