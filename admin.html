@@ -96,6 +96,9 @@
   .mp-item .acts{display:flex;gap:6px}
   .mp-add{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
   .mp-add .inp{flex:1;min-width:150px;max-width:none}
+  input[type=file].inp{padding:7px 10px;cursor:pointer;color:var(--grey);font-size:13px}
+  input[type=file].inp::file-selector-button{font-family:var(--syne);font-weight:700;font-size:12px;background:var(--mg);color:#fff;border:none;border-radius:8px;padding:9px 15px;margin-right:12px;cursor:pointer;transition:background .2s}
+  input[type=file].inp::file-selector-button:hover{background:var(--mg2)}
   .fta{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;outline:none;resize:vertical;min-height:90px}
   .fta:focus{border-color:var(--mg)}
   label.flbl{display:block;font-size:12px;font-weight:600;margin-bottom:6px}
@@ -582,8 +585,9 @@ function agTypeToggle(){var v=document.getElementById('ag-type-sel').value;docum
 /* ---------- PHOTOS ---------- */
 async function loadPhotos(){
   $('#pho-editor').style.display='none';$('#pho-list').style.display='block';
-  var {data}=await sb.from('photos').select('*').order('created_at',{ascending:false});
-  if(!data||!data.length){$('#pho-list').innerHTML='<div class="tbl"><div class="empty">Aucune photo.</div></div>';return}
+  var pr=await sb.from('photos').select('*').order('created_at',{ascending:false});
+  var data=(pr.data||[]).filter(function(p){return p.categorie!=='Merch'&&p.categorie!=='Concours logos';});
+  if(!data.length){$('#pho-list').innerHTML='<div class="tbl"><div class="empty">Aucune photo. (Les modèles de Merch et les logos du concours se gèrent dans leurs sections dédiées.)</div></div>';return}
   $('#pho-list').innerHTML='<div class="tbl">'+data.map(function(p){
     var vis='<button class="btn btn-sm '+(p.public_galerie===false?'btn-out':'btn-vt')+'" data-act="pho-vis" data-id="'+p.id+'" data-on="'+(p.public_galerie===false?0:1)+'" title="Visible dans la galerie publique">'+(p.public_galerie===false?'Privé':'Public')+'</button>';
     return '<div class="row"><img class="thumb" src="'+esc(p.image_url)+'"><div class="grow"><div class="t">'+esc(p.titre||'(sans titre)')+'</div><div class="m">'+esc(p.categorie||'')+' · '+esc(tagsToStr(p.tags))+'</div></div><div class="acts">'+vis+'<button class="btn btn-out btn-sm" data-act="pho-edit" data-id="'+p.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="pho-del" data-id="'+p.id+'">Suppr.</button></div></div>';
@@ -597,7 +601,6 @@ function phoEditor(p){
    +'<div class="grid2"><div class="fld"><label class="flbl">Titre</label><input class="inp" id="p-titre" value="'+esc(p.titre)+'"></div>'
    +'<div class="fld"><label class="flbl">Catégorie</label><input class="inp" id="p-cat" value="'+esc(p.categorie)+'" placeholder="Le lycée, Bal, Halloween…"></div></div>'
    +'<div class="fld"><label class="flbl">Tags (virgules)</label><input class="inp" id="p-tags" value="'+esc(tagsToStr(p.tags))+'"></div>'
-   +'<div class="fld"><label class="flbl">Collection (Merch uniquement)</label><input class="inp" id="p-collection" list="p-coll-dl" value="'+esc(p.collection)+'" placeholder="Ex. Collection 2025-2026"><datalist id="p-coll-dl">'+(COLLS||[]).map(function(c){return '<option value="'+esc(c.nom)+'">';}).join('')+'</datalist><div class="hint">À remplir seulement pour une photo de Merch (catégorie « Merch »), avec le nom exact d\'une collection.</div></div>'
    +'<label class="chkrow" style="margin:4px 0 12px"><input type="checkbox" id="p-public"'+(p.public_galerie===false?'':' checked')+'> Visible dans la galerie publique <span style="color:#6b7280">(décoche pour la garder en réserve privée)</span></label>'
    +'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-vt" data-act="pho-save">Enregistrer</button><button class="btn btn-out" data-act="pho-cancel">Annuler</button></div>'
    +'<div class="hint" id="p-status" style="margin-top:10px"></div></div>';
@@ -613,7 +616,7 @@ async function phoSave(){
     url=sb.storage.from('medias').getPublicUrl(path).data.publicUrl;
   }
   if(!url){toast('Ajoute un fichier ou une adresse d\'image.');return}
-  var payload={titre:$('#p-titre').value.trim()||null,image_url:url,categorie:$('#p-cat').value.trim()||null,tags:strToTags($('#p-tags').value),collection:(document.getElementById('p-collection')?document.getElementById('p-collection').value.trim():'')||null,public_galerie:$('#p-public').checked};
+  var payload={titre:$('#p-titre').value.trim()||null,image_url:url,categorie:$('#p-cat').value.trim()||null,tags:strToTags($('#p-tags').value),public_galerie:$('#p-public').checked};
   var res=id?await sb.from('photos').update(payload).eq('id',id):await sb.from('photos').insert(payload);
   if(res.error){toast('Erreur : '+res.error.message);return}
   toast('Photo enregistrée');loadPhotos();
