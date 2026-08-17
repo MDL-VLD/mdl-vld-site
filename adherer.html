@@ -60,7 +60,7 @@
   summary{font-family:var(--syne);font-weight:700;font-size:16px;padding:18px 0;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
   summary::-webkit-details-marker{display:none}
   summary::after{content:"+";color:var(--mg);font-size:22px;font-weight:400}
-  details[open] summary::after{content:"–"}
+  details[open] summary::after{content:"-"}
   details p{color:var(--grey);font-size:15px;padding:0 0 20px}
   footer{background:var(--ink);color:#fff;padding:70px 0 32px}
   .foot-top{display:grid;grid-template-columns:1.9fr 1fr 1fr 1fr;gap:26px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.12)}
@@ -95,6 +95,8 @@
     <div class="burger"><span></span><span></span><span></span></div>
   </div>
 </nav>
+<nav class="crumb" aria-label="Fil d'Ariane"><div class="wrap"><a href="index.html">Accueil</a><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-cur" id="crumbCur"></span></div></nav>
+<script>(function(){var m={apropos:'À propos',evenements:'Événements',planning:'Agenda',actu:'Actualités',galerie:'Galerie',contact:'Contact',adherer:'Adhérer',merch:'Merch',documents:'Documents',partenaires:'Partenaires','concours-logos':'Concours de logos',faq:'FAQ','mentions-legales':'Mentions légales',confidentialite:'Confidentialité',cgu:'CGU',cgv:'CGV'};var p=(location.pathname.split('/').pop()||'').replace(/\.html$/,'')||'index';var c=document.getElementById('crumbCur'),b=document.querySelector('.crumb');if(!c||!b)return;if(!m[p]){b.style.display='none';return}c.textContent=m[p];})();</script>
 
 <header id="main" class="phero">
   <div class="phero-bg" style="background-image:url(assets/lycee-1.jpg)"></div>
@@ -167,7 +169,7 @@
       <div class="foot-col"><h4>Le site</h4><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a></div>
       <div class="foot-col"><h4>Participer</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="merch.html">Merch</a><a href="concours-logos.html">Concours</a></div><div class="foot-col"><h4>Ressources</h4><a href="faq.html">FAQ</a><a href="documents.html">Documents</a><a href="partenaires.html">Partenaires</a></div>
     </div>
-    <div class="foot-bottom"><span>© 2026 MDL Viollet-le-Duc · Fait par les lycéens · Tous droits réservés</span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="admin.html">Espace membres</a></span></div>
+    <div class="foot-bottom"><span>© 2026 MDL Viollet-le-Duc · Fait par les lycéens · Tous droits réservés</span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="cgu.html">CGU</a> · <a href="cgv.html">CGV</a> · <a href="admin.html">Espace membres</a></span></div>
   </div>
 </footer>
 <script>
@@ -189,13 +191,26 @@
   @font-face{font-family:'OpenDyslexic';font-style:normal;font-weight:700;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.3.0/files/opendyslexic-latin-700-normal.woff2') format('woff2')}
   html.a11y-dys, html.a11y-dys *{font-family:'OpenDyslexic','DM Sans',sans-serif !important;letter-spacing:normal !important}
   html.a11y-big{zoom:1.15}
-  html.a11y-contrast{--grey:#241019;--line:rgba(45,26,40,.42)}
+  html.a11y-contrast{--grey:#180d13;--line:rgba(45,26,40,.6)}
+  html.a11y-contrast body{color:#120a0f}
+  html.a11y-contrast a:not(.cta):not(.btn):not(.chip):not(.brand){text-decoration:underline}
+  html.dark.a11y-contrast{--grey:#f6f1f4;--line:rgba(255,255,255,.55)}
+  html.dark.a11y-contrast body{color:#fff}
+  html.dark.a11y-contrast a:not(.cta):not(.btn):not(.chip):not(.brand){text-decoration:underline}
   .a11y-btn{position:fixed;right:18px;bottom:18px;z-index:300;width:50px;height:50px;border-radius:50%;background:#7d0f64;color:#fff;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.28);font-size:22px;display:flex;align-items:center;justify-content:center}
   .a11y-btn:hover{background:#63104f}
   .totop{position:fixed;left:18px;bottom:18px;z-index:300;width:46px;height:46px;border-radius:50%;background:#fff;color:#7d0f64;border:1px solid #e7e1ea;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.22);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .25s,transform .25s,visibility .25s}
   .totop.show{opacity:1;visibility:visible;transform:translateY(0)}
   .totop:hover{background:#7d0f64;color:#fff}
   .ms-lbl{display:none}
+  .crumb{background:var(--paper2,#efe8e3);border-bottom:1px solid var(--line)}
+  .crumb .wrap{display:flex;align-items:center;gap:8px;padding:9px 32px;font-size:12.5px;color:var(--grey)}
+  .crumb a{color:var(--grey);text-decoration:none}
+  .crumb a:hover{color:var(--mg);text-decoration:underline}
+  .crumb-sep{opacity:.55}
+  .crumb-cur{color:var(--ink);font-weight:600}
+  html.dark .crumb{background:#1b1426;border-color:rgba(255,255,255,.1)}
+  @media(max-width:560px){.crumb .wrap{padding:8px 18px}}
   .nav-links a.active{opacity:1;color:var(--mg);font-weight:600}
   html.a11y-dys .a11y-btn,html.a11y-dys .totop{height:50px;width:50px;line-height:normal}
   .foot-col h4{padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.14);display:inline-block}
