@@ -362,6 +362,17 @@
   .totop.show{opacity:1;visibility:visible;transform:translateY(0)}
   .totop:hover{background:#7d0f64;color:#fff}
   .ms-lbl{display:none}
+  @media(max-width:900px){
+    .nav-links.open{position:fixed!important;left:0;right:0;top:70px;z-index:120;border-radius:0 0 18px 18px;box-shadow:0 18px 44px rgba(45,26,40,.22);padding:8px 0 16px!important;max-height:calc(100vh - 70px);overflow:auto}
+    .nav-links.open a:not(.cta){margin:0 12px!important;border-radius:0!important;padding:16px 12px!important;font-size:16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);opacity:1;background:transparent!important}
+    .nav-links.open a:not(.cta)::after{content:"\203A";color:var(--mg);font-family:var(--syne);font-weight:800;font-size:19px;opacity:.55;margin-left:12px}
+    .nav-links.open a:not(.cta):hover,.nav-links.open a:not(.cta):active{background:var(--paper2)!important;border-radius:12px!important}
+    .nav-links.open a.active{color:var(--mg)}
+    .nav-links.open a.cta{margin:14px 16px 4px!important;justify-content:center}
+    .nav-links.open a[href="admin.html"]{border:1px solid var(--line);border-radius:100px!important;margin:8px 16px 4px!important;padding:14px 16px!important;justify-content:flex-start}
+    .nav-links.open a[href="admin.html"]::after{content:none}
+    html.dark .nav-links.open{box-shadow:0 18px 44px rgba(0,0,0,.55)}
+  }
   .nav-links a.active{opacity:1;color:var(--mg);font-weight:600}
   html.a11y-dys .a11y-btn,html.a11y-dys .totop{height:50px;width:50px;line-height:normal}
   .foot-col h4{padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.14);display:inline-block}
