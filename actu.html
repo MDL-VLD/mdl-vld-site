@@ -83,7 +83,7 @@
   .article-content .video-embed{position:relative;width:100%;aspect-ratio:16/9;margin:20px 0;border-radius:12px;overflow:hidden;background:#000}
   .article-content .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   footer{background:var(--ink);color:#fff;padding:70px 0 32px}
-  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .foot-top{display:grid;grid-template-columns:1.9fr 1fr 1fr 1fr;gap:26px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.12)}
   .foot-brand{font-family:var(--syne);font-weight:800;font-size:20px}
   .foot-brand-row{display:flex;align-items:center;gap:12px}.foot-logo{height:42px;width:auto;display:block}
   .foot-brand p{font-family:var(--body);font-weight:400;font-size:14px;color:rgba(255,255,255,.5);margin-top:14px;max-width:320px}
@@ -160,10 +160,10 @@
         </div>
         <a href="https://search.google.com/local/writereview?placeid=ChIJCc3KzrOb5kcR2pEyC0TCt2g" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;margin-top:26px;background:#c9a84c;color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;padding:10px 18px;border-radius:100px;text-decoration:none">★ Laisser un avis Google</a>
       </div>
-      <div class="foot-col"><h4>Le site</h4><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a></div>
-      <div class="foot-col"><h4>Pratique</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="faq.html">FAQ</a><a href="documents.html">Documents</a><a href="partenaires.html">Partenaires</a><a href="merch.html">Merch</a><a href="concours-logos.html">Concours</a></div>
+      <div class="foot-col"><h4>Le site</h4><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a></div>
+      <div class="foot-col"><h4>Participer</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="merch.html">Merch</a><a href="concours-logos.html">Concours</a></div><div class="foot-col"><h4>Ressources</h4><a href="faq.html">FAQ</a><a href="documents.html">Documents</a><a href="partenaires.html">Partenaires</a></div>
     </div>
-    <div class="foot-bottom"><span>© 2026 MDL Viollet-le-Duc · Fait par les lycéens</span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="admin.html">Espace membres</a></span></div>
+    <div class="foot-bottom"><span>© 2026 MDL Viollet-le-Duc · Fait par les lycéens · Tous droits réservés</span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="admin.html">Espace membres</a></span></div>
   </div>
 </footer>
 
@@ -178,7 +178,7 @@ const FALLBACK=[
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function fdate(d){try{return new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})}catch(e){return ''}}
 let ALL=[],activeTag='Tous';
-function coverList(a){return a.cover_url?('<img loading="lazy" src="'+a.cover_url+'" alt="'+esc(a.title)+'">'):('<div class="acard-ph">📰</div>')}
+function coverList(a){return a.cover_url?('<img loading="lazy" src="'+a.cover_url+'" alt="'+esc(a.title)+'">'):('<div class="acard-ph"><svg viewBox=\"0 0 24 24\" width=\"42\" height=\"42\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z\"/><path d=\"M14 3v6h6\"/><path d=\"M9 13h6M9 17h6\"/></svg></div>')}
 function cardHTML(a){
   return '<button class="acard rv" onclick="openArticle('+a._i+')"><div class="acard-cover">'+coverList(a)+'</div>'
     +'<div class="acard-body"><span class="atag">'+esc((a.tags&&a.tags[0])||'Actualité')+'</span>'
@@ -209,11 +209,11 @@ function applyFilters(){
 function openArticle(i){
   var a=ALL[i];
   var cover=a.cover_url?('<div class="article-cover"><img loading="lazy" src="'+a.cover_url+'" alt=""></div>'):'';
-  var author=(a.show_author&&a.author_name)?('<span>✍️ '+esc(a.author_name)+'</span>'):'';
+  var author=(a.show_author&&a.author_name)?('<span><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" style=\"vertical-align:-2px;margin-right:5px\" aria-hidden=\"true\"><path d=\"M12 20h9\"/><path d=\"M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z\"/></svg>'+esc(a.author_name)+'</span>'):'';
   document.getElementById('article').innerHTML=cover
     +'<span class="atag">'+esc((a.tags&&a.tags[0])||'Actualité')+'</span>'
     +'<h1>'+esc(a.title)+'</h1>'
-    +'<div class="article-meta"><span>📅 '+fdate(a.published_at)+'</span>'+author+'</div>'
+    +'<div class="article-meta"><span><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" style=\"vertical-align:-2px;margin-right:5px\" aria-hidden=\"true\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"17\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/></svg>'+fdate(a.published_at)+'</span>'+author+'</div>'
     +'<div class="article-content">'+(a.content||'')+'</div>';
   document.getElementById('view-list').style.display='none';
   document.getElementById('view-article').style.display='block';
@@ -235,7 +235,7 @@ document.getElementById('sort').addEventListener('click',function(){var cur=this
   applyFilters();
 })();
 </script>
-<script>(function(){var b=document.querySelector(".burger"),n=document.querySelector(".nav-links");if(b&&n){b.addEventListener("click",function(){n.classList.toggle("open");b.classList.toggle("open")});n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");b.classList.remove("open")}})}})();</script>
+<script>(function(){var b=document.querySelector(".burger"),n=document.querySelector(".nav-links");if(b&&n){b.addEventListener("click",function(){n.classList.toggle("open");b.classList.toggle("open")});n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");b.classList.remove("open")}})}})();(function(){var p=(location.pathname.split("/").pop()||"").replace(/\.html$/,"")||"index";document.querySelectorAll(".nav-links a").forEach(function(a){var h=(a.getAttribute("href")||"").split("/").pop().replace(/\.html$/,"");if(h&&h===p&&!a.classList.contains("cta"))a.classList.add("active")})})();</script>
 <style id="a11y-css">
   @font-face{font-family:'OpenDyslexic';font-style:normal;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.3.0/files/opendyslexic-latin-400-normal.woff2') format('woff2')}
   @font-face{font-family:'OpenDyslexic';font-style:normal;font-weight:700;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.3.0/files/opendyslexic-latin-700-normal.woff2') format('woff2')}
@@ -248,6 +248,8 @@ document.getElementById('sort').addEventListener('click',function(){var cur=this
   .totop.show{opacity:1;visibility:visible;transform:translateY(0)}
   .totop:hover{background:#7d0f64;color:#fff}
   .ms-lbl{display:none}
+  .nav-links a.active{opacity:1;color:var(--mg);font-weight:600}
+  html.a11y-dys .a11y-btn,html.a11y-dys .totop{height:50px;width:50px;line-height:normal}
   .foot-col h4{padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.14);display:inline-block}
   @media(max-width:560px){
     .foot-brand{font-size:16px!important}
@@ -269,7 +271,7 @@ document.getElementById('sort').addEventListener('click',function(){var cur=this
   html.dark .a11y-btn,html.dark .totop{box-shadow:none!important}
   a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #7d0f64;outline-offset:2px;border-radius:4px}
   html.dark a:focus-visible,html.dark button:focus-visible,html.dark input:focus-visible,html.dark textarea:focus-visible,html.dark select:focus-visible{outline-color:#f3b9e2}
-  html.a11y-dys .cta,html.a11y-dys .btn,html.a11y-dys .chip,html.a11y-dys .ag-tab,html.a11y-dys .sec-link,html.a11y-dys .a11y-opt button,html.a11y-dys button{white-space:normal;height:auto;line-height:1.25}
+  html.a11y-dys .cta,html.a11y-dys .btn,html.a11y-dys .chip,html.a11y-dys .ag-tab,html.a11y-dys .sec-link,html.a11y-dys .a11y-opt button{white-space:normal;height:auto;line-height:1.25}
   @media(max-width:560px){
     html,body{overflow-x:hidden}
     .phero h1{font-size:clamp(30px,9vw,40px)!important;overflow-wrap:break-word}
@@ -337,8 +339,8 @@ document.getElementById('sort').addEventListener('click',function(){var cur=this
     root.classList.toggle('a11y-dys',!!st.dys); if(st.dys)ensureFont();
     root.classList.toggle('a11y-big',!!st.big);
     root.classList.toggle('a11y-contrast',!!st.contrast);
-    root.classList.toggle('dark',!!st.dark);
-    document.querySelectorAll('[data-a11y]').forEach(function(b){var k=b.getAttribute('data-a11y');if(k==='reset')return;var on=!!st[k];b.classList.toggle('on',on);b.textContent=on?'Activé':'Activer';});
+    var wantDark=(st.dark===undefined)?window.matchMedia('(prefers-color-scheme:dark)').matches:!!st.dark;root.classList.toggle('dark',wantDark);
+    document.querySelectorAll('[data-a11y]').forEach(function(b){var k=b.getAttribute('data-a11y');if(k==='reset')return;var on=(k==='dark')?wantDark:!!st[k];b.classList.toggle('on',on);b.textContent=on?'Activé':'Activer';});
   }
   apply();
   var btn=document.getElementById('a11yBtn'),panel=document.getElementById('a11yPanel');

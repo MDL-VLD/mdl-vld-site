@@ -174,7 +174,6 @@
       <button data-nav="messages"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><span class="lbl">Messages</span><span class="badge" id="nav-msg-badge" style="display:none">0</span></button>
       <button data-nav="annonce"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></span><span class="lbl">Annonce</span></button>
       <button data-nav="adhesion"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></span><span class="lbl">Adhésion</span></button>
-      <button data-nav="liens"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></span><span class="lbl">Liens utiles</span></button>
     </aside>
     <main class="main">
 
@@ -246,8 +245,8 @@
       </section>
 
       <section class="view" id="v-documents">
-        <div class="vhead"><div class="vtitle">Documents</div><button class="btn" data-act="doc-new">+ Nouveau document</button></div>
-        <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouveau document ».</li><li>Titre, catégorie (même nom = même section), et le lien (dossier OneDrive, PDF…).</li><li>Astuce : écris une nouvelle catégorie pour créer une nouvelle section automatiquement.</li></ol></details>
+        <div class="vhead"><div class="vtitle">Documents &amp; liens</div><button class="btn" data-act="doc-new">+ Nouveau</button></div>
+        <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouveau », puis choisis le <b>type</b> : un <b>Document</b> (fichier PDF, dossier OneDrive…) ou un <b>Lien</b> (site, Notion, Drive…). L'icône s'adapte automatiquement.</li><li>Titre, catégorie (même nom = même section, ex. « Statuts &amp; règlement », « Liens utiles »), et l'adresse.</li><li>Écris une nouvelle catégorie pour créer une nouvelle section automatiquement. Tout apparaît sur la page « Documents ».</li></ol></details>
         <div id="doc-list"></div><div id="doc-editor" style="display:none"></div>
       </section>
 
@@ -287,17 +286,6 @@
           <div class="fld"><label class="flbl">Lien du formulaire HelloAsso</label><input class="inp" id="p-hello"></div>
           <div class="fld"><label class="flbl">Année d'adhésion affichée (mise à jour sur tout le site)</label><input class="inp" id="p-annee" placeholder="2026-2027"></div>
           <button class="btn" data-act="params-save">Enregistrer</button>
-        </div>
-      </section>
-
-      <section class="view" id="v-liens">
-        <div class="vhead"><div class="vtitle">Liens utiles</div></div>
-        <div class="panel">
-          <details class="help"><summary>Comment faire ?</summary><ol><li>Écris un nom (ex. « OneDrive photos ») et l'adresse du lien.</li><li>« + Ajouter le lien ».</li><li>Les liens s'affichent en bas de la page Documents.</li></ol></details>
-        <p class="hint" style="margin-bottom:16px">OneDrive, Notion, Drive… affichés sur la page Documents.</p>
-          <div id="liens-list" style="margin-bottom:16px"></div>
-          <div class="grid2"><input class="inp" id="lien-lib" placeholder="Nom (ex : OneDrive photos)"><input class="inp" id="lien-url" placeholder="https://…"></div>
-          <button class="btn" data-act="lien-add" style="margin-top:12px">+ Ajouter le lien</button>
         </div>
       </section>
 
@@ -441,7 +429,7 @@ function nav(id){
   if(id==='documents')loadDocuments();
   if(id==='partenaires')loadPartenaires();
   if(id==='messages')loadMessages();
-  if(id==='annonce'||id==='adhesion'||id==='liens'||id==='merch')loadParams();
+  if(id==='annonce'||id==='adhesion'||id==='merch')loadParams();
   if(id==='concours')loadConcours();
   if(id==='dash')loadDash();
 }
@@ -644,11 +632,6 @@ async function loadParams(){
   $('#an-titre').value=map.annonce_titre||'';$('#an-texte').value=map.annonce_texte||'';
   $('#an-lien').value=map.annonce_lien||'';$('#an-label').value=map.annonce_lien_label||'';
   $('#m-actif').checked=(map.merch_actif==='true');$('#m-intro').value=map.merch_intro||'';$('#m-url').value=map.merch_boutique_url||'';loadColls();
-  var l=await sb.from('liens_utiles').select('*').order('ordre');
-  var list=$('#liens-list');
-  list.innerHTML=(l.data&&l.data.length)?l.data.map(function(x){
-    return '<div class="row" style="border:1px solid var(--line);border-radius:8px;margin-bottom:8px"><div class="grow"><div class="t">'+esc(x.libelle)+'</div><div class="m">'+esc(x.url)+'</div></div><button class="btn btn-rg btn-sm" data-act="lien-del" data-id="'+x.id+'">Suppr.</button></div>';
-  }).join(''):'<div class="hint">Aucun lien pour l\'instant.</div>';
 }
 async function paramsSave(){
   await sb.from('parametres').upsert({cle:'helloasso_url',valeur:$('#p-hello').value.trim()});
@@ -671,13 +654,14 @@ function docEditor(d){d=d||{};$('#doc-list').style.display='none';var e=$('#doc-
   e.innerHTML='<div class="panel"><input type="hidden" id="d-id" value="'+(d.id||'')+'">'
    +'<div class="fld"><label class="flbl">Titre *</label><input class="inp" id="d-titre" value="'+esc(d.titre)+'"></div>'
    +'<div class="fld"><label class="flbl">Description</label><textarea class="fta" id="d-desc" style="min-height:70px">'+esc(d.description)+'</textarea></div>'
-   +'<div class="grid2"><div class="fld"><label class="flbl">Catégorie</label><input class="inp" id="d-cat" value="'+esc(d.categorie)+'" placeholder="Statuts & règlement, Rapports annuels…"></div>'
-   +'<div class="fld"><label class="flbl">Lien (OneDrive, PDF…)</label><input class="inp" id="d-url" value="'+esc(d.url)+'" placeholder="https://…"></div></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Type</label><select class="inp" id="d-type"><option value="document"'+(d.type==='lien'?'':' selected')+'>Document (fichier : PDF, OneDrive…)</option><option value="lien"'+(d.type==='lien'?' selected':'')+'>Lien (site, Notion, Drive…)</option></select></div>'
+   +'<div class="fld"><label class="flbl">Catégorie</label><input class="inp" id="d-cat" value="'+esc(d.categorie)+'" placeholder="Statuts & règlement, Liens utiles…"></div></div>'
+   +'<div class="fld"><label class="flbl">Lien / adresse</label><input class="inp" id="d-url" value="'+esc(d.url)+'" placeholder="https://…"></div>'
    +'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-vt" data-act="doc-save">Enregistrer</button><button class="btn btn-out" data-act="doc-cancel">Annuler</button></div></div>';
 }
 async function docSave(){var id=$('#d-id').value,titre=$('#d-titre').value.trim(),url=$('#d-url').value.trim();
   if(!titre||!url){toast('Titre et lien requis.');return}
-  var payload={titre:titre,description:$('#d-desc').value.trim()||null,categorie:$('#d-cat').value.trim()||null,url:url};
+  var payload={titre:titre,description:$('#d-desc').value.trim()||null,categorie:$('#d-cat').value.trim()||null,url:url,type:($('#d-type')?$('#d-type').value:'document')};
   var res=id?await sb.from('documents').update(payload).eq('id',id):await sb.from('documents').insert(payload);
   if(res.error){toast('Erreur : '+res.error.message);return}toast('Document enregistré');loadDocuments();
 }
@@ -786,8 +770,6 @@ document.addEventListener('click',async function(e){
   if(act==='cc-logo-del'){if(await askConfirm('Ce logo sera supprimé définitivement.','Supprimer ce logo ?')){await sb.from('photos').delete().eq('id',id);toast('Logo supprimé');loadConcours()}return}
   if(act==='annonce-save'){await sb.from('parametres').upsert({cle:'annonce_active',valeur:$('#an-active').checked?'true':'false'});await sb.from('parametres').upsert({cle:'annonce_titre',valeur:$('#an-titre').value.trim()});await sb.from('parametres').upsert({cle:'annonce_texte',valeur:$('#an-texte').value.trim()});await sb.from('parametres').upsert({cle:'annonce_lien',valeur:$('#an-lien').value.trim()});await sb.from('parametres').upsert({cle:'annonce_lien_label',valeur:$('#an-label').value.trim()});toast('Annonce enregistrée');return}
   if(act==='params-save')return paramsSave();
-  if(act==='lien-add'){var lib=$('#lien-lib').value.trim(),url=$('#lien-url').value.trim();if(!lib||!url){toast('Nom et adresse requis.');return}await sb.from('liens_utiles').insert({libelle:lib,url:url});$('#lien-lib').value='';$('#lien-url').value='';toast('Lien ajouté');return loadParams()}
-  if(act==='lien-del'){await sb.from('liens_utiles').delete().eq('id',id);toast('Lien supprimé');return loadParams()}
 });
 
 document.addEventListener('change',async function(e){
