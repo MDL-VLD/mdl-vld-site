@@ -67,12 +67,12 @@
     <div class="foot-top">
       <div class="foot-brand">
         <div class="foot-brand-row"><img loading="lazy" src="assets/logo.png" alt="" class="foot-logo"><span>MDL Viollet-le-Duc</span></div>
-        <p>La Maison des Lycéens du Lycée Viollet-le-Duc.<br>Villiers-Saint-Frédéric (78640), Yvelines, France.</p>
+        <p>La Maison des Lycéens du Lycée Viollet-le-Duc.<br>Villiers-Saint-Frédéric (78640), Yvelines, France.</p><div class="foot-cta"><a href="adherer.html" class="foot-adh">Adhérer</a></div>
       </div>
       <div class="foot-col"><h4>Le site</h4><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a></div>
       <div class="foot-col"><h4>Participer</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="merch.html">Merch</a><a href="concours-logos.html">Concours</a></div><div class="foot-col"><h4>Ressources</h4><a href="faq.html">FAQ</a><a href="documents.html">Documents</a><a href="partenaires.html">Partenaires</a></div>
     </div>
-    <div class="foot-bottom"><span>© 2026 MDL Viollet-le-Duc · Fait par les lycéens · Tous droits réservés</span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="cgu.html">CGU</a> · <a href="cgv.html">CGV</a> · <a href="admin.html">Espace membres</a></span></div>
+    <div class="foot-bottom"><span><span class="nb">© 2026 MDL Viollet-le-Duc</span> · <span class="nb">Fait par les lycéens</span> · <span class="nb">Tous droits réservés</span></span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="cgu.html">CGU</a> · <a href="cgv.html">CGV</a> · <a href="admin.html">Espace membres</a></span></div>
   </div>
 </footer>
 <script>(function(){var b=document.querySelector(".burger"),n=document.querySelector(".nav-links");if(b&&n){b.addEventListener("click",function(){n.classList.toggle("open");b.classList.toggle("open")});n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");b.classList.remove("open")}})}})();(function(){var p=(location.pathname.split("/").pop()||"").replace(/\.html$/,"")||"index";document.querySelectorAll(".nav-links a").forEach(function(a){var h=(a.getAttribute("href")||"").split("/").pop().replace(/\.html$/,"");if(h&&h===p&&!a.classList.contains("cta"))a.classList.add("active")})})();</script>
@@ -93,6 +93,30 @@
   .totop.show{opacity:1;visibility:visible;transform:translateY(0)}
   .totop:hover{background:#7d0f64;color:#fff}
   .ms-lbl{display:none}
+  .nb{white-space:nowrap}
+  .br-m{display:none}
+  .foot-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .foot-cta a{margin-top:0!important}
+  .foot-adh{display:inline-flex;align-items:center;background:var(--mg);color:#fff;font-family:var(--syne),'Syne',sans-serif;font-weight:700;font-size:12px;padding:10px 18px;border-radius:100px;text-decoration:none}
+  .foot-adh:hover{background:var(--mg2,#63104f)}
+  @media(max-width:900px){
+    .foot-top{grid-template-columns:1fr 1fr 1fr;gap:28px}
+    .foot-brand{grid-column:1 / -1}
+    .foot-brand-row span{white-space:nowrap}
+    .foot-bottom{flex-direction:column;align-items:center;text-align:center;gap:8px;line-height:1.9}
+    .foot-bottom a{white-space:nowrap}
+    footer{padding-bottom:84px}
+  }
+  @media(max-width:560px){
+    .br-m{display:block}
+    .foot-top{grid-template-columns:1fr;gap:22px}
+    .stat{text-align:center}
+    .annonce-in{justify-content:center;text-align:center}
+    .annonce-txt{justify-content:center}
+    .hero-actions{flex-direction:column;align-items:stretch}
+    .hero-actions>a{justify-content:center;text-align:center;width:100%}
+    .btn-txt{border:1.5px solid rgba(255,255,255,.55);border-radius:100px;padding:14px 20px}
+  }
   @media(max-width:900px){.wrap{padding-left:44px;padding-right:44px}}
   @media(max-width:560px){.wrap{padding-left:24px;padding-right:24px}}
   @media(max-width:900px){
