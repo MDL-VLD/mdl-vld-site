@@ -87,6 +87,15 @@
 <div class="wrap phero-in"><div class="eyebrow rv">La boutique</div><h1 class="rv">Merch</h1>
 <p class="rv">Le merch du lycée, imaginé par les élèves de la MDL.</p></div></header>
 <section><div class="wrap"><div id="merch"><p style="color:var(--grey)">Chargement…</p></div></div></section>
+
+<section class="mfaq"><div class="wrap">
+<h2>Questions fréquentes</h2>
+<p class="mfaq-sub">Achat, paiement et tailles.</p>
+<details><summary>Comment acheter le merch ?</summary><div class="a">Quand la boutique est ouverte, via le lien d'achat indiqué sur cette page. Des ventes ont aussi lieu en direct au lycée.</div></details>
+<details><summary>Comment se passe le paiement ?</summary><div class="a">Sur la boutique en ligne ou en direct (carte via SumUp, ou espèces). Aucun paiement ne transite par ce site.</div></details>
+<details><summary>Quelles tailles et couleurs ?</summary><div class="a">Les tailles, couleurs et prix sont indiqués sur chaque modèle et sur la boutique en ligne.</div></details>
+<p class="more">Une autre question ? <a href="faq.html">Voir la FAQ complète</a> ou <a href="contact.html">nous écrire</a>.</p>
+</div></section>
 <footer>
   <div class="wrap">
     <div class="foot-top">
@@ -153,6 +162,21 @@ function render(params,collections){
   .totop.show{opacity:1;visibility:visible;transform:translateY(0)}
   .totop:hover{background:#7d0f64;color:#fff}
   .ms-lbl{display:none}
+  .mfaq{background:var(--paper2,#efe8e3);padding:56px 0}
+  .mfaq .wrap{max-width:820px}
+  .mfaq h2{font-family:var(--syne);font-weight:800;font-size:clamp(24px,3.5vw,32px);letter-spacing:-.01em;margin-bottom:8px}
+  .mfaq .mfaq-sub{color:var(--grey);margin-bottom:24px}
+  .mfaq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 20px;margin-bottom:10px}
+  .mfaq summary{font-family:var(--syne);font-weight:700;font-size:15px;padding:16px 0;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .mfaq summary::-webkit-details-marker{display:none}
+  .mfaq summary::after{content:"+";color:var(--mg);font-size:20px;font-weight:400}
+  .mfaq details[open] summary::after{content:"-"}
+  .mfaq .a{color:var(--grey);font-size:14.5px;line-height:1.6;padding:0 0 18px}
+  .mfaq .more{margin-top:20px;font-size:14px;color:var(--grey)}
+  .mfaq .more a{color:var(--mg);font-weight:600;text-decoration:none}
+  .mfaq .more a:hover{text-decoration:underline}
+  html.dark .mfaq{background:#1b1426}
+  html.dark .mfaq details{background:#1e1726;border-color:rgba(255,255,255,.1)}
   .crumb{background:var(--paper2,#efe8e3);border-bottom:1px solid var(--line)}
   .crumb .wrap{display:flex;align-items:center;gap:8px;padding:9px 32px;font-size:12.5px;color:var(--grey)}
   .crumb a{color:var(--grey);text-decoration:none}

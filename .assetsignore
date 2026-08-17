@@ -3,4 +3,5 @@
 node_modules
 wrangler.jsonc
 .assetsignore
+.gitignore
 *.zip

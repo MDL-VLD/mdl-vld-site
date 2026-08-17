@@ -291,7 +291,7 @@
 
       <section class="view" id="v-documents">
         <div class="vhead"><div class="vtitle">Documents &amp; liens</div><button class="btn" data-act="doc-new">+ Nouveau</button></div>
-        <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouveau », puis choisis le <b>type</b> : un <b>Document</b> (fichier PDF, dossier OneDrive…) ou un <b>Lien</b> (site, Notion, Drive…). L'icône s'adapte automatiquement.</li><li>Titre, catégorie (même nom = même section, ex. « Statuts &amp; règlement », « Liens utiles »), et l'adresse.</li><li>Écris une nouvelle catégorie pour créer une nouvelle section automatiquement. Tout apparaît sur la page « Documents ».</li></ol></details>
+        <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouveau », puis choisis le <b>type</b> : un <b>Document</b> (fichier PDF, dossier OneDrive…) ou un <b>Lien</b> (site, Notion, Drive…). L'icône s'adapte automatiquement. Le fichier n'est pas hébergé sur le site : dépose-le d'abord sur OneDrive ou Drive, puis colle ici son <b>lien de partage</b>.</li><li>Titre, catégorie (même nom = même section, ex. « Statuts &amp; règlement », « Liens utiles »), et l'adresse.</li><li>Écris une nouvelle catégorie pour créer une nouvelle section automatiquement. Tout apparaît sur la page « Documents ».</li></ol></details>
         <div id="doc-list"></div><div id="doc-editor" style="display:none"></div>
       </section>
 
@@ -328,7 +328,7 @@
         <div class="panel">
           <details class="help"><summary>Comment faire ?</summary><ol><li>Colle le lien du formulaire HelloAsso de l'année.</li><li>Indique l'année affichée (ex. 2026-2027).</li><li>Enregistre : le lien et l'année se mettent à jour partout sur le site.</li></ol></details>
         <h3 style="font-family:var(--syne);margin-bottom:16px">Formulaire HelloAsso</h3>
-          <div class="fld"><label class="flbl">Lien du formulaire HelloAsso</label><input class="inp" id="p-hello"></div>
+          <div class="fld"><label class="flbl">Lien du formulaire HelloAsso</label><input class="inp" id="p-hello" placeholder="https://www.helloasso.com/associations/..."><div class="hint">Colle l'adresse de ton formulaire d'adhésion HelloAsso.</div></div>
           <div class="fld"><label class="flbl">Année d'adhésion affichée (mise à jour sur tout le site)</label><input class="inp" id="p-annee" placeholder="2026-2027"></div>
           <button class="btn" data-act="params-save">Enregistrer</button>
         </div>
@@ -341,7 +341,7 @@
         <p class="hint" style="margin-bottom:16px">Tout se gère ici : crée des collections, règle leurs couleurs, et ajoute directement les modèles (photos) dans chaque collection.</p>
           <label class="chkrow toggle-hi" style="margin-bottom:16px"><input type="checkbox" id="m-actif"> Afficher la boutique Merch sur le site</label>
           <div class="fld"><label class="flbl">Collections</label>
-            <div class="hint" style="margin-bottom:8px">Crée tes collections et choisis lesquelles afficher (« Active ») ou cacher (« Masquée »).</div>
+            <div class="hint" style="margin-bottom:8px">Crée tes collections et choisis lesquelles afficher (« Affichée ») ou cacher (« Masquée »). Ajoute au moins 1 modèle par collection.</div>
             <div id="coll-list"></div>
             <div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="coll-new" placeholder="Nom d'une nouvelle collection" style="flex:1"><button class="btn" data-act="col-add">Ajouter</button></div>
           </div>
@@ -393,6 +393,10 @@
           <p style="color:var(--grey);margin-top:12px"><b>Accessibilité.</b> Le bouton en bas à droite (police dyslexie, texte agrandi, contraste, mode sombre) fonctionne aussi dans cet espace admin. Tes préférences sont conservées et partagées avec le site public.</p>
           <p style="color:var(--grey);margin-top:8px"><b>Pages légales.</b> Les mentions légales, la confidentialité et les conditions (CGU et CGV) sont des pages fixes du site, gérées dans le code. Pour toute modification, écris à Ewan.</p>
           <details class="help" style="margin-top:14px"><summary>Photos et vidéos : où les mettre ?</summary><p style="margin-bottom:8px"><b>Photos.</b> Le site n'héberge qu'une <b>sélection</b> de photos (les plus belles, sans visage reconnaissable ou avec accord). Pour la galerie, tu les ajoutes dans <b>Galerie</b> ; pour le merch, dans <b>Merch</b> (chaque collection). Le site les compresse tout seul. Les <b>albums complets</b> (des centaines de photos) restent sur OneDrive : dans Galerie, colle le <b>lien de l'album</b>. On ne met jamais des centaines de photos sur le site.</p><p style="margin-bottom:8px"><b>Vidéos.</b> Elles ne se mettent <b>jamais</b> directement sur le site (trop lourd). Pour qu'une vidéo se lise sur le site, colle un lien soit dans un <b>article</b> (bouton « Vidéo » de l'éditeur), soit dans la <b>galerie</b> (champ « Lien vidéo » en ajoutant un élément) :</p><ul style="margin:0 0 8px 18px;line-height:1.8"><li><b>YouTube</b> (conseillé) : mets la vidéo sur YouTube, puis colle son lien. Choisis <b>« Non répertorié »</b> s'il y a des visages, ou <b>« Public »</b> pour un projet officiel dont on a les droits.</li><li><b>OneDrive</b> : ouvre la vidéo, clique <b>« Intégrer »</b>, copie le lien proposé, puis colle-le.</li></ul><p style="margin:0"><b>Important :</b> un lien collé comme simple texte ne devient pas un lecteur. Passe par le bouton <b>« Vidéo »</b>.</p></details>
+          <hr style="margin:22px 0;border:none;border-top:1px solid var(--line)">
+          <h3 style="font-family:var(--syne);font-size:17px;margin-bottom:6px">Sauvegarde</h3>
+          <p class="hint" style="margin-bottom:12px">Télécharge une copie de tout le contenu du site (articles, événements, agenda, galerie, documents, partenaires, messages, réglages) dans un seul fichier. Range-le en lieu sûr : en cas de souci, il permet de tout retrouver. À faire de temps en temps.</p>
+          <button class="btn btn-out btn-sm" data-act="backup-dl" style="margin-bottom:4px">Télécharger une sauvegarde (.json)</button>
           <hr style="margin:22px 0;border:none;border-top:1px solid var(--line)">
           <h3 style="font-family:var(--syne);font-size:17px;margin-bottom:6px">Outils de la MDL (accès rapide)</h3>
           <p class="hint" style="margin-bottom:12px">Colle ici les adresses des outils du bureau. Elles restent privées (visibles seulement dans cet espace admin).</p>
@@ -465,7 +469,7 @@ async function loadColls(){
       +'<div class="coll-head"><b>'+esc(c.nom)+'</b><div class="acts"><button class="btn btn-sm '+(c.actif?'btn-vt':'btn-out')+'" data-act="col-toggle" data-id="'+c.id+'" data-on="'+(c.actif?1:0)+'">'+(c.actif?'Affichée':'Masquée')+'</button><button class="btn btn-rg btn-sm" data-act="col-del" data-id="'+c.id+'">Suppr.</button></div></div>'
       +'<div class="fld" style="margin-bottom:8px"><label class="flbl">Couleurs disponibles (Nom:code, séparées par des virgules)</label><div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="colcol-'+c.id+'" value="'+esc(c.couleurs)+'" placeholder="Blanc:#f4f4f2, Noir:#1a1a1a, Bleu marine:#1b2a4a" style="flex:1;min-width:220px;max-width:none"><button class="btn btn-out btn-sm" data-act="col-colors" data-id="'+c.id+'">Enregistrer les couleurs</button></div></div>'
       +'<div class="mp-grid">'+ph+'</div>'
-      +'<div class="mp-add"><input class="inp" type="file" id="mpf-'+c.id+'" accept="image/*"><input class="inp" id="mpt-'+c.id+'" placeholder="Nom du modèle (optionnel)"><button class="btn btn-vt btn-sm" data-act="mp-add" data-coll="'+esc(c.nom)+'" data-id="'+c.id+'">Ajouter le modèle</button></div>'
+      +'<div class="hint" style="margin:4px 0 6px">Ajoute au moins 1 modèle. Photos carrées conseillées, JPEG, PNG ou WebP, 10 Mo max (réduites automatiquement).</div>'+'<div class="mp-add"><input class="inp" type="file" id="mpf-'+c.id+'" accept="image/*"><input class="inp" id="mpt-'+c.id+'" placeholder="Nom du modèle (optionnel)"><button class="btn btn-vt btn-sm" data-act="mp-add" data-coll="'+esc(c.nom)+'" data-id="'+c.id+'">Ajouter le modèle</button></div>'
       +'</div>';
   }).join('');
 }
@@ -487,7 +491,7 @@ async function loadConcours(){
     return '<div class="coll-card">'
       +'<div class="coll-head"><b>'+esc(y.nom)+'</b><div class="acts"><button class="btn btn-sm '+(y.actif?'btn-vt':'btn-out')+'" data-act="col-toggle" data-id="'+y.id+'" data-on="'+(y.actif?1:0)+'">'+(y.actif?'Affichée':'Masquée')+'</button><button class="btn btn-rg btn-sm" data-act="cc-year-del" data-id="'+y.id+'">Suppr.</button></div></div>'
       +'<div class="mp-grid">'+lg+'</div>'
-      +'<div class="mp-add"><input class="inp" type="file" id="ccf-'+y.id+'" accept="image/*"><input class="inp" id="cct-'+y.id+'" placeholder="Nom du logo (optionnel)"><button class="btn btn-vt btn-sm" data-act="cc-logo-add" data-coll="'+esc(y.nom)+'" data-id="'+y.id+'">Ajouter le logo</button></div>'
+      +'<div class="hint" style="margin:4px 0 6px">Un logo par participant. Désigne ensuite le vainqueur de l\'année. JPEG, PNG ou WebP, 10 Mo max.</div>'+'<div class="mp-add"><input class="inp" type="file" id="ccf-'+y.id+'" accept="image/*"><input class="inp" id="cct-'+y.id+'" placeholder="Nom du logo (optionnel)"><button class="btn btn-vt btn-sm" data-act="cc-logo-add" data-coll="'+esc(y.nom)+'" data-id="'+y.id+'">Ajouter le logo</button></div>'
       +'</div>';
   }).join('');
 }
@@ -609,9 +613,9 @@ function artEditor(a){
      +'<button type="button" class="tb" data-cmd="link">Lien</button>'
      +'<button type="button" class="tb" data-cmd="img">Image</button>'
      +'<button type="button" class="tb" data-cmd="video">Vidéo</button>'
-   +'</div><div class="editor" id="a-content" contenteditable="true">'+(a.content||'')+'</div><div class="hint">Astuce : tu peux insérer jusqu\'à 5 images dans un article.</div></div>'
+   +'</div><div class="editor" id="a-content" contenteditable="true">'+(a.content||'')+'</div><div class="hint">Astuce : jusqu\'à 5 images par article (bouton image de la barre d\'outils). Photos JPEG, PNG ou WebP, 10 Mo max.</div></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Extrait (résumé court)</label><textarea class="fta" id="a-excerpt" style="min-height:70px">'+esc(a.excerpt)+'</textarea></div>'
-   +'<div class="fld"><label class="flbl">Image de couverture</label><input class="inp" type="file" id="a-cover-file" accept="image/*"><div class="hint">Envoie un fichier, choisis-en une existante, ou colle une adresse.</div><div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="a-cover" value="'+esc(a.cover_url)+'" placeholder="https://…"><button type="button" class="btn btn-out btn-sm" data-act="pick-cover">Choisir dans la galerie</button></div></div></div>'
+   +'<div class="fld"><label class="flbl">Image de couverture</label><input class="inp" type="file" id="a-cover-file" accept="image/*"><div class="hint">Facultatif. Envoie un fichier, choisis-en un existant, ou colle une adresse. Photos JPEG, PNG ou WebP, 10 Mo max (réduites automatiquement). Format paysage conseillé.</div><div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="a-cover" value="'+esc(a.cover_url)+'" placeholder="https://…"><button type="button" class="btn btn-out btn-sm" data-act="pick-cover">Choisir dans la galerie</button></div></div></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Tags (séparés par des virgules)</label><input class="inp" id="a-tags" value="'+esc(tagsToStr(a.tags))+'"></div>'
    +'<div class="fld"><label class="flbl">Auteur affiché</label><input class="inp" id="a-author" value="'+esc(a.author_name||'Le bureau de la MDL')+'"></div></div>'
    +'<div style="display:flex;gap:10px;margin-top:10px"><button class="btn btn-vt" data-act="art-save" data-status="publie">Publier</button>'
@@ -652,7 +656,7 @@ function evtEditor(v){
    +'<div class="grid2"><div class="fld"><label class="flbl">Période affichée</label><input class="inp" id="e-date" value="'+esc(v.date_affichee)+'" placeholder="Octobre, Juillet…"></div>'
    +'<div class="fld"><label class="flbl">Lieu</label><input class="inp" id="e-lieu" value="'+esc(v.lieu||'Lycée Viollet-le-Duc')+'"></div></div>'
    +'<div class="fld"><label class="flbl">Description</label><textarea class="fta" id="e-desc">'+esc(v.description)+'</textarea></div>'
-   +'<div class="grid2"><div class="fld"><label class="flbl">Affiche</label><input class="inp" type="file" id="e-affiche-file" accept="image/*"><div class="hint">Choisis un fichier, ou colle une adresse. Vide = carte de couleur avec le titre.</div><div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="e-affiche" value="'+esc(v.affiche_url)+'" placeholder="https://…"><button type="button" class="btn btn-out btn-sm" data-act="pick-affiche">Choisir dans la galerie</button></div></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Affiche</label><input class="inp" type="file" id="e-affiche-file" accept="image/*"><div class="hint">Facultatif (vide = mini-affiche à icône générée automatiquement). Format portrait / A4 conseillé. JPEG, PNG ou WebP, 10 Mo max.</div><div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="e-affiche" value="'+esc(v.affiche_url)+'" placeholder="https://…"><button type="button" class="btn btn-out btn-sm" data-act="pick-affiche">Choisir dans la galerie</button></div></div>'
    +'<div class="fld"><label class="flbl">Lien billetterie (facultatif)</label><input class="inp" id="e-billet" value="'+esc(v.lien_billetterie)+'"></div></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Tags (virgules)</label><input class="inp" id="e-tags" value="'+esc(tagsToStr(v.tags))+'"></div>'
    +'<div class="fld"><label class="flbl">Statut</label><select class="inp" id="e-statut"><option value="passe"'+(v.statut!=='a_venir'?' selected':'')+'>Passé</option><option value="a_venir"'+(v.statut==='a_venir'?' selected':'')+'>À venir</option></select></div></div>'
@@ -721,7 +725,7 @@ function phoEditor(p){
   e.innerHTML='<div class="panel"><input type="hidden" id="p-id" value="'+(p.id||'')+'">'
    +'<div class="grid2"><div class="fld"><label class="flbl">Titre *</label><input class="inp" id="p-titre" value="'+esc(p.titre)+'" placeholder="Titre (obligatoire)"></div>'
    +'<div class="fld"><label class="flbl">Catégorie</label><input class="inp" id="p-cat" value="'+esc(p.categorie)+'" placeholder="Le lycée, Bal, Course contre la Faim…"></div></div>'
-   +'<div class="fld"><label class="flbl">Photo (facultatif)</label><input class="inp" type="file" id="p-file" accept="image/*"><div class="hint">Choisis un fichier (compressé automatiquement) ou colle une adresse ci-dessous. Facultatif si tu mets un lien vidéo.</div></div>'
+   +'<div class="fld"><label class="flbl">Photo (facultatif)</label><input class="inp" type="file" id="p-file" accept="image/*"><div class="hint">Facultatif si tu mets un lien vidéo. Photos JPEG, PNG ou WebP, 10 Mo max (réduites automatiquement). Ou colle une adresse ci-dessous.</div></div>'
    +'<div class="fld"><label class="flbl">Adresse de l\'image (URL, facultatif)</label><input class="inp" id="p-url" value="'+esc(p.image_url)+'"></div>'
    +'<div class="fld"><label class="flbl">Tags (virgules, facultatif)</label><input class="inp" id="p-tags" value="'+esc(tagsToStr(p.tags))+'"></div>'
    +'<div class="fld"><label class="flbl">Lien vidéo (facultatif, YouTube ou OneDrive)</label><input class="inp" id="p-video" value="'+esc(p.video_url)+'" placeholder="https://youtu.be/... ou lien OneDrive"><div class="hint">Si tu mets un lien vidéo, l\'élément devient une <b>vidéo</b> dans la galerie (lecture au clic). L\'image sert de miniature (facultative ; pour YouTube elle est automatique).</div></div>'
@@ -816,7 +820,7 @@ function parEditor(p){p=p||{};$('#par-list').style.display='none';var e=$('#par-
    +'<div class="fld"><label class="flbl">Description</label><textarea class="fta" id="pa-desc" style="min-height:70px">'+esc(p.description)+'</textarea></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Catégorie</label><input class="inp" id="pa-cat" value="'+esc(p.categorie)+'"></div>'
    +'<div class="fld"><label class="flbl">Lien (Instagram, site…)</label><input class="inp" id="pa-url" value="'+esc(p.url)+'"></div></div>'
-   +'<div class="fld"><label class="flbl">Logo</label><input class="inp" type="file" id="pa-logo-file" accept="image/*"><div class="hint">Envoie un logo, ou colle une adresse. Vide = initiales.</div><input class="inp" id="pa-logo" value="'+esc(p.logo_url)+'" placeholder="https://…" style="margin-top:8px"></div>'
+   +'<div class="fld"><label class="flbl">Logo</label><input class="inp" type="file" id="pa-logo-file" accept="image/*"><div class="hint">Facultatif (vide = initiales). 1 logo par partenaire. PNG à fond transparent conseillé. JPEG, PNG ou WebP, 10 Mo max.</div><input class="inp" id="pa-logo" value="'+esc(p.logo_url)+'" placeholder="https://…" style="margin-top:8px"></div>'
    +'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-vt" data-act="par-save">Enregistrer</button><button class="btn btn-out" data-act="par-cancel">Annuler</button></div></div>';
 }
 async function parSave(){var id=$('#pa-id').value,nom=$('#pa-nom').value.trim();
@@ -908,6 +912,7 @@ document.addEventListener('click',async function(e){
   if(act==='cc-logo-add'){var lf=document.getElementById('ccf-'+id).files[0];if(!lf){toast('Choisis une image de logo.');return}toast('Envoi…');try{var liu=await uploadFile(lf);await sb.from('photos').insert({titre:(document.getElementById('cct-'+id).value.trim()||null),image_url:liu,categorie:'Concours logos',collection:t.getAttribute('data-coll'),public_galerie:false});toast('Logo ajouté')}catch(e){toast('Envoi échoué')}return loadConcours()}
   if(act==='cc-winner'){await sb.from('collections').update({gagnant_id:id}).eq('id',t.getAttribute('data-coll'));toast('Vainqueur désigné');return loadConcours()}
   if(act==='cc-logo-del'){if(await askConfirm('Ce logo ira à la corbeille. Tu pourras le restaurer pendant 7 jours.','Mettre ce logo à la corbeille ?')){await sb.from('photos').update({deleted_at:new Date().toISOString()}).eq('id',id);toast('Mis à la corbeille');loadConcours()}return}
+  if(act==='backup-dl'){toast('Préparation de la sauvegarde…');try{var tbs=['articles','evenements','agenda','photos','documents','partenaires','collections','messages','parametres'];var out={_site:'mdl-vld.fr',_exporte_le:new Date().toISOString()};for(var bi=0;bi<tbs.length;bi++){var rr=await sb.from(tbs[bi]).select('*');out[tbs[bi]]=rr.data||[]}var blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='sauvegarde-mdl-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('Sauvegarde téléchargée')}catch(e){toast('Sauvegarde impossible')}return}
   if(act==='aide-save'){var tls=['notion','onedrive','cloudflare','supabase','protonpass','github'];for(var ti=0;ti<tls.length;ti++){await sb.from('parametres').upsert({cle:'outil_'+tls[ti],valeur:$('#ol-'+tls[ti]).value.trim()});}toast('Liens enregistrés');return loadAide()}
   if(act==='annonce-save'){await sb.from('parametres').upsert({cle:'annonce_active',valeur:$('#an-active').checked?'true':'false'});await sb.from('parametres').upsert({cle:'annonce_titre',valeur:$('#an-titre').value.trim()});await sb.from('parametres').upsert({cle:'annonce_texte',valeur:$('#an-texte').value.trim()});await sb.from('parametres').upsert({cle:'annonce_lien',valeur:$('#an-lien').value.trim()});await sb.from('parametres').upsert({cle:'annonce_lien_label',valeur:$('#an-label').value.trim()});toast('Annonce enregistrée');return}
   if(act==='params-save')return paramsSave();
