@@ -50,6 +50,12 @@
   .gitem:hover::after{opacity:1}
   .gitem .cap{position:absolute;left:12px;right:12px;bottom:10px;z-index:2;color:#fff;font-family:var(--syne);font-weight:700;font-size:13px;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
   .gitem:hover .cap{opacity:1;transform:none}
+  .gph{width:100%;height:100%;background:linear-gradient(140deg,var(--mg),var(--prune))}
+  .gplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2}
+  .gplay::before{content:"";position:absolute;width:52px;height:52px;border-radius:50%;background:rgba(20,6,15,.55)}
+  .gplay svg{position:relative;z-index:1;margin-left:3px}
+  .lb-video{width:min(92vw,1000px);aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden}
+  .lb-video iframe{width:100%;height:100%;border:0}
   .empty{color:var(--grey);padding:26px 0}
   /* albums privés */
   .private{background:var(--paper2);border-radius:16px;padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:56px}
@@ -130,6 +136,7 @@
   <button class="lb-close" onclick="closeLb()" aria-label="Fermer">×</button>
   <button class="lb-nav lb-prev" onclick="lbStep(-1)" aria-label="Précédent">‹</button>
   <img loading="lazy" id="lb-img" src="" alt="">
+  <div class="lb-video" id="lb-video" style="display:none"></div>
   <button class="lb-nav lb-next" onclick="lbStep(1)" aria-label="Suivant">›</button>
   <div class="lb-cap" id="lb-cap"></div>
 </div>
@@ -169,6 +176,8 @@ const FALLBACK=[
  {titre:"La piste d'athlétisme",image_url:'assets/lycee-piste.jpg',categorie:'Sport',tags:['Piste']}
 ];
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function videoEmbedSrc(u){u=(u||'').trim();var m=u.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);if(m)return 'https://www.youtube-nocookie.com/embed/'+m[1];var s=u.match(/src=["']([^"']+)["']/i);if(s)return s[1];return u}
+function ytThumb(u){var m=(u||'').match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);return m?('https://img.youtube.com/vi/'+m[1]+'/hqdefault.jpg'):''}
 let ALL=[],activeCat='Toutes',LIST=[],cur=0;
 function buildChips(){
   var cats=['Toutes'];
@@ -187,18 +196,24 @@ function applyFilters(){
   });
   var g=document.getElementById('gal');
   g.innerHTML=LIST.length?LIST.map(function(p,i){
-    return '<button class="gitem rv in" onclick="openLb('+i+')"><img loading="lazy" src="'+p.image_url+'" alt="'+esc(p.titre)+'"><span class="cap">'+esc(p.titre)+'</span></button>';
+    var isV=!!p.video_url;
+    var poster=p.image_url||(isV?ytThumb(p.video_url):'');
+    var media=poster?('<img loading="lazy" src="'+poster+'" alt="'+esc(p.titre)+'">'):'<div class="gph"></div>';
+    var play=isV?'<span class="gplay" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>':'';
+    return '<button class="gitem rv in" onclick="openLb('+i+')">'+media+play+'<span class="cap">'+esc(p.titre)+'</span></button>';
   }).join(''):'<p class="empty">Aucune photo ne correspond.</p>';
 }
 function openLb(i){cur=i;showLb()}
 function showLb(){
   var p=LIST[cur];if(!p)return;
-  document.getElementById('lb-img').src=p.image_url;
+  var img=document.getElementById('lb-img'),vid=document.getElementById('lb-video');
+  if(p.video_url){img.style.display='none';vid.style.display='block';vid.innerHTML='<iframe src="'+videoEmbedSrc(p.video_url)+'" title="Vidéo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';}
+  else{vid.style.display='none';vid.innerHTML='';img.style.display='block';img.src=p.image_url;}
   document.getElementById('lb-cap').innerHTML='<b>'+esc(p.titre)+'</b><span>'+esc(p.categorie||'')+'</span>';
   document.getElementById('lb').classList.add('open');
 }
 function lbStep(d){cur=(cur+d+LIST.length)%LIST.length;showLb()}
-function closeLb(){document.getElementById('lb').classList.remove('open')}
+function closeLb(){var v=document.getElementById('lb-video');if(v){v.innerHTML='';v.style.display='none';}document.getElementById('lb').classList.remove('open')}
 document.addEventListener('keydown',function(e){
   if(!document.getElementById('lb').classList.contains('open'))return;
   if(e.key==='Escape')closeLb();if(e.key==='ArrowRight')lbStep(1);if(e.key==='ArrowLeft')lbStep(-1);
