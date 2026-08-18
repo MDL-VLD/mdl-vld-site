@@ -86,7 +86,7 @@
 <header id="main" class="phero"><div class="phero-bg" style="background-image:url(assets/lycee-facade2.jpg)"></div>
 <div class="wrap phero-in"><div class="eyebrow rv">La boutique</div><h1 class="rv">Merch</h1>
 <p class="rv">Le merch du lycée, imaginé par les élèves de la MDL.</p></div></header>
-<section><div class="wrap"><div id="merch"><p style="color:var(--grey)">Chargement…</p></div></div></section>
+<section><div class="wrap"><div id="merch"><p style="color:var(--grey)">Le merch de la MDL, imaginé par les élèves : pulls et articles aux couleurs du lycée Viollet-le-Duc.</p></div></div></section>
 
 <section class="mfaq"><div class="wrap">
 <h2>Questions fréquentes</h2>
@@ -120,14 +120,14 @@ const SB_URL='https://ksvqjbcnqphnyxfpjhvz.supabase.co',SB_KEY='sb_publishable_K
 function esc(s){return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function render(params,collections){
   var el=document.getElementById('merch');
-  if(params.merch_actif!=='true'){el.innerHTML='<div class="dnote">La boutique n\'est pas encore disponible. Reviens bientôt !</div>';return;}
+  if(params.merch_actif!=='true'){el.innerHTML='<div class="dnote">Le merch du lycée est proposé par la MDL au fil de l\'année. Reviens sur cette page pour la prochaine collection.</div>';return;}
   var intro=params.merch_intro?('<p class="merch-intro">'+esc(params.merch_intro)+'</p>'):'';
   function card(p){return '<div class="mcard"><img loading="lazy" src="'+esc(p.image_url)+'" alt="'+esc(p.titre||'Modèle')+'">'+(p.titre?'<div class="mcap">'+esc(p.titre)+'</div>':'')+'</div>';}
   function colorsRow(str){if(!str)return '';var it=str.split(',').map(function(x){var pp=x.split(':');var nom=(pp[0]||'').trim();var hex=(pp[1]||'').trim();if(!nom)return '';return '<span class="mc-item"><span class="mc-dot" style="background:'+esc(hex||'#ccc')+'"></span><span class="mc-name">'+esc(nom)+'</span></span>';}).filter(Boolean).join('');return it?('<div class="merch-colors"><span class="mc-label">Couleurs :</span>'+it+'</div>'):'';}
   var grid=collections.map(function(col){if(!col.photos.length)return '';return '<div class="merch-collection"><h2 class="merch-col-title">'+esc(col.nom)+'</h2>'+colorsRow(col.couleurs)+'<div class="mgrid">'+col.photos.map(card).join('')+'</div></div>';}).join('');
   if(!grid)grid='<div class="dnote">Les modèles arrivent bientôt.</div>';
   var btn=params.merch_boutique_url?('<div style="text-align:center;margin-top:44px"><a class="cta" style="padding:16px 34px;font-size:15px" href="'+esc(params.merch_boutique_url)+'" target="_blank" rel="noopener">Voir la boutique</a></div>'):'';
-  var note=grid.indexOf('dnote')===-1?('<p class="merch-note">Cette page présente les modèles. Les <b>prix</b> et le <b>paiement</b> se font directement sur la boutique en ligne'+(params.merch_boutique_url?'':' (lien à venir)')+'.</p>'):'';
+  var note=grid.indexOf('dnote')===-1?('<p class="merch-note">Cette page présente les modèles. Les <b>prix</b> et le <b>paiement</b> se font directement sur la boutique en ligne'+(params.merch_boutique_url?'':'')+'.</p>'):'';
   el.innerHTML=intro+grid+note+btn;
 }
 (async function(){

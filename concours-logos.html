@@ -88,7 +88,7 @@
 <header id="main" class="phero"><div class="phero-bg" style="background-image:url(assets/lycee-facade2.jpg)"></div>
 <div class="wrap phero-in"><div class="eyebrow rv">Le concours</div><h1 class="rv">Concours de logos</h1>
 <p class="rv">Les logos proposés par les élèves cette année, et le grand vainqueur.</p></div></header>
-<section><div class="wrap"><div id="concours"><p style="color:var(--grey)">Chargement…</p></div></div></section>
+<section><div class="wrap"><div id="concours"><p style="color:var(--grey)">La MDL organise un concours de logo ouvert aux élèves du lycée Viollet-le-Duc. Découvrez les créations proposées et le logo gagnant de chaque édition.</p></div></div></section>
 
 <section class="mfaq"><div class="wrap">
 <h2>Questions fréquentes</h2>
@@ -122,7 +122,7 @@ const SB_URL='https://ksvqjbcnqphnyxfpjhvz.supabase.co',SB_KEY='sb_publishable_K
 function esc(s){return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function render(params,years){
   var el=document.getElementById('concours');
-  if(params.concours_actif!=='true'){el.innerHTML='<div class="dnote">La page du concours n\'est pas encore disponible. Reviens bientôt !</div>';return;}
+  if(params.concours_actif!=='true'){el.innerHTML='<div class="dnote">La MDL organise régulièrement un concours de logo ouvert aux élèves du lycée. Reviens sur cette page pour la prochaine édition.</div>';return;}
   var intro=params.concours_intro?('<p class="merch-intro">'+esc(params.concours_intro)+'</p>'):'';
   function card(p,win){var w=(p.id===win);return '<div class="mcard'+(w?' win':'')+'">'+(w?'<div class="win-badge">★ Vainqueur</div>':'')+'<img loading="lazy" src="'+esc(p.image_url)+'" alt="'+esc(p.titre||'Logo')+'">'+(p.titre?'<div class="mcap">'+esc(p.titre)+'</div>':'')+'</div>';}
   var grid=years.map(function(y){if(!y.photos.length)return '';var ph=y.photos.slice().sort(function(a,b){return (b.id===y.gagnant_id?1:0)-(a.id===y.gagnant_id?1:0);});return '<div class="merch-collection"><h2 class="merch-col-title">'+esc(y.nom)+'</h2><div class="mgrid">'+ph.map(function(p){return card(p,y.gagnant_id);}).join('')+'</div></div>';}).join('');
