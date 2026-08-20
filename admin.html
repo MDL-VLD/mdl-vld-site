@@ -66,6 +66,9 @@
   .view{display:none}.view.on{display:block}
   .vhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap}
   .vtitle{font-family:var(--syne);font-weight:800;font-size:24px;letter-spacing:-.01em}
+.vtitle-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.viewlink{font-size:13px;color:var(--mg);text-decoration:none;font-weight:600;white-space:nowrap;border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+.viewlink:hover{background:#f7eef4;text-decoration:none}
   /* stats */
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
   .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
@@ -253,9 +256,10 @@
       <button data-nav="messages"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><span class="lbl">Messages</span><span class="badge" id="nav-msg-badge" style="display:none">0</span></button>
       <button data-nav="annonce"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></span><span class="lbl">Annonce</span></button>
       <button data-nav="adhesion"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></span><span class="lbl">Adhésion</span></button>
-      <div class="side-cat">Aide</div>
-      <button data-nav="aide"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span><span class="lbl">Aide</span></button>
+      <div class="side-cat">Outils &amp; aide</div>
       <button data-nav="corbeille"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6M14 11v6"/></svg></span><span class="lbl">Corbeille</span></button>
+      <button data-nav="sauvegarde"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></span><span class="lbl">Sauvegarde</span></button>
+      <button data-nav="aide"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span><span class="lbl">Aide</span></button>
     </aside>
     <main class="main">
 
@@ -267,42 +271,42 @@
 
       <!-- ARTICLES -->
       <section class="view" id="v-articles">
-        <div class="vhead"><div class="vtitle">Articles</div><button class="btn" data-act="art-new">+ Nouvel article</button></div>
-        <details class="help"><summary>Comment faire ?</summary><ol><li>Clique sur « + Nouvel article » et lis le petit rappel.</li><li>Mets un titre, puis écris ton texte : gras, italique, titre, liste, lien, image, vidéo, <b>citation</b> (encadrée par deux lignes) et <b>séparateur</b>.</li><li><b>Insérer une vidéo</b> : clique sur « Vidéo » et colle un lien. Pour YouTube, mets d'abord la vidéo en « Non répertorié » (visible seulement via le lien, pas dans les recherches YouTube) puis colle son lien. Pour OneDrive, ouvre la vidéo, clique « Intégrer » et colle le lien proposé. La vidéo se lira directement dans l'article.</li><li>Choisis une image de couverture : un fichier, une image de la galerie, ou une adresse.</li><li>« Publier » pour le mettre en ligne, ou « Enregistrer en brouillon » pour finir plus tard.</li></ol></details>
+        <div class="vhead"><div class="vtitle-row"><div class="vtitle">Articles</div><a class="viewlink" href="actu.html" target="_blank" rel="noopener">Voir la page ↗</a></div><button class="btn" data-act="art-new">+ Nouvel article</button></div>
+        <details class="help"><summary>Comment faire ?</summary><ol><li>Clique sur « + Nouvel article » et lis le petit rappel.</li><li>Mets un titre, puis écris ton texte : gras, italique, titre, liste, lien externe, <b>lien vers une page du site</b> (bouton « Page du site »), image, vidéo, <b>citation</b> (encadrée par deux lignes) et <b>séparateur</b>.</li><li><b>Insérer une vidéo</b> : clique sur « Vidéo » et colle un lien. Pour YouTube, mets d'abord la vidéo en « Non répertorié » (visible seulement via le lien, pas dans les recherches YouTube) puis colle son lien. Pour OneDrive, ouvre la vidéo, clique « Intégrer » et colle le lien proposé. La vidéo se lira directement dans l'article.</li><li>Choisis une image de couverture : un fichier, une image de la galerie, ou une adresse.</li><li>« Publier » pour le mettre en ligne, ou « Enregistrer en brouillon » pour finir plus tard.</li></ol></details>
         <div id="art-list"></div>
         <div id="art-editor" style="display:none"></div>
       </section>
 
       <!-- ÉVÉNEMENTS -->
       <section class="view" id="v-evenements">
-        <div class="vhead"><div class="vtitle">Événements</div><button class="btn" data-act="evt-new">+ Nouvel événement</button></div>
+        <div class="vhead"><div class="vtitle-row"><div class="vtitle">Événements</div><a class="viewlink" href="evenements.html" target="_blank" rel="noopener">Voir la page ↗</a></div><button class="btn" data-act="evt-new">+ Nouvel événement</button></div>
         <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouvel événement » : titre, période (ex. « Octobre »), lieu, description.</li><li>Ajoute une affiche (envoi de fichier ou « Choisir dans la galerie »).</li><li>Dans la liste, le bouton « épingle » met l'événement en avant, et le bouton « maison » l'affiche sur la page d'accueil (3 maximum).</li></ol></details>
         <div id="evt-list"></div>
         <div id="evt-editor" style="display:none"></div>
       </section>
 
       <section class="view" id="v-agenda">
-        <div class="vhead"><div class="vtitle">Agenda</div><button class="btn" data-act="ag-new">+ Nouvelle entrée</button></div>
+        <div class="vhead"><div class="vtitle-row"><div class="vtitle">Agenda</div><a class="viewlink" href="planning.html" target="_blank" rel="noopener">Voir la page ↗</a></div><button class="btn" data-act="ag-new">+ Nouvelle entrée</button></div>
         <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouvelle entrée ».</li><li>Choisis un type (ou « Personnalisé… »), une date de début, et une date de fin si ça dure plusieurs jours.</li><li>Enregistre : ça apparaît sur la page Agenda (vue calendrier et vue planning).</li></ol></details>
         <div id="ag-list"></div><div id="ag-editor" style="display:none"></div>
       </section>
 
       <!-- GALERIE -->
       <section class="view" id="v-galerie">
-        <div class="vhead"><div class="vtitle">Galerie</div><button class="btn" data-act="pho-new">+ Photo ou vidéo</button></div>
+        <div class="vhead"><div class="vtitle-row"><div class="vtitle">Galerie</div><a class="viewlink" href="galerie.html" target="_blank" rel="noopener">Voir la page ↗</a></div><button class="btn" data-act="pho-new">+ Photo ou vidéo</button></div>
         <details class="help"><summary>Comment faire ?</summary><ol><li>« + Photo ou vidéo ». Le <b>titre est obligatoire</b> ; l'image et les tags sont facultatifs.</li><li><b>Photo</b> : choisis un fichier (compressé automatiquement) ou colle une adresse d'image.</li><li><b>Vidéo</b> : laisse l'image de côté et colle un <b>lien vidéo</b>. YouTube (mets « Non répertorié » s'il y a des visages, « Public » sinon) ou OneDrive (option « Intégrer »). Elle se lira au clic dans la galerie.</li><li>Bouton « Public / Privé » : Privé = gardée dans la réserve (utilisable pour les articles) mais cachée de la galerie publique.</li></ol></details>
         <div id="pho-list"></div>
         <div id="pho-editor" style="display:none"></div>
       </section>
 
       <section class="view" id="v-documents">
-        <div class="vhead"><div class="vtitle">Documents &amp; liens</div><button class="btn" data-act="doc-new">+ Nouveau</button></div>
+        <div class="vhead"><div class="vtitle-row"><div class="vtitle">Documents &amp; liens</div><a class="viewlink" href="documents.html" target="_blank" rel="noopener">Voir la page ↗</a></div><button class="btn" data-act="doc-new">+ Nouveau</button></div>
         <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouveau », puis choisis le <b>type</b> : un <b>Document</b> (fichier PDF, dossier OneDrive…) ou un <b>Lien</b> (site, Notion, Drive…). L'icône s'adapte automatiquement. Le fichier n'est pas hébergé sur le site : dépose-le d'abord sur OneDrive ou Drive, puis colle ici son <b>lien de partage</b>.</li><li>Titre, catégorie (même nom = même section, ex. « Statuts &amp; règlement », « Liens utiles »), et l'adresse.</li><li>Écris une nouvelle catégorie pour créer une nouvelle section automatiquement. Tout apparaît sur la page « Documents ».</li></ol></details>
         <div id="doc-list"></div><div id="doc-editor" style="display:none"></div>
       </section>
 
       <section class="view" id="v-partenaires">
-        <div class="vhead"><div class="vtitle">Partenaires</div><button class="btn" data-act="par-new">+ Nouveau partenaire</button></div>
+        <div class="vhead"><div class="vtitle-row"><div class="vtitle">Partenaires</div><a class="viewlink" href="partenaires.html" target="_blank" rel="noopener">Voir la page ↗</a></div><button class="btn" data-act="par-new">+ Nouveau partenaire</button></div>
         <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouveau partenaire ».</li><li>Nom, description, catégorie, lien (Instagram, site…), et un logo (facultatif).</li><li>Un lien Instagram s'affiche automatiquement avec le logo Instagram.</li></ol></details>
         <div id="par-list"></div><div id="par-editor" style="display:none"></div>
       </section>
@@ -316,7 +320,7 @@
 
       <!-- PARAMÈTRES -->
             <section class="view" id="v-annonce">
-        <div class="vhead"><div class="vtitle">Annonce à la une</div></div>
+        <div class="vhead"><div class="vtitle-row"><div class="vtitle">Annonce à la une</div><a class="viewlink" href="index.html" target="_blank" rel="noopener">Voir l'accueil ↗</a></div></div>
         <div class="panel">
           <details class="help"><summary>Comment faire ?</summary><ol><li>Coche « Afficher l'annonce ».</li><li>Écris un petit titre, un texte court, et un lien (billetterie ou site).</li><li>Enregistre : le bandeau apparaît en haut de la page d'accueil.</li></ol></details>
         <p class="hint" style="margin-bottom:16px">Une bannière en haut de la page d'accueil (ex : prochain événement). Garde une phrase courte.</p>
@@ -330,7 +334,7 @@
       </section>
 
       <section class="view" id="v-adhesion">
-        <div class="vhead"><div class="vtitle">Adhésion</div></div>
+        <div class="vhead"><div class="vtitle-row"><div class="vtitle">Adhésion</div><a class="viewlink" href="adherer.html" target="_blank" rel="noopener">Voir la page ↗</a></div></div>
         <div class="panel">
           <details class="help"><summary>Comment faire ?</summary><ol><li>Colle le lien du formulaire HelloAsso de l'année.</li><li>Indique l'année affichée (ex. 2026-2027).</li><li>Enregistre : le lien et l'année se mettent à jour partout sur le site.</li></ol></details>
         <h3 style="font-family:var(--syne);margin-bottom:16px">Formulaire HelloAsso</h3>
@@ -341,7 +345,7 @@
       </section>
 
       <section class="view" id="v-merch">
-        <div class="vhead"><div class="vtitle">Merch</div></div>
+        <div class="vhead"><div class="vtitle-row"><div class="vtitle">Merch</div><a class="viewlink" href="merch.html" target="_blank" rel="noopener">Voir la page ↗</a></div></div>
         <div class="panel">
           <details class="help"><summary>Comment faire ?</summary><ol><li>Coche « Activer la page Merch » pour la rendre visible sur le site.</li><li>Crée une ou plusieurs <b>collections</b> ci-dessous (ex. « Collection 2025-2026 »). Le bouton à droite de chaque collection l'affiche ou la masque sur le site.</li><li>Dans « Galerie », ajoute tes modèles avec la catégorie <b>« Merch »</b> et choisis leur <b>collection</b>.</li><li>Mets le lien de ta boutique (SumUp…) : il apparaît en gros bouton en bas de la page.</li></ol></details>
         <p class="hint" style="margin-bottom:16px">Tout se gère ici : crée des collections, règle leurs couleurs, et ajoute directement les modèles (photos) dans chaque collection.</p>
@@ -359,7 +363,7 @@
 
       <!-- CONCOURS LOGOS -->
       <section class="view" id="v-concours">
-        <div class="vhead"><div class="vtitle">Concours de logos</div></div>
+        <div class="vhead"><div class="vtitle-row"><div class="vtitle">Concours de logos</div><a class="viewlink" href="concours-logos.html" target="_blank" rel="noopener">Voir la page ↗</a></div></div>
         <div class="panel">
           <details class="help"><summary>Comment faire ?</summary><ol><li>Coche « Afficher la page » pour la rendre visible sur le site.</li><li>Crée une <b>année</b> de concours (ex. « 2025-2026 »).</li><li>Ajoute les <b>logos</b> de cette année (image + nom si tu veux).</li><li>Clique <b>« Vainqueur »</b> sur le logo gagnant de l'année : il sera mis en avant.</li></ol></details>
           <label class="chkrow toggle-hi" style="margin-bottom:16px"><input type="checkbox" id="cc-actif"> Afficher la page Concours de logos sur le site</label>
@@ -400,10 +404,6 @@
           <p style="color:var(--grey);margin-top:8px"><b>Pages légales.</b> Les mentions légales, la confidentialité et les conditions (CGU et CGV) sont des pages fixes du site, gérées dans le code. Pour toute modification, écris à Ewan.</p>
           <details class="help" style="margin-top:14px"><summary>Photos et vidéos : où les mettre ?</summary><p style="margin-bottom:8px"><b>Photos.</b> Le site n'héberge qu'une <b>sélection</b> de photos (les plus belles, sans visage reconnaissable ou avec accord). Pour la galerie, tu les ajoutes dans <b>Galerie</b> ; pour le merch, dans <b>Merch</b> (chaque collection). Le site les compresse tout seul. Les <b>albums complets</b> (des centaines de photos) restent sur OneDrive : dans Galerie, colle le <b>lien de l'album</b>. On ne met jamais des centaines de photos sur le site.</p><p style="margin-bottom:8px"><b>Vidéos.</b> Elles ne se mettent <b>jamais</b> directement sur le site (trop lourd). Pour qu'une vidéo se lise sur le site, colle un lien soit dans un <b>article</b> (bouton « Vidéo » de l'éditeur), soit dans la <b>galerie</b> (champ « Lien vidéo » en ajoutant un élément) :</p><ul style="margin:0 0 8px 18px;line-height:1.8"><li><b>YouTube</b> (conseillé) : mets la vidéo sur YouTube, puis colle son lien. Choisis <b>« Non répertorié »</b> s'il y a des visages, ou <b>« Public »</b> pour un projet officiel dont on a les droits.</li><li><b>OneDrive</b> : ouvre la vidéo, clique <b>« Intégrer »</b>, copie le lien proposé, puis colle-le.</li></ul><p style="margin:0"><b>Important :</b> un lien collé comme simple texte ne devient pas un lecteur. Passe par le bouton <b>« Vidéo »</b>.</p></details>
           <hr style="margin:22px 0;border:none;border-top:1px solid var(--line)">
-          <h3 style="font-family:var(--syne);font-size:17px;margin-bottom:6px">Sauvegarde</h3>
-          <p class="hint" style="margin-bottom:12px">Télécharge une copie de tout le contenu du site (articles, événements, agenda, galerie, documents, partenaires, messages, réglages) dans un seul fichier. Range-le en lieu sûr : en cas de souci, il permet de tout retrouver. À faire de temps en temps.</p>
-          <button class="btn btn-out btn-sm" data-act="backup-dl" style="margin-bottom:4px">Télécharger une sauvegarde (.json)</button>
-          <hr style="margin:22px 0;border:none;border-top:1px solid var(--line)">
           <h3 style="font-family:var(--syne);font-size:17px;margin-bottom:6px">Outils de la MDL (accès rapide)</h3>
           <p class="hint" style="margin-bottom:12px">Colle ici les adresses des outils du bureau. Elles restent privées (visibles seulement dans cet espace admin).</p>
           <div id="outils-links" style="margin-bottom:16px"></div>
@@ -419,6 +419,19 @@
         </div>
       </section>
 
+      <!-- SAUVEGARDE -->
+      <section class="view" id="v-sauvegarde">
+        <div class="vhead"><div class="vtitle">Sauvegarde</div></div>
+        <div class="panel">
+          <div style="background:#f7eef4;border-left:3px solid var(--mg);border-radius:8px;padding:14px 16px;margin-bottom:16px">
+            <b style="font-family:var(--syne)">Prends l'habitude de sauvegarder</b>
+            <p style="color:var(--grey);margin:6px 0 0">Télécharge une sauvegarde <b>régulièrement</b> (par exemple une fois par mois) et surtout <b>avant une grosse modification</b>. Range le fichier en lieu sûr (OneDrive, Drive…) : en cas de souci, il permet de tout retrouver.</p>
+          </div>
+          <p class="hint" style="margin-bottom:12px">La sauvegarde réunit tout le contenu du site (articles, événements, agenda, galerie, documents, partenaires, messages, réglages) dans un seul fichier.</p>
+          <button class="btn btn-out btn-sm" data-act="backup-dl">Télécharger une sauvegarde (.json)</button>
+        </div>
+      </section>
+
       <!-- CORBEILLE -->
       <section class="view" id="v-corbeille">
         <div class="vhead"><div class="vtitle">Corbeille</div></div>
@@ -430,6 +443,7 @@
 </div>
 
 <div class="pickov" id="imgpick"><div class="pickmodal"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><b style="font-family:var(--syne)">Choisir une image</b><button class="btn btn-out btn-sm" data-act="pick-close">Fermer</button></div><div class="pick-body"></div></div></div>
+<div class="pickov" id="pagepick"><div class="pickmodal" style="max-width:520px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><b style="font-family:var(--syne)">Lier une page du site</b><button class="btn btn-out btn-sm" data-act="pagepick-close">Fermer</button></div><div class="pick-body"></div></div></div>
 <div class="pickov" id="rules"><div class="pickmodal" style="max-width:520px"><h3 style="font-family:var(--syne);font-size:19px;margin-bottom:12px;display:flex;align-items:center;gap:8px"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg> Avant de publier un article</h3><p style="color:var(--grey);margin-bottom:10px">Cet article sera visible <b>publiquement</b> sur le site de la MDL. Merci de vérifier que :</p><ul style="margin:0 0 16px 18px;color:var(--grey);line-height:1.9"><li>le contenu est approprié, respectueux et représente bien la MDL ;</li><li>tu as le droit d'utiliser les images (aucun visage sans accord, aucune image protégée) ;</li><li>aucune donnée personnelle ni propos déplacé ;</li><li>tu ne colles pas de code inconnu dans l'article.</li></ul><div style="display:flex;gap:10px"><button class="btn btn-vt" data-act="rules-ok">J'ai compris, continuer</button><button class="btn btn-out" data-act="rules-cancel">Annuler</button></div></div></div>
 <div class="pickov" id="confirmov"><div class="pickmodal" style="max-width:420px"><h3 id="confirm-title" style="font-family:var(--syne);font-size:19px;margin-bottom:10px">Confirmer la suppression</h3><p id="confirm-msg" style="color:var(--grey);margin-bottom:20px">Cette action est définitive.</p><div style="display:flex;gap:10px"><button class="btn" id="confirm-ok" style="background:#b42318">Supprimer</button><button class="btn btn-out" id="confirm-no">Annuler</button></div></div></div>
 <div class="pickov" id="inputov"><div class="pickmodal" style="max-width:470px"><h3 id="input-title" style="font-family:var(--syne);font-size:19px;margin-bottom:6px">Insérer</h3><p id="input-help" style="color:var(--grey);font-size:13.5px;line-height:1.6;margin-bottom:14px"></p><input class="inp" id="input-field" style="width:100%" placeholder=""><div style="display:flex;gap:10px;margin-top:16px"><button class="btn" id="input-ok">Insérer</button><button class="btn btn-out" id="input-no">Annuler</button></div></div></div>
@@ -617,6 +631,7 @@ function artEditor(a){
      +'<button type="button" class="tb" data-cmd="quote">Citation</button>'
      +'<button type="button" class="tb" data-cmd="hr">Séparateur</button>'
      +'<button type="button" class="tb" data-cmd="link">Lien</button>'
+     +'<button type="button" class="tb" data-cmd="pagelink">Page du site</button>'
      +'<button type="button" class="tb" data-cmd="img">Image</button>'
      +'<button type="button" class="tb" data-cmd="video">Vidéo</button>'
    +'</div><div class="editor" id="a-content" contenteditable="true">'+(a.content||'')+'</div><div class="hint">Astuce : jusqu\'à 5 images par article (bouton image de la barre d\'outils). Photos JPEG, PNG ou WebP, 10 Mo max.</div></div>'
@@ -791,6 +806,12 @@ function openImagePicker(cb){IMGCB=cb;var m=$('#imgpick');m.querySelector('.pick
     m.querySelector('.pick-body').innerHTML='<div class="hint" style="margin-bottom:12px;color:#a16207"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg> Pour un article public, choisis de préférence une photo sans visage (sauf accord des personnes).</div><label class="dropz" id="pick-drop"><input type="file" id="pick-file" accept="image/*" style="display:none"><span class="dropz-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v13"/></svg></span><span><b>Glisse une image ici</b> ou clique pour parcourir</span><span class="hint" style="margin:0">Le site la réduit et la compresse tout seul (max 1600 px).</span></label><div class="hint" style="margin:6px 0 14px">ou choisis parmi les photos de la galerie :</div><div class="pickgrid">'+imgs.map(function(p){return '<img class="pickimg" src="'+esc(p.image_url)+'" data-url="'+esc(p.image_url)+'">'}).join('')+'</div>';});
 }
 function closePicker(){$('#imgpick').classList.remove('open')}
+var SITE_PAGES=[{label:'Accueil',url:'index.html'},{label:'À propos',url:'apropos.html'},{label:'Actualités',url:'actu.html'},{label:'Événements',url:'evenements.html'},{label:'Agenda',url:'planning.html'},{label:'Galerie',url:'galerie.html'},{label:'Documents & liens',url:'documents.html'},{label:'Partenaires',url:'partenaires.html'},{label:'Merch',url:'merch.html'},{label:'Concours de logos',url:'concours-logos.html'},{label:'Adhérer',url:'adherer.html'},{label:'Contact',url:'contact.html'},{label:'FAQ',url:'faq.html'}];
+function pickPageLink(cb){var m=$('#pagepick'),body=m.querySelector('.pick-body');
+  body.innerHTML='<div class="hint" style="margin-bottom:12px">Choisis la page à lier. Si du texte est sélectionné, il devient le lien ; sinon, le nom de la page est inséré.</div><div style="display:flex;flex-wrap:wrap;gap:8px">'+SITE_PAGES.map(function(p){return '<button type="button" class="btn btn-out btn-sm pagepick-item" data-url="'+p.url+'" data-label="'+esc(p.label)+'">'+esc(p.label)+'</button>'}).join('')+'</div>';
+  m.classList.add('open');
+  body.querySelectorAll('.pagepick-item').forEach(function(b){b.onclick=function(){m.classList.remove('open');cb({url:b.getAttribute('data-url'),label:b.getAttribute('data-label')})}});
+}
 /* ---------- DOCUMENTS ---------- */
 async function loadDocuments(){
   $('#doc-editor').style.display='none';$('#doc-list').style.display='block';
@@ -851,6 +872,7 @@ document.addEventListener('click',async function(e){
     else if(c==='quote')document.execCommand('formatBlock',false,'blockquote');
     else if(c==='hr'){document.execCommand('insertHTML',false,'<hr><p><br></p>')}
     else if(c==='link'){askInput({title:'Ajouter un lien',help:'Colle l\'adresse du lien (elle s\'appliquera au texte sélectionné).',placeholder:'https://...',ok:'Ajouter le lien'}).then(function(u){if(u){focusEditorSel();document.execCommand('createLink',false,u)}})}
+    else if(c==='pagelink'){pickPageLink(function(p){focusEditorSel();var sel=window.getSelection();if(sel&&String(sel).trim()){document.execCommand('createLink',false,p.url)}else{document.execCommand('insertHTML',false,'<a href="'+p.url+'">'+p.label+'</a>')}})}
     else if(c==='img'){openImagePicker(function(url){focusEditorSel();document.execCommand('insertImage',false,url)})}
     else if(c==='video'){askInput({title:'Insérer une vidéo',help:'YouTube (conseillé) : mets la vidéo en « Non répertorié » s\'il y a des visages (ou « Public » pour un projet officiel), puis colle son lien. OneDrive : ouvre la vidéo, clique « Intégrer » et colle le lien proposé.',placeholder:'https://youtu.be/... ou lien OneDrive',ok:'Insérer la vidéo'}).then(function(vu){if(vu){focusEditorSel();document.execCommand('insertHTML',false,videoEmbedHTML(vu))}})}
     return}
@@ -905,6 +927,7 @@ document.addEventListener('click',async function(e){
   if(act==='par-del'){if(await askConfirm('Ce partenaire ira à la corbeille. Tu pourras le restaurer pendant 7 jours.','Mettre ce partenaire à la corbeille ?')){await sb.from('partenaires').update({deleted_at:new Date().toISOString()}).eq('id',id);toast('Mis à la corbeille');loadPartenaires()}return}
   if(act==='pick-cover'){openImagePicker(function(u){$('#a-cover').value=u});return}
   if(act==='pick-close'){closePicker();return}
+  if(act==='pagepick-close'){$('#pagepick').classList.remove('open');return}
   if(act==='merch-save'){await sb.from('parametres').upsert({cle:'merch_actif',valeur:$('#m-actif').checked?'true':'false'});await sb.from('parametres').upsert({cle:'merch_intro',valeur:$('#m-intro').value.trim()});await sb.from('parametres').upsert({cle:'merch_boutique_url',valeur:$('#m-url').value.trim()});toast('Merch enregistré');return}
   if(act==='col-add'){var nm=$('#coll-new').value.trim();if(!nm){toast('Donne un nom de collection.');return}await sb.from('collections').insert({nom:nm,actif:true,ordre:COLLS.length,type:'merch'});$('#coll-new').value='';toast('Collection ajoutée');return loadColls()}
   if(act==='col-toggle'){var con=t.getAttribute('data-on')==='1';await sb.from('collections').update({actif:!con}).eq('id',id);loadColls();loadConcours();return}
