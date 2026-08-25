@@ -10,6 +10,7 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="MDL VLD · Actualités">
 <meta property="og:description" content="Les actualités de la Maison des Lycéens du Lycée Viollet-le-Duc.">
+<link rel="canonical" href="https://mdl-vld.fr/actu.html">
 <meta property="og:url" content="https://mdl-vld.fr/actu.html">
 <meta property="og:image" content="https://mdl-vld.fr/assets/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -83,7 +84,7 @@
   .article{max-width:760px;margin:0 auto}
   .article-cover{aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:var(--prune);margin-bottom:28px}
   .article-cover img{width:100%;height:100%;object-fit:cover}
-  .article .atag{margin-bottom:16px}
+  .article .atag{display:inline-block;margin-bottom:22px}
   .article h1{font-family:var(--syne);font-weight:800;font-size:clamp(30px,4.5vw,48px);letter-spacing:-.02em;line-height:1.05;margin-bottom:16px}
   .article-meta{display:flex;gap:18px;color:var(--grey);font-size:14px;padding-bottom:24px;margin-bottom:28px;border-bottom:1px solid var(--line)}
   .article-content{font-size:17px;color:#33232e}
@@ -100,6 +101,24 @@
   html.dark .article-content blockquote{color:#ece7ea}
   .article-content .video-embed{position:relative;width:100%;aspect-ratio:16/9;margin:20px 0;border-radius:12px;overflow:hidden;background:#000}
   .article-content .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--mg);z-index:200;transition:width .08s linear,opacity .2s;opacity:0}
+  .article-meta{flex-wrap:wrap}
+  .toc{background:var(--paper2);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:26px}
+  .toc b{font-family:var(--syne);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--mg);display:block;margin-bottom:8px}
+  .toc a{display:block;color:var(--prune);text-decoration:none;font-size:15px;padding:4px 0 4px 10px;border-left:2px solid transparent}
+  .toc a:hover{border-left-color:var(--mg);color:var(--mg)}
+  .toc a.toc-sub{padding-left:24px;font-size:14px;color:var(--grey)}
+  .share{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0 26px}
+  .share-lbl{font-family:var(--syne);font-weight:700;font-size:13px;color:var(--grey)}
+  .share-btn{font-family:var(--syne);font-weight:700;font-size:13px;color:var(--prune);background:#fff;border:1px solid var(--line);border-radius:100px;padding:7px 14px;cursor:pointer;text-decoration:none;transition:background .2s,border-color .2s}
+  .share-btn:hover{border-color:var(--mg);background:#f7eef4;color:var(--mg)}
+  .next-article{display:flex;flex-direction:column;gap:4px;margin-top:34px;padding:18px 22px;background:var(--paper2);border-radius:14px;text-decoration:none;transition:transform .2s}
+  .next-article:hover{transform:translateY(-2px)}
+  .na-lbl{font-family:var(--syne);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mg)}
+  .na-title{font-family:var(--syne);font-weight:800;font-size:18px;color:var(--ink)}
+  html.dark .toc,html.dark .next-article{background:rgba(255,255,255,.05)}
+  html.dark .na-title{color:#ece7ea}
+  .new-badge{display:inline-block;background:var(--mg);color:#fff;font-family:var(--syne);font-weight:700;font-size:10px;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:100px}
   footer{background:var(--ink);color:#fff;padding:70px 0 32px}
   .foot-top{display:grid;grid-template-columns:1.9fr 1fr 1fr 1fr;gap:26px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.12)}
   .foot-brand{font-family:var(--syne);font-weight:800;font-size:20px}
@@ -114,7 +133,7 @@
   .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;font-size:12px;color:rgba(255,255,255,.4)}
   .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}
   .rv.in{opacity:1;transform:none}
-  @media(max-width:1024px){
+  @media(max-width:1250px){
     .nav-links{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 0;box-shadow:0 14px 30px rgba(45,26,40,.12)}.nav-links.open{display:flex}.nav-links a{padding:13px 32px;opacity:1}.nav-links a.cta{margin:10px 24px;justify-content:center}.burger{display:flex}.burger span{transition:transform .2s,opacity .2s}.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger.open span:nth-child(2){opacity:0}.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
     section{padding:56px 0}.grid{grid-template-columns:repeat(2,1fr);gap:18px}
     .foot-top{grid-template-columns:1fr 1fr;gap:30px}footer{padding:54px 0 28px}
@@ -153,6 +172,8 @@
     <p class="rv">Les nouvelles, les coulisses et les retours sur nos événements.</p>
   </div>
 </header>
+
+<div class="read-progress" id="readprog" aria-hidden="true"></div>
 
 <section>
   <div class="wrap">
@@ -198,13 +219,35 @@ const FALLBACK=[
 ];
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function fdate(d){try{return new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})}catch(e){return ''}}
+function slugify(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60)}
+function readingMin(html){var t=(html||'').replace(/<[^>]+>/g,' ');var w=t.trim().split(/\s+/).filter(Boolean).length;return Math.max(1,Math.round(w/200))}
+function tocAndContent(html){
+  var d=document.createElement('div');d.innerHTML=html||'';
+  var hs=d.querySelectorAll('h2,h3');var items=[];
+  hs.forEach(function(h,i){var id='sec-'+i;h.id=id;items.push({id:id,txt:h.textContent||'',lvl:h.tagName})});
+  d.querySelectorAll('img').forEach(function(im){im.setAttribute('loading','lazy')});
+  var toc='';
+  if(items.length>=3){toc='<nav class="toc" aria-label="Sommaire"><b>Sommaire</b>'+items.map(function(it){return '<a href="#'+it.id+'" class="toc-'+(it.lvl==='H3'?'sub':'main')+'">'+esc(it.txt)+'</a>'}).join('')+'</nav>'}
+  return {toc:toc,html:d.innerHTML};
+}
+function shareBar(a){
+  var url=location.origin+location.pathname+'#'+a._slug;
+  return '<div class="share"><button class="share-btn" type="button" data-url="'+esc(url)+'" onclick="copyLink(this)"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" style="vertical-align:-2px;margin-right:6px" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.4"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.5-1.4"/></svg>Copier le lien</button></div>';
+}
+function copyLink(btn){var url=btn.getAttribute('data-url');if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){var o=btn.textContent;btn.textContent='Lien copié ✓';setTimeout(function(){btn.textContent=o},1800)})}}
+function articleJsonLd(a){
+  var data={"@context":"https://schema.org","@type":"NewsArticle","headline":a.title,"datePublished":a.published_at||"","author":{"@type":"Organization","name":a.author_name||"Maison des Lycéens du Lycée Viollet-le-Duc"},"publisher":{"@type":"Organization","name":"Maison des Lycéens du Lycée Viollet-le-Duc","logo":{"@type":"ImageObject","url":"https://mdl-vld.fr/assets/logo.png"}},"image":a.cover_url?("https://mdl-vld.fr/"+String(a.cover_url).replace(/^\//,'')):"https://mdl-vld.fr/assets/og-image.png","mainEntityOfPage":location.origin+location.pathname+"#"+a._slug};
+  var el=document.getElementById('article-jsonld');if(!el){el=document.createElement('script');el.type='application/ld+json';el.id='article-jsonld';document.head.appendChild(el)}el.textContent=JSON.stringify(data);
+}
+function nextArticleHTML(i){var n=ALL[i+1];if(!n)return '';return '<a class="next-article" href="#'+n._slug+'" onclick="openArticle('+n._i+');return false;"><span class="na-lbl">Article suivant</span><span class="na-title">'+esc(n.title)+' →</span></a>'}
 let ALL=[],activeTag='Tous';
 function coverList(a){return a.cover_url?('<img loading="lazy" src="'+a.cover_url+'" alt="'+esc(a.title)+'">'):('<div class="acard-ph"><svg viewBox=\"0 0 24 24\" width=\"42\" height=\"42\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z\"/><path d=\"M14 3v6h6\"/><path d=\"M9 13h6M9 17h6\"/></svg></div>')}
+function isNewArt(a){return a.published_at&&((Date.now()-new Date(a.published_at).getTime())/86400000<=14)}
 function cardHTML(a){
   return '<button class="acard rv" onclick="openArticle('+a._i+')"><div class="acard-cover">'+coverList(a)+'</div>'
-    +'<div class="acard-body"><span class="atag">'+esc((a.tags&&a.tags[0])||'Actualité')+'</span>'
+    +'<div class="acard-body"><span class="atag">'+(a.epingle?'★ ':'')+esc((a.tags&&a.tags[0])||'Actualité')+'</span>'
     +'<h3>'+esc(a.title)+'</h3><div class="exc">'+esc(a.excerpt||'')+'</div>'
-    +'<div class="acard-meta"><span>'+fdate(a.published_at)+'</span><span class="lire">Lire →</span></div></div></button>';
+    +'<div class="acard-meta"><span>'+(isNewArt(a)?'<span class="new-badge">Nouveau</span> ':'')+fdate(a.published_at)+'</span><span class="lire">Lire →</span></div></div></button>';
 }
 function buildChips(){
   var tags=['Tous'];
@@ -229,18 +272,28 @@ function applyFilters(){
 }
 function openArticle(i){
   var a=ALL[i];
-  var cover=a.cover_url?('<div class="article-cover"><img loading="lazy" src="'+a.cover_url+'" alt=""></div>'):'';
+  var cover=a.cover_url?('<div class="article-cover"><img loading="lazy" src="'+a.cover_url+'" alt="'+esc(a.cover_alt||a.title)+'"></div>'):'';
   var author=(a.show_author&&a.author_name)?('<span><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" style=\"vertical-align:-2px;margin-right:5px\" aria-hidden=\"true\"><path d=\"M12 20h9\"/><path d=\"M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z\"/></svg>'+esc(a.author_name)+'</span>'):'';
+  var rt='<span><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" style=\"vertical-align:-2px;margin-right:5px\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 2\"/></svg>'+readingMin(a.content)+' min de lecture</span>';
+  var tc=tocAndContent(a.content);
+  if(a.id){try{var vk='v_'+a.id;if(!sessionStorage.getItem(vk)){supabase.createClient(SB_URL,SB_KEY).rpc('increment_article_views',{article_id:a.id});sessionStorage.setItem(vk,'1');a.views=(a.views||0)+1}}catch(e){}}
+  var vw=(a.views?('<span><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" style=\"vertical-align:-2px;margin-right:5px\" aria-hidden=\"true\"><path d=\"M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg>'+a.views+(a.views>1?' vues':' vue')+'</span>'):'');
   document.getElementById('article').innerHTML=cover
     +'<span class="atag">'+esc((a.tags&&a.tags[0])||'Actualité')+'</span>'
     +'<h1>'+esc(a.title)+'</h1>'
-    +'<div class="article-meta"><span><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" style=\"vertical-align:-2px;margin-right:5px\" aria-hidden=\"true\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"17\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/></svg>'+fdate(a.published_at)+'</span>'+author+'</div>'
-    +'<div class="article-content">'+(a.content||'')+'</div>';
+    +'<div class="article-meta"><span><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" style=\"vertical-align:-2px;margin-right:5px\" aria-hidden=\"true\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"17\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/></svg>'+fdate(a.published_at)+'</span>'+author+rt+vw+'<button class="share-btn" type="button" data-url="'+esc(location.origin+location.pathname+'#'+a._slug)+'" onclick="copyLink(this)" style="margin-left:auto"><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" style=\"vertical-align:-2px;margin-right:6px\" aria-hidden=\"true\"><path d=\"M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.4\"/><path d=\"M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.5-1.4\"/></svg>Copier le lien</button></div>'
+    +tc.toc
+    +'<div class="article-content">'+tc.html+'</div>'
+    +nextArticleHTML(i);
+  articleJsonLd(a);
+  try{history.replaceState(null,'',location.pathname+'#'+a._slug)}catch(e){}
   document.getElementById('view-list').style.display='none';
   document.getElementById('view-article').style.display='block';
   window.scrollTo(0,0);
 }
-function showList(){document.getElementById('view-article').style.display='none';document.getElementById('view-list').style.display='block';window.scrollTo(0,0)}
+function showList(){document.getElementById('view-article').style.display='none';document.getElementById('view-list').style.display='block';try{history.replaceState(null,'',location.pathname)}catch(e){}var bar=document.getElementById('readprog');if(bar){bar.style.width='0';bar.style.opacity='0'}window.scrollTo(0,0)}
+window.addEventListener('scroll',function(){var va=document.getElementById('view-article'),bar=document.getElementById('readprog');if(!bar)return;if(va&&va.style.display!=='none'){var h=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=(h>0?Math.min(100,window.scrollY/h*100):0)+'%';bar.style.opacity='1'}else{bar.style.width='0';bar.style.opacity='0'}});
+window.addEventListener('hashchange',function(){var s=location.hash.slice(1);if(!s){showList();return}var idx=ALL.findIndex(function(a){return a._slug===s});if(idx>=0)openArticle(idx)});
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
 document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 document.getElementById('sort').addEventListener('click',function(){var cur=this.getAttribute('data-sort')==='recent'?'ancien':'recent';this.setAttribute('data-sort',cur);this.textContent=cur==='recent'?'Plus récents ↓':'Plus anciens ↑';applyFilters();});
@@ -248,12 +301,14 @@ document.getElementById('sort').addEventListener('click',function(){var cur=this
   var data=null;
   try{
     var sb=supabase.createClient(SB_URL,SB_KEY);
-    var r=await sb.from('articles').select('*').eq('status','publie').order('published_at',{ascending:false});
+    var r=await sb.from('articles').select('*').eq('status','publie').is('deleted_at',null).order('epingle',{ascending:false}).order('published_at',{ascending:false});
     if(!r.error && r.data && r.data.length) data=r.data;
   }catch(e){}
-  ALL=(data||FALLBACK).map(function(a,i){a._i=i;return a});
+  ALL=(data||FALLBACK).map(function(a,i){a._i=i;a._slug=slugify(a.title)||('article-'+i);return a});
   buildChips();
   applyFilters();
+  try{var org={"@context":"https://schema.org","@type":"Organization","name":"Maison des Lycéens du Lycée Viollet-le-Duc","alternateName":"MDL Viollet-le-Duc","url":"https://mdl-vld.fr/","logo":"https://mdl-vld.fr/assets/logo.png"};var os=document.createElement('script');os.type='application/ld+json';os.textContent=JSON.stringify(org);document.head.appendChild(os)}catch(e){}
+  if(location.hash){var s=location.hash.slice(1);var idx=ALL.findIndex(function(a){return a._slug===s});if(idx>=0)openArticle(idx)}
 })();
 </script>
 <script>(function(){var b=document.querySelector(".burger"),n=document.querySelector(".nav-links");if(b&&n){b.addEventListener("click",function(){n.classList.toggle("open");b.classList.toggle("open")});n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");b.classList.remove("open")}})}})();(function(){var p=(location.pathname.split("/").pop()||"").replace(/\.html$/,"")||"index";document.querySelectorAll(".nav-links a").forEach(function(a){var h=(a.getAttribute("href")||"").split("/").pop().replace(/\.html$/,"");if(h&&h===p&&!a.classList.contains("cta"))a.classList.add("active")})})();</script>
@@ -289,7 +344,7 @@ document.getElementById('sort').addEventListener('click',function(){var cur=this
   .foot-cta a{margin-top:0!important}
   .foot-adh{display:inline-flex;align-items:center;background:var(--mg);color:#fff;font-family:var(--syne),'Syne',sans-serif;font-weight:700;font-size:12px;padding:10px 18px;border-radius:100px;text-decoration:none}
   .foot-adh:hover{background:var(--mg2,#63104f)}
-  @media(max-width:1024px){
+  @media(max-width:1250px){
     .foot-top{grid-template-columns:1fr 1fr 1fr;gap:28px}
     .foot-brand{grid-column:1 / -1}
     .foot-brand-row span{white-space:nowrap}
@@ -309,7 +364,7 @@ document.getElementById('sort').addEventListener('click',function(){var cur=this
   }
   @media(max-width:1263px){.wrap{padding-left:clamp(24px,5vw,72px);padding-right:clamp(24px,5vw,72px)}}
   
-  @media(max-width:1024px){
+  @media(max-width:1250px){
     .nav-links.open{position:fixed!important;left:0;right:0;top:70px;z-index:120;border-radius:0 0 18px 18px;box-shadow:0 18px 44px rgba(45,26,40,.22);padding:8px 0 16px!important;max-height:calc(100vh - 70px);overflow:auto}
     .nav-links.open a:not(.cta){margin:0 12px!important;border-radius:0!important;padding:16px 12px!important;font-size:16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);opacity:1;background:transparent!important}
     .nav-links.open a:not(.cta)::after{content:"\203A";color:var(--mg);font-family:var(--syne);font-weight:800;font-size:19px;opacity:.55;margin-left:12px}
@@ -335,12 +390,12 @@ document.getElementById('sort').addEventListener('click',function(){var cur=this
     .foot-brand{font-size:16px!important}
     .foot-bottom{text-align:center;align-items:center;justify-content:center}
   }
-  @media(max-width:1024px){
+  @media(max-width:1250px){
     .nav-links a:not(.cta){margin:2px 14px;border-radius:12px;padding:12px 18px!important}
     .nav-links a:not(.cta):hover,.nav-links a:not(.cta):active{background:var(--paper2)}
     .nav-links a[href="admin.html"]{border:1px solid var(--line);border-radius:100px;margin:12px 24px 6px;justify-content:flex-start}
   }
-  @media(max-width:1024px){
+  @media(max-width:1250px){
     .nav-links a[href="admin.html"]{opacity:1!important}
     .ms-lbl{display:inline;margin-left:12px;font-weight:600;color:var(--prune)}
     .nav-links a:hover,.nav-links a:active{background:var(--paper2)}
@@ -430,5 +485,6 @@ document.getElementById('sort').addEventListener('click',function(){var cur=this
 })();
 </script>
 
+<script src="assets/site.js" defer></script>
 </body>
 </html>

@@ -69,6 +69,13 @@
 .vtitle-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .viewlink{font-size:13px;color:var(--mg);text-decoration:none;font-weight:600;white-space:nowrap;border:1px solid var(--line);padding:4px 10px;border-radius:999px}
 .viewlink:hover{background:#f7eef4;text-decoration:none}
+.pv-tag{display:inline-block;background:#f7eef4;color:var(--mg);font-family:var(--syne);font-weight:700;font-size:11px;letter-spacing:.03em;padding:5px 11px;border-radius:100px}
+.art-preview-content{font-size:16px;color:var(--ink);line-height:1.6}
+.art-preview-content h2{font-family:var(--syne);font-weight:700;font-size:22px;margin:22px 0 10px}
+.art-preview-content h3{font-family:var(--syne);font-weight:700;font-size:18px;margin:18px 0 8px}
+.art-preview-content p{margin-bottom:14px}
+.art-preview-content img{max-width:100%;border-radius:10px;margin:12px 0}
+.art-preview-content blockquote{font-family:var(--syne);font-style:italic;border-left:3px solid var(--mg);padding-left:14px;color:var(--prune);margin:16px 0}
   /* stats */
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
   .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
@@ -254,7 +261,7 @@
       <button data-nav="concours"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><span class="lbl">Concours logos</span></button>
       <div class="side-cat">Vie de l'asso</div>
       <button data-nav="messages"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><span class="lbl">Messages</span><span class="badge" id="nav-msg-badge" style="display:none">0</span></button>
-      <button data-nav="annonce"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></span><span class="lbl">Annonce</span></button>
+      <button data-nav="annonce"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg></span><span class="lbl">Accueil</span></button>
       <button data-nav="adhesion"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg></span><span class="lbl">Adhésion</span></button>
       <div class="side-cat">Outils &amp; aide</div>
       <button data-nav="corbeille"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6M14 11v6"/></svg></span><span class="lbl">Corbeille</span></button>
@@ -320,7 +327,7 @@
 
       <!-- PARAMÈTRES -->
             <section class="view" id="v-annonce">
-        <div class="vhead"><div class="vtitle-row"><div class="vtitle">Annonce à la une</div><a class="viewlink" href="index.html" target="_blank" rel="noopener">Voir l'accueil ↗</a></div></div>
+        <div class="vhead"><div class="vtitle-row"><div class="vtitle">Accueil (bandeau, compte à rebours, chiffres)</div><a class="viewlink" href="index.html" target="_blank" rel="noopener">Voir l'accueil ↗</a></div></div>
         <div class="panel">
           <details class="help"><summary>Comment faire ?</summary><ol><li>Coche « Afficher l'annonce ».</li><li>Écris un petit titre, un texte court, et un lien (billetterie ou site).</li><li>Enregistre : le bandeau apparaît en haut de la page d'accueil.</li></ol></details>
         <p class="hint" style="margin-bottom:16px">Une bannière en haut de la page d'accueil (ex : prochain événement). Garde une phrase courte.</p>
@@ -330,6 +337,24 @@
           <div class="fld"><label class="flbl">Texte de l'annonce</label><input class="inp" id="an-texte" placeholder="Bal des Terminales · 3 juillet · réservez vite !"></div>
           <div class="fld"><label class="flbl">Lien du bouton (billetterie, site…)</label><input class="inp" id="an-lien" placeholder="https://…"></div>
           <button class="btn" data-act="annonce-save">Enregistrer l'annonce</button>
+        </div>
+        <div class="panel" style="margin-top:18px">
+          <h3 style="font-family:var(--syne);font-size:17px;margin-bottom:6px">Compte à rebours (accueil)</h3>
+          <p class="hint" style="margin-bottom:14px">Affiche un décompte sur la page d'accueil jusqu'à une date (prochain événement, bal…).</p>
+          <label class="chkrow" style="margin-bottom:14px"><input type="checkbox" id="cd-actif"> Afficher le compte à rebours sur l'accueil</label>
+          <div class="grid2"><div class="fld"><label class="flbl">Titre / événement</label><input class="inp" id="cd-label" placeholder="Bal des Terminales"></div>
+          <div class="fld"><label class="flbl">Date et heure</label><input class="inp" type="datetime-local" id="cd-date"></div></div>
+          <div class="grid2"><div class="fld"><label class="flbl">Lien (billetterie, infos… facultatif)</label><input class="inp" id="cd-lien" placeholder="https://…"></div>
+          <div class="fld"><label class="flbl">Texte du bouton</label><input class="inp" id="cd-btnlabel" placeholder="Réserver, En savoir plus…"></div></div>
+          <button class="btn" data-act="countdown-save">Enregistrer le compte à rebours</button>
+        </div>
+        <div class="panel" style="margin-top:18px">
+          <h3 style="font-family:var(--syne);font-size:17px;margin-bottom:6px">Chiffres clés de l'accueil</h3>
+          <p class="hint" style="margin-bottom:14px">Les 3 chiffres animés en haut de la page d'accueil. Préfixe (ex. « ≈ ») et suffixe (ex. « % ») facultatifs.</p>
+          <div class="fld"><label class="flbl">Chiffre 1</label><div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="st1-pre" placeholder="Préfixe" style="max-width:90px"><input class="inp" id="st1-num" placeholder="Nombre" style="max-width:110px"><input class="inp" id="st1-suf" placeholder="Suffixe" style="max-width:90px"><input class="inp" id="st1-lbl" placeholder="Libellé" style="flex:1;min-width:160px"></div></div>
+          <div class="fld"><label class="flbl">Chiffre 2</label><div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="st2-pre" placeholder="Préfixe" style="max-width:90px"><input class="inp" id="st2-num" placeholder="Nombre" style="max-width:110px"><input class="inp" id="st2-suf" placeholder="Suffixe" style="max-width:90px"><input class="inp" id="st2-lbl" placeholder="Libellé" style="flex:1;min-width:160px"></div></div>
+          <div class="fld"><label class="flbl">Chiffre 3</label><div style="display:flex;gap:8px;flex-wrap:wrap"><input class="inp" id="st3-pre" placeholder="Préfixe" style="max-width:90px"><input class="inp" id="st3-num" placeholder="Nombre" style="max-width:110px"><input class="inp" id="st3-suf" placeholder="Suffixe" style="max-width:90px"><input class="inp" id="st3-lbl" placeholder="Libellé" style="flex:1;min-width:160px"></div></div>
+          <button class="btn" data-act="stats-save">Enregistrer les chiffres</button>
         </div>
       </section>
 
@@ -385,19 +410,29 @@
           <h3 style="font-family:var(--syne);font-size:17px;margin-bottom:8px">Comment le site est organisé</h3>
           <p style="color:var(--grey);margin-bottom:8px">Chaque section de ce panneau gère une partie du site, et tout apparaît tout de suite en ligne :</p>
           <ul style="margin:0 0 14px 18px;color:var(--grey);line-height:1.9">
-            <li><b>Articles</b> : les actualités (brouillon possible, images et vidéos dans le texte).</li>
-            <li><b>Événements</b> : les temps forts, l'épinglage et les 3 affichés sur l'accueil.</li>
-            <li><b>Agenda</b> : toutes les dates (elles se rangent seules dans le calendrier et le planning).</li>
-            <li><b>Galerie</b> : la sélection de photos publiques et les liens des albums OneDrive. Astuce : range les affiches dans la catégorie « Affiches », elles seront regroupées dans leur propre onglet et n'apparaîtront pas dans « Toutes ».</li>
+            <li><b>Articles</b> : les actualités. Titre, texte (gras, titres, listes, citations, images, vidéos, lien externe ou vers une page du site), couverture, extrait (généré automatiquement si tu le laisses vide), tags, auteur et date de publication. Tu peux <b>épingler « à la une »</b>, <b>dupliquer</b> et <b>prévisualiser</b> (bouton Aperçu) avant de publier.</li>
+            <li><b>Événements</b> : les temps forts. Affiche (+ texte alternatif), tags, statut, <b>épinglage</b>, <b>affichage sur l'accueil</b> (3 max), <b>date exacte</b> (active le bouton « Ajouter à mon calendrier ») et <b>album</b> (les photos rattachées à l'événement).</li>
+            <li><b>Agenda</b> : toutes les dates. Les visiteurs peuvent <b>exporter l'agenda (.ics)</b> pour l'ajouter à leur calendrier.</li>
+            <li><b>Galerie</b> : la sélection de photos publiques et les liens d'albums OneDrive. Chaque photo peut être <b>rattachée à un événement</b> (elle apparaît alors dans son album) et avoir un <b>texte alternatif</b>. Astuce : range les affiches dans la catégorie « Affiches », elles auront leur propre onglet.</li>
             <li><b>Documents &amp; liens</b> : fichiers et liens externes, rangés par catégorie.</li>
-            <li><b>Partenaires</b> : les clubs et associations partenaires.</li>
+            <li><b>Partenaires</b> : les clubs et associations partenaires (logo + texte alternatif).</li>
             <li><b>Merch</b> : les collections, leurs couleurs et leurs modèles.</li>
             <li><b>Concours logos</b> : les logos par année et le vainqueur de chaque année.</li>
             <li><b>Messages</b> : les messages reçus via le formulaire de contact.</li>
-            <li><b>Annonce</b> : la bannière « à la une » de l'accueil.</li>
-            <li><b>Adhésion</b> : le lien HelloAsso, l'année et les avantages.</li>
-            <li><b>Corbeille</b> : tout ce que tu supprimes y reste 7 jours, le temps de le restaurer si besoin, puis s'efface tout seul.</li>
+            <li><b>Annonce</b> : la bannière « à la une », le <b>compte à rebours</b> de l'accueil et les <b>chiffres clés</b> de l'accueil.</li>
+            <li><b>Adhésion</b> : le lien HelloAsso et l'année affichée partout.</li>
+            <li><b>Sauvegarde</b> : télécharge une copie de tout le contenu. À faire régulièrement, surtout avant une grosse modification.</li>
+            <li><b>Corbeille</b> : tout ce que tu supprimes y reste 7 jours (restaurable), puis s'efface tout seul. Un élément en corbeille n'apparaît plus sur le site.</li>
           </ul>
+          <hr style="margin:22px 0;border:none;border-top:1px solid var(--line)">
+          <h3 style="font-family:var(--syne);font-size:17px;margin:0 0 10px">Tutoriels · pas à pas</h3>
+          <details class="help"><summary>Écrire et publier un article</summary><ol style="margin:0 0 0 18px;line-height:1.9"><li>Section <b>Articles</b> → « + Nouvel article ».</li><li>Mets un <b>titre</b>, puis écris ton texte avec la barre d'outils (gras, sous-titres, listes, citation, lien, « Page du site », image, vidéo).</li><li><b>Extrait</b> : laisse vide pour qu'il soit généré automatiquement, ou écris un résumé court.</li><li>Choisis une <b>couverture</b> et son <b>texte alternatif</b> (décris l'image en un mot).</li><li>Renseigne l'<b>auteur</b> et, si besoin, une <b>date de publication</b> précise (vide = date du jour).</li><li>Options : <b>épingler à la une</b> (l'article passe en tête) et <b>afficher l'auteur</b>.</li><li>Clique <b>Aperçu</b> pour voir le rendu, puis <b>Publier</b> (ou « Enregistrer en brouillon »). Le compteur de mots et le temps de lecture s'affichent sous l'éditeur.</li></ol><p style="margin:8px 0 0">Astuce : le bouton <b>Dupliquer</b> (dans la liste) crée une copie en brouillon pour repartir d'un modèle. Un sommaire cliquable apparaît tout seul sur les articles à partir de 3 sous-titres.</p></details>
+          <details class="help"><summary>Faire l'album photo d'un événement</summary><ol style="margin:0 0 0 18px;line-height:1.9"><li>Ajoute tes photos dans <b>Galerie</b> (une par une).</li><li>Dans chaque photo, choisis l'<b>événement</b> à rattacher (menu « Rattacher à un événement »).</li><li>Sur le site, en ouvrant la fiche de l'événement, un <b>Album</b> regroupe automatiquement ces photos.</li></ol></details>
+          <details class="help"><summary>Activer « Ajouter à mon calendrier » sur un événement</summary><ol style="margin:0 0 0 18px;line-height:1.9"><li>Section <b>Événements</b> → modifie l'événement.</li><li>Renseigne la <b>Date exacte</b>.</li><li>Un bouton « ↓ Ajouter à mon calendrier » apparaît alors sur sa fiche (public) : chacun peut l'ajouter à Google/Apple/Outlook.</li></ol></details>
+          <details class="help"><summary>Régler le compte à rebours de l'accueil</summary><ol style="margin:0 0 0 18px;line-height:1.9"><li>Section <b>Annonce</b> → bloc « Compte à rebours ».</li><li>Coche « Afficher », mets un <b>titre</b> (ex. « Bal des Terminales »), une <b>date et heure</b>, et si tu veux un <b>lien</b> + le <b>texte du bouton</b>.</li><li>Enregistre : le décompte s'affiche en direct sur l'accueil et disparaît tout seul une fois la date passée.</li></ol></details>
+          <details class="help"><summary>Modifier les chiffres clés de l'accueil</summary><ol style="margin:0 0 0 18px;line-height:1.9"><li>Section <b>Annonce</b> → bloc « Chiffres clés de l'accueil ».</li><li>Pour chacun des 3 chiffres : préfixe (ex. « ≈ »), nombre, suffixe (ex. « % ») et libellé.</li><li>Enregistre : les chiffres animés en haut de l'accueil se mettent à jour.</li></ol></details>
+          <details class="help"><summary>Bien remplir le texte alternatif (accessibilité)</summary><p style="margin:0">Le <b>texte alternatif</b> décrit une image pour les personnes malvoyantes (et aide le référencement). Il est proposé pour les couvertures d'articles, les photos de galerie, les affiches d'événements et les logos de partenaires. Décris simplement ce qu'on voit (« Élèves au stand Octobre Rose »). Si tu laisses vide, le titre est utilisé par défaut.</p></details>
+          <details class="help"><summary>La recherche du site</summary><p style="margin:0">Sur le site public, l'<b>icône loupe</b> (en haut à droite du menu) ou le raccourci <b>Ctrl/Cmd + K</b> ouvrent une recherche dans les articles, les événements et les pages. Rien à gérer côté admin, ça se met à jour tout seul.</p></details>
           <h3 style="font-family:var(--syne);font-size:17px;margin:18px 0 8px">Besoin d'aide ?</h3>
           <p style="color:var(--grey)">Pour le <b>contenu</b> : un membre référent du bureau. Pour la <b>technique ou la structure</b> du site (code, mise en page, bug, nouvelle fonctionnalité) : contacte <b>Ewan Foucaud</b> à <a href="mailto:ewan.foucaud@ik.me">ewan.foucaud@ik.me</a>. Merci de ne pas modifier le code toi-même, pour ne rien casser.</p>
           <p style="color:var(--grey);margin-top:12px"><b>Accessibilité.</b> Le bouton en bas à droite (police dyslexie, texte agrandi, contraste, mode sombre) fonctionne aussi dans cet espace admin. Tes préférences sont conservées et partagées avec le site public.</p>
@@ -608,12 +643,12 @@ function stat(n,l){return '<div class="stat"><div class="n">'+n+'</div><div clas
 /* ---------- ARTICLES ---------- */
 async function loadArticles(){
   $('#art-editor').style.display='none';$('#art-list').style.display='block';
-  var {data}=await sb.from('articles').select('*').is('deleted_at',null).order('created_at',{ascending:false});
+  var {data}=await sb.from('articles').select('*').is('deleted_at',null).order('epingle',{ascending:false}).order('created_at',{ascending:false});
   if(!data||!data.length){$('#art-list').innerHTML='<div class="tbl"><div class="empty">Aucun article. Clique sur « Nouvel article ».</div></div>';return}
   $('#art-list').innerHTML='<div class="tbl">'+data.map(function(a){
     var badge=a.status==='publie'?'<span class="b b-pub">Publié</span>':'<span class="b b-bro">Brouillon</span>';
     var pub=a.status==='publie'?'<button class="btn btn-out btn-sm" data-act="art-unpub" data-id="'+a.id+'">Dépublier</button>':'<button class="btn btn-vt btn-sm" data-act="art-pub" data-id="'+a.id+'">Publier</button>';
-    return '<div class="row"><div class="grow"><div class="t">'+esc(a.title)+' '+badge+'</div><div class="m">'+esc(a.excerpt||'')+'</div></div><div class="acts">'+pub+'<button class="btn btn-out btn-sm" data-act="art-edit" data-id="'+a.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="art-del" data-id="'+a.id+'">Suppr.</button></div></div>';
+    return '<div class="row"><div class="grow"><div class="t">'+esc(a.title)+' '+badge+(a.epingle?' <span class="b b-av">★ À la une</span>':'')+'</div><div class="m">'+esc(a.excerpt||'')+'</div></div><div class="acts">'+pub+'<button class="btn btn-out btn-sm" data-act="art-dup" data-id="'+a.id+'">Dupliquer</button><button class="btn btn-out btn-sm" data-act="art-edit" data-id="'+a.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="art-del" data-id="'+a.id+'">Suppr.</button></div></div>';
   }).join('')+'</div>';
 }
 function artEditor(a){
@@ -630,18 +665,23 @@ function artEditor(a){
      +'<button type="button" class="tb" data-cmd="ul">Liste</button>'
      +'<button type="button" class="tb" data-cmd="quote">Citation</button>'
      +'<button type="button" class="tb" data-cmd="hr">Séparateur</button>'
-     +'<button type="button" class="tb" data-cmd="link">Lien</button>'
-     +'<button type="button" class="tb" data-cmd="pagelink">Page du site</button>'
-     +'<button type="button" class="tb" data-cmd="img">Image</button>'
-     +'<button type="button" class="tb" data-cmd="video">Vidéo</button>'
-   +'</div><div class="editor" id="a-content" contenteditable="true">'+(a.content||'')+'</div><div class="hint">Astuce : jusqu\'à 5 images par article (bouton image de la barre d\'outils). Photos JPEG, PNG ou WebP, 10 Mo max.</div></div>'
+     +'<button type="button" class="tb" data-cmd="link"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.4"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.5-1.4"/></svg>Lien</button>'
+     +'<button type="button" class="tb" data-cmd="pagelink"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>Page du site</button>'
+     +'<button type="button" class="tb" data-cmd="img"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>Image</button>'
+     +'<button type="button" class="tb" data-cmd="video"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m10 9 5 3-5 3z" fill="currentColor" stroke="none"/></svg>Vidéo</button>'
+   +'</div><div class="editor" id="a-content" contenteditable="true">'+(a.content||'')+'</div><div class="hint" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><span>Astuce : jusqu\'à 5 images par article. JPEG, PNG ou WebP, 10 Mo max.</span><span id="a-wc"></span></div></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Extrait (résumé court)</label><textarea class="fta" id="a-excerpt" style="min-height:70px">'+esc(a.excerpt)+'</textarea></div>'
-   +'<div class="fld"><label class="flbl">Image de couverture</label><input class="inp" type="file" id="a-cover-file" accept="image/*"><div class="hint">Facultatif. Envoie un fichier, choisis-en un existant, ou colle une adresse. Photos JPEG, PNG ou WebP, 10 Mo max (réduites automatiquement). Format paysage conseillé.</div><div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="a-cover" value="'+esc(a.cover_url)+'" placeholder="https://…"><button type="button" class="btn btn-out btn-sm" data-act="pick-cover">Choisir dans la galerie</button></div></div></div>'
+   +'<div class="fld"><label class="flbl">Image de couverture</label><input class="inp" type="file" id="a-cover-file" accept="image/*"><div class="hint">Facultatif. Envoie un fichier, choisis-en un existant, ou colle une adresse. Photos JPEG, PNG ou WebP, 10 Mo max (réduites automatiquement). Format paysage conseillé.</div><div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="a-cover" value="'+esc(a.cover_url)+'" placeholder="https://…"><button type="button" class="btn btn-out btn-sm" data-act="pick-cover">Choisir dans la galerie</button></div><input class="inp" id="a-cover-alt" value="'+esc(a.cover_alt)+'" placeholder="Texte alternatif de la couverture (pour l\'accessibilité)" style="margin-top:8px"></div></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Tags (séparés par des virgules)</label><input class="inp" id="a-tags" value="'+esc(tagsToStr(a.tags))+'"></div>'
    +'<div class="fld"><label class="flbl">Auteur affiché</label><input class="inp" id="a-author" value="'+esc(a.author_name||'Le bureau de la MDL')+'"></div></div>'
-   +'<div style="display:flex;gap:10px;margin-top:10px"><button class="btn btn-vt" data-act="art-save" data-status="publie">Publier</button>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Date de publication</label><input class="inp" type="date" id="a-date" value="'+(a.published_at?new Date(a.published_at).toISOString().slice(0,10):'')+'"><div class="hint">Laisse vide = date du jour à la publication.</div></div>'
+   +'<div class="fld"><label class="flbl">Options</label><label class="chkrow"><input type="checkbox" id="a-showauthor"'+(a.show_author===false?'':' checked')+'> Afficher l\'auteur sur l\'article</label><label class="chkrow" style="margin-top:8px"><input type="checkbox" id="a-epingle"'+(a.epingle?' checked':'')+'> Épingler à la une</label></div></div>'
+   +'<div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap"><button class="btn btn-vt" data-act="art-save" data-status="publie">Publier</button>'
+   +'<button class="btn btn-out" data-act="art-preview">Aperçu</button>'
    +'<button class="btn btn-out" data-act="art-save" data-status="brouillon">Enregistrer en brouillon</button>'
    +'<button class="btn btn-out" data-act="art-cancel">Annuler</button></div></div>';
+  updateWC();
+  if(!a.id){try{var sv=JSON.parse(localStorage.getItem('mdl_art_autosave')||'null');if(sv&&sv.id===''&&sv.title){$('#a-title').value=sv.title;$('#a-content').innerHTML=sv.content||'';updateWC();toast('Brouillon auto-restauré')}}catch(e){}}
 }
 async function artSave(status){
   var id=$('#a-id').value, title=$('#a-title').value.trim();
@@ -649,12 +689,29 @@ async function artSave(status){
   var cover=$('#a-cover').value.trim()||null;
   var covFile=$('#a-cover-file').files[0];
   if(covFile){try{cover=await uploadFile(covFile)}catch(e){toast('Envoi de la couverture echoue');return}}
-  var payload={title:title,content:$('#a-content').innerHTML,excerpt:$('#a-excerpt').value.trim()||null,cover_url:cover,tags:strToTags($('#a-tags').value),author_name:$('#a-author').value.trim()||null,status:status,updated_at:new Date().toISOString()};
-  if(status==='publie')payload.published_at=new Date().toISOString();
+  var content=$('#a-content').innerHTML;
+  var exc=$('#a-excerpt').value.trim();
+  if(!exc){var pl=content.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();exc=pl.length>160?pl.slice(0,159)+'…':pl;}
+  var payload={title:title,content:content,excerpt:exc||null,cover_url:cover,cover_alt:$('#a-cover-alt').value.trim()||null,tags:strToTags($('#a-tags').value),author_name:$('#a-author').value.trim()||null,show_author:$('#a-showauthor').checked,epingle:$('#a-epingle').checked,status:status,updated_at:new Date().toISOString()};
+  var dv=$('#a-date').value;
+  if(dv){payload.published_at=new Date(dv+'T12:00:00').toISOString()}
+  else if(status==='publie'){payload.published_at=new Date().toISOString()}
   var res=id?await sb.from('articles').update(payload).eq('id',id):await sb.from('articles').insert(payload);
   if(res.error){toast('Erreur : '+res.error.message);return}
+  try{localStorage.removeItem('mdl_art_autosave')}catch(e){}
   toast(status==='publie'?'Article publié !':'Brouillon enregistré');loadArticles();
 }
+function updateWC(){var el=$('#a-wc');if(!el)return;var c=$('#a-content');var t=(c?(c.innerText||c.textContent||''):'').trim();var w=t?t.split(/\s+/).filter(Boolean).length:0;el.textContent=w+' mots · '+Math.max(1,Math.round(w/200))+' min de lecture'}
+function autosaveArt(){try{var idf=$('#a-id');if(!idf)return;localStorage.setItem('mdl_art_autosave',JSON.stringify({id:idf.value||'',title:($('#a-title')||{}).value||'',content:($('#a-content')||{}).innerHTML||'',ts:Date.now()}))}catch(e){}}
+function artPreview(){
+  var title=$('#a-title').value||'(Sans titre)';var cover=$('#a-cover').value.trim();var content=$('#a-content').innerHTML;var tags=strToTags($('#a-tags').value);
+  var ov=document.getElementById('previewov');
+  if(!ov){ov=document.createElement('div');ov.className='pickov';ov.id='previewov';ov.innerHTML='<div class="pickmodal" style="max-width:820px;max-height:88vh;overflow:auto"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><b style="font-family:var(--syne)">Aperçu de l\'article</b><button class="btn btn-out btn-sm" data-act="preview-close">Fermer</button></div><div id="preview-body"></div></div>';document.body.appendChild(ov)}
+  var w=content.replace(/<[^>]+>/g,' ').trim().split(/\s+/).filter(Boolean).length;
+  document.getElementById('preview-body').innerHTML='<span class="pv-tag">'+esc((tags&&tags[0])||'Actualité')+'</span>'+(cover?'<img src="'+esc(cover)+'" alt="" style="width:100%;border-radius:12px;margin:12px 0">':'')+'<h1 style="font-family:var(--syne);font-weight:800;font-size:30px;line-height:1.1;margin:6px 0 8px">'+esc(title)+'</h1><div style="color:var(--grey);font-size:13.5px;margin-bottom:18px">'+Math.max(1,Math.round(w/200))+' min de lecture</div><div class="art-preview-content">'+content+'</div>';
+  ov.classList.add('open');
+}
+document.addEventListener('input',function(e){if(e.target&&e.target.id==='a-content'){updateWC();autosaveArt()}if(e.target&&e.target.id==='a-title')autosaveArt()});
 
 /* ---------- ÉVÉNEMENTS ---------- */
 async function loadEvenements(){
@@ -676,8 +733,9 @@ function evtEditor(v){
    +'<div class="fld"><label class="flbl">Sous-titre / thème</label><input class="inp" id="e-sous" value="'+esc(v.sous_titre)+'"></div></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Période affichée</label><input class="inp" id="e-date" value="'+esc(v.date_affichee)+'" placeholder="Octobre, Juillet…"></div>'
    +'<div class="fld"><label class="flbl">Lieu</label><input class="inp" id="e-lieu" value="'+esc(v.lieu||'Lycée Viollet-le-Duc')+'"></div></div>'
+   +'<div class="fld"><label class="flbl">Date exacte (pour « ajouter au calendrier », facultatif)</label><input class="inp" type="date" id="e-datev" value="'+(v.date_evenement||'')+'"><div class="hint">Sert au bouton « Ajouter à mon calendrier » sur la fiche de l\'événement.</div></div>'
    +'<div class="fld"><label class="flbl">Description</label><textarea class="fta" id="e-desc">'+esc(v.description)+'</textarea></div>'
-   +'<div class="grid2"><div class="fld"><label class="flbl">Affiche</label><input class="inp" type="file" id="e-affiche-file" accept="image/*"><div class="hint">Facultatif (vide = mini-affiche à icône générée automatiquement). Format portrait / A4 conseillé. JPEG, PNG ou WebP, 10 Mo max.</div><div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="e-affiche" value="'+esc(v.affiche_url)+'" placeholder="https://…"><button type="button" class="btn btn-out btn-sm" data-act="pick-affiche">Choisir dans la galerie</button></div></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Affiche</label><input class="inp" type="file" id="e-affiche-file" accept="image/*"><div class="hint">Facultatif (vide = mini-affiche à icône générée automatiquement). Format portrait / A4 conseillé. JPEG, PNG ou WebP, 10 Mo max.</div><div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="e-affiche" value="'+esc(v.affiche_url)+'" placeholder="https://…"><button type="button" class="btn btn-out btn-sm" data-act="pick-affiche">Choisir dans la galerie</button></div><input class="inp" id="e-affiche-alt" value="'+esc(v.affiche_alt)+'" placeholder="Texte alternatif de l\'affiche (accessibilité)" style="margin-top:8px"></div>'
    +'<div class="fld"><label class="flbl">Lien billetterie (facultatif)</label><input class="inp" id="e-billet" value="'+esc(v.lien_billetterie)+'"></div></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Tags (virgules)</label><input class="inp" id="e-tags" value="'+esc(tagsToStr(v.tags))+'"></div>'
    +'<div class="fld"><label class="flbl">Statut</label><select class="inp" id="e-statut"><option value="passe"'+(v.statut!=='a_venir'?' selected':'')+'>Passé</option><option value="a_venir"'+(v.statut==='a_venir'?' selected':'')+'>À venir</option></select></div></div>'
@@ -691,7 +749,7 @@ async function evtSave(){
   var affiche=$('#e-affiche').value.trim()||null;
   var afFile=$('#e-affiche-file').files[0];
   if(afFile){try{affiche=await uploadFile(afFile)}catch(err){toast('Envoi de l\'affiche echoue');return}}
-  var payload={titre:titre,sous_titre:$('#e-sous').value.trim()||null,date_affichee:$('#e-date').value.trim()||null,lieu:$('#e-lieu').value.trim()||null,description:$('#e-desc').value.trim()||null,affiche_url:affiche,lien_billetterie:$('#e-billet').value.trim()||null,tags:strToTags($('#e-tags').value),statut:$('#e-statut').value,epingle:$('#e-epingle').checked,en_accueil:$('#e-accueil').checked,updated_at:new Date().toISOString()};
+  var payload={titre:titre,sous_titre:$('#e-sous').value.trim()||null,date_affichee:$('#e-date').value.trim()||null,lieu:$('#e-lieu').value.trim()||null,description:$('#e-desc').value.trim()||null,affiche_url:affiche,affiche_alt:($('#e-affiche-alt')?$('#e-affiche-alt').value.trim():'')||null,date_evenement:($('#e-datev')&&$('#e-datev').value)?$('#e-datev').value:null,lien_billetterie:$('#e-billet').value.trim()||null,tags:strToTags($('#e-tags').value),statut:$('#e-statut').value,epingle:$('#e-epingle').checked,en_accueil:$('#e-accueil').checked,updated_at:new Date().toISOString()};
   var res=id?await sb.from('evenements').update(payload).eq('id',id):await sb.from('evenements').insert(payload);
   if(res.error){toast('Erreur : '+res.error.message);return}
   toast('Événement enregistré');loadEvenements();
@@ -748,11 +806,14 @@ function phoEditor(p){
    +'<div class="fld"><label class="flbl">Catégorie</label><input class="inp" id="p-cat" value="'+esc(p.categorie)+'" placeholder="Le lycée, Bal, Course contre la Faim…"></div></div>'
    +'<div class="fld"><label class="flbl">Photo (facultatif)</label><input class="inp" type="file" id="p-file" accept="image/*"><div class="hint">Facultatif si tu mets un lien vidéo. Photos JPEG, PNG ou WebP, 10 Mo max (réduites automatiquement). Ou colle une adresse ci-dessous.</div></div>'
    +'<div class="fld"><label class="flbl">Adresse de l\'image (URL, facultatif)</label><input class="inp" id="p-url" value="'+esc(p.image_url)+'"></div>'
+   +'<div class="fld"><label class="flbl">Texte alternatif (accessibilité, facultatif)</label><input class="inp" id="p-alt" value="'+esc(p.alt)+'" placeholder="Décris brièvement l\'image (par défaut : le titre)"></div>'
+   +'<div class="fld"><label class="flbl">Rattacher à un événement (facultatif)</label><select class="inp" id="p-evenement"><option value="">Aucun</option></select><div class="hint">Les photos rattachées forment l\'album de l\'événement, visible sur la page Événements.</div></div>'
    +'<div class="fld"><label class="flbl">Tags (virgules, facultatif)</label><input class="inp" id="p-tags" value="'+esc(tagsToStr(p.tags))+'"></div>'
    +'<div class="fld"><label class="flbl">Lien vidéo (facultatif, YouTube ou OneDrive)</label><input class="inp" id="p-video" value="'+esc(p.video_url)+'" placeholder="https://youtu.be/... ou lien OneDrive"><div class="hint">Si tu mets un lien vidéo, l\'élément devient une <b>vidéo</b> dans la galerie (lecture au clic). L\'image sert de miniature (facultative ; pour YouTube elle est automatique).</div></div>'
    +'<label class="chkrow" style="margin:4px 0 12px"><input type="checkbox" id="p-public"'+(p.public_galerie===false?'':' checked')+'> Visible dans la galerie publique <span style="color:#6b7280">(décoche pour la garder en réserve privée)</span></label>'
    +'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-vt" data-act="pho-save">Enregistrer</button><button class="btn btn-out" data-act="pho-cancel">Annuler</button></div>'
    +'<div class="hint" id="p-status" style="margin-top:10px"></div></div>';
+  sb.from('evenements').select('id,titre').is('deleted_at',null).order('titre').then(function(r){var sel=$('#p-evenement');if(!sel)return;(r.data||[]).forEach(function(ev){var o=document.createElement('option');o.value=ev.id;o.textContent=ev.titre;if(p.evenement_id===ev.id)o.selected=true;sel.appendChild(o)})});
 }
 async function phoSave(){
   var id=$('#p-id').value, url=$('#p-url').value.trim(), titre=$('#p-titre').value.trim();
@@ -767,7 +828,7 @@ async function phoSave(){
   }
   var vurl=(document.getElementById('p-video')?document.getElementById('p-video').value.trim():'');
   if(!url&&!vurl){toast('Ajoute une image, ou un lien vidéo.');return}
-  var payload={titre:titre,image_url:url||null,categorie:$('#p-cat').value.trim()||null,tags:strToTags($('#p-tags').value),video_url:vurl||null,public_galerie:$('#p-public').checked};
+  var payload={titre:titre,image_url:url||null,alt:($('#p-alt')?$('#p-alt').value.trim():'')||null,categorie:$('#p-cat').value.trim()||null,tags:strToTags($('#p-tags').value),video_url:vurl||null,evenement_id:($('#p-evenement')?($('#p-evenement').value||null):null),public_galerie:$('#p-public').checked};
   var res=id?await sb.from('photos').update(payload).eq('id',id):await sb.from('photos').insert(payload);
   if(res.error){toast('Erreur : '+res.error.message);return}
   toast('Photo enregistrée');loadPhotos();
@@ -778,7 +839,8 @@ async function loadMessages(){
   var {data}=await sb.from('messages').select('*').is('deleted_at',null).order('created_at',{ascending:false});
   if(!data||!data.length){$('#msg-list').innerHTML='<div class="tbl"><div class="empty">Aucun message reçu.</div></div>';return}
   $('#msg-list').innerHTML=data.map(function(m){
-    return '<div class="msgbox'+(m.lu?'':' unread')+'"><div class="mh"><div><span class="who">'+esc(m.nom||'Anonyme')+'</span> '+(m.email?'<a href="mailto:'+esc(m.email)+'">'+esc(m.email)+'</a>':'')+'</div><div class="dt">'+fdate(m.created_at)+'</div></div>'
+    return '<div class="msgbox'+(m.lu?'':' unread')+'"><div class="mh"><div><span class="who">'+esc(((m.prenom||'')+' '+(m.nom||'')).trim()||'Anonyme')+'</span> '+(m.email?'<a href="mailto:'+esc(m.email)+'">'+esc(m.email)+'</a>':'')+'</div><div class="dt">'+fdate(m.created_at)+'</div></div>'
+     +((m.classe||m.telephone)?'<div class="hint" style="margin:2px 0 8px">'+[m.classe?('Classe : '+esc(m.classe)):'',m.telephone?('Tél : '+esc(m.telephone)):''].filter(Boolean).join(' · ')+'</div>':'')
      +(m.sujet?'<div style="font-weight:600;margin-bottom:6px">'+esc(m.sujet)+'</div>':'')
      +'<div class="txt">'+esc(m.message)+'</div>'
      +'<div class="acts" style="margin-top:12px">'+(m.lu?'<button class="btn btn-out btn-sm" data-act="msg-unread" data-id="'+m.id+'">Marquer non lu</button>':'<button class="btn btn-vt btn-sm" data-act="msg-read" data-id="'+m.id+'">Marquer lu</button>')+'<button class="btn btn-rg btn-sm" data-act="msg-del" data-id="'+m.id+'">Supprimer</button></div></div>';
@@ -794,7 +856,10 @@ async function loadParams(){
   $('#an-active').checked=(map.annonce_active==='true');
   $('#an-titre').value=map.annonce_titre||'';$('#an-texte').value=map.annonce_texte||'';
   $('#an-lien').value=map.annonce_lien||'';$('#an-label').value=map.annonce_lien_label||'';
-  $('#m-actif').checked=(map.merch_actif==='true');$('#m-intro').value=map.merch_intro||'';$('#m-url').value=map.merch_boutique_url||'';loadColls();
+  $('#m-actif').checked=(map.merch_actif==='true');$('#m-intro').value=map.merch_intro||'';$('#m-url').value=map.merch_boutique_url||'';
+  if($('#cd-actif')){$('#cd-actif').checked=(map.countdown_actif==='true');$('#cd-label').value=map.countdown_label||'';$('#cd-date').value=map.countdown_date||'';$('#cd-lien').value=map.countdown_lien||'';if($('#cd-btnlabel'))$('#cd-btnlabel').value=map.countdown_btn_label||''}
+  if($('#st1-num')){var dflt={st1:['≈','12','','événements par an'],st2:['','140','','adhérents cette année'],st3:['','100','%','organisé par les élèves']};['1','2','3'].forEach(function(k){var d=dflt['st'+k];$('#st'+k+'-pre').value=map['stat'+k+'_pre']!=null?map['stat'+k+'_pre']:d[0];$('#st'+k+'-num').value=map['stat'+k+'_num']!=null?map['stat'+k+'_num']:d[1];$('#st'+k+'-suf').value=map['stat'+k+'_suf']!=null?map['stat'+k+'_suf']:d[2];$('#st'+k+'-lbl').value=map['stat'+k+'_lbl']!=null?map['stat'+k+'_lbl']:d[3]})}
+  loadColls();
 }
 async function paramsSave(){
   await sb.from('parametres').upsert({cle:'helloasso_url',valeur:$('#p-hello').value.trim()});
@@ -847,14 +912,14 @@ function parEditor(p){p=p||{};$('#par-list').style.display='none';var e=$('#par-
    +'<div class="fld"><label class="flbl">Description</label><textarea class="fta" id="pa-desc" style="min-height:70px">'+esc(p.description)+'</textarea></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Catégorie</label><input class="inp" id="pa-cat" value="'+esc(p.categorie)+'"></div>'
    +'<div class="fld"><label class="flbl">Lien (Instagram, site…)</label><input class="inp" id="pa-url" value="'+esc(p.url)+'"></div></div>'
-   +'<div class="fld"><label class="flbl">Logo</label><input class="inp" type="file" id="pa-logo-file" accept="image/*"><div class="hint">Facultatif (vide = initiales). 1 logo par partenaire. PNG à fond transparent conseillé. JPEG, PNG ou WebP, 10 Mo max.</div><input class="inp" id="pa-logo" value="'+esc(p.logo_url)+'" placeholder="https://…" style="margin-top:8px"></div>'
+   +'<div class="fld"><label class="flbl">Logo</label><input class="inp" type="file" id="pa-logo-file" accept="image/*"><div class="hint">Facultatif (vide = initiales). 1 logo par partenaire. PNG à fond transparent conseillé. JPEG, PNG ou WebP, 10 Mo max.</div><input class="inp" id="pa-logo" value="'+esc(p.logo_url)+'" placeholder="https://…" style="margin-top:8px"><input class="inp" id="pa-logo-alt" value="'+esc(p.logo_alt)+'" placeholder="Texte alternatif du logo (accessibilité)" style="margin-top:8px"></div>'
    +'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-vt" data-act="par-save">Enregistrer</button><button class="btn btn-out" data-act="par-cancel">Annuler</button></div></div>';
 }
 async function parSave(){var id=$('#pa-id').value,nom=$('#pa-nom').value.trim();
   if(!nom){toast('Le nom est requis.');return}
   var logo=$('#pa-logo').value.trim()||null;var lf=$('#pa-logo-file').files[0];
   if(lf){try{logo=await uploadFile(lf)}catch(e){toast('Envoi du logo echoue');return}}
-  var payload={nom:nom,description:$('#pa-desc').value.trim()||null,categorie:$('#pa-cat').value.trim()||null,url:$('#pa-url').value.trim()||null,logo_url:logo};
+  var payload={nom:nom,description:$('#pa-desc').value.trim()||null,categorie:$('#pa-cat').value.trim()||null,url:$('#pa-url').value.trim()||null,logo_url:logo,logo_alt:($('#pa-logo-alt')?$('#pa-logo-alt').value.trim():'')||null};
   var res=id?await sb.from('partenaires').update(payload).eq('id',id):await sb.from('partenaires').insert(payload);
   if(res.error){toast('Erreur : '+res.error.message);return}toast('Partenaire enregistré');loadPartenaires();
 }
@@ -883,9 +948,12 @@ document.addEventListener('click',async function(e){
   if(act==='art-new'){document.getElementById('rules').classList.add('open');return}
   if(act==='rules-ok'){document.getElementById('rules').classList.remove('open');return artEditor(null)}
   if(act==='rules-cancel'){document.getElementById('rules').classList.remove('open');return}
-  if(act==='art-cancel')return loadArticles();
+  if(act==='art-cancel'){try{localStorage.removeItem('mdl_art_autosave')}catch(e){}return loadArticles()}
   if(act==='art-save')return artSave(t.getAttribute('data-status'));
   if(act==='art-edit'){var r=await sb.from('articles').select('*').eq('id',id).single();return artEditor(r.data)}
+  if(act==='art-dup'){var rd=await sb.from('articles').select('*').eq('id',id).single();if(rd.data){var c=rd.data;var ins=await sb.from('articles').insert({title:(c.title||'')+' (copie)',content:c.content,excerpt:c.excerpt,cover_url:c.cover_url,cover_alt:c.cover_alt,tags:c.tags,author_name:c.author_name,show_author:c.show_author,epingle:false,status:'brouillon'});if(ins.error){toast('Erreur : '+ins.error.message)}else{toast('Article dupliqué (brouillon)')}loadArticles()}return}
+  if(act==='art-preview'){artPreview();return}
+  if(act==='preview-close'){var pv=document.getElementById('previewov');if(pv)pv.classList.remove('open');return}
   if(act==='art-pub'){await sb.from('articles').update({status:'publie',published_at:new Date().toISOString()}).eq('id',id);toast('Publié');return loadArticles()}
   if(act==='art-unpub'){await sb.from('articles').update({status:'brouillon'}).eq('id',id);toast('Dépublié');return loadArticles()}
   if(act==='art-del'){if(await askConfirm('Cet article ira à la corbeille. Tu pourras le restaurer pendant 7 jours.','Mettre cet article à la corbeille ?')){await sb.from('articles').update({deleted_at:new Date().toISOString()}).eq('id',id);toast('Mis à la corbeille');loadArticles()}return}
@@ -944,6 +1012,8 @@ document.addEventListener('click',async function(e){
   if(act==='backup-dl'){toast('Préparation de la sauvegarde…');try{var tbs=['articles','evenements','agenda','photos','documents','partenaires','collections','messages','parametres'];var out={_site:'mdl-vld.fr',_exporte_le:new Date().toISOString()};for(var bi=0;bi<tbs.length;bi++){var rr=await sb.from(tbs[bi]).select('*');out[tbs[bi]]=rr.data||[]}var blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='sauvegarde-mdl-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('Sauvegarde téléchargée')}catch(e){toast('Sauvegarde impossible')}return}
   if(act==='aide-save'){var tls=['notion','onedrive','cloudflare','supabase','protonpass','github'];for(var ti=0;ti<tls.length;ti++){await sb.from('parametres').upsert({cle:'outil_'+tls[ti],valeur:$('#ol-'+tls[ti]).value.trim()});}toast('Liens enregistrés');return loadAide()}
   if(act==='annonce-save'){await sb.from('parametres').upsert({cle:'annonce_active',valeur:$('#an-active').checked?'true':'false'});await sb.from('parametres').upsert({cle:'annonce_titre',valeur:$('#an-titre').value.trim()});await sb.from('parametres').upsert({cle:'annonce_texte',valeur:$('#an-texte').value.trim()});await sb.from('parametres').upsert({cle:'annonce_lien',valeur:$('#an-lien').value.trim()});await sb.from('parametres').upsert({cle:'annonce_lien_label',valeur:$('#an-label').value.trim()});toast('Annonce enregistrée');return}
+  if(act==='stats-save'){for(var sk=1;sk<=3;sk++){await sb.from('parametres').upsert({cle:'stat'+sk+'_pre',valeur:$('#st'+sk+'-pre').value.trim()});await sb.from('parametres').upsert({cle:'stat'+sk+'_num',valeur:$('#st'+sk+'-num').value.trim()});await sb.from('parametres').upsert({cle:'stat'+sk+'_suf',valeur:$('#st'+sk+'-suf').value.trim()});await sb.from('parametres').upsert({cle:'stat'+sk+'_lbl',valeur:$('#st'+sk+'-lbl').value.trim()})}toast('Chiffres clés enregistrés');return}
+  if(act==='countdown-save'){await sb.from('parametres').upsert({cle:'countdown_actif',valeur:$('#cd-actif').checked?'true':'false'});await sb.from('parametres').upsert({cle:'countdown_label',valeur:$('#cd-label').value.trim()});await sb.from('parametres').upsert({cle:'countdown_date',valeur:$('#cd-date').value});await sb.from('parametres').upsert({cle:'countdown_lien',valeur:$('#cd-lien').value.trim()});await sb.from('parametres').upsert({cle:'countdown_btn_label',valeur:($('#cd-btnlabel')?$('#cd-btnlabel').value.trim():'')});toast('Compte à rebours enregistré');return}
   if(act==='params-save')return paramsSave();
   // Corbeille
   if(act==='cb-restore'){await sb.from(t.getAttribute('data-tb')).update({deleted_at:null}).eq('id',id);toast('Restauré');return loadCorbeille()}

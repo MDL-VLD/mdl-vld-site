@@ -120,7 +120,7 @@
   .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;font-size:12px;color:rgba(255,255,255,.4)}
   .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}
   .rv.in{opacity:1;transform:none}
-  @media(max-width:1024px){
+  @media(max-width:1250px){
     .nav-links{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 0;box-shadow:0 14px 30px rgba(45,26,40,.12)}.nav-links.open{display:flex}.nav-links a{padding:13px 32px;opacity:1}.nav-links a.cta{margin:10px 24px;justify-content:center}.burger{display:flex}.burger span{transition:transform .2s,opacity .2s}.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger.open span:nth-child(2){opacity:0}.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
     section{padding:60px 0}
     .cards{grid-template-columns:repeat(3,1fr)}
@@ -241,7 +241,7 @@ function evIcon(ev){
 }
 function gradClass(ev){var s=String((ev.tags&&ev.tags[0])||ev.titre||'');var h=0;for(var i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))>>>0}return 'g'+(h%4+1)}
 function phBlock(ev,cls){var ic=evIcon(ev);return '<div class="'+cls+' '+gradClass(ev)+'"><span class="ph-deco" aria-hidden="true">'+ic+'</span><span class="ph-in"><span class="ph-ic">'+ic+'</span><span class="ph-eyebrow">MDL Viollet-le-Duc</span></span></div>'}
-function coverHTML(ev,cls){return ev.affiche_url?('<img loading="lazy" src="'+ev.affiche_url+'" alt="Affiche : '+esc(ev.titre)+'">'):phBlock(ev,cls)}
+function coverHTML(ev,cls){return ev.affiche_url?('<img loading="lazy" src="'+ev.affiche_url+'" alt="'+esc(ev.affiche_alt||('Affiche : '+(ev.titre||'')))+'">'):phBlock(ev,cls)}
 function cardHTML(ev,i){
   return '<button class="card rv" style="transition-delay:'+((i%4)*60)+'ms" onclick="openEv('+i+')">'
     +'<span class="card-tag">'+esc((ev.tags&&ev.tags[0])||'Événement')+'</span>'
@@ -271,15 +271,17 @@ function render(data){
 function openEv(i){
   var e=EVENTS[i];var m=document.getElementById('modal');
   var hero=e.affiche_url
-    ?'<div class="modal-hero"><button class="modal-close" onclick="closeEv()" aria-label="Fermer">×</button><img loading="lazy" src="'+e.affiche_url+'" alt=""></div>'
+    ?'<div class="modal-hero"><button class="modal-close" onclick="closeEv()" aria-label="Fermer">×</button><img loading="lazy" src="'+e.affiche_url+'" alt="'+esc(e.affiche_alt||('Affiche : '+(e.titre||'')))+'"></div>'
     :'<div class="modal-hero ph '+gradClass(e)+'"><button class="modal-close" onclick="closeEv()" aria-label="Fermer">×</button><span class="ph-deco" aria-hidden="true">'+evIcon(e)+'</span><span class="ph-in"><span class="ph-ic">'+evIcon(e)+'</span><span class="ph-eyebrow">MDL Viollet-le-Duc</span></span></div>';
   m.innerHTML=hero
     +'<div class="modal-body"><div class="mtag">'+esc((e.tags&&e.tags[0])||'Événement')+'</div><h3>'+esc(e.titre)+'</h3>'
     +'<div class="mmeta"><div><div class="kk">Quand</div>'+esc(e.date_affichee||'À préciser')+'</div><div><div class="kk">Où</div>'+esc(e.lieu||'Lycée Viollet-le-Duc')+'</div></div>'
-    +'<p class="desc">'+esc(e.description||'')+'</p></div>';
+    +'<p class="desc">'+esc(e.description||'')+'</p>'+(e.date_evenement?'<button class="cta" style="margin-top:4px" onclick="evICS('+i+')">↓ Ajouter à mon calendrier</button>':'')+'<div id="modal-album"></div></div>';
   document.getElementById('ov').classList.add('open');
+  if(e.id){try{supabase.createClient(SB_URL,SB_KEY).from('photos').select('image_url,alt,titre').eq('evenement_id',e.id).eq('public_galerie',true).is('deleted_at',null).limit(30).then(function(r){var ph=(r.data||[]).filter(function(x){return x.image_url});var el=document.getElementById('modal-album');if(!ph.length||!el)return;el.innerHTML='<div style="font-family:var(--syne);font-weight:800;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--mg);margin:20px 0 10px">Album ('+ph.length+')</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">'+ph.map(function(x){return '<a href="'+esc(x.image_url)+'" target="_blank" rel="noopener"><img loading="lazy" src="'+esc(x.image_url)+'" alt="'+esc(x.alt||x.titre||'')+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;display:block"></a>'}).join('')+'</div>';});}catch(err){}}
 }
 function closeEv(){document.getElementById('ov').classList.remove('open')}
+function evICS(i){var e=EVENTS[i];if(!e||!e.date_evenement)return;function pad(n){return('0'+n).slice(-2)}function dp(iso,plus){var d=new Date(iso+'T00:00:00');if(plus)d.setDate(d.getDate()+1);return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())}function ie(s){return String(s==null?'':s).replace(/([,;\\])/g,'\\$1').replace(/\n/g,'\\n')}var stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');var L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MDL VLD//Evenement//FR','METHOD:PUBLISH','BEGIN:VEVENT','UID:'+((e.id||Math.random().toString(36).slice(2)))+'@mdl-vld.fr','DTSTAMP:'+stamp,'DTSTART;VALUE=DATE:'+dp(e.date_evenement),'DTEND;VALUE=DATE:'+dp(e.date_evenement,true),'SUMMARY:'+ie(e.titre||'Événement MDL'),(e.lieu?'LOCATION:'+ie(e.lieu):''),(e.lien_billetterie?'URL:'+ie(e.lien_billetterie):''),'END:VEVENT','END:VCALENDAR'].filter(Boolean);var blob=new Blob([L.join('\r\n')],{type:'text/calendar'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download=((e.titre||'evenement').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40)||'evenement')+'.ics';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeEv()});
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
 document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
@@ -326,7 +328,7 @@ document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
   .foot-cta a{margin-top:0!important}
   .foot-adh{display:inline-flex;align-items:center;background:var(--mg);color:#fff;font-family:var(--syne),'Syne',sans-serif;font-weight:700;font-size:12px;padding:10px 18px;border-radius:100px;text-decoration:none}
   .foot-adh:hover{background:var(--mg2,#63104f)}
-  @media(max-width:1024px){
+  @media(max-width:1250px){
     .foot-top{grid-template-columns:1fr 1fr 1fr;gap:28px}
     .foot-brand{grid-column:1 / -1}
     .foot-brand-row span{white-space:nowrap}
@@ -346,7 +348,7 @@ document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
   }
   @media(max-width:1263px){.wrap{padding-left:clamp(24px,5vw,72px);padding-right:clamp(24px,5vw,72px)}}
   
-  @media(max-width:1024px){
+  @media(max-width:1250px){
     .nav-links.open{position:fixed!important;left:0;right:0;top:70px;z-index:120;border-radius:0 0 18px 18px;box-shadow:0 18px 44px rgba(45,26,40,.22);padding:8px 0 16px!important;max-height:calc(100vh - 70px);overflow:auto}
     .nav-links.open a:not(.cta){margin:0 12px!important;border-radius:0!important;padding:16px 12px!important;font-size:16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);opacity:1;background:transparent!important}
     .nav-links.open a:not(.cta)::after{content:"\203A";color:var(--mg);font-family:var(--syne);font-weight:800;font-size:19px;opacity:.55;margin-left:12px}
@@ -387,12 +389,12 @@ document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
     .foot-brand{font-size:16px!important}
     .foot-bottom{text-align:center;align-items:center;justify-content:center}
   }
-  @media(max-width:1024px){
+  @media(max-width:1250px){
     .nav-links a:not(.cta){margin:2px 14px;border-radius:12px;padding:12px 18px!important}
     .nav-links a:not(.cta):hover,.nav-links a:not(.cta):active{background:var(--paper2)}
     .nav-links a[href="admin.html"]{border:1px solid var(--line);border-radius:100px;margin:12px 24px 6px;justify-content:flex-start}
   }
-  @media(max-width:1024px){
+  @media(max-width:1250px){
     .nav-links a[href="admin.html"]{opacity:1!important}
     .ms-lbl{display:inline;margin-left:12px;font-weight:600;color:var(--prune)}
     .nav-links a:hover,.nav-links a:active{background:var(--paper2)}
@@ -482,5 +484,6 @@ document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 })();
 </script>
 
+<script src="assets/site.js" defer></script>
 </body>
 </html>
