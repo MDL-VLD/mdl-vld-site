@@ -321,7 +321,11 @@
       <!-- MESSAGES -->
       <section class="view" id="v-messages">
         <div class="vhead"><div class="vtitle">Messages reçus</div></div>
-        <details class="help"><summary>Comment faire ?</summary><ol><li>Les messages envoyés depuis le formulaire de contact arrivent ici.</li><li>Clique sur l'adresse email pour répondre.</li><li>Marque « lu » quand c'est traité, ou supprime le message.</li></ol></details>
+        <div class="notice-box" style="background:#f7eef4;border:1px solid #e6d4e2;border-left:3px solid var(--mg,#7d0f64);border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:14px;line-height:1.55;color:#3a2233">
+          <b>Le plus important : répondez par mail, pas ici.</b><br>
+          Chaque message du formulaire arrive aussi <b>par mail</b> dans la boîte du bureau (contact@mdl-vld.fr). Pour répondre à la personne, ouvrez ce mail et cliquez sur <b>Répondre</b> dans votre messagerie : la réponse part directement vers son adresse. Cette page sert seulement à <b>consulter et archiver</b> les messages ; on ne peut pas répondre depuis le site.
+        </div>
+        <details class="help"><summary>Comment faire ?</summary><ol><li>Un visiteur remplit le formulaire de contact : le message s'affiche ici <b>et</b> le bureau reçoit un mail avec tout le contenu.</li><li>Pour répondre : ouvrez le mail et cliquez sur <b>Répondre</b> dans votre messagerie (Gmail, Outlook…). La réponse part vers l'adresse du visiteur, jamais depuis le site.</li><li>Ici, marquez « lu » quand c'est traité, ou mettez à la corbeille. C'est un simple historique.</li></ol></details>
         <div id="msg-list"></div>
       </section>
 
@@ -418,7 +422,7 @@
             <li><b>Partenaires</b> : les clubs et associations partenaires (logo + texte alternatif).</li>
             <li><b>Merch</b> : les collections, leurs couleurs et leurs modèles.</li>
             <li><b>Concours logos</b> : les logos par année et le vainqueur de chaque année.</li>
-            <li><b>Messages</b> : les messages reçus via le formulaire de contact.</li>
+            <li><b>Messages</b> : les messages reçus via le formulaire de contact. Ils s'affichent ici <b>et</b> arrivent <b>par mail</b> dans la boîte du bureau. On répond toujours <b>par mail</b>, jamais depuis le site (cette page est un historique).</li>
             <li><b>Annonce</b> : la bannière « à la une », le <b>compte à rebours</b> de l'accueil et les <b>chiffres clés</b> de l'accueil.</li>
             <li><b>Adhésion</b> : le lien HelloAsso et l'année affichée partout.</li>
             <li><b>Sauvegarde</b> : télécharge une copie de tout le contenu. À faire régulièrement, surtout avant une grosse modification.</li>
@@ -433,6 +437,7 @@
           <details class="help"><summary>Modifier les chiffres clés de l'accueil</summary><ol style="margin:0 0 0 18px;line-height:1.9"><li>Section <b>Annonce</b> → bloc « Chiffres clés de l'accueil ».</li><li>Pour chacun des 3 chiffres : préfixe (ex. « ≈ »), nombre, suffixe (ex. « % ») et libellé.</li><li>Enregistre : les chiffres animés en haut de l'accueil se mettent à jour.</li></ol></details>
           <details class="help"><summary>Bien remplir le texte alternatif (accessibilité)</summary><p style="margin:0">Le <b>texte alternatif</b> décrit une image pour les personnes malvoyantes (et aide le référencement). Il est proposé pour les couvertures d'articles, les photos de galerie, les affiches d'événements et les logos de partenaires. Décris simplement ce qu'on voit (« Élèves au stand Octobre Rose »). Si tu laisses vide, le titre est utilisé par défaut.</p></details>
           <details class="help"><summary>La recherche du site</summary><p style="margin:0">Sur le site public, l'<b>icône loupe</b> (en haut à droite du menu) ou le raccourci <b>Ctrl/Cmd + K</b> ouvrent une recherche dans les articles, les événements et les pages. Rien à gérer côté admin, ça se met à jour tout seul.</p></details>
+          <details class="help"><summary>Recevoir et répondre aux messages du formulaire</summary><ol style="margin:0 0 0 18px;line-height:1.9"><li>Un visiteur remplit le <b>formulaire de contact</b> du site (email obligatoire ; prénom, nom, classe, téléphone et sujet facultatifs).</li><li>Aussitôt, deux choses se passent : le message s'affiche dans la section <b>Messages</b> de l'admin, <b>et</b> un mail contenant tout le contenu arrive dans la boîte du bureau (<b>contact@mdl-vld.fr</b>).</li><li>Pour <b>répondre</b> : ouvrez ce mail et cliquez sur <b>Répondre</b> dans votre messagerie (Gmail, Outlook…). Votre réponse part <b>directement vers l'adresse du visiteur</b> (c'est réglé automatiquement).</li><li>On ne répond <b>jamais depuis le site</b> : la section Messages sert seulement à consulter et archiver. Marquez « lu » quand c'est traité, ou mettez à la corbeille.</li></ol><p style="margin:8px 0 0">Bon à savoir : si le bureau ne reçoit plus les mails, vérifiez d'abord le dossier <b>Spam</b>, puis prévenez Ewan (c'est un réglage technique).</p></details>
           <h3 style="font-family:var(--syne);font-size:17px;margin:18px 0 8px">Besoin d'aide ?</h3>
           <p style="color:var(--grey)">Pour le <b>contenu</b> : un membre référent du bureau. Pour la <b>technique ou la structure</b> du site (code, mise en page, bug, nouvelle fonctionnalité) : contacte <b>Ewan Foucaud</b> à <a href="mailto:ewan.foucaud@ik.me">ewan.foucaud@ik.me</a>. Merci de ne pas modifier le code toi-même, pour ne rien casser.</p>
           <p style="color:var(--grey);margin-top:12px"><b>Accessibilité.</b> Le bouton en bas à droite (police dyslexie, texte agrandi, contraste, mode sombre) fonctionne aussi dans cet espace admin. Tes préférences sont conservées et partagées avec le site public.</p>
