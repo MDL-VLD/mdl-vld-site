@@ -58,6 +58,29 @@
     +'html.dark .site-search-box{background:#241019}html.dark .site-search-top input{color:#fff}'
     +'@media print{nav,footer,.a11y-btn,.a11y-panel,.totop,.site-search-btn,.site-search-ov,.crumb,.notice,.read-progress,.hero-actions,.foot-social,.burger,.ag-toggle,.share,.next-article{display:none!important}html,body{background:#fff!important;color:#000!important}a{color:#000!important;text-decoration:underline}.wrap{max-width:100%!important;padding:0!important}*{box-shadow:none!important;text-shadow:none!important}.phero,.hero{min-height:auto!important;color:#000!important}.phero::after,.hero-bg::after{display:none!important}}';
     var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+    /* --- lien "Aller au contenu" (skip-link) --- */
+    var css2='.skip-link{position:fixed;left:12px;top:-80px;z-index:500;background:var(--mg,#7d0f64);color:#fff;font-family:var(--syne,sans-serif);font-weight:700;font-size:15px;padding:12px 18px;border-radius:0 0 12px 12px;text-decoration:none;box-shadow:0 10px 30px rgba(45,26,40,.28);transition:top .18s ease}'
+    +'.skip-link:focus,.skip-link:focus-visible{top:0;outline:2px solid #fff;outline-offset:-4px}'
+    /* --- bascule forcee en menu burger : dyslexie + grand texte ensemble --- */
+    +'html.a11y-dys.a11y-big .nav-links{display:none!important;position:fixed;left:0;right:0;top:70px;flex-direction:column;align-items:stretch;gap:0;background:var(--paper,#f6f2ef);border-bottom:1px solid var(--line,#e7e1ea);padding:8px 0 16px;box-shadow:0 18px 44px rgba(45,26,40,.22);z-index:120;max-height:calc(100vh - 70px);overflow:auto;border-radius:0 0 18px 18px}'
+    +'html.a11y-dys.a11y-big .nav-links.open{display:flex!important}'
+    +'html.a11y-dys.a11y-big .nav-links a{padding:13px 32px;opacity:1}'
+    +'html.a11y-dys.a11y-big .nav-links a:not(.cta){margin:0 12px;border-bottom:1px solid var(--line,#e7e1ea);display:flex;align-items:center;justify-content:space-between}'
+    +'html.a11y-dys.a11y-big .nav-links a.cta{margin:14px 16px 4px;justify-content:center}'
+    +'html.a11y-dys.a11y-big .burger{display:flex!important}'
+    +'html.a11y-dys.a11y-big .nav-links .site-search-btn{order:-1;width:auto;height:auto;border:none;border-radius:12px;justify-content:flex-start;gap:12px;padding:16px 12px;margin:6px 14px 2px}'
+    +'html.a11y-dys.a11y-big .nav-links .site-search-btn .ss-btn-lbl{display:inline;font-family:var(--syne,sans-serif);font-weight:600;font-size:16px}'
+    +'html.dark.a11y-dys.a11y-big .nav-links{background:#241019}';
+    var st2=document.createElement('style');st2.textContent=css2;document.head.appendChild(st2);
+  }
+  function addSkipLink(){
+    if(document.querySelector('.skip-link'))return;
+    var tgt=document.getElementById('main')||document.querySelector('main,header.hero,.phero,.page-hero,.wrap,section');
+    if(tgt&&!tgt.id)tgt.id='main';
+    var id=(tgt&&tgt.id)?tgt.id:'main';
+    var a=document.createElement('a');a.className='skip-link';a.href='#'+id;a.textContent='Aller au contenu';
+    a.addEventListener('click',function(){if(tgt){tgt.setAttribute('tabindex','-1');setTimeout(function(){tgt.focus()},0)}});
+    document.body.insertBefore(a,document.body.firstChild);
   }
 
   function buildOverlay(){
@@ -107,6 +130,6 @@
   }
 
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSearch();if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch()}});
-  function init(){injectCSS();addLoupe();loadData();pastille()}
+  function init(){injectCSS();addSkipLink();addLoupe();loadData();pastille()}
   if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
 })();
