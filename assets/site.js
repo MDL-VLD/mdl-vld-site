@@ -70,7 +70,11 @@
     +'html.a11y-dys.a11y-big .burger{display:flex!important}'
     +'html.a11y-dys.a11y-big .nav-links .site-search-btn{order:-1;width:auto;height:auto;border:none;border-radius:12px;justify-content:flex-start;gap:12px;padding:16px 12px;margin:6px 14px 2px}'
     +'html.a11y-dys.a11y-big .nav-links .site-search-btn .ss-btn-lbl{display:inline;font-family:var(--syne,sans-serif);font-weight:600;font-size:16px}'
-    +'html.dark.a11y-dys.a11y-big .nav-links{background:#241019}';
+    +'html.dark.a11y-dys.a11y-big .nav-links{background:#241019}'
+    /* --- hauteur uniforme des bannieres (phero) sur toutes les pages + pas de coupure au milieu des mots --- */
+    +'.phero{min-height:460px!important}'
+    +'.phero h1,.lhead h1{word-break:normal!important;overflow-wrap:break-word}'
+    +'@media(max-width:640px){.phero{min-height:300px!important}}';
     var st2=document.createElement('style');st2.textContent=css2;document.head.appendChild(st2);
   }
   function addSkipLink(){
