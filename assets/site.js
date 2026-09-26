@@ -134,7 +134,18 @@
   }
 
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSearch();if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch()}});
+  function applyGlobalParams(){
+    api('parametres?select=cle,valeur').then(function(rows){
+      var m={};(rows||[]).forEach(function(p){m[p.cle]=p.valeur});
+      document.querySelectorAll('[data-param]').forEach(function(el){var k=el.getAttribute('data-param');if(m[k]!=null&&m[k]!=='')el.textContent=m[k]});
+      if(m.social_instagram)document.querySelectorAll('a[href*="instagram.com/mdl.vld"]').forEach(function(a){a.href=m.social_instagram});
+      if(m.social_tiktok)document.querySelectorAll('a[href*="tiktok.com/@mdl.vld"]').forEach(function(a){a.href=m.social_tiktok});
+      if(m.email_contact)document.querySelectorAll('a[href^="mailto:contact@mdl-vld.fr"]').forEach(function(a){var t=(a.textContent||'').trim();a.href='mailto:'+m.email_contact;if(t==='contact@mdl-vld.fr')a.textContent=m.email_contact});
+      if(m.lycee_url)document.querySelectorAll('a.foot-lycee').forEach(function(a){a.href=m.lycee_url});
+      if(m.social_youtube)document.querySelectorAll('.foot-social').forEach(function(fs){if(fs.querySelector('.js-yt'))return;var tk=fs.querySelector('a[href*="tiktok"]');var yt=document.createElement('a');yt.className='js-yt';yt.href=m.social_youtube;yt.target='_blank';yt.rel='noopener';yt.setAttribute('aria-label','YouTube');yt.title='YouTube';yt.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>';if(tk&&tk.parentNode){tk.parentNode.insertBefore(yt,tk.nextSibling)}else{fs.appendChild(yt)}});
+    });
+  }
   function registerSW(){if('serviceWorker' in navigator){try{navigator.serviceWorker.register('sw.js')}catch(e){}}}
-  function init(){injectCSS();addSkipLink();addLoupe();loadData();pastille();registerSW()}
+  function init(){injectCSS();addSkipLink();addLoupe();loadData();pastille();registerSW();applyGlobalParams()}
   if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
 })();
