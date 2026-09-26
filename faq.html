@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MDL VLD · FAQ</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7d0f64">
+<title>FAQ · Maison des Lycéens Viollet-le-Duc</title>
 <meta name="description" content="Questions fréquentes sur la Maison des Lycéens du Lycée Viollet-le-Duc : adhésion, événements, clubs, agenda, contact.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MDL Viollet-le-Duc">
@@ -93,6 +95,7 @@
 <script>(function(){var m={apropos:'À propos',evenements:'Événements',planning:'Agenda',actu:'Actualités',galerie:'Galerie',contact:'Contact',adherer:'Adhérer',merch:'Merch',documents:'Documents',partenaires:'Partenaires','concours-logos':'Concours de logos',faq:'FAQ','mentions-legales':'Mentions légales',confidentialite:'Confidentialité',cgu:'CGU',cgv:'CGV'};var p=(location.pathname.split('/').pop()||'').replace(/\.html$/,'')||'index';var c=document.getElementById('crumbCur'),b=document.querySelector('.crumb');if(!c||!b)return;if(!m[p]){b.style.display='none';return}c.textContent=m[p];})();</script>
 <header id="main" class="lhead"><div class="wrap"><div class="eyebrow">Besoin d'aide ?</div><h1>Questions fréquentes</h1><div class="maj">Tout ce qu'il faut savoir sur la MDL, l'adhésion et la vie du lycée.</div></div></header>
 <main class="legal"><div class="wrap"><div class="col">
+<div id="faq-list">
 <details class="qa"><summary>Qu&#x27;est-ce que la Maison des Lycéens (MDL) ?</summary><div class="a">La Maison des Lycéens du Lycée Viollet-le-Duc (sigle : MDL VLD) est une association loi 1901 gérée par les élèves, pour les élèves. Elle organise les événements et anime la vie du lycée : bal, carnaval, soirées à thème, Octobre Rose, et d&#x27;autres projets au fil de l&#x27;année.</div></details>
 <details class="qa"><summary>Comment adhérer à la MDL ?</summary><div class="a">En ligne via HelloAsso, en deux minutes, pour environ 5€ l&#x27;année scolaire. Rendez-vous sur la page Adhérer. L&#x27;adhésion est à renouveler à chaque rentrée.</div></details>
 <details class="qa"><summary>Combien coûte l&#x27;adhésion ?</summary><div class="a">Environ 5€ pour l&#x27;année scolaire. Le montant peut varier légèrement selon les années.</div></details>
@@ -106,6 +109,7 @@
 <details class="qa"><summary>Où trouver les documents officiels (statuts, règlement intérieur) ?</summary><div class="a">Sur la page Documents.</div></details>
 <details class="qa"><summary>Comment contacter la MDL ?</summary><div class="a">Par le formulaire de la page Contact, par email à contact@mdl-vld.fr, ou en parlant à un membre du bureau.</div></details>
 <details class="qa"><summary>Puis-je réutiliser les photos du site ?</summary><div class="a">Les photos appartiennent à la MDL. Les albums où l&#x27;on reconnaît des élèves sont privés, pour respecter le droit à l&#x27;image. Pour toute demande, écris à contact@mdl-vld.fr.</div></details>
+</div>
 <p style="margin-top:20px;color:var(--grey)">Une autre question ? Écris-nous à <a href="mailto:contact@mdl-vld.fr">contact@mdl-vld.fr</a> ou via la page <a href="contact.html">Contact</a>.</p>
 </div></div></main>
 <footer>
@@ -295,5 +299,6 @@
 })();
 </script>
 
+<script>(function(){var K='sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0';fetch('https://ksvqjbcnqphnyxfpjhvz.supabase.co/rest/v1/faq?select=question,reponse&actif=eq.true&order=ordre',{headers:{apikey:K,Authorization:'Bearer '+K}}).then(function(r){return r.ok?r.json():[]}).then(function(d){if(!d||!d.length)return;var esc=function(x){return (x==null?'':String(x)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')};var el=document.getElementById('faq-list');if(!el)return;el.innerHTML=d.map(function(q){return '<details class="qa"><summary>'+esc(q.question)+'</summary><div class="a">'+esc(q.reponse)+'</div></details>'}).join('');}).catch(function(){});})();</script>
 <script src="assets/site.js" defer></script>
 </body></html>

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://mdl-vld.fr/</loc><priority>1.0</priority></url>
-  <url><loc>https://mdl-vld.fr/apropos.html</loc><priority>0.7</priority></url>
-  <url><loc>https://mdl-vld.fr/evenements.html</loc><priority>0.7</priority></url>
-  <url><loc>https://mdl-vld.fr/planning.html</loc><priority>0.7</priority></url>
-  <url><loc>https://mdl-vld.fr/actu.html</loc><priority>0.7</priority></url>
-  <url><loc>https://mdl-vld.fr/galerie.html</loc><priority>0.7</priority></url>
-  <url><loc>https://mdl-vld.fr/adherer.html</loc><priority>0.7</priority></url>
-  <url><loc>https://mdl-vld.fr/contact.html</loc><priority>0.7</priority></url>
-  <url><loc>https://mdl-vld.fr/documents.html</loc><priority>0.7</priority></url>
-  <url><loc>https://mdl-vld.fr/partenaires.html</loc><priority>0.7</priority></url>
-  <url><loc>https://mdl-vld.fr/merch.html</loc><priority>0.6</priority></url>
-  <url><loc>https://mdl-vld.fr/concours-logos.html</loc><priority>0.6</priority></url>
-  <url><loc>https://mdl-vld.fr/faq.html</loc><priority>0.7</priority></url>
-  <url><loc>https://mdl-vld.fr/mentions-legales.html</loc><priority>0.7</priority></url>
-  <url><loc>https://mdl-vld.fr/confidentialite.html</loc><priority>0.7</priority></url>
-  <url><loc>https://mdl-vld.fr/cgu.html</loc><priority>0.5</priority></url>
-  <url><loc>https://mdl-vld.fr/cgv.html</loc><priority>0.5</priority></url>
+  <url><loc>https://mdl-vld.fr/</loc><lastmod>2026-09-26</lastmod><priority>1.0</priority></url>
+  <url><loc>https://mdl-vld.fr/apropos.html</loc><lastmod>2026-09-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mdl-vld.fr/evenements.html</loc><lastmod>2026-09-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mdl-vld.fr/planning.html</loc><lastmod>2026-09-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mdl-vld.fr/actu.html</loc><lastmod>2026-09-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mdl-vld.fr/galerie.html</loc><lastmod>2026-09-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mdl-vld.fr/adherer.html</loc><lastmod>2026-09-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mdl-vld.fr/contact.html</loc><lastmod>2026-09-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mdl-vld.fr/documents.html</loc><lastmod>2026-09-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mdl-vld.fr/partenaires.html</loc><lastmod>2026-09-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mdl-vld.fr/merch.html</loc><lastmod>2026-09-26</lastmod><priority>0.6</priority></url>
+  <url><loc>https://mdl-vld.fr/concours-logos.html</loc><lastmod>2026-09-26</lastmod><priority>0.6</priority></url>
+  <url><loc>https://mdl-vld.fr/faq.html</loc><lastmod>2026-09-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mdl-vld.fr/mentions-legales.html</loc><lastmod>2026-09-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mdl-vld.fr/confidentialite.html</loc><lastmod>2026-09-26</lastmod><priority>0.7</priority></url>
+  <url><loc>https://mdl-vld.fr/cgu.html</loc><lastmod>2026-09-26</lastmod><priority>0.5</priority></url>
+  <url><loc>https://mdl-vld.fr/cgv.html</loc><lastmod>2026-09-26</lastmod><priority>0.5</priority></url>
 </urlset>

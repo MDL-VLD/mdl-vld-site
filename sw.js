@@ -1,18 +1,35 @@
-/* Service worker "auto-destructeur".
-   L'ancien site installait un service worker qui gardait les pages en cache.
-   Ce fichier remplace l'ancien au meme emplacement (/sw.js) : au prochain
-   passage d'un visiteur, il vide tous les caches, se desinscrit, puis
-   recharge les onglets ouverts pour afficher le nouveau site.
-   A NE PAS SUPPRIMER du depot : c'est lui qui nettoie l'ancien cache. */
-self.addEventListener('install', function () { self.skipWaiting(); });
+/* Service worker "reseau d'abord" (network-first).
+   Toujours servir la version en ligne la plus fraiche ; le cache ne sert
+   qu'en secours hors-ligne. Gere uniquement les fichiers du site (meme
+   origine) : les appels a Supabase et aux CDN passent directement au reseau.
+   Presence d'un handler fetch = le site devient installable (Android/Chrome). */
+const CACHE = 'mdl-rt-v2';
+self.addEventListener('install', function (e) { self.skipWaiting(); });
 self.addEventListener('activate', function (e) {
   e.waitUntil((async function () {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(function (k) { return k !== CACHE; }).map(function (k) { return caches.delete(k); }));
+    await self.clients.claim();
+  })());
+});
+self.addEventListener('fetch', function (e) {
+  const req = e.request;
+  if (req.method !== 'GET') return;
+  let url;
+  try { url = new URL(req.url); } catch (_) { return; }
+  if (url.origin !== self.location.origin) return; // Supabase / CDN : reseau direct
+  e.respondWith((async function () {
     try {
-      var keys = await caches.keys();
-      await Promise.all(keys.map(function (k) { return caches.delete(k); }));
-      await self.registration.unregister();
-      var clients = await self.clients.matchAll({ type: 'window' });
-      clients.forEach(function (c) { try { c.navigate(c.url); } catch (e) {} });
-    } catch (e) {}
+      const net = await fetch(req);
+      if (net && net.status === 200 && net.type === 'basic') {
+        const c = await caches.open(CACHE); c.put(req, net.clone());
+      }
+      return net;
+    } catch (_) {
+      const m = await caches.match(req);
+      if (m) return m;
+      if (req.mode === 'navigate') { const f = await caches.match('index.html'); if (f) return f; }
+      return new Response('', { status: 504, statusText: 'Hors ligne' });
+    }
   })());
 });

@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MDL VLD · Événements</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7d0f64">
+<title>Événements · Maison des Lycéens Viollet-le-Duc</title>
 <meta name="description" content="Tous les événements de la MDL du Lycée Viollet-le-Duc : bal, carnaval, Octobre Rose, soirées et temps forts de l'année.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MDL Viollet-le-Duc">
@@ -242,16 +244,19 @@ function evIcon(ev){
 function gradClass(ev){var s=String((ev.tags&&ev.tags[0])||ev.titre||'');var h=0;for(var i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))>>>0}return 'g'+(h%4+1)}
 function phBlock(ev,cls){var ic=evIcon(ev);return '<div class="'+cls+' '+gradClass(ev)+'"><span class="ph-deco" aria-hidden="true">'+ic+'</span><span class="ph-in"><span class="ph-ic">'+ic+'</span><span class="ph-eyebrow">MDL Viollet-le-Duc</span></span></div>'}
 function coverHTML(ev,cls){return ev.affiche_url?('<img loading="lazy" src="'+ev.affiche_url+'" alt="'+esc(ev.affiche_alt||('Affiche : '+(ev.titre||'')))+'">'):phBlock(ev,cls)}
+function _today(){var d=new Date();d.setHours(0,0,0,0);return d}
+function isPast(ev){if(ev.date_evenement){return new Date(ev.date_evenement+'T00:00:00')<_today()}return ev.statut==='passe'}
+function isUpcoming(ev){if(ev.date_evenement){return new Date(ev.date_evenement+'T00:00:00')>=_today()}return ev.statut==='a_venir'}
 function cardHTML(ev,i){
   return '<button class="card rv" style="transition-delay:'+((i%4)*60)+'ms" onclick="openEv('+i+')">'
     +'<span class="card-tag">'+esc((ev.tags&&ev.tags[0])||'Événement')+'</span>'
     +coverHTML(ev,'ph')
-    +'<div class="card-cap"><h3>'+esc(ev.titre)+'</h3><p>'+esc(ev.date_affichee||'')+'</p></div></button>';
+    +'<div class="card-cap"><h3>'+esc(ev.titre)+'</h3><p>'+esc(ev.date_affichee||'')+'</p>'+(isPast(ev)?'<span style="display:inline-block;margin-top:8px;font-family:var(--syne);font-weight:700;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);background:var(--paper2);border-radius:100px;padding:3px 9px">Terminé</span>':'')+'</div></button>';
 }
 let EVENTS=[];
 function render(data){
   EVENTS=data;
-  var av=data.filter(function(e){return e.statut==='a_venir'});
+  var av=data.filter(isUpcoming).sort(function(a,b){return (a.date_evenement||'9999-99')<(b.date_evenement||'9999-99')?-1:1});
   var zone=document.getElementById('avenir-zone');
   if(av.length){
     var e=av[0];
@@ -265,7 +270,7 @@ function render(data){
   } else {
     zone.innerHTML='<div class="noavenir">Toutes les dates (événements, vacances, épreuves du bac) sont réunies dans l\'agenda.<br><a class="cta" href="planning.html" style="margin-top:18px">Voir l\'agenda</a></div>';
   }
-  document.getElementById('grid').innerHTML=data.map(cardHTML).join('');
+  var ordered=data.slice().sort(function(a,b){return (isUpcoming(a)?0:1)-(isUpcoming(b)?0:1)});document.getElementById('grid').innerHTML=ordered.map(cardHTML).join('');
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 }
 function openEv(i){

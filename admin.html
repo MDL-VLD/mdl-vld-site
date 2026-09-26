@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7d0f64">
 <title>MDL VLD · Administration</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="favicon.ico">
@@ -256,6 +258,7 @@
       <button data-nav="galerie"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></span><span class="lbl">Galerie</span></button>
       <button data-nav="documents"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h5l2 3h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></span><span class="lbl">Documents</span></button>
       <button data-nav="partenaires"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="lbl">Partenaires</span></button>
+      <button data-nav="faq"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span><span class="lbl">FAQ</span></button>
       <div class="side-cat">Boutique &amp; concours</div>
       <button data-nav="merch"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span class="lbl">Merch</span></button>
       <button data-nav="concours"><span class="nav-ic"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><span class="lbl">Concours logos</span></button>
@@ -310,6 +313,12 @@
         <div class="vhead"><div class="vtitle-row"><div class="vtitle">Documents &amp; liens</div><a class="viewlink" href="documents.html" target="_blank" rel="noopener">Voir la page ↗</a></div><button class="btn" data-act="doc-new">+ Nouveau</button></div>
         <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouveau », puis choisis le <b>type</b> : un <b>Document</b> (fichier PDF, dossier OneDrive…) ou un <b>Lien</b> (site, Notion, Drive…). L'icône s'adapte automatiquement. Le fichier n'est pas hébergé sur le site : dépose-le d'abord sur OneDrive ou Drive, puis colle ici son <b>lien de partage</b>.</li><li>Titre, catégorie (même nom = même section, ex. « Statuts &amp; règlement », « Liens utiles »), et l'adresse.</li><li>Écris une nouvelle catégorie pour créer une nouvelle section automatiquement. Tout apparaît sur la page « Documents ».</li></ol></details>
         <div id="doc-list"></div><div id="doc-editor" style="display:none"></div>
+      </section>
+
+      <section class="view" id="v-faq">
+        <div class="vhead"><div class="vtitle-row"><div class="vtitle">FAQ</div><a class="viewlink" href="faq.html" target="_blank" rel="noopener">Voir la page ↗</a></div><button class="btn" data-act="faq-new">+ Nouvelle question</button></div>
+        <details class="help"><summary>Comment faire ?</summary><ol><li>« + Nouvelle question » : écris la question et la réponse.</li><li>L'ordre définit la position (plus petit = plus haut). Décoche « Affichée » pour masquer une question sans la supprimer.</li><li>Tout apparaît sur la page FAQ du site.</li></ol></details>
+        <div id="faq-list-adm"></div><div id="faq-editor" style="display:none"></div>
       </section>
 
       <section class="view" id="v-partenaires">
@@ -523,7 +532,7 @@ async function loadColls(){
   el.innerHTML=COLLS.map(function(c){
     var items=photos.filter(function(p){return (p.collection||'')===c.nom;});
     var ph=items.length?items.map(function(p){
-      return '<div class="mp-item"><img loading="lazy" src="'+esc(p.image_url)+'"><input class="inp mp-titre" data-id="'+p.id+'" value="'+esc(p.titre)+'" placeholder="Nom du modèle"><div class="acts"><button class="btn btn-rg btn-sm" data-act="mp-del" data-id="'+p.id+'">Suppr.</button></div></div>';
+      return '<div class="mp-item"><img alt="Aperçu" loading="lazy" src="'+esc(p.image_url)+'"><input class="inp mp-titre" data-id="'+p.id+'" value="'+esc(p.titre)+'" placeholder="Nom du modèle"><div class="acts"><button class="btn btn-rg btn-sm" data-act="mp-del" data-id="'+p.id+'">Suppr.</button></div></div>';
     }).join(''):'<div class="hint">Aucun modèle dans cette collection.</div>';
     return '<div class="coll-card">'
       +'<div class="coll-head"><b>'+esc(c.nom)+'</b><div class="acts"><button class="btn btn-sm '+(c.actif?'btn-vt':'btn-out')+'" data-act="col-toggle" data-id="'+c.id+'" data-on="'+(c.actif?1:0)+'">'+(c.actif?'Affichée':'Masquée')+'</button><button class="btn btn-rg btn-sm" data-act="col-del" data-id="'+c.id+'">Suppr.</button></div></div>'
@@ -546,7 +555,7 @@ async function loadConcours(){
   el.innerHTML=years.map(function(y){
     var items=logos.filter(function(p){return (p.collection||'')===y.nom;});
     var lg=items.length?items.map(function(p){var w=(p.id===y.gagnant_id);
-      return '<div class="mp-item'+(w?' win':'')+'"><img loading="lazy" src="'+esc(p.image_url)+'"><input class="inp mp-titre" data-id="'+p.id+'" value="'+esc(p.titre)+'" placeholder="Nom du logo"><div class="acts"><button class="btn btn-sm '+(w?'btn-vt':'btn-out')+'" data-act="cc-winner" data-id="'+p.id+'" data-coll="'+y.id+'">'+(w?'Vainqueur ✓':'Vainqueur')+'</button><button class="btn btn-rg btn-sm" data-act="cc-logo-del" data-id="'+p.id+'">Suppr.</button></div></div>';
+      return '<div class="mp-item'+(w?' win':'')+'"><img alt="Aperçu" loading="lazy" src="'+esc(p.image_url)+'"><input class="inp mp-titre" data-id="'+p.id+'" value="'+esc(p.titre)+'" placeholder="Nom du logo"><div class="acts"><button class="btn btn-sm '+(w?'btn-vt':'btn-out')+'" data-act="cc-winner" data-id="'+p.id+'" data-coll="'+y.id+'">'+(w?'Vainqueur ✓':'Vainqueur')+'</button><button class="btn btn-rg btn-sm" data-act="cc-logo-del" data-id="'+p.id+'">Suppr.</button></div></div>';
     }).join(''):'<div class="hint">Aucun logo pour cette année.</div>';
     return '<div class="coll-card">'
       +'<div class="coll-head"><b>'+esc(y.nom)+'</b><div class="acts"><button class="btn btn-sm '+(y.actif?'btn-vt':'btn-out')+'" data-act="col-toggle" data-id="'+y.id+'" data-on="'+(y.actif?1:0)+'">'+(y.actif?'Affichée':'Masquée')+'</button><button class="btn btn-rg btn-sm" data-act="cc-year-del" data-id="'+y.id+'">Suppr.</button></div></div>'
@@ -601,6 +610,7 @@ function nav(id){
   if(id==='agenda')loadAgenda();
   if(id==='galerie')loadPhotos();
   if(id==='documents')loadDocuments();
+  if(id==='faq')loadFaq();
   if(id==='partenaires')loadPartenaires();
   if(id==='messages')loadMessages();
   if(id==='annonce'||id==='adhesion'||id==='merch')loadParams();
@@ -725,7 +735,7 @@ async function loadEvenements(){
   if(!data||!data.length){$('#evt-list').innerHTML='<div class="tbl"><div class="empty">Aucun événement.</div></div>';return}
   $('#evt-list').innerHTML='<div class="tbl">'+data.map(function(v){
     var b=v.statut==='a_venir'?'<span class="b b-av">À venir</span>':'<span class="b b-bro">Passé</span>';
-    var img=v.affiche_url?'<img class="thumb" src="'+esc(v.affiche_url)+'">':'<div class="thumb"></div>';
+    var img=v.affiche_url?'<img alt="Aperçu" class="thumb" src="'+esc(v.affiche_url)+'">':'<div class="thumb"></div>';
     var pin='<button class="btn btn-sm '+(v.epingle?'btn-vt':'btn-out')+'" data-act="evt-pin" data-id="'+v.id+'" data-on="'+(v.epingle?1:0)+'" title="Mettre en avant"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></button>';
     var acc='<button class="btn btn-sm '+(v.en_accueil?'btn-vt':'btn-out')+'" data-act="evt-accueil" data-id="'+v.id+'" data-on="'+(v.en_accueil?1:0)+'" title="Afficher sur la page d accueil"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg></button>';
     return '<div class="row">'+img+'<div class="grow"><div class="t">'+esc(v.titre)+' '+b+'</div><div class="m">'+esc(v.date_affichee||'')+' · '+esc(v.lieu||'')+'</div></div><div class="acts">'+pin+acc+'<button class="btn btn-out btn-sm" data-act="evt-edit" data-id="'+v.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="evt-del" data-id="'+v.id+'">Suppr.</button></div></div>';
@@ -740,7 +750,7 @@ function evtEditor(v){
    +'<div class="fld"><label class="flbl">Lieu</label><input class="inp" id="e-lieu" value="'+esc(v.lieu||'Lycée Viollet-le-Duc')+'"></div></div>'
    +'<div class="fld"><label class="flbl">Date exacte (pour « ajouter au calendrier », facultatif)</label><input class="inp" type="date" id="e-datev" value="'+(v.date_evenement||'')+'"><div class="hint">Sert au bouton « Ajouter à mon calendrier » sur la fiche de l\'événement.</div></div>'
    +'<div class="fld"><label class="flbl">Description</label><textarea class="fta" id="e-desc">'+esc(v.description)+'</textarea></div>'
-   +'<div class="grid2"><div class="fld"><label class="flbl">Affiche</label><input class="inp" type="file" id="e-affiche-file" accept="image/*"><div class="hint">Facultatif (vide = mini-affiche à icône générée automatiquement). Format portrait / A4 conseillé. JPEG, PNG ou WebP, 10 Mo max.</div><div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="e-affiche" value="'+esc(v.affiche_url)+'" placeholder="https://…"><button type="button" class="btn btn-out btn-sm" data-act="pick-affiche">Choisir dans la galerie</button></div><input class="inp" id="e-affiche-alt" value="'+esc(v.affiche_alt)+'" placeholder="Texte alternatif de l\'affiche (accessibilité)" style="margin-top:8px"></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Affiche</label>'+(v.affiche_url?'<img src="'+esc(v.affiche_url)+'" alt="Affiche actuelle" style="max-height:130px;border-radius:8px;display:block;margin:2px 0 8px;border:1px solid var(--line)">':'')+'<input class="inp" type="file" id="e-affiche-file" accept="image/*"><div class="hint">Facultatif (vide = mini-affiche à icône générée automatiquement). Format portrait / A4 conseillé. JPEG, PNG ou WebP, 10 Mo max.</div><div style="display:flex;gap:8px;margin-top:8px"><input class="inp" id="e-affiche" value="'+esc(v.affiche_url)+'" placeholder="https://…"><button type="button" class="btn btn-out btn-sm" data-act="pick-affiche">Choisir dans la galerie</button></div><input class="inp" id="e-affiche-alt" value="'+esc(v.affiche_alt)+'" placeholder="Texte alternatif de l\'affiche (accessibilité)" style="margin-top:8px"></div>'
    +'<div class="fld"><label class="flbl">Lien billetterie (facultatif)</label><input class="inp" id="e-billet" value="'+esc(v.lien_billetterie)+'"></div></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Tags (virgules)</label><input class="inp" id="e-tags" value="'+esc(tagsToStr(v.tags))+'"></div>'
    +'<div class="fld"><label class="flbl">Statut</label><select class="inp" id="e-statut"><option value="passe"'+(v.statut!=='a_venir'?' selected':'')+'>Passé</option><option value="a_venir"'+(v.statut==='a_venir'?' selected':'')+'>À venir</option></select></div></div>'
@@ -799,7 +809,7 @@ async function loadPhotos(){
   if(!data.length){$('#pho-list').innerHTML='<div class="tbl"><div class="empty">Aucune photo. (Les modèles de Merch et les logos du concours se gèrent dans leurs sections dédiées.)</div></div>';return}
   $('#pho-list').innerHTML='<div class="tbl">'+data.map(function(p){
     var vis='<button class="btn btn-sm '+(p.public_galerie===false?'btn-out':'btn-vt')+'" data-act="pho-vis" data-id="'+p.id+'" data-on="'+(p.public_galerie===false?0:1)+'" title="Visible dans la galerie publique">'+(p.public_galerie===false?'Privé':'Public')+'</button>';
-    var th=p.image_url?('<img class="thumb" src="'+esc(p.image_url)+'">'):'<div class="thumb" style="display:flex;align-items:center;justify-content:center;color:var(--mg);font-size:16px">&#9654;</div>';
+    var th=p.image_url?('<img alt="Aperçu" class="thumb" src="'+esc(p.image_url)+'">'):'<div class="thumb" style="display:flex;align-items:center;justify-content:center;color:var(--mg);font-size:16px">&#9654;</div>';
     var kind=p.video_url?' · Vidéo':'';
     return '<div class="row">'+th+'<div class="grow"><div class="t">'+esc(p.titre||'(sans titre)')+'</div><div class="m">'+esc(p.categorie||'')+' · '+esc(tagsToStr(p.tags))+kind+'</div></div><div class="acts">'+vis+'<button class="btn btn-out btn-sm" data-act="pho-edit" data-id="'+p.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="pho-del" data-id="'+p.id+'">Suppr.</button></div></div>';
   }).join('')+'</div>';
@@ -873,7 +883,7 @@ async function paramsSave(){
 }
 function openImagePicker(cb){IMGCB=cb;var m=$('#imgpick');m.querySelector('.pick-body').innerHTML='<div class="hint">Chargement…</div>';m.classList.add('open');
   sb.from('photos').select('*').is('deleted_at',null).order('created_at',{ascending:false}).then(function(r){var imgs=(r.data||[]);
-    m.querySelector('.pick-body').innerHTML='<div class="hint" style="margin-bottom:12px;color:#a16207"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg> Pour un article public, choisis de préférence une photo sans visage (sauf accord des personnes).</div><label class="dropz" id="pick-drop"><input type="file" id="pick-file" accept="image/*" style="display:none"><span class="dropz-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v13"/></svg></span><span><b>Glisse une image ici</b> ou clique pour parcourir</span><span class="hint" style="margin:0">Le site la réduit et la compresse tout seul (max 1600 px).</span></label><div class="hint" style="margin:6px 0 14px">ou choisis parmi les photos de la galerie :</div><div class="pickgrid">'+imgs.map(function(p){return '<img class="pickimg" src="'+esc(p.image_url)+'" data-url="'+esc(p.image_url)+'">'}).join('')+'</div>';});
+    m.querySelector('.pick-body').innerHTML='<div class="hint" style="margin-bottom:12px;color:#a16207"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg> Pour un article public, choisis de préférence une photo sans visage (sauf accord des personnes).</div><label class="dropz" id="pick-drop"><input type="file" id="pick-file" accept="image/*" style="display:none"><span class="dropz-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v13"/></svg></span><span><b>Glisse une image ici</b> ou clique pour parcourir</span><span class="hint" style="margin:0">Le site la réduit et la compresse tout seul (max 1600 px).</span></label><div class="hint" style="margin:6px 0 14px">ou choisis parmi les photos de la galerie :</div><div class="pickgrid">'+imgs.map(function(p){return '<img alt="Aperçu" class="pickimg" src="'+esc(p.image_url)+'" data-url="'+esc(p.image_url)+'">'}).join('')+'</div>';});
 }
 function closePicker(){$('#imgpick').classList.remove('open')}
 var SITE_PAGES=[{label:'Accueil',url:'index.html'},{label:'À propos',url:'apropos.html'},{label:'Actualités',url:'actu.html'},{label:'Événements',url:'evenements.html'},{label:'Agenda',url:'planning.html'},{label:'Galerie',url:'galerie.html'},{label:'Documents & liens',url:'documents.html'},{label:'Partenaires',url:'partenaires.html'},{label:'Merch',url:'merch.html'},{label:'Concours de logos',url:'concours-logos.html'},{label:'Adhérer',url:'adherer.html'},{label:'Contact',url:'contact.html'},{label:'FAQ',url:'faq.html'}];
@@ -904,12 +914,33 @@ async function docSave(){var id=$('#d-id').value,titre=$('#d-titre').value.trim(
   var res=id?await sb.from('documents').update(payload).eq('id',id):await sb.from('documents').insert(payload);
   if(res.error){toast('Erreur : '+res.error.message);return}toast('Document enregistré');loadDocuments();
 }
+/* ---------- FAQ ---------- */
+async function loadFaq(){
+  $('#faq-editor').style.display='none';$('#faq-list-adm').style.display='block';
+  var {data}=await sb.from('faq').select('*').order('ordre');
+  if(!data||!data.length){$('#faq-list-adm').innerHTML='<div class="tbl"><div class="empty">Aucune question.</div></div>';return}
+  $('#faq-list-adm').innerHTML='<div class="tbl">'+data.map(function(d){return '<div class="row"><div class="grow"><div class="t">'+esc(d.question)+(d.actif?'':' <span style="color:var(--grey);font-weight:400">(masquée)</span>')+'</div><div class="m">Ordre '+(d.ordre||0)+'</div></div><div class="acts"><button class="btn btn-out btn-sm" data-act="faq-edit" data-id="'+d.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="faq-del" data-id="'+d.id+'">Suppr.</button></div></div>';}).join('')+'</div>';
+}
+function faqEditor(d){d=d||{};$('#faq-list-adm').style.display='none';var e=$('#faq-editor');e.style.display='block';
+  e.innerHTML='<div class="panel"><input type="hidden" id="f-id" value="'+(d.id||'')+'">'
+   +'<div class="fld"><label class="flbl">Question *</label><input class="inp" id="f-q" value="'+esc(d.question)+'"></div>'
+   +'<div class="fld"><label class="flbl">Réponse *</label><textarea class="fta" id="f-r" style="min-height:110px">'+esc(d.reponse)+'</textarea></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Ordre</label><input class="inp" type="number" id="f-ordre" value="'+(d.ordre!=null?d.ordre:0)+'"></div>'
+   +'<div class="fld"><label class="flbl">Affichage</label><label style="display:flex;align-items:center;gap:8px;margin-top:10px"><input type="checkbox" id="f-actif"'+(d.actif===false?'':' checked')+'> Affichée sur le site</label></div></div>'
+   +'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-vt" data-act="faq-save">Enregistrer</button><button class="btn btn-out" data-act="faq-cancel">Annuler</button></div></div>';
+}
+async function faqSave(){var id=$('#f-id').value,q=$('#f-q').value.trim(),r=$('#f-r').value.trim();
+  if(!q||!r){toast('Question et réponse requises.');return}
+  var payload={question:q,reponse:r,ordre:parseInt($('#f-ordre').value,10)||0,actif:$('#f-actif').checked,updated_at:new Date().toISOString()};
+  var res=id?await sb.from('faq').update(payload).eq('id',id):await sb.from('faq').insert(payload);
+  if(res.error){toast('Erreur : '+res.error.message);return}toast('Question enregistrée');loadFaq();
+}
 /* ---------- PARTENAIRES ---------- */
 async function loadPartenaires(){
   $('#par-editor').style.display='none';$('#par-list').style.display='block';
   var {data}=await sb.from('partenaires').select('*').is('deleted_at',null).order('ordre');
   if(!data||!data.length){$('#par-list').innerHTML='<div class="tbl"><div class="empty">Aucun partenaire.</div></div>';return}
-  $('#par-list').innerHTML='<div class="tbl">'+data.map(function(p){var img=p.logo_url?'<img class="thumb" src="'+esc(p.logo_url)+'">':'<div class="thumb"></div>';return '<div class="row">'+img+'<div class="grow"><div class="t">'+esc(p.nom)+'</div><div class="m">'+esc(p.categorie||'')+(p.url?' · '+esc(p.url):'')+'</div></div><div class="acts"><button class="btn btn-out btn-sm" data-act="par-edit" data-id="'+p.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="par-del" data-id="'+p.id+'">Suppr.</button></div></div>';}).join('')+'</div>';
+  $('#par-list').innerHTML='<div class="tbl">'+data.map(function(p){var img=p.logo_url?'<img alt="Aperçu" class="thumb" src="'+esc(p.logo_url)+'">':'<div class="thumb"></div>';return '<div class="row">'+img+'<div class="grow"><div class="t">'+esc(p.nom)+'</div><div class="m">'+esc(p.categorie||'')+(p.url?' · '+esc(p.url):'')+'</div></div><div class="acts"><button class="btn btn-out btn-sm" data-act="par-edit" data-id="'+p.id+'">Modifier</button><button class="btn btn-rg btn-sm" data-act="par-del" data-id="'+p.id+'">Suppr.</button></div></div>';}).join('')+'</div>';
 }
 function parEditor(p){p=p||{};$('#par-list').style.display='none';var e=$('#par-editor');e.style.display='block';
   e.innerHTML='<div class="panel"><input type="hidden" id="pa-id" value="'+(p.id||'')+'">'
@@ -993,6 +1024,11 @@ document.addEventListener('click',async function(e){
   if(act==='doc-save')return docSave();
   if(act==='doc-edit'){var rd=await sb.from('documents').select('*').eq('id',id).single();return docEditor(rd.data)}
   if(act==='doc-del'){if(await askConfirm('Ce document ira à la corbeille. Tu pourras le restaurer pendant 7 jours.','Mettre ce document à la corbeille ?')){await sb.from('documents').update({deleted_at:new Date().toISOString()}).eq('id',id);toast('Mis à la corbeille');loadDocuments()}return}
+  if(act==='faq-new')return faqEditor(null);
+  if(act==='faq-cancel')return loadFaq();
+  if(act==='faq-save')return faqSave();
+  if(act==='faq-edit'){var rf=await sb.from('faq').select('*').eq('id',id).single();return faqEditor(rf.data)}
+  if(act==='faq-del'){if(await askConfirm('Supprimer définitivement cette question ?','Supprimer la question ?')){await sb.from('faq').delete().eq('id',id);toast('Supprimée');loadFaq()}return}
   if(act==='par-new')return parEditor(null);
   if(act==='par-cancel')return loadPartenaires();
   if(act==='par-save')return parSave();

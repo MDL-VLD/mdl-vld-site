@@ -134,6 +134,7 @@
   }
 
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSearch();if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch()}});
-  function init(){injectCSS();addSkipLink();addLoupe();loadData();pastille()}
+  function registerSW(){if('serviceWorker' in navigator){try{navigator.serviceWorker.register('sw.js')}catch(e){}}}
+  function init(){injectCSS();addSkipLink();addLoupe();loadData();pastille();registerSW()}
   if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
 })();

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MDL VLD · Conditions de vente</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7d0f64">
+<title>CGV · Maison des Lycéens Viollet-le-Duc</title>
 <meta name="description" content="Conditions générales de vente de la Maison des Lycéens du Lycée Viollet-le-Duc : adhésions et produits.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MDL Viollet-le-Duc">
@@ -123,7 +125,7 @@
 <h2>Modification des CGV</h2>
 <p>La MDL peut faire évoluer ces conditions, notamment pour tenir compte de nouveaux canaux de vente. La version applicable est celle publiée sur cette page au moment de l'achat.</p>
 
-<p style="color:var(--grey);font-size:13px;margin-top:26px">Dernière mise à jour : 17 août 2026.</p>
+<p style="color:var(--grey);font-size:13px;margin-top:26px">Dernière mise à jour : <span id="maj-auto">17 août 2026</span></p>
 </div></div></main>
 <footer>
   <div class="wrap">
@@ -313,4 +315,5 @@
 </script>
 
 <script src="assets/site.js" defer></script>
+<script id="maj-auto-js">(function(){var e=document.getElementById("maj-auto");if(!e)return;try{var d=new Date(document.lastModified);if(!isNaN(d))e.textContent=d.toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})}catch(_){}})();</script>
 </body></html>

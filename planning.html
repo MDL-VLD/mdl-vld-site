@@ -1,6 +1,8 @@
 <!DOCTYPE html><html lang="fr"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MDL VLD · Agenda</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7d0f64">
+<title>Agenda · Maison des Lycéens Viollet-le-Duc</title>
 <meta name="description" content="L'agenda de la MDL du Lycée Viollet-le-Duc : événements, vacances, jours fériés.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MDL Viollet-le-Duc">
@@ -119,7 +121,7 @@
 <header id="main" class="phero"><div class="phero-bg" style="background-image:url(assets/lycee-etang.jpg)"></div>
 <div class="wrap phero-in"><div class="eyebrow rv">Toute l'année</div><h1 class="rv">Agenda</h1>
 <p class="rv">Les événements de la MDL, les vacances et les jours fériés, au fil de l'année.</p></div></header>
-<section><div class="wrap"><div class="ag-toggle"><button id="btn-cal" class="ag-tab on">Calendrier</button><button id="btn-list" class="ag-tab">Planning</button><button id="btn-ics" class="ag-tab" style="margin-left:auto" title="Ajouter l'agenda à ton calendrier (Google, Apple, Outlook)">↓ Ajouter à mon calendrier</button></div>
+<section><div class="wrap"><div class="ag-toggle"><button id="btn-cal" class="ag-tab on">Calendrier</button><button id="btn-list" class="ag-tab">Planning</button><button id="btn-ics" class="ag-tab" style="margin-left:auto" title="Télécharger un instantané de l'agenda (.ics)">↓ Télécharger</button><a id="btn-sub" class="ag-tab" href="webcal://ksvqjbcnqphnyxfpjhvz.supabase.co/functions/v1/agenda-ics" title="S'abonner : ton agenda se met à jour tout seul" style="display:inline-flex;align-items:center;text-decoration:none">S'abonner (auto)</a></div>
 <div id="cal-view"></div>
 <div id="list-view" style="display:none"><p style="color:var(--grey)">L'agenda réunit toutes les dates de l'année : événements de la MDL, vacances scolaires, jours fériés et épreuves du bac.</p></div></div></section>
 <footer>
@@ -151,11 +153,14 @@ function colorType(t){t=(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-
 function typeLabel(t){return AGTL[t]||(t?(t.charAt(0).toUpperCase()+t.slice(1)):'');}
 function fday(iso){var d=new Date(iso);return d.getDate()+' '+MC[d.getMonth()]}
 var ITEMS=[],calY,calM;
+function _todayISO(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 function renderList(){
   var el=document.getElementById('list-view');
   if(!ITEMS.length){el.innerHTML='<div class="dnote">L\'agenda sera bientôt disponible.</div>';return;}
+  var T=_todayISO();var LIST=ITEMS.filter(function(e){var end=e.date_fin||e.date_debut;return !end||end>=T});
+  if(!LIST.length){el.innerHTML='<div class="dnote">Pas de date à venir pour le moment.</div>';return;}
   var groups={},order=[];
-  ITEMS.forEach(function(e){var d=new Date(e.date_debut);var key=d.getFullYear()+'-'+('0'+d.getMonth()).slice(-2);if(!groups[key]){groups[key]=[];order.push(key);}groups[key].push(e);});
+  LIST.forEach(function(e){var d=new Date(e.date_debut);var key=d.getFullYear()+'-'+('0'+d.getMonth()).slice(-2);if(!groups[key]){groups[key]=[];order.push(key);}groups[key].push(e);});
   order.sort();
   el.innerHTML=order.map(function(key){
     var p=key.split('-');var ml=MOIS[parseInt(p[1],10)]+' '+p[0];
