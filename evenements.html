@@ -144,7 +144,7 @@
   <div class="wrap nav-in">
     <a href="index.html" class="brand"><img loading="lazy" src="assets/logo.png" alt="MDL"><span class="brand-name"><span class="bn-full">MDL Viollet-le-Duc</span><span class="bn-abbr">MDL VLD</span><small>Maison des Lycéens</small></span></a>
     <div class="nav-links">
-      <a href="apropos.html">À propos</a>
+      <a href="apropos.html">À propos</a><a href="bureau.html">Le bureau</a>
       <a href="evenements.html" class="active">Événements</a><a href="planning.html">Agenda</a>
       <a href="actu.html">Actualités</a>
       <a href="galerie.html">Galerie</a>
@@ -177,6 +177,20 @@
   </div>
 </section>
 
+<style>.ideabox{background:var(--prune);color:#fff;border-radius:20px;padding:38px 34px;margin-top:8px}.ideabox .eyebrow{color:#f3b9e2;font-family:var(--syne);font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase}.ideabox h2{font-family:var(--syne);font-weight:800;font-size:26px;margin:8px 0 8px}.ideabox p.ib-lead{color:rgba(255,255,255,.82);font-size:15px;margin-bottom:18px;max-width:560px}.ideabox textarea{width:100%;min-height:92px;border-radius:12px;border:none;padding:14px;font:inherit;font-size:15px;resize:vertical;background:#fff;color:var(--ink)}.ib-row{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}.ib-row input{flex:1;min-width:180px;border-radius:100px;border:none;padding:12px 18px;font:inherit;font-size:14px;background:#fff;color:var(--ink)}.ideabox .cta{background:var(--mg);color:#fff;border:none;cursor:pointer}.ideabox .cta:disabled{opacity:.6;cursor:default}.ib-msg{margin-top:12px;font-size:14px;min-height:18px}@media(max-width:560px){.ib-row .cta{width:100%;justify-content:center}}</style>
+<section><div class="wrap">
+  <div class="ideabox rv">
+    <div class="eyebrow">À toi de jouer</div>
+    <h2>Une idée d'événement ?</h2>
+    <p class="ib-lead">Propose ton idée au bureau de la MDL : un thème, une sortie, une soirée… Laisse ton prénom ou reste anonyme, comme tu préfères.</p>
+    <form id="idea-form" onsubmit="return submitIdea(event)">
+      <textarea id="idea-txt" required maxlength="1000" placeholder="Ton idée : type d'événement, thème, période souhaitée…"></textarea>
+      <div class="ib-row"><input id="idea-prenom" maxlength="60" placeholder="Ton prénom (facultatif)"><button class="cta" type="submit" id="idea-btn">Envoyer mon idée</button></div>
+      <p class="ib-msg" id="idea-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div></section>
+
 <div class="ov" id="ov" onclick="if(event.target===this)closeEv()">
   <div class="modal" id="modal"></div>
 </div>
@@ -203,10 +217,10 @@
         </div>
         <div class="foot-cta"><a href="https://search.google.com/local/writereview?placeid=ChIJCc3KzrOb5kcR2pEyC0TCt2g" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#c9a84c;color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;padding:10px 18px;border-radius:100px;text-decoration:none">★ Laisser un avis Google</a><a href="adherer.html" class="foot-adh">Adhérer</a></div>
       </div>
-      <div class="foot-col"><h4>Le site</h4><a href="apropos.html">À propos</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a></div>
+      <div class="foot-col"><h4>Le site</h4><a href="apropos.html">À propos</a><a href="bureau.html">Le bureau</a><a href="evenements.html">Événements</a><a href="planning.html">Agenda</a><a href="actu.html">Actualités</a><a href="galerie.html">Galerie</a></div>
       <div class="foot-col"><h4>Participer</h4><a href="adherer.html">Adhérer</a><a href="contact.html">Contact</a><a href="merch.html">Merch</a><a href="concours-logos.html">Concours</a></div><div class="foot-col"><h4>Ressources</h4><a href="faq.html">FAQ</a><a href="documents.html">Documents</a><a href="partenaires.html">Partenaires</a></div>
     </div>
-    <div class="foot-bottom"><span><span class="nb">© 2026 MDL Viollet-le-Duc</span> · <span class="nb">Fait par les lycéens</span> · <span class="nb">Tous droits réservés</span> · <span class="nb">Site par <span data-param="credit_technique">Ewan Foucaud</span></span></span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="cgu.html">CGU</a> · <a href="cgv.html">CGV</a> · <a href="admin.html">Espace membres</a></span></div>
+    <div class="foot-bottom"><span><span class="nb">© 2026 MDL Viollet-le-Duc</span> · <span class="nb">Fait par les lycéens</span> · <span class="nb">Tous droits réservés</span></span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="cgu.html">CGU</a> · <a href="cgv.html">CGV</a> · <a href="admin.html">Espace membres</a></span></div>
   </div>
 </footer>
 
@@ -216,11 +230,11 @@ const SB_KEY='sb_publishable_KJntHDOzJXgogIKxXNvWDg_p65OruJ0';
 const FALLBACK=[
  {titre:"Bal des Terminales",date_affichee:"Juillet",lieu:"Salle polyvalente de Thoiry",description:"La soirée incontournable de la MDL : chaque année, le Bal des Terminales réunit les élèves pour fêter la fin de leur parcours au lycée, dans une ambiance unique.",affiche_url:"assets/affiche-bal.jpg",statut:"passe",tags:["Soirée"],epingle:true},
  {titre:"Course contre la Faim",date_affichee:"Printemps",lieu:"Lycée Viollet-le-Duc",description:"La MDL organise la Course contre la Faim au lycée, en partenariat avec Action contre la Faim : une journée solidaire où tout l'établissement se mobilise et court pour la bonne cause.",affiche_url:"assets/affiche-ccf.jpg",statut:"passe",tags:["Solidarité"]},
- {titre:"Octobre Rose",date_affichee:"Octobre",lieu:"Lycée Viollet-le-Duc",description:"En octobre, la MDL se mobilise contre le cancer du sein : vente de pins, journée où tout le lycée s'habille en rose, et l'intégralité des bénéfices reversée à une association de lutte contre le cancer du sein.",affiche_url:"assets/affiche-octobrose.jpg",statut:"passe",tags:["Solidarité"]},
- {titre:"Soirée Halloween",date_affichee:"Octobre",lieu:"Lycée Viollet-le-Duc",description:"La MDL décore le lycée aux couleurs d'Halloween, avec parfois un concours de déguisements et une tombola.",affiche_url:"assets/affiche-halloween.jpg",statut:"passe",tags:["Festif"]},
+ {titre:"Octobre Rose",date_affichee:"Octobre",lieu:"Lycée Viollet-le-Duc",description:"En octobre, la MDL se mobilise contre le cancer du sein : vente de pins, journée où tout le lycée s'habille en rose, et l'intégralité des bénéfices reversée à une association de lutte contre le cancer du sein.",affiche_url:"assets/affiche-octobrose.webp",statut:"passe",tags:["Solidarité"]},
+ {titre:"Soirée Halloween",date_affichee:"Octobre",lieu:"Lycée Viollet-le-Duc",description:"La MDL décore le lycée aux couleurs d'Halloween, avec parfois un concours de déguisements et une tombola.",affiche_url:"assets/affiche-halloween.webp",statut:"passe",tags:["Festif"]},
  {titre:"Fête de Noël",date_affichee:"Décembre",lieu:"Lycée Viollet-le-Duc",description:"La MDL décore le lycée pour les fêtes : concours de déguisements ou de pulls moches, et parfois une tombola avant les vacances.",affiche_url:"assets/affiche-noel.jpg",statut:"passe",tags:["Festif"]},
- {titre:"Saint-Valentin",date_affichee:"Février",lieu:"Lycée Viollet-le-Duc",description:"Pour la fête des amoureux, la MDL organise une vente de roses en mousse à offrir partout dans le lycée.",affiche_url:"assets/affiche-stvalentin.jpg",statut:"passe",tags:["Festif"]},
- {titre:"Carnaval du lycée",date_affichee:"Mars",lieu:"Lycée Viollet-le-Duc",description:"Une journée festive au lycée : concours de déguisements et, parfois, une tombola.",affiche_url:"assets/affiche-carnaval.jpg",statut:"passe",tags:["Festif"]},
+ {titre:"Saint-Valentin",date_affichee:"Février",lieu:"Lycée Viollet-le-Duc",description:"Pour la fête des amoureux, la MDL organise une vente de roses en mousse à offrir partout dans le lycée.",affiche_url:"assets/affiche-stvalentin.webp",statut:"passe",tags:["Festif"]},
+ {titre:"Carnaval du lycée",date_affichee:"Mars",lieu:"Lycée Viollet-le-Duc",description:"Une journée festive au lycée : concours de déguisements et, parfois, une tombola.",affiche_url:"assets/affiche-carnaval.webp",statut:"passe",tags:["Festif"]},
  {titre:"Journée de l'Élégance",date_affichee:"Printemps",lieu:"Lycée Viollet-le-Duc",description:"La Journée de l'Élégance invite à sublimer son quotidien au lycée : tenue soignée et créativité bienvenue, le style fait partie de la vie lycéenne.",affiche_url:"assets/affiche-elegance.jpg",statut:"passe",tags:["Thème"]},
  {titre:"Semaine des Talents",date_affichee:"Mai",lieu:"Lycée Viollet-le-Duc",description:"La MDL donne la scène aux lycéens : chant, danse, humour, musique, art. Pendant une semaine, le lycée devient un théâtre et les talents sont à l'honneur.",affiche_url:null,statut:"passe",tags:["Culture"]},
  {titre:"Les pulls du lycée",date_affichee:"Toute l'année",lieu:"Lycée Viollet-le-Duc",description:"Le tout nouveau merch du lycée, lancé en 2025-2026. Tout commence par un concours de logo ouvert à tous, élèves comme personnels, avant la vente des pulls.",affiche_url:null,statut:"passe",tags:["Nouveauté"]},
@@ -281,11 +295,13 @@ function openEv(i){
   m.innerHTML=hero
     +'<div class="modal-body"><div class="mtag">'+esc((e.tags&&e.tags[0])||'Événement')+'</div><h3>'+esc(e.titre)+'</h3>'
     +'<div class="mmeta"><div><div class="kk">Quand</div>'+esc(e.date_affichee||'À préciser')+'</div><div><div class="kk">Où</div>'+esc(e.lieu||'Lycée Viollet-le-Duc')+'</div></div>'
-    +'<p class="desc">'+esc(e.description||'')+'</p>'+(e.date_evenement?'<button class="cta" style="margin-top:4px" onclick="evICS('+i+')">↓ Ajouter à mon calendrier</button>':'')+'<div id="modal-album"></div></div>';
-  document.getElementById('ov').classList.add('open');
+    +'<p class="desc">'+esc(e.description||'')+'</p>'+'<div class="mact" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">'+(e.date_evenement?'<button class="cta" onclick="evICS('+i+')">↓ Ajouter à mon calendrier</button>':'')+'<button class="cta" id="shareBtn" style="background:transparent;color:var(--mg);border:1.5px solid var(--mg)" onclick="shareEv('+i+')">Partager</button></div>'+'<div id="modal-album"></div></div>';
+  document.getElementById('ov').classList.add('open');if(e.id){try{history.replaceState(null,'','#ev-'+e.id)}catch(_){}}
   if(e.id){try{supabase.createClient(SB_URL,SB_KEY).from('photos').select('image_url,alt,titre').eq('evenement_id',e.id).eq('public_galerie',true).is('deleted_at',null).limit(30).then(function(r){var ph=(r.data||[]).filter(function(x){return x.image_url});var el=document.getElementById('modal-album');if(!ph.length||!el)return;el.innerHTML='<div style="font-family:var(--syne);font-weight:800;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--mg);margin:20px 0 10px">Album ('+ph.length+')</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">'+ph.map(function(x){return '<a href="'+esc(x.image_url)+'" target="_blank" rel="noopener"><img loading="lazy" src="'+esc(x.image_url)+'" alt="'+esc(x.alt||x.titre||'')+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;display:block"></a>'}).join('')+'</div>';});}catch(err){}}
 }
-function closeEv(){document.getElementById('ov').classList.remove('open')}
+function closeEv(){document.getElementById('ov').classList.remove('open');try{if(location.hash.indexOf('#ev-')===0)history.replaceState(null,'',location.pathname)}catch(_){}}
+function shareEv(i){var e=EVENTS[i];if(!e)return;var url=location.origin+location.pathname+(e.id?'#ev-'+e.id:'');var d={title:(e.titre||'Événement')+' · MDL Viollet-le-Duc',text:(e.titre||'')+(e.date_affichee?' · '+e.date_affichee:''),url:url};if(navigator.share){navigator.share(d).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(url);var b=document.getElementById('shareBtn');if(b){var o=b.textContent;b.textContent='Lien copié ✓';setTimeout(function(){b.textContent=o},1800)}}else{prompt('Copie ce lien :',url)}}
+async function submitIdea(ev){ev.preventDefault();var t=(document.getElementById('idea-txt').value||'').trim();var msg=document.getElementById('idea-msg'),btn=document.getElementById('idea-btn');if(!t){msg.style.color='#ffd0d0';msg.textContent='Écris ton idée avant d\'envoyer.';return false}btn.disabled=true;btn.textContent='Envoi…';try{var sb=supabase.createClient(SB_URL,SB_KEY);var r=await sb.from('suggestions').insert({idee:t,prenom:(document.getElementById('idea-prenom').value||'').trim()||null});if(r.error)throw r.error;document.getElementById('idea-form').reset();msg.style.color='#c9f0d2';msg.textContent='Merci ! Ton idée a bien été transmise au bureau.';}catch(e){msg.style.color='#ffd0d0';msg.textContent='Envoi impossible pour le moment. Réessaie dans un instant.';}btn.disabled=false;btn.textContent='Envoyer mon idée';return false}
 function evICS(i){var e=EVENTS[i];if(!e||!e.date_evenement)return;function pad(n){return('0'+n).slice(-2)}function dp(iso,plus){var d=new Date(iso+'T00:00:00');if(plus)d.setDate(d.getDate()+1);return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())}function ie(s){return String(s==null?'':s).replace(/([,;\\])/g,'\\$1').replace(/\n/g,'\\n')}var stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');var L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MDL VLD//Evenement//FR','METHOD:PUBLISH','BEGIN:VEVENT','UID:'+((e.id||Math.random().toString(36).slice(2)))+'@mdl-vld.fr','DTSTAMP:'+stamp,'DTSTART;VALUE=DATE:'+dp(e.date_evenement),'DTEND;VALUE=DATE:'+dp(e.date_evenement,true),'SUMMARY:'+ie(e.titre||'Événement MDL'),(e.lieu?'LOCATION:'+ie(e.lieu):''),(e.lien_billetterie?'URL:'+ie(e.lien_billetterie):''),'END:VEVENT','END:VCALENDAR'].filter(Boolean);var blob=new Blob([L.join('\r\n')],{type:'text/calendar'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download=((e.titre||'evenement').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40)||'evenement')+'.ics';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeEv()});
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
@@ -298,6 +314,7 @@ document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
     if(!r.error && r.data && r.data.length) data=r.data;
   }catch(err){}
   render(data||FALLBACK);
+  var _h=(location.hash||'').match(/^#ev-(.+)$/);if(_h){var _i=EVENTS.findIndex(function(x){return String(x.id)===_h[1]});if(_i>=0)openEv(_i);}
 })();
 </script>
 <script>(function(){var b=document.querySelector(".burger"),n=document.querySelector(".nav-links");if(b&&n){b.addEventListener("click",function(){n.classList.toggle("open");b.classList.toggle("open")});n.addEventListener("click",function(e){if(e.target.closest("a")){n.classList.remove("open");b.classList.remove("open")}})}})();(function(){var p=(location.pathname.split("/").pop()||"").replace(/\.html$/,"")||"index";document.querySelectorAll(".nav-links a").forEach(function(a){var h=(a.getAttribute("href")||"").split("/").pop().replace(/\.html$/,"");if(h&&h===p&&!a.classList.contains("cta"))a.classList.add("active")})})();</script>
