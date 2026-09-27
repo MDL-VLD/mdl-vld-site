@@ -380,7 +380,7 @@
         var ic=evIcon(e);
         var cover=e.affiche_url?'<img loading="lazy" src="'+esc(e.affiche_url)+'" alt="Affiche : '+esc(e.titre)+'">':'<div class="ph '+gradClass(e)+'"><span class="ph-deco" aria-hidden="true">'+ic+'</span><span class="ph-in"><span class="ph-ic">'+ic+'</span><span class="ph-eyebrow">MDL Viollet-le-Duc</span></span></div>';
         var tag=(e.tags&&e.tags[0])||'Événement';
-        return '<a href="evenements.html" class="card in"><span class="card-tag">'+esc(tag)+'</span>'+cover+'<div class="card-cap"><h3>'+esc(e.titre)+'</h3><p>'+esc(e.date_affichee||'')+'</p></div></a>';
+        return '<a href="evenements.html#ev-'+esc(e.id)+'" class="card in"><span class="card-tag">'+esc(tag)+'</span>'+cover+'<div class="card-cap"><h3>'+esc(e.titre)+'</h3><p>'+esc(e.date_affichee||'')+'</p></div></a>';
       }).join('');
     });
   })();

@@ -1018,11 +1018,13 @@ function burEditor(m){m=m||{};$('#bur-list').style.display='none';var e=$('#bur-
   e.innerHTML='<div class="panel"><input type="hidden" id="bu-id" value="'+(m.id||'')+'">'
    +'<div class="grid2"><div class="fld"><label class="flbl">Année *</label><input class="inp" id="bu-annee" list="bu-annees" value="'+esc(m.annee)+'" placeholder="2025-2026"><datalist id="bu-annees"></datalist></div>'
    +'<div class="fld"><label class="flbl">Groupe</label><input class="inp" id="bu-groupe" list="bu-groupes" value="'+esc(m.groupe||'Bureau')+'" placeholder="Bureau"><datalist id="bu-groupes"><option value="Bureau"><option value="Conseil d\'administration"><option value="Membres actifs"></datalist></div></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">Ordre du groupe</label><input class="inp" type="number" id="bu-gordre" value="'+(m.groupe_ordre||0)+'"><div class="hint">Plus petit = affiché plus haut. Ex : Bureau permanent 0, Bureau 1, historique 2…</div></div><div class="fld"></div></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Rôle</label><input class="inp" id="bu-role" value="'+esc(m.role)+'" placeholder="Président·e, Trésorier·e…"></div>'
    +'<div class="fld"><label class="flbl">Nom *</label><input class="inp" id="bu-nom" value="'+esc(m.nom)+'" placeholder="Prénom Nom (ou juste le prénom)"></div></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Statut</label><input class="inp" id="bu-statut" list="bu-statuts" value="'+esc(m.statut)+'" placeholder="Élève"><datalist id="bu-statuts"><option value="Élève"><option value="Professeur"><option value="Personnel"><option value="Parent"></datalist></div>'
    +'<div class="fld"><label class="flbl">Classe (facultatif)</label><input class="inp" id="bu-classe" value="'+esc(m.classe)+'" placeholder="Terminale, 1re…"></div></div>'
    +'<div class="fld"><label class="flbl">Photo (facultative)</label><input class="inp" type="file" id="bu-photo-file" accept="image/*"><div class="hint">Vide = initiales affichées. JPEG, PNG ou WebP, 10 Mo max.</div><input class="inp" id="bu-photo" value="'+esc(m.photo_url)+'" placeholder="https://…" style="margin-top:8px"></div>'
+   +'<div class="grid2"><div class="fld"><label class="flbl">LinkedIn (facultatif)</label><input class="inp" id="bu-linkedin" value="'+esc(m.linkedin)+'" placeholder="https://www.linkedin.com/in/…"></div><div class="fld"><label class="flbl">Instagram (facultatif)</label><input class="inp" id="bu-instagram" value="'+esc(m.instagram)+'" placeholder="https://www.instagram.com/…"></div></div>'
    +'<div class="grid2"><div class="fld"><label class="flbl">Ordre</label><input class="inp" type="number" id="bu-ordre" value="'+(m.ordre||0)+'"></div>'
    +'<div class="fld"><label class="flbl">Affichage</label><label style="display:flex;align-items:center;gap:8px;margin-top:8px"><input type="checkbox" id="bu-actif" '+actif+'> Visible sur le site</label></div></div>'
    +'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn btn-vt" data-act="bur-save">Enregistrer</button><button class="btn btn-out" data-act="bur-cancel">Annuler</button></div></div>';
@@ -1032,7 +1034,7 @@ async function burSave(){var id=$('#bu-id').value,nom=$('#bu-nom').value.trim(),
   if(!annee){toast('L\'année est requise.');return}
   var photo=$('#bu-photo').value.trim()||null;var pf=$('#bu-photo-file').files[0];
   if(pf){try{photo=await uploadFile(pf)}catch(e){toast('Envoi de la photo échoué');return}}
-  var payload={annee:annee,groupe:$('#bu-groupe').value.trim()||'Bureau',role:$('#bu-role').value.trim()||null,nom:nom,statut:$('#bu-statut').value.trim()||null,classe:$('#bu-classe').value.trim()||null,photo_url:photo,ordre:parseInt($('#bu-ordre').value,10)||0,actif:$('#bu-actif').checked};
+  var payload={annee:annee,groupe:$('#bu-groupe').value.trim()||'Bureau',role:$('#bu-role').value.trim()||null,nom:nom,statut:$('#bu-statut').value.trim()||null,classe:$('#bu-classe').value.trim()||null,photo_url:photo,ordre:parseInt($('#bu-ordre').value,10)||0,groupe_ordre:parseInt($('#bu-gordre').value,10)||0,linkedin:$('#bu-linkedin').value.trim()||null,instagram:$('#bu-instagram').value.trim()||null,actif:$('#bu-actif').checked};
   var res=id?await sb.from('membres').update(payload).eq('id',id):await sb.from('membres').insert(payload);
   if(res.error){toast('Erreur : '+res.error.message);return}toast('Membre enregistré');loadBureau();
 }
