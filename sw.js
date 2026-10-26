@@ -3,7 +3,7 @@
    qu'en secours hors-ligne. Gere uniquement les fichiers du site (meme
    origine) : les appels a Supabase et aux CDN passent directement au reseau.
    Presence d'un handler fetch = le site devient installable (Android/Chrome). */
-const CACHE = 'mdl-rt-v2';
+const CACHE = 'mdl-rt-v3';
 self.addEventListener('install', function (e) { self.skipWaiting(); });
 self.addEventListener('activate', function (e) {
   e.waitUntil((async function () {
