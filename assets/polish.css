@@ -1,0 +1,78 @@
+/* MDL Viollet-le-Duc · couche de polish design (8 nov 2026)
+   Chargee dans le <head> de chaque page, apres ses styles. Chaque regle commence par "html"
+   pour passer devant les styles propres a la page sans !important.
+   Les options d'accessibilite (dyslexie, contraste, sombre) gardent la priorite. */
+
+/* 1. Deux familles seulement : Syne (titres) + DM Sans (texte). Plus de Fraunces. */
+html:root{--serif:'DM Sans',sans-serif;--ease:cubic-bezier(.2,.6,.2,1)}
+
+/* 2. Titres : Syne 700 au lieu de 800, le mot d'accent garde sa couleur mais plus d'italique serif */
+html .hero h1,html .phero h1,html .lhead h1,html .sec-title,html .join h2,html .ctaband h2,
+html .ideabox h2,html .catt,html .mfaq h2,html .article h1,html .card h2,html .merch-col-title,
+html .merch-sub,html .cal-title,html .ag-mtitle,html .avenir h3,html .modal-body h3,html .private h3,
+html .na-title,html .pini,html .acard-ph,html .stat .n,html .cd-seg b,html .mission .num,
+html .step .num,html .a11y-panel h4{font-weight:700}
+html .hero h1,html .phero h1{letter-spacing:-.025em}
+html h1 em,html h2 em,html .hero h1 em,html .phero h1 em,html .join h2 em,html .ctaband h2 em,html .ideabox h2 em{font-family:inherit;font-style:normal;font-weight:inherit;letter-spacing:inherit}
+
+/* 3. Textes d'accroche et citations : DM Sans droit, pas d'italique */
+html .about-statement,html .lead{font-family:var(--body);font-weight:400;font-size:clamp(22px,2.6vw,30px);line-height:1.35;letter-spacing:-.012em}
+html .about-statement b,html .lead b{font-style:normal;font-weight:500}
+html .about-quote p,html .quote p{font-family:var(--body);font-style:normal;font-size:18px;line-height:1.5}
+html .article-content blockquote{font-style:normal}
+
+/* 4. Petits libelles : casse normale, sans espacement large */
+html .eyebrow,html .lhead .eyebrow,html .ideabox .eyebrow{text-transform:none;letter-spacing:.005em;font-size:14px;font-weight:500}
+html .ideabox .eyebrow{font-family:var(--body)}
+/* sur photo (bandeaux) : blanc, plus lisible que le rose sur les zones claires */
+html .hero .eyebrow,html .hero .eyebrow b,html .phero .eyebrow{color:rgba(255,255,255,.95);font-weight:600}
+html .notice,html .annonce-eyebrow,html .brand-name small,html .ph .ph-eyebrow,html .gov-card .tag,
+html .objet span,html .card .k,html .avenir .k,html .avenir .meta .kk,html .modal-body .mtag,
+html .modal-body .mmeta .kk,html .na-lbl,html .new-badge,html .toc b,html .cal-dow,html .cd-seg i{text-transform:none;letter-spacing:.01em}
+html .annonce-eyebrow,html .card .k,html .gov-card .tag,html .na-lbl,html .toc b{font-size:13px;font-weight:700}
+html .objet span,html .avenir .k,html .ph .ph-eyebrow{font-size:13px}
+html .brand-name small{font-size:12px}
+html .foot-col h4{font-family:var(--syne);font-weight:600;font-size:13px;letter-spacing:0;text-transform:none}
+
+/* 5. Mouvement : plus d'apparition au defilement, une seule entree douce du bandeau au chargement */
+html .rv{opacity:1;transform:none;transition:none}
+@media (prefers-reduced-motion:no-preference){
+  html .hero-in>*,html .phero-in>*{animation:mdl-in .7s var(--ease) both}
+  html .hero-in>:nth-child(2),html .phero-in>:nth-child(2){animation-delay:.06s}
+  html .hero-in>:nth-child(3),html .phero-in>:nth-child(3){animation-delay:.12s}
+  html .hero-in>:nth-child(4),html .phero-in>:nth-child(4){animation-delay:.18s}
+}
+@keyframes mdl-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* 6. Micro-interactions : bouton qui s'enfonce au clic, carte qui monte de 2px, affiche qui zoome a peine */
+html .cta,html .foot-adh,html .foot-avis{transition:background-color .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),transform .2s var(--ease)}
+html .cta:active,html .foot-adh:active,html .foot-avis:active{transform:scale(.97)}
+html a.card,html button.card,html .acard{transition:transform .3s var(--ease)}
+html a.card:hover,html button.card:hover,html .acard:hover{transform:translateY(-2px)}
+html .card img{transition:transform .5s var(--ease)}
+html .card:hover img{transform:scale(1.03)}
+html .sec-link .arw,html .btn-txt .arw{transition:transform .2s var(--ease)}
+html .sec-link:hover .arw,html .btn-txt:hover .arw{transform:translateX(4px)}
+
+/* 7. Footer : bouton d'avis dans la palette (contour clair au lieu du dore) */
+html .foot-avis{display:inline-flex;align-items:center;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);font-family:var(--syne),'Syne',sans-serif;font-weight:700;font-size:12px;padding:10px 18px;border-radius:100px;text-decoration:none}
+html .foot-avis:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+@media (prefers-reduced-motion:reduce){
+  html a.card:hover,html button.card:hover,html .acard:hover,html .card:hover img{transform:none}
+}
+
+/* 8. Bouton secondaire a contour (ex. avis Google sur Contact), dans la palette en clair comme en sombre */
+html .cta.cta-ghost{background:transparent;color:var(--accent-txt);border:1.5px solid var(--accent-txt)}
+html .cta.cta-ghost:hover{background:var(--accent-txt);color:#fff}
+html.dark .cta.cta-ghost:hover{color:#241019}
+
+/* 9. Separation des sections
+   Clair : un trait fin quand deux sections voisines ont presque le meme fond.
+   Sombre : fond alterne plus marque (avant #1c1524, invisible sur #141019) ; bloc "Rejoins" teinte prune. */
+html .join + .mfaq,html .sep{border-top:1px solid var(--line)}
+html.dark:root{--paper2:#241c2e}
+html.dark body .mfaq{background:var(--paper2)}
+html.dark body .join{background:#2a1630!important}
+html.dark body #annonce{background:#2a1630!important}
+html.dark body .mfaq details,html.dark body .how .step{background:#2c2337!important}
